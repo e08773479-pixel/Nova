@@ -1,0 +1,1253 @@
+<!-- =========================================================
+     NOVA — Sidebar Component
+     File: components/sidebar.html
+     Version: 1.0.0
+     ========================================================= -->
+
+<aside
+  class="nova-sidebar"
+  id="nova-sidebar"
+  data-component="sidebar"
+  aria-label="القائمة الرئيسية"
+>
+
+  <!-- رأس القائمة -->
+  <div class="nova-sidebar__header">
+
+    <a
+      href="../index.html"
+      class="nova-sidebar__brand"
+      data-route="home"
+      aria-label="NOVA"
+    >
+      <span
+        class="nova-sidebar__logo"
+        aria-hidden="true"
+      >
+        N
+      </span>
+
+      <span class="nova-sidebar__brand-text">
+        <strong>NOVA</strong>
+        <small>تواصل ببساطة</small>
+      </span>
+    </a>
+
+    <button
+      type="button"
+      class="nova-sidebar__close"
+      data-action="close-sidebar"
+      aria-label="إغلاق القائمة"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        width="20"
+        height="20"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M6 6L18 18M18 6L6 18"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+        />
+      </svg>
+    </button>
+
+  </div>
+
+
+  <!-- حساب المستخدم -->
+  <div class="nova-sidebar__account">
+
+    <a
+      href="../pages/profile.html"
+      class="nova-sidebar__account-link"
+      data-route="profile"
+    >
+
+      <span class="nova-sidebar__avatar">
+
+        <img
+          src=""
+          alt=""
+          data-profile-avatar
+          hidden
+        />
+
+        <span
+          class="nova-sidebar__avatar-placeholder"
+          data-profile-avatar-placeholder
+          aria-hidden="true"
+        ></span>
+
+        <span
+          class="nova-sidebar__online"
+          data-profile-online
+          hidden
+          aria-label="متصل الآن"
+        ></span>
+
+      </span>
+
+      <span class="nova-sidebar__account-info">
+
+        <strong
+          data-profile-name
+        ></strong>
+
+        <small
+          data-profile-username
+        ></small>
+
+      </span>
+
+    </a>
+
+    <a
+      href="../pages/profile.html"
+      class="nova-sidebar__profile-link"
+      data-route="profile"
+      aria-label="عرض الملف الشخصي"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        width="17"
+        height="17"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M9 18L15 12L9 6"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </a>
+
+  </div>
+
+
+  <!-- القائمة الرئيسية -->
+  <nav
+    class="nova-sidebar__nav"
+    aria-label="التنقل الرئيسي"
+  >
+
+    <div class="nova-sidebar__section">
+
+      <span class="nova-sidebar__section-title">
+        الرئيسية
+      </span>
+
+
+      <!-- المحادثات -->
+      <a
+        href="../pages/chats.html"
+        class="nova-sidebar__item"
+        data-route="chats"
+        data-nav-item="chats"
+      >
+
+        <span
+          class="nova-sidebar__icon"
+          aria-hidden="true"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width="21"
+            height="21"
+            fill="none"
+          >
+            <path
+              d="M5 6.5C5 5.67 5.67 5 6.5 5H17.5
+                 C18.33 5 19 5.67 19 6.5V14.5
+                 C19 15.33 18.33 16 17.5 16H11
+                 L7 19V16H6.5
+                 C5.67 16 5 15.33 5 14.5V6.5Z"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </span>
+
+        <span class="nova-sidebar__label">
+          المحادثات
+        </span>
+
+        <span
+          class="nova-sidebar__badge"
+          data-unread-messages-count
+          hidden
+        ></span>
+
+      </a>
+
+
+      <!-- المكالمات -->
+      <a
+        href="../pages/calls.html"
+        class="nova-sidebar__item"
+        data-route="calls"
+        data-nav-item="calls"
+      >
+
+        <span
+          class="nova-sidebar__icon"
+          aria-hidden="true"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width="21"
+            height="21"
+            fill="none"
+          >
+            <path
+              d="M7.2 4.5H5.4
+                 C4.63 4.5 4 5.13 4 5.9
+                 C4 13.68 10.32 20 18.1 20
+                 C18.87 20 19.5 19.37 19.5 18.6V16.8
+                 C19.5 16.25 19.18 15.75 18.68 15.5
+                 L15.9 14.11
+                 C15.4 13.86 14.8 13.96 14.41 14.35
+                 L13.15 15.61
+                 C10.94 14.53 9.47 13.06 8.39 10.85
+                 L9.65 9.59
+                 C10.04 9.2 10.14 8.6 9.89 8.1
+                 L8.5 5.32
+                 C8.25 4.82 7.75 4.5 7.2 4.5Z"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </span>
+
+        <span class="nova-sidebar__label">
+          المكالمات
+        </span>
+
+      </a>
+
+
+      <!-- الحالات -->
+      <a
+        href="../pages/status.html"
+        class="nova-sidebar__item"
+        data-route="status"
+        data-nav-item="status"
+      >
+
+        <span
+          class="nova-sidebar__icon"
+          aria-hidden="true"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width="21"
+            height="21"
+            fill="none"
+          >
+            <circle
+              cx="12"
+              cy="12"
+              r="7"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+
+            <path
+              d="M12 8V12L15 14"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </span>
+
+        <span class="nova-sidebar__label">
+          الحالات
+        </span>
+
+      </a>
+
+
+      <!-- جهات الاتصال -->
+      <a
+        href="../pages/contacts.html"
+        class="nova-sidebar__item"
+        data-route="contacts"
+        data-nav-item="contacts"
+      >
+
+        <span
+          class="nova-sidebar__icon"
+          aria-hidden="true"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width="21"
+            height="21"
+            fill="none"
+          >
+            <circle
+              cx="12"
+              cy="8"
+              r="3"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+
+            <path
+              d="M6 19C6.6 15.6 8.6 14 12 14
+                 C15.4 14 17.4 15.6 18 19"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+            />
+          </svg>
+        </span>
+
+        <span class="nova-sidebar__label">
+          جهات الاتصال
+        </span>
+
+      </a>
+
+
+      <!-- المجتمعات -->
+      <a
+        href="../pages/communities.html"
+        class="nova-sidebar__item"
+        data-route="communities"
+        data-nav-item="communities"
+      >
+
+        <span
+          class="nova-sidebar__icon"
+          aria-hidden="true"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width="21"
+            height="21"
+            fill="none"
+          >
+            <circle
+              cx="9"
+              cy="8"
+              r="3"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+
+            <circle
+              cx="16"
+              cy="9"
+              r="2.4"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+
+            <path
+              d="M3.5 19
+                 C4.2 15.7 6 14 9 14
+                 C12 14 13.8 15.7 14.5 19"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+            />
+
+            <path
+              d="M14.5 14.5
+                 C16.8 14.5 18.4 15.7 19 18"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+            />
+          </svg>
+        </span>
+
+        <span class="nova-sidebar__label">
+          المجتمعات
+        </span>
+
+      </a>
+
+    </div>
+
+
+    <div class="nova-sidebar__divider"></div>
+
+
+    <!-- المجموعات -->
+    <div class="nova-sidebar__section">
+
+      <span class="nova-sidebar__section-title">
+        التواصل الجماعي
+      </span>
+
+      <a
+        href="../groups/create.html"
+        class="nova-sidebar__item"
+        data-route="groups.create"
+      >
+
+        <span
+          class="nova-sidebar__icon"
+          aria-hidden="true"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width="21"
+            height="21"
+            fill="none"
+          >
+            <circle
+              cx="9"
+              cy="8"
+              r="3"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+
+            <path
+              d="M4 19C4.7 15.8 6.3 14 9 14
+                 C11.7 14 13.3 15.8 14 19"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+            />
+
+            <path
+              d="M17 8V14M14 11H20"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+            />
+          </svg>
+        </span>
+
+        <span class="nova-sidebar__label">
+          إنشاء مجموعة
+        </span>
+
+      </a>
+
+
+      <a
+        href="../pages/communities.html"
+        class="nova-sidebar__item"
+        data-route="communities"
+      >
+
+        <span
+          class="nova-sidebar__icon"
+          aria-hidden="true"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width="21"
+            height="21"
+            fill="none"
+          >
+            <rect
+              x="4"
+              y="5"
+              width="16"
+              height="14"
+              rx="3"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+
+            <path
+              d="M8 9H16M8 13H13"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+            />
+          </svg>
+        </span>
+
+        <span class="nova-sidebar__label">
+          المجتمعات
+        </span>
+
+      </a>
+
+    </div>
+
+
+    <div class="nova-sidebar__divider"></div>
+
+
+    <!-- الحساب -->
+    <div class="nova-sidebar__section">
+
+      <span class="nova-sidebar__section-title">
+        الحساب
+      </span>
+
+
+      <a
+        href="../pages/profile.html"
+        class="nova-sidebar__item"
+        data-route="profile"
+      >
+
+        <span
+          class="nova-sidebar__icon"
+          aria-hidden="true"
+        >
+          👤
+        </span>
+
+        <span class="nova-sidebar__label">
+          ملفي الشخصي
+        </span>
+
+      </a>
+
+
+      <a
+        href="../pages/settings.html"
+        class="nova-sidebar__item"
+        data-route="settings"
+      >
+
+        <span
+          class="nova-sidebar__icon"
+          aria-hidden="true"
+        >
+          ⚙️
+        </span>
+
+        <span class="nova-sidebar__label">
+          الإعدادات
+        </span>
+
+      </a>
+
+
+      <a
+        href="../pages/privacy.html"
+        class="nova-sidebar__item"
+        data-route="privacy"
+      >
+
+        <span
+          class="nova-sidebar__icon"
+          aria-hidden="true"
+        >
+          🔐
+        </span>
+
+        <span class="nova-sidebar__label">
+          الخصوصية
+        </span>
+
+      </a>
+
+
+      <a
+        href="../pages/security.html"
+        class="nova-sidebar__item"
+        data-route="security"
+      >
+
+        <span
+          class="nova-sidebar__icon"
+          aria-hidden="true"
+        >
+          🛡️
+        </span>
+
+        <span class="nova-sidebar__label">
+          الأمان
+        </span>
+
+      </a>
+
+
+      <a
+        href="../pages/devices.html"
+        class="nova-sidebar__item"
+        data-route="devices"
+      >
+
+        <span
+          class="nova-sidebar__icon"
+          aria-hidden="true"
+        >
+          📱
+        </span>
+
+        <span class="nova-sidebar__label">
+          الأجهزة المرتبطة
+        </span>
+
+      </a>
+
+    </div>
+
+  </nav>
+
+
+  <!-- أسفل القائمة -->
+  <div class="nova-sidebar__footer">
+
+    <div class="nova-sidebar__status">
+
+      <span
+        class="nova-sidebar__status-dot"
+        aria-hidden="true"
+      ></span>
+
+      <span>
+        NOVA تعمل
+      </span>
+
+    </div>
+
+    <button
+      type="button"
+      class="nova-sidebar__logout"
+      data-action="logout"
+    >
+      <span aria-hidden="true">↪</span>
+      <span>تسجيل الخروج</span>
+    </button>
+
+  </div>
+
+</aside>
+
+
+<!-- طبقة خلفية للموبايل -->
+<div
+  class="nova-sidebar-overlay"
+  data-sidebar-overlay
+  hidden
+></div>
+
+
+<style>
+  /* =========================================================
+     NOVA Sidebar
+     ========================================================= */
+
+  .nova-sidebar {
+    position: fixed;
+
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    z-index: 1100;
+
+    width: 270px;
+
+    display: flex;
+    flex-direction: column;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(7, 23, 17, .98),
+        rgba(5, 16, 12, .98)
+      );
+
+    border-left:
+      1px solid rgba(255,255,255,.07);
+
+    box-shadow:
+      -18px 0 60px
+      rgba(0,0,0,.18);
+
+    overflow: hidden;
+
+    transition:
+      transform .25s ease,
+      box-shadow .25s ease;
+  }
+
+
+  .nova-sidebar__header {
+    min-height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 12px 15px;
+
+    border-bottom:
+      1px solid rgba(255,255,255,.06);
+  }
+
+
+  .nova-sidebar__brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: #F4FAF7;
+
+    text-decoration: none;
+  }
+
+
+  .nova-sidebar__logo {
+    width: 40px;
+    height: 40px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 12px;
+
+    background:
+      linear-gradient(
+        145deg,
+        #20D47B,
+        #12A85E
+      );
+
+    color: #06110D;
+
+    font-size: 20px;
+    font-weight: 900;
+
+    box-shadow:
+      0 8px 25px
+      rgba(32,212,123,.18);
+  }
+
+
+  .nova-sidebar__brand-text {
+    display: flex;
+    flex-direction: column;
+
+    line-height: 1.15;
+  }
+
+
+  .nova-sidebar__brand-text strong {
+    font-size: 16px;
+    letter-spacing: .4px;
+  }
+
+
+  .nova-sidebar__brand-text small {
+    margin-top: 3px;
+
+    color: #80958C;
+
+    font-size: 9px;
+  }
+
+
+  .nova-sidebar__close {
+    display: none;
+
+    width: 36px;
+    height: 36px;
+
+    place-items: center;
+
+    border: 0;
+    border-radius: 10px;
+
+    background:
+      rgba(255,255,255,.05);
+
+    color: #C7D4CE;
+
+    cursor: pointer;
+  }
+
+
+  /* =========================================================
+     Account
+     ========================================================= */
+
+  .nova-sidebar__account {
+    display: flex;
+    align-items: center;
+
+    margin: 13px 12px 8px;
+
+    padding: 9px;
+
+    border:
+      1px solid rgba(255,255,255,.055);
+
+    border-radius: 15px;
+
+    background:
+      rgba(255,255,255,.035);
+  }
+
+
+  .nova-sidebar__account-link {
+    min-width: 0;
+
+    flex: 1;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: inherit;
+
+    text-decoration: none;
+  }
+
+
+  .nova-sidebar__avatar {
+    position: relative;
+
+    width: 42px;
+    height: 42px;
+
+    flex: 0 0 42px;
+
+    display: grid;
+    place-items: center;
+
+    overflow: visible;
+
+    border-radius: 50%;
+
+    background:
+      linear-gradient(
+        145deg,
+        #163B2D,
+        #0B2018
+      );
+  }
+
+
+  .nova-sidebar__avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+  }
+
+
+  .nova-sidebar__avatar-placeholder {
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    color: #20D47B;
+
+    font-weight: 800;
+  }
+
+
+  .nova-sidebar__online {
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+
+    width: 11px;
+    height: 11px;
+
+    border-radius: 50%;
+
+    background: #20D47B;
+
+    border:
+      2px solid #071710;
+  }
+
+
+  .nova-sidebar__account-info {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .nova-sidebar__account-info strong {
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    font-size: 12px;
+  }
+
+
+  .nova-sidebar__account-info small {
+    margin-top: 3px;
+
+    direction: ltr;
+    text-align: right;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    color: #82968D;
+
+    font-size: 9px;
+  }
+
+
+  .nova-sidebar__profile-link {
+    width: 30px;
+    height: 30px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 9px;
+
+    color: #71857D;
+
+    text-decoration: none;
+
+    transition:
+      color .2s ease,
+      background .2s ease;
+  }
+
+
+  .nova-sidebar__profile-link:hover {
+    color: #20D47B;
+
+    background:
+      rgba(32,212,123,.08);
+  }
+
+
+  /* =========================================================
+     Navigation
+     ========================================================= */
+
+  .nova-sidebar__nav {
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding: 7px 10px 12px;
+
+    scrollbar-width: thin;
+    scrollbar-color:
+      rgba(255,255,255,.12)
+      transparent;
+  }
+
+
+  .nova-sidebar__section-title {
+    display: block;
+
+    padding:
+      7px 10px 6px;
+
+    color: #637A70;
+
+    font-size: 9px;
+    font-weight: 700;
+  }
+
+
+  .nova-sidebar__item {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    min-height: 45px;
+
+    margin: 2px 0;
+
+    padding: 0 11px;
+
+    border-radius: 12px;
+
+    color: #B7C7C0;
+
+    text-decoration: none;
+
+    transition:
+      background .18s ease,
+      color .18s ease,
+      transform .18s ease;
+  }
+
+
+  .nova-sidebar__item:hover {
+    color: #F4FAF7;
+
+    background:
+      rgba(255,255,255,.045);
+
+    transform:
+      translateX(-2px);
+  }
+
+
+  .nova-sidebar__item.active,
+  .nova-sidebar__item[aria-current="page"] {
+    color: #20D47B;
+
+    background:
+      linear-gradient(
+        90deg,
+        rgba(32,212,123,.13),
+        rgba(32,212,123,.045)
+      );
+  }
+
+
+  .nova-sidebar__item.active::before,
+  .nova-sidebar__item[aria-current="page"]::before {
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+    top: 9px;
+    bottom: 9px;
+
+    width: 3px;
+
+    border-radius: 5px;
+
+    background: #20D47B;
+  }
+
+
+  .nova-sidebar__icon {
+    width: 23px;
+    height: 23px;
+
+    flex: 0 0 23px;
+
+    display: grid;
+    place-items: center;
+
+    font-size: 17px;
+
+    color: inherit;
+  }
+
+
+  .nova-sidebar__label {
+    flex: 1;
+
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+
+  .nova-sidebar__badge {
+    min-width: 20px;
+    height: 20px;
+
+    padding: 0 5px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 999px;
+
+    background: #20D47B;
+    color: #06110D;
+
+    font-size: 9px;
+    font-weight: 900;
+  }
+
+
+  .nova-sidebar__divider {
+    height: 1px;
+
+    margin:
+      9px 8px;
+
+    background:
+      rgba(255,255,255,.055);
+  }
+
+
+  /* =========================================================
+     Footer
+     ========================================================= */
+
+  .nova-sidebar__footer {
+    padding: 11px 12px 14px;
+
+    border-top:
+      1px solid rgba(255,255,255,.06);
+  }
+
+
+  .nova-sidebar__status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    padding:
+      7px 8px 10px;
+
+    color: #70847B;
+
+    font-size: 9px;
+  }
+
+
+  .nova-sidebar__status-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #20D47B;
+
+    box-shadow:
+      0 0 9px
+      rgba(32,212,123,.5);
+  }
+
+
+  .nova-sidebar__logout {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-height: 40px;
+
+    padding: 0 11px;
+
+    border: 0;
+    border-radius: 11px;
+
+    background:
+      rgba(255,255,255,.035);
+
+    color: #9AAEA5;
+
+    font: inherit;
+    font-size: 11px;
+
+    cursor: pointer;
+
+    text-align: right;
+
+    transition:
+      background .2s ease,
+      color .2s ease;
+  }
+
+
+  .nova-sidebar__logout:hover {
+    background:
+      rgba(255,92,103,.08);
+
+    color: #FF7A83;
+  }
+
+
+  /* =========================================================
+     Overlay
+     ========================================================= */
+
+  .nova-sidebar-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1050;
+
+    background:
+      rgba(0,0,0,.55);
+
+    backdrop-filter:
+      blur(3px);
+
+    -webkit-backdrop-filter:
+      blur(3px);
+  }
+
+
+  /* =========================================================
+     Mobile
+     ========================================================= */
+
+  @media (max-width: 900px) {
+
+    .nova-sidebar {
+      transform:
+        translateX(105%);
+
+      box-shadow: none;
+    }
+
+
+    .nova-sidebar.is-open {
+      transform:
+        translateX(0);
+
+      box-shadow:
+        -20px 0 70px
+        rgba(0,0,0,.4);
+    }
+
+
+    .nova-sidebar__close {
+      display: grid;
+    }
+
+
+    .nova-sidebar-overlay.is-visible {
+      display: block;
+    }
+
+  }
+
+
+  @media (min-width: 901px) {
+
+    .nova-sidebar-overlay {
+      display: none !important;
+    }
+
+  }
+
+
+  @media (max-width: 420px) {
+
+    .nova-sidebar {
+      width: min(310px, 88vw);
+    }
+
+    .nova-sidebar__brand-text {
+      display: none;
+    }
+
+  }
+  </style>
