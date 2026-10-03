@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
+  >
+
+  <meta
+    name="theme-color"
+    content="#06110D"
+  >
+
+  <meta
+    name="description"
+    content="NOVA — محادثاتك ورسائلك في مكان واحد."
+  >
+
+  <meta
+    name="color-scheme"
+    content="dark light"
+  >
+
+  <title>المحادثات | NOVA</title>
+
+  <!-- =====================================================
+       Fonts
+       ===================================================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- =====================================================
+       Core CSS
+       ===================================================== -->
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/chat.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/animations.css">
+
+  <style>
+    /* =====================================================
+       NOVA — Chats Page
+       ===================================================== */
+
+    :root {
+      --chats-sidebar-width: 330px;
+      --chats-gap: 16px;
+      --chats-radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family:
+        "Cairo",
+        "IBM Plex Sans Arabic",
+        system-ui,
+        sans-serif;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    /* -----------------------------------------------------
+       Page
+       ----------------------------------------------------- */
+
+    .chats-page {
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .chats-shell {
+      width: min(100%, 1180px);
+      min-height: calc(100vh - 40px);
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: var(--chats-sidebar-width) minmax(0, 1fr);
+      gap: var(--chats-gap);
+    }
+
+    /* -----------------------------------------------------
+       Conversations panel
+       ----------------------------------------------------- */
+
+    .chats-panel {
+      min-width: 0;
+      min-height: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+
+      border: 1px solid rgba(255,255,255,0.075);
+      border-radius: var(--chats-radius);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(17,42,32,0.96),
+          rgba(7,20,15,0.98)
+        );
+
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.20);
+    }
+
+    .chats-panel__header {
+      padding: 18px 16px 13px;
+      border-bottom: 1px solid rgba(255,255,255,0.055);
+    }
+
+    .chats-panel__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .chats-title {
+      margin: 0;
+      color: #f4faf7;
+      font-size: 1.05rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .chats-subtitle {
+      margin: 4px 0 0;
+      color: #9cafa8;
+      font-size: 0.58rem;
+      line-height: 1.7;
+    }
+
+    .chats-new-button {
+      width: 38px;
+      height: 38px;
+      flex: 0 0 38px;
+
+      display: grid;
+      place-items: center;
+
+      border: 1px solid rgba(32,212,123,0.16);
+      border-radius: 11px;
+
+      color: #20d47b;
+      background: rgba(32,212,123,0.07);
+
+      cursor: pointer;
+
+      transition:
+        transform 160ms ease,
+        background 160ms ease,
+        border-color 160ms ease;
+    }
+
+    .chats-new-button:hover {
+      background: rgba(32,212,123,0.12);
+      border-color: rgba(32,212,123,0.27);
+    }
+
+    .chats-new-button:active {
+      transform: scale(0.96);
+    }
+
+    .chats-new-button:focus-visible {
+      outline: 2px solid #20d47b;
+      outline-offset: 3px;
+    }
+
+    /* -----------------------------------------------------
+       Search
+       ----------------------------------------------------- */
+
+    .chats-search {
+      position: relative;
+      margin-top: 13px;
+    }
+
+    .chats-search__icon {
+      position: absolute;
+      top: 50%;
+      inset-inline-start: 12px;
+
+      width: 17px;
+      height: 17px;
+
+      color: #789087;
+
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .chats-search__input {
+      width: 100%;
+      height: 42px;
+
+      padding:
+        0 38px
+        0 12px;
+
+      border: 1px solid rgba(255,255,255,0.065);
+      border-radius: 12px;
+
+      outline: none;
+
+      color: #f4faf7;
+      background: rgba(255,255,255,0.035);
+
+      font-size: 0.62rem;
+
+      transition:
+        border-color 150ms ease,
+        box-shadow 150ms ease;
+    }
+
+    .chats-search__input::placeholder {
+      color: #70837b;
+    }
+
+    .chats-search__input:focus {
+      border-color: rgba(32,212,123,0.40);
+
+      box-shadow:
+        0 0 0 3px rgba(32,212,123,0.055);
+    }
+
+    .chats-search__clear {
+      position: absolute;
+      top: 50%;
+      inset-inline-end: 8px;
+
+      width: 27px;
+      height: 27px;
+
+      display: grid;
+      place-items: center;
+
+      border: 0;
+      border-radius: 8px;
+
+      color: #93a59e;
+      background: transparent;
+
+      cursor: pointer;
+
+      transform: translateY(-50%);
+    }
+
+    .chats-search__clear:hover {
+      color: #f4faf7;
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* -----------------------------------------------------
+       Filters
+       ----------------------------------------------------- */
+
+    .chats-filters {
+      display: flex;
+      gap: 6px;
+
+      margin-top: 11px;
+
+      overflow-x: auto;
+
+      scrollbar-width: none;
+    }
+
+    .chats-filters::-webkit-scrollbar {
+      display: none;
+    }
+
+    .chats-filter {
+      flex: 0 0 auto;
+
+      min-height: 31px;
+
+      padding: 0 10px;
+
+      border: 1px solid rgba(255,255,255,0.055);
+      border-radius: 9px;
+
+      color: #9cafa8;
+      background: rgba(255,255,255,0.025);
+
+      font-size: 0.53rem;
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+
+    .chats-filter:hover {
+      color: #f4faf7;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .chats-filter.is-active {
+      color: #07150f;
+      border-color: #20d47b;
+      background: #20d47b;
+    }
+
+    /* -----------------------------------------------------
+       List
+       ----------------------------------------------------- */
+
+    .chats-list {
+      min-height: 0;
+      flex: 1;
+
+      overflow-y: auto;
+
+      padding: 5px;
+
+      scrollbar-width: thin;
+      scrollbar-color:
+        rgba(255,255,255,0.10)
+        transparent;
+    }
+
+    .chats-list::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .chats-list::-webkit-scrollbar-thumb {
+      border-radius: 99px;
+      background: rgba(255,255,255,0.10);
+    }
+
+    .chats-list__empty {
+      min-height: 270px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      padding: 30px;
+
+      text-align: center;
+    }
+
+    .chats-empty__icon {
+      width: 66px;
+      height: 66px;
+
+      display: grid;
+      place-items: center;
+
+      margin-bottom: 14px;
+
+      border: 1px solid rgba(32,212,123,0.12);
+      border-radius: 20px;
+
+      color: #20d47b;
+      background: rgba(32,212,123,0.055);
+    }
+
+    .chats-empty__title {
+      margin: 0;
+
+      color: #f4faf7;
+
+      font-size: 0.75rem;
+      font-weight: 850;
+    }
+
+    .chats-empty__text {
+      max-width: 230px;
+
+      margin: 7px 0 0;
+
+      color: #84968f;
+
+      font-size: 0.55rem;
+      line-height: 1.8;
+    }
+
+    .chats-empty__button {
+      min-height: 38px;
+
+      margin-top: 14px;
+      padding: 0 15px;
+
+      border: 0;
+      border-radius: 10px;
+
+      color: #06110d;
+      background: #20d47b;
+
+      font-size: 0.57rem;
+      font-weight: 850;
+
+      cursor: pointer;
+    }
+
+    /* -----------------------------------------------------
+       Main empty state
+       ----------------------------------------------------- */
+
+    .chats-main {
+      min-width: 0;
+      min-height: 0;
+      overflow: hidden;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 1px solid rgba(255,255,255,0.075);
+      border-radius: var(--chats-radius);
+
+      background:
+        radial-gradient(
+          circle at 50% 35%,
+          rgba(32,212,123,0.065),
+          transparent 35%
+        ),
+        linear-gradient(
+          145deg,
+          rgba(13,32,24,0.96),
+          rgba(5,16,11,0.98)
+        );
+    }
+
+    .chats-main__empty {
+      width: min(100%, 390px);
+
+      padding: 35px;
+
+      text-align: center;
+    }
+
+    .chats-main__logo {
+      width: 82px;
+      height: 82px;
+
+      display: grid;
+      place-items: center;
+
+      margin: 0 auto 18px;
+
+      border: 1px solid rgba(32,212,123,0.16);
+      border-radius: 25px;
+
+      color: #20d47b;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(32,212,123,0.11),
+          rgba(32,212,123,0.025)
+        );
+
+      box-shadow:
+        0 0 55px rgba(32,212,123,0.055);
+    }
+
+    .chats-main__title {
+      margin: 0;
+
+      color: #f4faf7;
+
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 900;
+    }
+
+    .chats-main__text {
+      margin: 8px auto 0;
+
+      color: #8da098;
+
+      font-size: 0.61rem;
+      line-height: 1.9;
+    }
+
+    .chats-main__hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+
+      margin-top: 17px;
+
+      padding: 7px 10px;
+
+      border: 1px solid rgba(255,255,255,0.055);
+      border-radius: 9px;
+
+      color: #84968f;
+      background: rgba(255,255,255,0.025);
+
+      font-size: 0.51rem;
+    }
+
+    /* -----------------------------------------------------
+       New chat dialog
+       ----------------------------------------------------- */
+
+    .nova-dialog {
+      width: min(
+        calc(100vw - 28px),
+        470px
+      );
+
+      padding: 0;
+
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 18px;
+
+      color: #f4faf7;
+      background: #0b1d16;
+
+      box-shadow:
+        0 30px 100px rgba(0,0,0,0.45);
+    }
+
+    .nova-dialog::backdrop {
+      background: rgba(0,0,0,0.68);
+      backdrop-filter: blur(5px);
+    }
+
+    .nova-dialog__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+
+      padding: 16px;
+
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nova-dialog__title {
+      margin: 0;
+
+      color: #f4faf7;
+
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+
+    .nova-dialog__close {
+      width: 34px;
+      height: 34px;
+
+      display: grid;
+      place-items: center;
+
+      border: 0;
+      border-radius: 9px;
+
+      color: #91a29b;
+      background: rgba(255,255,255,0.035);
+
+      cursor: pointer;
+    }
+
+    .nova-dialog__close:hover {
+      color: #f4faf7;
+      background: rgba(255,255,255,0.07);
+    }
+
+    .nova-dialog__body {
+      padding: 16px;
+    }
+
+    .nova-dialog__text {
+      margin: 0;
+
+      color: #94a69f;
+
+      font-size: 0.58rem;
+      line-height: 1.8;
+    }
+
+    .nova-dialog__input {
+      width: 100%;
+      height: 44px;
+
+      margin-top: 13px;
+      padding: 0 12px;
+
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 11px;
+
+      outline: none;
+
+      color: #f4faf7;
+      background: rgba(255,255,255,0.03);
+
+      font-size: 0.61rem;
+    }
+
+    .nova-dialog__input:focus {
+      border-color: rgba(32,212,123,0.40);
+
+      box-shadow:
+        0 0 0 3px rgba(32,212,123,0.055);
+    }
+
+    .nova-dialog__footer {
+      display: flex;
+      justify-content: flex-start;
+      gap: 7px;
+
+      padding: 0 16px 16px;
+    }
+
+    .nova-dialog__button {
+      min-height: 38px;
+
+      padding: 0 14px;
+
+      border: 0;
+      border-radius: 10px;
+
+      font-size: 0.57rem;
+      font-weight: 800;
+
+      cursor: pointer;
+    }
+
+    .nova-dialog__button--primary {
+      color: #06110d;
+      background: #20d47b;
+    }
+
+    .nova-dialog__button--secondary {
+      color: #a4b3ad;
+      background: rgba(255,255,255,0.045);
+    }
+
+    /* -----------------------------------------------------
+       Responsive
+       ----------------------------------------------------- */
+
+    @media (max-width: 950px) {
+      :root {
+        --chats-sidebar-width: 300px;
+      }
+
+      .chats-page {
+        padding: 15px;
+      }
+
+      .chats-shell {
+        min-height: calc(100vh - 30px);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .chats-page {
+        padding:
+          0
+          0
+          calc(70px + env(safe-area-inset-bottom));
+      }
+
+      .chats-shell {
+        display: block;
+        min-height: 100vh;
+      }
+
+      .chats-panel {
+        min-height: 100vh;
+
+        border: 0;
+        border-radius: 0;
+
+        background:
+          linear-gradient(
+            145deg,
+            rgba(11,31,22,0.98),
+            rgba(5,15,10,1)
+          );
+      }
+
+      .chats-panel__header {
+        padding:
+          max(13px, env(safe-area-inset-top))
+          13px
+          11px;
+      }
+
+      .chats-main {
+        display: none;
+      }
+
+      .chats-list {
+        padding: 4px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .chats-title {
+        font-size: 0.96rem;
+      }
+
+      .chats-subtitle {
+        font-size: 0.53rem;
+      }
+
+      .chats-search__input {
+        height: 44px;
+      }
+
+      .nova-dialog {
+        border-radius: 17px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+
+    [data-theme="light"] .chats-panel,
+    [data-theme="light"] .chats-main {
+      border-color: rgba(8,35,24,0.08);
+
+      background:
+        linear-gradient(
+          145deg,
+          #ffffff,
+          #f3f8f5
+        );
+    }
+
+    [data-theme="light"] .chats-title,
+    [data-theme="light"] .chats-main__title,
+    [data-theme="light"] .chats-empty__title {
+      color: #0a2117;
+    }
+
+    [data-theme="light"] .chats-search__input {
+      color: #0a2117;
+      border-color: rgba(8,35,24,0.09);
+      background: rgba(8,35,24,0.025);
+    }
+
+    [data-theme="light"] .nova-dialog {
+      color: #0a2117;
+      background: #ffffff;
+      border-color: rgba(8,35,24,0.09);
+    }
+  </style>
+</head>
+
+<body data-page="chats">
+
+  <!-- =====================================================
+       Global application shell
+       ===================================================== -->
+
+  <div
+    id="app-shell"
+    class="app-shell"
+  >
+
+    <!-- Global header injected by app.js -->
+    <div
+      id="global-header"
+      data-component="header"
+    ></div>
+
+    <!-- Global sidebar injected by app.js -->
+    <aside
+      id="global-sidebar"
+      data-component="sidebar"
+    ></aside>
+
+    <!-- ===================================================
+         Main
+         =================================================== -->
+
+    <main
+      id="main-content"
+      class="app-main"
+      tabindex="-1"
+    >
+
+      <section
+        class="chats-page"
+        aria-labelledby="chats-page-title"
+      >
+
+        <div class="chats-shell">
+
+          <!-- =============================================
+               Conversations
+               ============================================= -->
+
+          <section
+            class="chats-panel"
+            aria-label="قائمة المحادثات"
+          >
+
+            <header class="chats-panel__header">
+
+              <div class="chats-panel__top">
+
+                <div>
+                  <h1
+                    id="chats-page-title"
+                    class="chats-title"
+                  >
+                    المحادثات
+                  </h1>
+
+                  <p class="chats-subtitle">
+                    رسائلك ومحادثاتك الخاصة في مكان واحد
+                  </p>
+                </div>
+
+                <button
+                  id="new-chat-button"
+                  class="chats-new-button"
+                  type="button"
+                  aria-label="بدء محادثة جديدة"
+                  title="محادثة جديدة"
+                  data-action="new-chat"
+                >
+                  <svg
+                    width="19"
+                    height="19"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M12 5v14M5 12h14"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </button>
+
+              </div>
+
+              <!-- Search -->
+
+              <div class="chats-search">
+
+                <svg
+                  class="chats-search__icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <circle
+                    cx="11"
+                    cy="11"
+                    r="6.5"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  />
+                  <path
+                    d="m16 16 4 4"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                  />
+                </svg>
+
+                <label
+                  for="chat-search-input"
+                  class="sr-only"
+                >
+                  البحث في المحادثات
+                </label>
+
+                <input
+                  id="chat-search-input"
+                  class="chats-search__input"
+                  type="search"
+                  autocomplete="off"
+                  inputmode="search"
+                  placeholder="ابحث في المحادثات..."
+                  aria-label="البحث في المحادثات"
+                  data-chat-search
+                >
+
+                <button
+                  id="chat-search-clear"
+                  class="chats-search__clear"
+                  type="button"
+                  aria-label="مسح البحث"
+                  title="مسح البحث"
+                  hidden
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="m7 7 10 10M17 7 7 17"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </button>
+
+              </div>
+
+              <!-- Filters -->
+
+              <nav
+                class="chats-filters"
+                aria-label="تصفية المحادثات"
+              >
+
+                <button
+                  class="chats-filter is-active"
+                  type="button"
+                  data-chat-filter="all"
+                  aria-pressed="true"
+                >
+                  الكل
+                </button>
+
+                <button
+                  class="chats-filter"
+                  type="button"
+                  data-chat-filter="unread"
+                  aria-pressed="false"
+                >
+                  غير مقروءة
+                </button>
+
+                <button
+                  class="chats-filter"
+                  type="button"
+                  data-chat-filter="groups"
+                  aria-pressed="false"
+                >
+                  المجموعات
+                </button>
+
+                <button
+                  class="chats-filter"
+                  type="button"
+                  data-chat-filter="archived"
+                  aria-pressed="false"
+                >
+                  المؤرشفة
+                </button>
+
+              </nav>
+
+            </header>
+
+            <!-- Conversation list -->
+
+            <div
+              id="chats-list"
+              class="chats-list"
+              role="list"
+              aria-live="polite"
+              aria-busy="false"
+              data-conversations-list
+            >
+
+              <!--
+                لا توجد بيانات وهمية هنا.
+                js/chats.js مسؤول عن جلب المحادثات الحقيقية
+                من API ثم بناء عناصر القائمة.
+              -->
+
+              <div
+                id="chats-loading"
+                class="chats-list__empty"
+                data-chats-loading
+              >
+                <div
+                  class="chats-empty__icon"
+                  aria-hidden="true"
+                >
+                  <svg
+                    width="27"
+                    height="27"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5c-1.1 0-2.14-.24-3.08-.67L5 20l1.67-3.92A7.47 7.47 0 0 1 5 11.5 7.5 7.5 0 0 1 12.5 4 7.5 7.5 0 0 1 20 11.5Z"
+                      stroke="currentColor"
+                      stroke-width="1.6"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+
+                <h2 class="chats-empty__title">
+                  جاري تحميل المحادثات
+                </h2>
+
+                <p class="chats-empty__text">
+                  يتم جلب محادثات حسابك من مصدر البيانات الحقيقي.
+                </p>
+              </div>
+
+              <div
+                id="chats-empty"
+                class="chats-list__empty"
+                data-chats-empty
+                hidden
+              >
+                <div
+                  class="chats-empty__icon"
+                  aria-hidden="true"
+                >
+                  <svg
+                    width="27"
+                    height="27"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5c-1.1 0-2.14-.24-3.08-.67L5 20l1.67-3.92A7.47 7.47 0 0 1 5 11.5 7.5 7.5 0 0 1 12.5 4 7.5 7.5 0 0 1 20 11.5Z"
+                      stroke="currentColor"
+                      stroke-width="1.6"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+
+                <h2 class="chats-empty__title">
+                  لا توجد محادثات
+                </h2>
+
+                <p class="chats-empty__text">
+                  ابدأ محادثة جديدة مع أحد جهات اتصالك عندما تكون
+                  جاهزًا.
+                </p>
+
+                <button
+                  class="chats-empty__button"
+                  type="button"
+                  data-action="new-chat"
+                >
+                  بدء محادثة
+                </button>
+              </div>
+
+              <div
+                id="chats-no-results"
+                class="chats-list__empty"
+                data-chats-no-results
+                hidden
+              >
+                <div
+                  class="chats-empty__icon"
+                  aria-hidden="true"
+                >
+                  <svg
+                    width="27"
+                    height="27"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <circle
+                      cx="10.5"
+                      cy="10.5"
+                      r="5.5"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                    />
+                    <path
+                      d="m15 15 4 4"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </div>
+
+                <h2 class="chats-empty__title">
+                  لم نجد نتائج
+                </h2>
+
+                <p class="chats-empty__text">
+                  جرّب كلمة بحث مختلفة أو غيّر نوع التصفية.
+                </p>
+              </div>
+
+            </div>
+
+          </section>
+
+          <!-- =============================================
+               Conversation preview
+               ============================================= -->
+
+          <section
+            id="chats-main"
+            class="chats-main"
+            aria-label="منطقة المحادثة"
+          >
+
+            <div class="chats-main__empty">
+
+              <div
+                class="chats-main__logo"
+                aria-hidden="true"
+              >
+                <svg
+                  width="38"
+                  height="38"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5c-1.1 0-2.14-.24-3.08-.67L5 20l1.67-3.92A7.47 7.47 0 0 1 5 11.5 7.5 7.5 0 0 1 12.5 4 7.5 7.5 0 0 1 20 11.5Z"
+                    stroke="currentColor"
+                    stroke-width="1.4"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M8.8 11.8h.01M12.5 11.8h.01M16.2 11.8h.01"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </div>
+
+              <h2 class="chats-main__title">
+                اختر محادثة للبدء
+              </h2>
+
+              <p class="chats-main__text">
+                اختر إحدى محادثاتك من القائمة لفتح الرسائل،
+                أو ابدأ محادثة جديدة.
+              </p>
+
+              <div class="chats-main__hint">
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M12 6v6l4 2"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="8"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                  />
+                </svg>
+
+                رسائلك تظهر هنا عند اختيار محادثة
+              </div>
+
+            </div>
+
+          </section>
+
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Mobile bottom navigation -->
+    <div
+      id="global-bottom-nav"
+      data-component="bottom-nav"
+    ></div>
+
+  </div>
+
+
+  <!-- =====================================================
+       New chat dialog
+       ===================================================== -->
+
+  <dialog
+    id="new-chat-dialog"
+    class="nova-dialog"
+    aria-labelledby="new-chat-title"
+  >
+
+    <header class="nova-dialog__header">
+
+      <h2
+        id="new-chat-title"
+        class="nova-dialog__title"
+      >
+        بدء محادثة جديدة
+      </h2>
+
+      <button
+        type="button"
+        class="nova-dialog__close"
+        data-dialog-close
+        aria-label="إغلاق"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="m7 7 10 10M17 7 7 17"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+
+    </header>
+
+    <div class="nova-dialog__body">
+
+      <p class="nova-dialog__text">
+        ابحث عن جهة اتصال من بيانات حسابك لبدء محادثة.
+        لن يتم إنشاء مستخدم أو محادثة وهمية.
+      </p>
+
+      <label
+        class="sr-only"
+        for="new-chat-contact-input"
+      >
+        البحث عن جهة اتصال
+      </label>
+
+      <input
+        id="new-chat-contact-input"
+        class="nova-dialog__input"
+        type="search"
+        autocomplete="off"
+        placeholder="اسم المستخدم أو رقم الهاتف أو البريد..."
+        data-new-chat-contact
+      >
+
+    </div>
+
+    <footer class="nova-dialog__footer">
+
+      <button
+        type="button"
+        class="nova-dialog__button nova-dialog__button--secondary"
+        data-dialog-close
+      >
+        إلغاء
+      </button>
+
+      <button
+        type="button"
+        class="nova-dialog__button nova-dialog__button--primary"
+        data-action="find-contact"
+      >
+        بحث عن جهة اتصال
+      </button>
+
+    </footer>
+
+  </dialog>
+
+
+  <!-- =====================================================
+       Screen-reader utility
+       ===================================================== -->
+
+  <style>
+    .sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+  </style>
+
+
+  <!-- =====================================================
+       Core JavaScript
+       ===================================================== -->
+
+  <script src="../js/config.js"></script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/router.js"></script>
+  <script src="../js/realtime.js"></script>
+  <script src="../js/notifications.js"></script>
+  <script src="../js/contacts.js"></script>
+  <script src="../js/chat.js"></script>
+  <script src="../js/chats.js"></script>
+  <script src="../js/app.js"></script>
+
+
+  <!-- =====================================================
+       Page controller
+       ===================================================== -->
+
+  <script>
+    (() => {
+      "use strict";
+
+      const state = {
+        filter: "all",
+        search: ""
+      };
+
+      const elements = {
+        search:
+          document.getElementById("chat-search-input"),
+
+        clearSearch:
+          document.getElementById("chat-search-clear"),
+
+        filters:
+          document.querySelectorAll("[data-chat-filter]"),
+
+        newChatButtons:
+          document.querySelectorAll('[data-action="new-chat"]'),
+
+        dialog:
+          document.getElementById("new-chat-dialog"),
+
+        closeDialogButtons:
+          document.querySelectorAll("[data-dialog-close]"),
+
+        contactInput:
+          document.getElementById("new-chat-contact-input"),
+
+        findContact:
+          document.querySelector(
+            '[data-action="find-contact"]'
+          ),
+
+        loading:
+          document.getElementById("chats-loading"),
+
+        empty:
+          document.getElementById("chats-empty"),
+
+        noResults:
+          document.getElementById("chats-no-results")
+      };
+
+      /* ---------------------------------------------------
+         Utility
+         --------------------------------------------------- */
+
+      function safeCall(fn, ...args) {
+        try {
+          if (typeof fn === "function") {
+            return fn(...args);
+          }
+        } catch (error) {
+          console.error("[NOVA] Chats action failed:", error);
+        }
+
+        return null;
+      }
+
+      /* ---------------------------------------------------
+         Dialog
+         --------------------------------------------------- */
+
+      function openNewChatDialog() {
+        if (!elements.dialog) {
+          return;
+        }
+
+        if (typeof elements.dialog.showModal === "function") {
+          elements.dialog.showModal();
+        } else {
+          elements.dialog.setAttribute("open", "");
+        }
+
+        window.setTimeout(() => {
+          elements.contactInput?.focus();
+        }, 50);
+      }
+
+      function closeNewChatDialog() {
+        if (!elements.dialog) {
+          return;
+        }
+
+        if (typeof elements.dialog.close === "function") {
+          elements.dialog.close();
+        } else {
+          elements.dialog.removeAttribute("open");
+        }
+
+        if (elements.contactInput) {
+          elements.contactInput.value = "";
+        }
+      }
+
+      elements.newChatButtons.forEach((button) => {
+        button.addEventListener(
+          "click",
+          openNewChatDialog
+        );
+      });
+
+      elements.closeDialogButtons.forEach((button) => {
+        button.addEventListener(
+          "click",
+          closeNewChatDialog
+        );
+      });
+
+      elements.dialog?.addEventListener(
+        "click",
+        (event) => {
+          if (event.target === elements.dialog) {
+            closeNewChatDialog();
+          }
+        }
+      );
+
+      /* ---------------------------------------------------
+         Search
+         --------------------------------------------------- */
+
+      function updateSearchClearButton() {
+        if (!elements.clearSearch) {
+          return;
+        }
+
+        elements.clearSearch.hidden =
+          !state.search;
+      }
+
+      function performSearch() {
+        state.search =
+          String(elements.search?.value || "")
+            .trim();
+
+        updateSearchClearButton();
+
+        /*
+         * js/chats.js owns the real conversation filtering.
+         * We only forward the user's query.
+         */
+
+        safeCall(
+          window.NOVA_CHATS?.search,
+          state.search
+        );
+
+        document.dispatchEvent(
+          new CustomEvent(
+            "nova:chats-search",
+            {
+              detail: {
+                query: state.search
+              }
+            }
+          )
+        );
+      }
+
+      let searchTimer = null;
+
+      elements.search?.addEventListener(
+        "input",
+        () => {
+          window.clearTimeout(searchTimer);
+
+          searchTimer = window.setTimeout(
+            performSearch,
+            180
+          );
+        }
+      );
+
+      elements.clearSearch?.addEventListener(
+        "click",
+        () => {
+          if (!elements.search) {
+            return;
+          }
+
+          elements.search.value = "";
+
+          performSearch();
+
+          elements.search.focus();
+        }
+      );
+
+      /* ---------------------------------------------------
+         Filters
+         --------------------------------------------------- */
+
+      function setFilter(filter) {
+        state.filter = filter;
+
+        elements.filters.forEach((button) => {
+          const active =
+            button.dataset.chatFilter === filter;
+
+          button.classList.toggle(
+            "is-active",
+            active
+          );
+
+          button.setAttribute(
+            "aria-pressed",
+            String(active)
+          );
+        });
+
+        /*
+         * Forward filter to the existing conversations module.
+         */
+
+        safeCall(
+          window.NOVA_CHATS?.filter,
+          filter
+        );
+
+        document.dispatchEvent(
+          new CustomEvent(
+            "nova:chats-filter",
+            {
+              detail: {
+                filter
+              }
+            }
+          )
+        );
+      }
+
+      elements.filters.forEach((button) => {
+        button.addEventListener(
+          "click",
+          () => {
+            setFilter(
+              button.dataset.chatFilter || "all"
+            );
+          }
+        );
+      });
+
+      /* ---------------------------------------------------
+         Contact search
+         --------------------------------------------------- */
+
+      async function findContact() {
+        const query =
+          String(
+            elements.contactInput?.value || ""
+          ).trim();
+
+        if (!query) {
+          safeCall(
+            window.NOVA?.toast,
+            "اكتب اسم المستخدم أو وسيلة البحث أولًا.",
+            "warning"
+          );
+
+          elements.contactInput?.focus();
+
+          return;
+        }
+
+        const button = elements.findContact;
+
+        if (button) {
+          button.disabled = true;
+          button.setAttribute(
+            "aria-busy",
+            "true"
+          );
+        }
+
+        try {
+          let result = null;
+
+          /*
+           * Prefer the real contacts module.
+           */
+
+          if (
+            window.NOVA_CONTACTS &&
+            typeof window.NOVA_CONTACTS.search === "function"
+          ) {
+            result =
+              await window.NOVA_CONTACTS.search(query);
+          }
+
+          /*
+           * If the contacts module exposes no result,
+           * let the central application handle the action.
+           */
+
+          document.dispatchEvent(
+            new CustomEvent(
+              "nova:find-contact",
+              {
+                detail: {
+                  query,
+                  result
+                }
+              }
+            )
+          );
+
+          if (
+            result &&
+            Array.isArray(result) &&
+            result.length === 0
+          ) {
+            safeCall(
+              window.NOVA?.toast,
+              "لم يتم العثور على جهة اتصال مطابقة.",
+              "info"
+            );
+          }
+
+        } catch (error) {
+          console.error(
+            "[NOVA] Contact search failed:",
+            error
+          );
+
+          safeCall(
+            window.NOVA?.toast,
+            "تعذر البحث عن جهة الاتصال حاليًا.",
+            "error"
+          );
+
+        } finally {
+          if (button) {
+            button.disabled = false;
+            button.removeAttribute("aria-busy");
+          }
+        }
+      }
+
+      elements.findContact?.addEventListener(
+        "click",
+        findContact
+      );
+
+      elements.contactInput?.addEventListener(
+        "keydown",
+        (event) => {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            findContact();
+          }
+        }
+      );
+
+      /* ---------------------------------------------------
+         Loading state
+         --------------------------------------------------- */
+
+      function hideInitialLoading() {
+        if (elements.loading) {
+          elements.loading.hidden = true;
+        }
+      }
+
+      /*
+       * Existing chats module can announce when data loading
+       * has completed. These listeners keep the page shell
+       * independent from the API implementation.
+       */
+
+      document.addEventListener(
+        "nova:chats-loaded",
+        (event) => {
+          hideInitialLoading();
+
+          const conversations =
+            event.detail?.conversations;
+
+          if (
+            Array.isArray(conversations) &&
+            conversations.length === 0
+          ) {
+            if (elements.empty) {
+              elements.empty.hidden = false;
+            }
+          }
+        }
+      );
+
+      document.addEventListener(
+        "nova:chats-error",
+        () => {
+          hideInitialLoading();
+        }
+      );
+
+      /* ---------------------------------------------------
+         Page startup
+         --------------------------------------------------- */
+
+      function initializePage() {
+        setFilter("all");
+        updateSearchClearButton();
+
+        /*
+         * If chats.js exposes an initialization method,
+         * use it. Otherwise app.js/chats.js can initialize
+         * through their own startup lifecycle.
+         */
+
+        if (
+          window.NOVA_CHATS &&
+          typeof window.NOVA_CHATS.init === "function"
+        ) {
+          safeCall(
+            window.NOVA_CHATS.init
+          );
+        }
+
+        document.dispatchEvent(
+          new CustomEvent("nova:page-ready", {
+            detail: {
+              page: "chats"
+            }
+          })
+        );
+      }
+
+      if (
+        document.readyState === "loading"
+      ) {
+        document.addEventListener(
+          "DOMContentLoaded",
+          initializePage,
+          { once: true }
+        );
+      } else {
+        initializePage();
+      }
+
+    })();
+  </script>
+
+</body>
+  </html>
