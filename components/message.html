@@ -1,0 +1,1261 @@
+<!-- =========================================================
+     NOVA — Message Component
+     File: components/message.html
+     Version: 1.0.0
+     Purpose:
+     Reusable message bubble
+     No fake/demo data
+     ========================================================= -->
+
+<article
+  class="nova-message"
+  data-message
+  data-message-id=""
+  data-message-type="text"
+  data-message-status=""
+  data-message-author=""
+  data-message-time=""
+  data-message-selected="false"
+>
+  <!-- Avatar — يظهر تلقائيًا للرسائل الواردة -->
+  <div
+    class="nova-message-avatar-wrap"
+    data-message-avatar-wrap
+  >
+    <div
+      class="nova-message-avatar"
+      data-message-avatar
+      aria-hidden="true"
+    >
+      <span data-message-avatar-fallback>
+        <svg
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          fill="none"
+        >
+          <circle
+            cx="12"
+            cy="8"
+            r="3.5"
+            stroke="currentColor"
+            stroke-width="1.7"
+          />
+          <path
+            d="M5.5 19c.7-3.2 3.1-5 6.5-5s5.8 1.8 6.5 5"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+          />
+        </svg>
+      </span>
+    </div>
+  </div>
+
+  <!-- Message body -->
+  <div class="nova-message-body">
+
+    <!-- Reply preview -->
+    <div
+      class="nova-message-reply"
+      data-message-reply
+      hidden
+    >
+      <span
+        class="nova-message-reply-author"
+        data-message-reply-author
+      ></span>
+
+      <span
+        class="nova-message-reply-text"
+        data-message-reply-text
+      ></span>
+    </div>
+
+    <!-- Sender name — groups -->
+    <div
+      class="nova-message-sender"
+      data-message-sender
+      hidden
+    ></div>
+
+    <!-- Bubble -->
+    <div
+      class="nova-message-bubble"
+      data-message-bubble
+    >
+
+      <!-- Text -->
+      <div
+        class="nova-message-text"
+        data-message-text
+      ></div>
+
+      <!-- Image -->
+      <div
+        class="nova-message-media nova-message-image"
+        data-message-image
+        hidden
+      >
+        <button
+          type="button"
+          class="nova-message-image-button"
+          data-message-image-open
+          aria-label="عرض الصورة"
+        >
+          <img
+            src=""
+            alt=""
+            data-message-image-src
+            loading="lazy"
+          />
+        </button>
+      </div>
+
+      <!-- Video -->
+      <div
+        class="nova-message-media nova-message-video"
+        data-message-video
+        hidden
+      >
+        <video
+          controls
+          playsinline
+          preload="metadata"
+          data-message-video-src
+        ></video>
+      </div>
+
+      <!-- Audio -->
+      <div
+        class="nova-message-audio"
+        data-message-audio
+        hidden
+      >
+        <div class="nova-message-audio-icon">
+          <svg
+            viewBox="0 0 24 24"
+            width="20"
+            height="20"
+            fill="none"
+          >
+            <path
+              d="M8 9v6a4 4 0 0 0 8 0V9"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+            />
+            <path
+              d="M12 19v2"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+            />
+            <path
+              d="M9 21h6"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+            />
+            <rect
+              x="8"
+              y="3"
+              width="8"
+              height="13"
+              rx="4"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+          </svg>
+        </div>
+
+        <audio
+          controls
+          preload="metadata"
+          data-message-audio-src
+        ></audio>
+      </div>
+
+      <!-- Document -->
+      <a
+        class="nova-message-document"
+        data-message-document
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer"
+        hidden
+      >
+        <span class="nova-message-document-icon">
+          <svg
+            viewBox="0 0 24 24"
+            width="22"
+            height="22"
+            fill="none"
+          >
+            <path
+              d="M7 3.5h7l4 4V20a.5.5 0 0 1-.5.5h-10A.5.5 0 0 1 7 20V3.5Z"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M14 3.5V8h4"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </span>
+
+        <span class="nova-message-document-info">
+          <strong data-message-document-name></strong>
+          <small data-message-document-size></small>
+        </span>
+      </a>
+
+      <!-- Location -->
+      <button
+        type="button"
+        class="nova-message-location"
+        data-message-location
+        hidden
+      >
+        <span class="nova-message-location-icon">
+          <svg
+            viewBox="0 0 24 24"
+            width="22"
+            height="22"
+            fill="none"
+          >
+            <path
+              d="M20 10.5c0 5-8 10-8 10s-8-5-8-10a8 8 0 1 1 16 0Z"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+            <circle
+              cx="12"
+              cy="10.5"
+              r="2.5"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+          </svg>
+        </span>
+
+        <span>
+          عرض الموقع
+        </span>
+      </button>
+
+      <!-- Contact -->
+      <button
+        type="button"
+        class="nova-message-contact"
+        data-message-contact
+        hidden
+      >
+        <span class="nova-message-contact-avatar">
+          <span data-contact-avatar-fallback>
+            <svg
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+            >
+              <circle
+                cx="12"
+                cy="8"
+                r="3.5"
+                stroke="currentColor"
+                stroke-width="1.7"
+              />
+              <path
+                d="M5.5 19c.7-3.2 3.1-5 6.5-5s5.8 1.8 6.5 5"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+              />
+            </svg>
+          </span>
+        </span>
+
+        <span class="nova-message-contact-info">
+          <strong data-message-contact-name></strong>
+          <small data-message-contact-phone></small>
+        </span>
+      </button>
+
+      <!-- Message meta -->
+      <footer class="nova-message-meta">
+
+        <time
+          class="nova-message-time"
+          data-message-time
+          datetime=""
+        ></time>
+
+        <!-- Edited -->
+        <span
+          class="nova-message-edited"
+          data-message-edited
+          hidden
+        >
+          تم التعديل
+        </span>
+
+        <!-- Status -->
+        <span
+          class="nova-message-status"
+          data-message-status-view
+          hidden
+          aria-label="حالة الرسالة"
+        >
+          <!-- Sending -->
+          <svg
+            data-status-sending
+            viewBox="0 0 24 24"
+            width="14"
+            height="14"
+            fill="none"
+            hidden
+          >
+            <circle
+              cx="12"
+              cy="12"
+              r="8"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-dasharray="3 3"
+            />
+          </svg>
+
+          <!-- Sent -->
+          <svg
+            data-status-sent
+            viewBox="0 0 24 24"
+            width="15"
+            height="15"
+            fill="none"
+            hidden
+          >
+            <path
+              d="m6.5 12.5 3.2 3.2L17.8 7.8"
+              stroke="currentColor"
+              stroke-width="1.9"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          <!-- Delivered -->
+          <svg
+            data-status-delivered
+            viewBox="0 0 24 24"
+            width="15"
+            height="15"
+            fill="none"
+            hidden
+          >
+            <path
+              d="m4.5 12.5 3.2 3.2L15.8 7.8"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="m9.5 12.5 3.2 3.2L20.8 7.8"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          <!-- Read -->
+          <svg
+            data-status-read
+            viewBox="0 0 24 24"
+            width="15"
+            height="15"
+            fill="none"
+            hidden
+          >
+            <path
+              d="m4.5 12.5 3.2 3.2L15.8 7.8"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="m9.5 12.5 3.2 3.2L20.8 7.8"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          <!-- Failed -->
+          <svg
+            data-status-failed
+            viewBox="0 0 24 24"
+            width="15"
+            height="15"
+            fill="none"
+            hidden
+          >
+            <circle
+              cx="12"
+              cy="12"
+              r="8"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+            <path
+              d="M9.5 9.5 14.5 14.5M14.5 9.5 9.5 14.5"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+            />
+          </svg>
+        </span>
+
+      </footer>
+    </div>
+
+    <!-- Reaction -->
+    <div
+      class="nova-message-reaction"
+      data-message-reaction
+      hidden
+    >
+      <span data-message-reaction-icon></span>
+      <span data-message-reaction-count></span>
+    </div>
+
+  </div>
+
+  <!-- Message actions -->
+  <div
+    class="nova-message-actions"
+    data-message-actions
+    aria-hidden="true"
+  >
+    <button
+      type="button"
+      data-message-action="reply"
+      aria-label="الرد"
+      title="الرد"
+    >
+      ↩
+    </button>
+
+    <button
+      type="button"
+      data-message-action="react"
+      aria-label="تفاعل"
+      title="تفاعل"
+    >
+      ☺
+    </button>
+
+    <button
+      type="button"
+      data-message-action="more"
+      aria-label="المزيد"
+      title="المزيد"
+    >
+      ⋮
+    </button>
+  </div>
+
+</article>
+
+
+<style>
+/* =========================================================
+   NOVA — Message Component
+   ========================================================= */
+
+.nova-message {
+  position: relative;
+
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+
+  width: 100%;
+
+  margin: 4px 0;
+
+  padding-inline:
+    10px;
+
+  transition:
+    background-color 160ms ease;
+}
+
+
+/* =========================================================
+   Incoming / Outgoing
+   ========================================================= */
+
+.nova-message[data-message-direction="incoming"] {
+  justify-content: flex-start;
+}
+
+.nova-message[data-message-direction="outgoing"] {
+  justify-content: flex-end;
+}
+
+.nova-message.is-selected {
+  background:
+    rgba(32, 212, 123, 0.07);
+
+  border-radius: 12px;
+}
+
+
+/* =========================================================
+   Avatar
+   ========================================================= */
+
+.nova-message-avatar-wrap {
+  flex: 0 0 30px;
+
+  width: 30px;
+  height: 30px;
+}
+
+.nova-message-avatar {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #173b2e,
+      #0d211a
+    );
+
+  color:
+    rgba(255,255,255,0.4);
+
+  border:
+    1px solid
+    rgba(255,255,255,0.07);
+}
+
+.nova-message-avatar img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* =========================================================
+   Body
+   ========================================================= */
+
+.nova-message-body {
+  position: relative;
+
+  min-width: 0;
+  max-width: min(78%, 620px);
+}
+
+.nova-message[data-message-direction="outgoing"]
+.nova-message-body {
+  max-width: min(76%, 620px);
+}
+
+
+/* =========================================================
+   Sender
+   ========================================================= */
+
+.nova-message-sender {
+  margin:
+    0 10px 4px;
+
+  color:
+    var(--primary, #20d47b);
+
+  font-family:
+    "Cairo",
+    "IBM Plex Sans Arabic",
+    sans-serif;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   Reply
+   ========================================================= */
+
+.nova-message-reply {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+
+  margin-bottom: -2px;
+
+  padding:
+    7px 10px;
+
+  border-radius:
+    11px 11px 4px 4px;
+
+  background:
+    rgba(255,255,255,0.055);
+
+  border-inline-start:
+    3px solid
+    var(--primary, #20d47b);
+
+  color:
+    var(--text-secondary, #c7d4ce);
+
+  overflow: hidden;
+}
+
+.nova-message-reply-author {
+  color:
+    var(--primary, #20d47b);
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.nova-message-reply-text {
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   Bubble
+   ========================================================= */
+
+.nova-message-bubble {
+  position: relative;
+
+  min-width: 80px;
+
+  padding:
+    8px 11px;
+
+  border-radius:
+    16px 16px 5px 16px;
+
+  background:
+    var(--message-outgoing,
+    #123f2c);
+
+  color:
+    var(--text-primary, #f4faf7);
+
+  border:
+    1px solid
+    rgba(32, 212, 123, 0.08);
+
+  box-shadow:
+    0 4px 14px
+    rgba(0,0,0,0.12);
+}
+
+.nova-message[data-message-direction="incoming"]
+.nova-message-bubble {
+  border-radius:
+    16px 16px 16px 5px;
+
+  background:
+    var(--message-incoming,
+    #10231c);
+
+  border-color:
+    rgba(255,255,255,0.055);
+}
+
+
+/* =========================================================
+   Text
+   ========================================================= */
+
+.nova-message-text {
+  color:
+    inherit;
+
+  font-family:
+    "IBM Plex Sans Arabic",
+    "Cairo",
+    sans-serif;
+
+  font-size: 13px;
+  font-weight: 400;
+
+  line-height: 1.75;
+
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.nova-message-text:empty {
+  display: none;
+}
+
+
+/* =========================================================
+   Media
+   ========================================================= */
+
+.nova-message-media {
+  overflow: hidden;
+
+  margin:
+    -3px -5px 5px;
+
+  border-radius: 12px;
+}
+
+.nova-message-image-button {
+  display: block;
+
+  width: 100%;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.nova-message-image img {
+  display: block;
+
+  width: min(360px, 100%);
+  max-height: 420px;
+
+  object-fit: cover;
+
+  border-radius: 11px;
+}
+
+.nova-message-video video {
+  display: block;
+
+  width: min(420px, 100%);
+  max-height: 420px;
+
+  border-radius: 11px;
+
+  background: #000;
+}
+
+
+/* =========================================================
+   Audio
+   ========================================================= */
+
+.nova-message-audio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  min-width: 230px;
+}
+
+.nova-message-audio-icon {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 36px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(32,212,123,0.12);
+
+  color:
+    var(--primary, #20d47b);
+}
+
+.nova-message-audio audio {
+  width: 210px;
+  max-width: 100%;
+}
+
+
+/* =========================================================
+   Document
+   ========================================================= */
+
+.nova-message-document {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  min-width: 230px;
+  max-width: 100%;
+
+  padding: 5px;
+
+  color:
+    inherit;
+
+  text-decoration: none;
+}
+
+.nova-message-document-icon {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 42px;
+
+  border-radius: 11px;
+
+  background:
+    rgba(32,212,123,0.11);
+
+  color:
+    var(--primary, #20d47b);
+}
+
+.nova-message-document-info {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nova-message-document-info strong {
+  overflow: hidden;
+
+  font-size: 12px;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.nova-message-document-info small {
+  color:
+    var(--text-muted, #9cafa8);
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   Location / Contact
+   ========================================================= */
+
+.nova-message-location,
+.nova-message-contact {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 5px;
+
+  border: 0;
+
+  background: transparent;
+
+  color:
+    inherit;
+
+  text-align: start;
+
+  cursor: pointer;
+}
+
+.nova-message-location-icon,
+.nova-message-contact-avatar {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 42px;
+
+  border-radius: 11px;
+
+  background:
+    rgba(32,212,123,0.11);
+
+  color:
+    var(--primary, #20d47b);
+}
+
+.nova-message-contact-info {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nova-message-contact-info strong {
+  font-size: 12px;
+}
+
+.nova-message-contact-info small {
+  color:
+    var(--text-muted, #9cafa8);
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   Meta
+   ========================================================= */
+
+.nova-message-meta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+
+  margin-top: 3px;
+
+  min-height: 14px;
+}
+
+.nova-message-time {
+  color:
+    rgba(220,235,228,0.55);
+
+  font-family:
+    "IBM Plex Sans Arabic",
+    "Cairo",
+    sans-serif;
+
+  font-size: 9px;
+
+  white-space: nowrap;
+}
+
+.nova-message-edited {
+  color:
+    rgba(220,235,228,0.5);
+
+  font-size: 9px;
+}
+
+.nova-message-status {
+  display: inline-flex;
+
+  color:
+    rgba(220,235,228,0.55);
+}
+
+.nova-message-status.is-read {
+  color:
+    var(--primary, #20d47b);
+}
+
+.nova-message-status.is-failed {
+  color:
+    var(--danger, #ff5c67);
+}
+
+
+/* =========================================================
+   Reaction
+   ========================================================= */
+
+.nova-message-reaction {
+  position: absolute;
+
+  bottom: -11px;
+
+  display: flex;
+  align-items: center;
+  gap: 3px;
+
+  min-height: 23px;
+
+  padding:
+    2px 7px;
+
+  border-radius: 999px;
+
+  background:
+    var(--surface-elevated, #10271f);
+
+  border:
+    1px solid
+    rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 4px 15px
+    rgba(0,0,0,0.22);
+
+  font-size: 11px;
+
+  z-index: 3;
+}
+
+.nova-message[data-message-direction="incoming"]
+.nova-message-reaction {
+  right: 38px;
+}
+
+.nova-message[data-message-direction="outgoing"]
+.nova-message-reaction {
+  left: 38px;
+}
+
+
+/* =========================================================
+   Actions
+   ========================================================= */
+
+.nova-message-actions {
+  position: absolute;
+
+  top: 50%;
+
+  display: flex;
+  align-items: center;
+  gap: 3px;
+
+  padding: 3px;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.07);
+
+  border-radius: 10px;
+
+  background:
+    rgba(8,25,20,0.96);
+
+  box-shadow:
+    0 8px 25px
+    rgba(0,0,0,0.3);
+
+  opacity: 0;
+  pointer-events: none;
+
+  transform:
+    translateY(-50%)
+    scale(.95);
+
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.nova-message[data-message-direction="incoming"]
+.nova-message-actions {
+  left: 48px;
+}
+
+.nova-message[data-message-direction="outgoing"]
+.nova-message-actions {
+  right: 48px;
+}
+
+.nova-message:hover
+.nova-message-actions,
+.nova-message:focus-within
+.nova-message-actions {
+  opacity: 1;
+
+  pointer-events: auto;
+
+  transform:
+    translateY(-50%)
+    scale(1);
+}
+
+.nova-message-actions button {
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-radius: 7px;
+
+  background: transparent;
+
+  color:
+    var(--text-secondary, #c7d4ce);
+
+  cursor: pointer;
+}
+
+.nova-message-actions button:hover {
+  background:
+    rgba(32,212,123,0.1);
+
+  color:
+    var(--primary, #20d47b);
+}
+
+.nova-message-actions button:focus-visible {
+  outline:
+    2px solid
+    rgba(32,212,123,0.65);
+
+  outline-offset: 1px;
+}
+
+
+/* =========================================================
+   System message
+   ========================================================= */
+
+.nova-message[data-message-type="system"] {
+  justify-content: center;
+
+  margin:
+    12px 0;
+}
+
+.nova-message[data-message-type="system"]
+.nova-message-body {
+  max-width: 90%;
+}
+
+.nova-message[data-message-type="system"]
+.nova-message-bubble {
+  padding:
+    6px 12px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255,255,255,0.045);
+
+  border-color:
+    rgba(255,255,255,0.05);
+
+  box-shadow: none;
+
+  color:
+    var(--text-muted, #9cafa8);
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   Failed message
+   ========================================================= */
+
+.nova-message.is-failed
+.nova-message-bubble {
+  border-color:
+    rgba(255,92,103,0.3);
+}
+
+.nova-message.is-failed
+.nova-message-time {
+  color:
+    var(--danger, #ff5c67);
+}
+
+
+/* =========================================================
+   Mobile
+   ========================================================= */
+
+@media (max-width: 576px) {
+
+  .nova-message {
+    padding-inline: 6px;
+    gap: 5px;
+  }
+
+  .nova-message-avatar-wrap {
+    display: none;
+  }
+
+  .nova-message-body,
+  .nova-message[data-message-direction="outgoing"]
+  .nova-message-body {
+    max-width: 88%;
+  }
+
+  .nova-message-bubble {
+    padding:
+      7px 9px;
+  }
+
+  .nova-message-text {
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+  .nova-message-image img {
+    max-height: 320px;
+  }
+
+  .nova-message-video video {
+    max-height: 320px;
+  }
+
+  .nova-message-audio {
+    min-width: 190px;
+  }
+
+  .nova-message-audio audio {
+    width: 170px;
+  }
+
+  .nova-message-actions {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   Reduced motion
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .nova-message,
+  .nova-message-actions {
+    transition: none;
+  }
+}
+  </style>
