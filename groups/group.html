@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#06110D">
+  <meta
+    name="description"
+    content="NOVA — صفحة المجموعة والمحادثة الجماعية"
+  >
+
+  <title>المجموعة | NOVA</title>
+
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/logo.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/chat.css">
+  <link rel="stylesheet" href="../css/groups.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/animations.css">
+</head>
+
+<body
+  class="nova-app-page nova-group-page"
+  data-page="group"
+  data-module="groups"
+>
+
+  <!-- =========================================================
+       Global App Shell
+       ========================================================= -->
+
+  <div id="app-shell" class="app-shell">
+
+    <!-- Header -->
+    <header
+      id="global-header"
+      class="global-header"
+      data-component="header"
+    ></header>
+
+    <!-- Sidebar -->
+    <aside
+      id="global-sidebar"
+      class="global-sidebar"
+      data-component="sidebar"
+    ></aside>
+
+
+    <!-- =======================================================
+         Main
+         ======================================================= -->
+
+    <main id="main-content" class="main-content">
+
+      <section
+        id="group-page"
+        class="group-page"
+        aria-labelledby="group-page-title"
+      >
+
+        <!-- ===================================================
+             Group Header
+             =================================================== -->
+
+        <div class="group-header glass-panel">
+
+          <div class="group-header-start">
+
+            <button
+              type="button"
+              class="icon-button"
+              id="group-back-button"
+              data-action="group-back"
+              aria-label="العودة"
+              title="العودة"
+            >
+              <span aria-hidden="true">→</span>
+            </button>
+
+            <div
+              id="group-avatar"
+              class="group-avatar group-avatar-lg"
+              aria-hidden="true"
+            >
+              <span id="group-avatar-placeholder">N</span>
+              <img
+                id="group-avatar-image"
+                src=""
+                alt=""
+                hidden
+              >
+            </div>
+
+            <div class="group-heading">
+
+              <div class="group-title-row">
+
+                <h1
+                  id="group-page-title"
+                  class="group-title"
+                >
+                  المجموعة
+                </h1>
+
+                <span
+                  id="group-privacy-badge"
+                  class="group-badge"
+                  hidden
+                ></span>
+
+              </div>
+
+              <p
+                id="group-member-summary"
+                class="group-subtitle"
+              >
+                جارٍ تحميل بيانات المجموعة...
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="group-header-actions">
+
+            <button
+              type="button"
+              class="icon-button"
+              id="group-search-button"
+              data-action="group-search"
+              aria-label="البحث داخل المجموعة"
+              title="البحث"
+            >
+              <span aria-hidden="true">⌕</span>
+            </button>
+
+            <button
+              type="button"
+              class="icon-button"
+              id="group-info-button"
+              data-action="group-info"
+              aria-label="معلومات المجموعة"
+              title="معلومات المجموعة"
+            >
+              <span aria-hidden="true">ⓘ</span>
+            </button>
+
+            <button
+              type="button"
+              class="icon-button"
+              id="group-more-button"
+              data-action="group-more"
+              aria-label="المزيد"
+              title="المزيد"
+            >
+              <span aria-hidden="true">⋮</span>
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- ===================================================
+             Search
+             =================================================== -->
+
+        <div
+          id="group-search-panel"
+          class="group-search-panel glass-panel"
+          hidden
+        >
+
+          <div class="search-field">
+
+            <span
+              class="search-field-icon"
+              aria-hidden="true"
+            >
+              ⌕
+            </span>
+
+            <input
+              id="group-message-search"
+              type="search"
+              autocomplete="off"
+              placeholder="ابحث داخل رسائل المجموعة..."
+              aria-label="البحث داخل رسائل المجموعة"
+            >
+
+            <button
+              type="button"
+              class="icon-button icon-button-sm"
+              id="group-search-close"
+              data-action="group-search-close"
+              aria-label="إغلاق البحث"
+            >
+              ×
+            </button>
+
+          </div>
+
+          <div
+            id="group-search-results"
+            class="group-search-results"
+            aria-live="polite"
+          ></div>
+
+        </div>
+
+
+        <!-- ===================================================
+             Group Layout
+             =================================================== -->
+
+        <div class="group-layout">
+
+          <!-- ================================================
+               Conversation
+               ================================================ -->
+
+          <section
+            class="group-conversation glass-panel"
+            aria-label="محادثة المجموعة"
+          >
+
+            <!-- Loading -->
+            <div
+              id="group-messages-loading"
+              class="group-state group-state-loading"
+              aria-live="polite"
+            >
+              <div class="loading-spinner" aria-hidden="true"></div>
+              <p>جارٍ تحميل الرسائل...</p>
+            </div>
+
+
+            <!-- Empty -->
+            <div
+              id="group-messages-empty"
+              class="group-state group-state-empty"
+              hidden
+            >
+              <div class="group-state-icon" aria-hidden="true">
+                💬
+              </div>
+
+              <h2>لا توجد رسائل بعد</h2>
+
+              <p>
+                ابدأ أول محادثة في المجموعة.
+              </p>
+            </div>
+
+
+            <!-- Error -->
+            <div
+              id="group-messages-error"
+              class="group-state group-state-error"
+              hidden
+              role="alert"
+            >
+              <div class="group-state-icon" aria-hidden="true">
+                !
+              </div>
+
+              <h2>تعذر تحميل الرسائل</h2>
+
+              <p id="group-messages-error-text">
+                حدث خطأ أثناء تحميل المحادثة.
+              </p>
+
+              <button
+                type="button"
+                class="button button-primary"
+                id="group-messages-retry"
+                data-action="group-messages-retry"
+              >
+                إعادة المحاولة
+              </button>
+            </div>
+
+
+            <!-- Messages -->
+            <div
+              id="group-messages"
+              class="group-messages"
+              role="log"
+              aria-live="polite"
+              aria-relevant="additions"
+            ></div>
+
+
+            <!-- Typing -->
+            <div
+              id="group-typing-indicator"
+              class="group-typing-indicator"
+              aria-live="polite"
+              hidden
+            >
+              <span class="typing-dots" aria-hidden="true">
+                <i></i>
+                <i></i>
+                <i></i>
+              </span>
+
+              <span id="group-typing-text">
+                يكتب الآن...
+              </span>
+            </div>
+
+
+            <!-- Composer -->
+            <form
+              id="group-message-form"
+              class="group-composer"
+              autocomplete="off"
+            >
+
+              <div class="composer-tools">
+
+                <button
+                  type="button"
+                  class="icon-button"
+                  id="group-attachment-button"
+                  data-action="group-attachment"
+                  aria-label="إرفاق ملف"
+                  title="إرفاق"
+                >
+                  +
+                </button>
+
+                <input
+                  id="group-file-input"
+                  type="file"
+                  hidden
+                  multiple
+                  accept="image/*,video/*,audio/*,.pdf,.doc,.docx,.xls,.xlsx,.zip"
+                >
+
+              </div>
+
+
+              <div class="composer-input-wrapper">
+
+                <textarea
+                  id="group-message-input"
+                  name="message"
+                  rows="1"
+                  maxlength="5000"
+                  placeholder="اكتب رسالة..."
+                  aria-label="اكتب رسالة"
+                  autocomplete="off"
+                ></textarea>
+
+                <div
+                  id="group-reply-preview"
+                  class="reply-preview"
+                  hidden
+                >
+                  <div class="reply-preview-content">
+
+                    <span
+                      class="reply-preview-label"
+                    >
+                      الرد على
+                    </span>
+
+                    <strong
+                      id="group-reply-author"
+                    ></strong>
+
+                    <span
+                      id="group-reply-text"
+                    ></span>
+
+                  </div>
+
+                  <button
+                    type="button"
+                    class="icon-button icon-button-sm"
+                    id="group-reply-cancel"
+                    data-action="group-reply-cancel"
+                    aria-label="إلغاء الرد"
+                  >
+                    ×
+                  </button>
+                </div>
+
+              </div>
+
+
+              <button
+                type="button"
+                class="icon-button"
+                id="group-voice-button"
+                data-action="group-voice"
+                aria-label="تسجيل رسالة صوتية"
+                title="رسالة صوتية"
+              >
+                🎙
+              </button>
+
+              <button
+                type="submit"
+                class="send-button"
+                id="group-send-button"
+                aria-label="إرسال الرسالة"
+                title="إرسال"
+              >
+                ➤
+              </button>
+
+            </form>
+
+          </section>
+
+
+          <!-- ================================================
+               Group Information
+               ================================================ -->
+
+          <aside
+            id="group-info-panel"
+            class="group-info-panel glass-panel"
+            aria-label="معلومات المجموعة"
+          >
+
+            <div class="group-info-cover">
+
+              <div
+                id="group-info-avatar"
+                class="group-avatar group-avatar-xl"
+              >
+                <span id="group-info-avatar-placeholder">
+                  N
+                </span>
+
+                <img
+                  id="group-info-avatar-image"
+                  src=""
+                  alt=""
+                  hidden
+                >
+              </div>
+
+            </div>
+
+
+            <div class="group-info-main">
+
+              <h2 id="group-info-name">
+                المجموعة
+              </h2>
+
+              <p id="group-info-description">
+                لا يوجد وصف للمجموعة.
+              </p>
+
+              <div class="group-info-meta">
+
+                <span id="group-info-members">
+                  —
+                </span>
+
+                <span
+                  aria-hidden="true"
+                >
+                  •
+                </span>
+
+                <span id="group-info-created">
+                  —
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <!-- Actions -->
+            <div class="group-info-actions">
+
+              <button
+                type="button"
+                class="button button-secondary"
+                id="group-members-button"
+                data-action="group-members"
+              >
+                <span aria-hidden="true">👥</span>
+                الأعضاء
+              </button>
+
+              <button
+                type="button"
+                class="button button-secondary"
+                id="group-media-button"
+                data-action="group-media"
+              >
+                <span aria-hidden="true">▧</span>
+                الوسائط والملفات
+              </button>
+
+            </div>
+
+
+            <!-- Group Details -->
+            <div class="group-details">
+
+              <div class="group-detail-item">
+
+                <span class="group-detail-icon" aria-hidden="true">
+                  🔗
+                </span>
+
+                <div>
+                  <span class="group-detail-label">
+                    رابط الدعوة
+                  </span>
+
+                  <span
+                    id="group-invite-link"
+                    class="group-detail-value"
+                  >
+                    غير متاح
+                  </span>
+                </div>
+
+              </div>
+
+
+              <div class="group-detail-item">
+
+                <span class="group-detail-icon" aria-hidden="true">
+                  🔔
+                </span>
+
+                <div>
+                  <span class="group-detail-label">
+                    الإشعارات
+                  </span>
+
+                  <span
+                    id="group-notification-status"
+                    class="group-detail-value"
+                  >
+                    مفعّلة
+                  </span>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- Management -->
+            <div
+              id="group-management-section"
+              class="group-management"
+              hidden
+            >
+
+              <h3>إدارة المجموعة</h3>
+
+              <button
+                type="button"
+                class="list-action"
+                id="group-settings-button"
+                data-action="group-settings"
+              >
+                <span aria-hidden="true">⚙</span>
+                <span>
+                  <strong>إعدادات المجموعة</strong>
+                  <small>الاسم والوصف والصلاحيات</small>
+                </span>
+                <span aria-hidden="true">‹</span>
+              </button>
+
+              <button
+                type="button"
+                class="list-action"
+                id="group-invite-button"
+                data-action="group-invite"
+              >
+                <span aria-hidden="true">🔗</span>
+                <span>
+                  <strong>دعوة أعضاء</strong>
+                  <small>إنشاء أو مشاركة رابط الدعوة</small>
+                </span>
+                <span aria-hidden="true">‹</span>
+              </button>
+
+            </div>
+
+
+            <!-- Leave -->
+            <div class="group-danger-zone">
+
+              <button
+                type="button"
+                class="danger-button"
+                id="group-leave-button"
+                data-action="group-leave"
+              >
+                مغادرة المجموعة
+              </button>
+
+            </div>
+
+          </aside>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <!-- Bottom Navigation -->
+    <nav
+      id="global-bottom-nav"
+      class="global-bottom-nav"
+      data-component="bottom-nav"
+      aria-label="التنقل الرئيسي"
+    ></nav>
+
+  </div>
+
+
+  <!-- =========================================================
+       Attachment Preview
+       ========================================================= -->
+
+  <div
+    id="group-attachment-preview"
+    class="modal-backdrop"
+    hidden
+    aria-hidden="true"
+  >
+
+    <div
+      class="modal-card attachment-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="attachment-modal-title"
+    >
+
+      <div class="modal-header">
+
+        <h2 id="attachment-modal-title">
+          المرفقات
+        </h2>
+
+        <button
+          type="button"
+          class="icon-button"
+          id="attachment-modal-close"
+          data-action="attachment-close"
+          aria-label="إغلاق"
+        >
+          ×
+        </button>
+
+      </div>
+
+      <div
+        id="group-attachment-list"
+        class="attachment-list"
+      ></div>
+
+      <div class="modal-actions">
+
+        <button
+          type="button"
+          class="button button-secondary"
+          data-action="attachment-close"
+        >
+          إلغاء
+        </button>
+
+        <button
+          type="button"
+          class="button button-primary"
+          id="group-send-attachments"
+          data-action="attachment-send"
+        >
+          إرسال
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       Members Modal
+       ========================================================= -->
+
+  <div
+    id="group-members-modal"
+    class="modal-backdrop"
+    hidden
+    aria-hidden="true"
+  >
+
+    <div
+      class="modal-card group-members-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="group-members-title"
+    >
+
+      <div class="modal-header">
+
+        <div>
+          <h2 id="group-members-title">
+            أعضاء المجموعة
+          </h2>
+
+          <p
+            id="group-members-count"
+            class="modal-subtitle"
+          >
+            —
+          </p>
+        </div>
+
+        <button
+          type="button"
+          class="icon-button"
+          id="group-members-close"
+          data-action="members-close"
+          aria-label="إغلاق"
+        >
+          ×
+        </button>
+
+      </div>
+
+      <div class="member-search">
+
+        <input
+          id="group-member-search"
+          type="search"
+          autocomplete="off"
+          placeholder="البحث عن عضو..."
+          aria-label="البحث عن عضو"
+        >
+
+      </div>
+
+      <div
+        id="group-members-list"
+        class="group-members-list"
+      ></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       More Menu
+       ========================================================= -->
+
+  <div
+    id="group-more-menu"
+    class="context-menu"
+    hidden
+  >
+
+    <button
+      type="button"
+      data-action="group-mute"
+    >
+      <span aria-hidden="true">🔕</span>
+      كتم الإشعارات
+    </button>
+
+    <button
+      type="button"
+      data-action="group-copy-link"
+    >
+      <span aria-hidden="true">🔗</span>
+      نسخ رابط الدعوة
+    </button>
+
+    <button
+      type="button"
+      data-action="group-report"
+    >
+      <span aria-hidden="true">⚑</span>
+      الإبلاغ عن المجموعة
+    </button>
+
+  </div>
+
+
+  <!-- =========================================================
+       Global Scripts
+       ========================================================= -->
+
+  <script src="../js/config.js" defer></script>
+  <script src="../js/storage.js" defer></script>
+  <script src="../js/router.js" defer></script>
+  <script src="../js/realtime.js" defer></script>
+  <script src="../js/chat.js" defer></script>
+  <script src="../js/groups.js" defer></script>
+  <script src="../js/notifications.js" defer></script>
+  <script src="../js/app.js" defer></script>
+
+  <!-- =========================================================
+       Page Initialization
+       ========================================================= -->
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      document.documentElement.setAttribute("dir", "rtl");
+      document.documentElement.setAttribute("lang", "ar");
+
+      /*
+       * The actual group ID must come from the route/query,
+       * for example:
+       * groups/group.html?id=<real-group-id>
+       *
+       * No fake group or fake member data is created here.
+       */
+
+      const params = new URLSearchParams(window.location.search);
+      const groupId = params.get("id");
+
+      if (groupId) {
+        document.body.dataset.groupId = groupId;
+      }
+
+      /*
+       * Group module initialization is intentionally delegated
+       * to groups.js so API/database integration remains centralized.
+       */
+      if (
+        window.NOVA &&
+        typeof window.NOVA.emit === "function"
+      ) {
+        window.NOVA.emit("group:page-ready", {
+          groupId: groupId || null
+        });
+      }
+
+      /*
+       * Basic UI fallback for environments where the module
+       * has not been connected to the backend yet.
+       */
+      const input = document.getElementById("group-message-input");
+
+      if (input) {
+        input.addEventListener("input", () => {
+          input.style.height = "auto";
+          input.style.height =
+            Math.min(input.scrollHeight, 140) + "px";
+        });
+      }
+
+      const attachmentButton =
+        document.getElementById("group-attachment-button");
+
+      const fileInput =
+        document.getElementById("group-file-input");
+
+      if (attachmentButton && fileInput) {
+        attachmentButton.addEventListener("click", () => {
+          fileInput.click();
+        });
+      }
+
+      const backButton =
+        document.getElementById("group-back-button");
+
+      if (backButton) {
+        backButton.addEventListener("click", () => {
+          if (
+            window.NOVA_ROUTER &&
+            typeof window.NOVA_ROUTER.back === "function"
+          ) {
+            window.NOVA_ROUTER.back();
+          } else {
+            window.history.back();
+          }
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
