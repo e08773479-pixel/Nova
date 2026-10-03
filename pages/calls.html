@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
+  >
+
+  <meta
+    name="theme-color"
+    content="#06110D"
+  >
+
+  <meta
+    name="description"
+    content="NOVA — المكالمات الصوتية والمرئية"
+  >
+
+  <title>المكالمات | NOVA</title>
+
+  <!-- =====================================================
+       Fonts
+       ===================================================== -->
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- =====================================================
+       Application CSS
+       ===================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="../css/design-system.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/components.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/layout.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/calls.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/responsive.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/animations.css"
+  >
+
+  <!-- =====================================================
+       Page-specific fallback styles
+       ===================================================== -->
+
+  <style>
+    .calls-page {
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+
+    .calls-page__content {
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: 24px;
+    }
+
+    .calls-page__inner {
+      width: min(100%, 1280px);
+      margin-inline: auto;
+    }
+
+    .calls-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 28px;
+      margin-bottom: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 24px;
+      background:
+        radial-gradient(
+          circle at 85% 20%,
+          rgba(32, 212, 123, 0.13),
+          transparent 34%
+        ),
+        linear-gradient(
+          145deg,
+          rgba(16, 39, 31, 0.94),
+          rgba(7, 18, 13, 0.96)
+        );
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.22);
+    }
+
+    .calls-hero::before {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      left: -110px;
+      bottom: -130px;
+      border-radius: 50%;
+      background: rgba(32, 212, 123, 0.07);
+      filter: blur(40px);
+      pointer-events: none;
+    }
+
+    .calls-hero__content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .calls-hero__title {
+      margin: 0;
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 900;
+      color: #f4faf7;
+    }
+
+    .calls-hero__description {
+      max-width: 620px;
+      margin: 8px 0 0;
+      color: #9cafa8;
+      font-size: 0.88rem;
+      line-height: 1.8;
+    }
+
+    .calls-hero__actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .calls-action {
+      min-height: 44px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      background: rgba(255, 255, 255, 0.035);
+      color: #f4faf7;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 750;
+      cursor: pointer;
+      transition:
+        transform 180ms ease,
+        background 180ms ease,
+        border-color 180ms ease;
+    }
+
+    .calls-action:hover {
+      transform: translateY(-1px);
+      border-color: rgba(32, 212, 123, 0.28);
+      background: rgba(32, 212, 123, 0.07);
+    }
+
+    .calls-action--primary {
+      border-color: rgba(32, 212, 123, 0.32);
+      background: rgba(32, 212, 123, 0.12);
+      color: #20d47b;
+    }
+
+    .calls-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 330px;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .calls-panel {
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 22px;
+      background: rgba(12, 29, 23, 0.76);
+      overflow: hidden;
+    }
+
+    .calls-panel__header {
+      min-height: 68px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .calls-panel__title {
+      margin: 0;
+      color: #f4faf7;
+      font-size: 0.98rem;
+      font-weight: 850;
+    }
+
+    .calls-panel__subtitle {
+      margin: 4px 0 0;
+      color: #91a49c;
+      font-size: 0.73rem;
+    }
+
+    .calls-history {
+      min-height: 300px;
+    }
+
+    .calls-empty {
+      min-height: 300px;
+      padding: 40px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .calls-empty__icon {
+      width: 68px;
+      height: 68px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      border-radius: 20px;
+      background: rgba(32, 212, 123, 0.08);
+      border: 1px solid rgba(32, 212, 123, 0.13);
+      color: #20d47b;
+      font-size: 27px;
+    }
+
+    .calls-empty__title {
+      margin: 0;
+      color: #f4faf7;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .calls-empty__text {
+      max-width: 390px;
+      margin: 8px 0 0;
+      color: #91a49c;
+      font-size: 0.78rem;
+      line-height: 1.8;
+    }
+
+    .calls-empty__button {
+      margin-top: 18px;
+      min-height: 43px;
+      padding: 0 17px;
+      border: 1px solid rgba(32, 212, 123, 0.24);
+      border-radius: 12px;
+      background: rgba(32, 212, 123, 0.09);
+      color: #20d47b;
+      font-family: inherit;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .calls-sidebar {
+      display: grid;
+      gap: 18px;
+    }
+
+    .calls-type-grid {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+    }
+
+    .calls-type {
+      width: 100%;
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.025);
+      color: #f4faf7;
+      text-align: right;
+      font-family: inherit;
+      cursor: pointer;
+      transition:
+        background 180ms ease,
+        border-color 180ms ease,
+        transform 180ms ease;
+    }
+
+    .calls-type:hover {
+      transform: translateY(-1px);
+      border-color: rgba(32, 212, 123, 0.22);
+      background: rgba(32, 212, 123, 0.045);
+    }
+
+    .calls-type__icon {
+      width: 40px;
+      height: 40px;
+      flex: 0 0 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: rgba(32, 212, 123, 0.08);
+      color: #20d47b;
+    }
+
+    .calls-type__content {
+      min-width: 0;
+    }
+
+    .calls-type__title {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .calls-type__text {
+      display: block;
+      margin-top: 2px;
+      color: #91a49c;
+      font-size: 0.69rem;
+    }
+
+    .calls-info {
+      padding: 18px;
+    }
+
+    .calls-info__row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .calls-info__icon {
+      color: #20d47b;
+      flex: 0 0 auto;
+    }
+
+    .calls-info__text {
+      color: #91a49c;
+      font-size: 0.72rem;
+      line-height: 1.8;
+    }
+
+    .calls-loading {
+      min-height: 300px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+      color: #91a49c;
+      font-size: 0.78rem;
+    }
+
+    .calls-loading.is-active {
+      display: flex;
+    }
+
+    .calls-loading__spinner {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 255, 255, 0.08);
+      border-top-color: #20d47b;
+      animation: nova-calls-spin 800ms linear infinite;
+    }
+
+    @keyframes nova-calls-spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* =====================================================
+       RESPONSIVE
+       ===================================================== */
+
+    @media (max-width: 1050px) {
+      .calls-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .calls-sidebar {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .calls-page__content {
+        padding: 14px;
+      }
+
+      .calls-hero {
+        padding: 20px;
+        border-radius: 19px;
+      }
+
+      .calls-hero__content {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .calls-hero__actions {
+        width: 100%;
+      }
+
+      .calls-action {
+        flex: 1;
+      }
+
+      .calls-sidebar {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .calls-page__content {
+        padding:
+          10px
+          10px
+          calc(76px + env(safe-area-inset-bottom));
+      }
+
+      .calls-hero {
+        margin-bottom: 14px;
+        padding: 17px;
+      }
+
+      .calls-hero__title {
+        font-size: 1.25rem;
+      }
+
+      .calls-hero__description {
+        font-size: 0.76rem;
+      }
+
+      .calls-panel {
+        border-radius: 17px;
+      }
+
+      .calls-panel__header {
+        min-height: 60px;
+        padding: 13px 15px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .calls-action,
+      .calls-type {
+        transition: none;
+      }
+
+      .calls-loading__spinner {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+
+<body
+  class="app-body calls-page"
+  data-page="calls"
+  data-module="calls"
+>
+
+  <!-- =====================================================
+       Global Header
+       ===================================================== -->
+
+  <div
+    id="app-header"
+    data-component="header"
+  ></div>
+
+  <!-- =====================================================
+       Global Sidebar
+       ===================================================== -->
+
+  <div
+    id="app-sidebar"
+    data-component="sidebar"
+  ></div>
+
+  <!-- =====================================================
+       Main
+       ===================================================== -->
+
+  <main
+    id="calls-page"
+    class="app-main calls-page__content"
+  >
+
+    <div class="calls-page__inner">
+
+      <!-- ===================================================
+           Hero
+           =================================================== -->
+
+      <section class="calls-hero">
+
+        <div class="calls-hero__content">
+
+          <div>
+            <h1 class="calls-hero__title">
+              المكالمات
+            </h1>
+
+            <p class="calls-hero__description">
+              أدر مكالماتك الصوتية والمرئية وسجل المكالمات
+              من مكان واحد.
+            </p>
+          </div>
+
+          <div class="calls-hero__actions">
+
+            <button
+              type="button"
+              class="calls-action calls-action--primary"
+              data-action="start-voice-call"
+              aria-label="بدء مكالمة صوتية"
+            >
+              <span aria-hidden="true">☎</span>
+              مكالمة صوتية
+            </button>
+
+            <button
+              type="button"
+              class="calls-action"
+              data-action="start-video-call"
+              aria-label="بدء مكالمة فيديو"
+            >
+              <span aria-hidden="true">▣</span>
+              مكالمة فيديو
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ===================================================
+           Calls Layout
+           =================================================== -->
+
+      <div class="calls-layout">
+
+        <!-- ===============================================
+             Call History
+             =============================================== -->
+
+        <section
+          class="calls-panel calls-history-panel"
+          aria-labelledby="calls-history-title"
+        >
+
+          <header class="calls-panel__header">
+
+            <div>
+              <h2
+                id="calls-history-title"
+                class="calls-panel__title"
+              >
+                سجل المكالمات
+              </h2>
+
+              <p class="calls-panel__subtitle">
+                المكالمات المرتبطة بحسابك
+              </p>
+            </div>
+
+            <button
+              type="button"
+              class="calls-action"
+              data-action="refresh-calls"
+              aria-label="تحديث سجل المكالمات"
+            >
+              تحديث
+            </button>
+
+          </header>
+
+          <!-- Dynamic call history -->
+          <div
+            id="calls-history"
+            class="calls-history"
+            data-calls-list
+            aria-live="polite"
+          >
+
+            <!--
+              لا توجد بيانات وهمية هنا.
+              js/calls.js سيحمّل سجل المكالمات
+              من الـAPI عندما يكون متاحًا.
+            -->
+
+            <div
+              id="calls-loading"
+              class="calls-loading"
+              data-calls-loading
+              aria-live="polite"
+            >
+              <span
+                class="calls-loading__spinner"
+                aria-hidden="true"
+              ></span>
+
+              <span>
+                جاري تحميل سجل المكالمات...
+              </span>
+            </div>
+
+            <div
+              id="calls-empty"
+              class="calls-empty"
+              data-calls-empty
+            >
+
+              <div
+                class="calls-empty__icon"
+                aria-hidden="true"
+              >
+                ☎
+              </div>
+
+              <h3 class="calls-empty__title">
+                لا توجد مكالمات لعرضها
+              </h3>
+
+              <p class="calls-empty__text">
+                عند إجراء أو استقبال مكالمة حقيقية،
+                سيظهر سجلها هنا تلقائيًا.
+              </p>
+
+              <button
+                type="button"
+                class="calls-empty__button"
+                data-action="open-contacts"
+              >
+                بدء مكالمة
+              </button>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- ===============================================
+             Sidebar
+             =============================================== -->
+
+        <aside class="calls-sidebar">
+
+          <!-- Call Types -->
+
+          <section
+            class="calls-panel"
+            aria-labelledby="calls-actions-title"
+          >
+
+            <header class="calls-panel__header">
+
+              <div>
+                <h2
+                  id="calls-actions-title"
+                  class="calls-panel__title"
+                >
+                  بدء مكالمة
+                </h2>
+
+                <p class="calls-panel__subtitle">
+                  اختر نوع المكالمة
+                </p>
+              </div>
+
+            </header>
+
+            <div class="calls-type-grid">
+
+              <button
+                type="button"
+                class="calls-type"
+                data-action="start-voice-call"
+              >
+
+                <span
+                  class="calls-type__icon"
+                  aria-hidden="true"
+                >
+                  ☎
+                </span>
+
+                <span class="calls-type__content">
+                  <span class="calls-type__title">
+                    مكالمة صوتية
+                  </span>
+
+                  <span class="calls-type__text">
+                    تواصل صوتي مباشر
+                  </span>
+                </span>
+
+              </button>
+
+              <button
+                type="button"
+                class="calls-type"
+                data-action="start-video-call"
+              >
+
+                <span
+                  class="calls-type__icon"
+                  aria-hidden="true"
+                >
+                  ▣
+                </span>
+
+                <span class="calls-type__content">
+                  <span class="calls-type__title">
+                    مكالمة فيديو
+                  </span>
+
+                  <span class="calls-type__text">
+                    صوت وصورة عبر WebRTC
+                  </span>
+                </span>
+
+              </button>
+
+            </div>
+
+          </section>
+
+          <!-- Information -->
+
+          <section
+            class="calls-panel"
+            aria-labelledby="calls-info-title"
+          >
+
+            <header class="calls-panel__header">
+
+              <div>
+                <h2
+                  id="calls-info-title"
+                  class="calls-panel__title"
+                >
+                  حول المكالمات
+                </h2>
+
+                <p class="calls-panel__subtitle">
+                  حالة نظام المكالمات
+                </p>
+              </div>
+
+            </header>
+
+            <div class="calls-info">
+
+              <div class="calls-info__row">
+
+                <span
+                  class="calls-info__icon"
+                  aria-hidden="true"
+                >
+                  ●
+                </span>
+
+                <p class="calls-info__text">
+                  المكالمات الفعلية تعتمد على إعداد
+                  خدمة الإشارة وWebRTC في بيئة الإنتاج.
+                  لا يتم إنشاء مكالمات أو مستخدمين وهميين
+                  داخل الواجهة.
+                </p>
+
+              </div>
+
+            </div>
+
+          </section>
+
+        </aside>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- =====================================================
+       Mobile Bottom Navigation
+       ===================================================== -->
+
+  <div
+    id="app-bottom-nav"
+    data-component="bottom-nav"
+  ></div>
+
+  <!-- =====================================================
+       Modal Host
+       ===================================================== -->
+
+  <div
+    id="app-modal"
+    data-component="modal"
+  ></div>
+
+  <!-- =====================================================
+       Application Scripts
+       ===================================================== -->
+
+  <script src="../js/config.js"></script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/router.js"></script>
+  <script src="../js/realtime.js"></script>
+  <script src="../js/calls.js"></script>
+  <script src="../js/app.js"></script>
+
+</body>
+</html>
