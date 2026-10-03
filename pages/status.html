@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
+  >
+
+  <meta
+    name="theme-color"
+    content="#06110D"
+  >
+
+  <meta
+    name="description"
+    content="NOVA — الحالات والتحديثات"
+  >
+
+  <title>الحالات | NOVA</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/status.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/animations.css">
+
+  <style>
+    /* =====================================================
+       NOVA — Status Page
+       ===================================================== */
+
+    .status-page {
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+
+    .status-page__content {
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: 24px;
+    }
+
+    .status-page__inner {
+      width: min(100%, 1240px);
+      margin-inline: auto;
+    }
+
+    /* -----------------------------------------------------
+       Hero
+       ----------------------------------------------------- */
+
+    .status-hero {
+      position: relative;
+      overflow: hidden;
+
+      margin-bottom: 22px;
+      padding: 28px;
+
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 24px;
+
+      background:
+        radial-gradient(
+          circle at 82% 18%,
+          rgba(32, 212, 123, 0.14),
+          transparent 34%
+        ),
+        radial-gradient(
+          circle at 15% 90%,
+          rgba(32, 212, 123, 0.055),
+          transparent 30%
+        ),
+        linear-gradient(
+          145deg,
+          rgba(16, 39, 31, 0.94),
+          rgba(7, 18, 13, 0.97)
+        );
+
+      box-shadow:
+        0 22px 65px rgba(0, 0, 0, 0.24);
+    }
+
+    .status-hero::after {
+      content: "";
+
+      position: absolute;
+
+      width: 280px;
+      height: 280px;
+
+      left: -150px;
+      bottom: -180px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(32, 212, 123, 0.10),
+          transparent 70%
+        );
+
+      filter: blur(15px);
+      pointer-events: none;
+    }
+
+    .status-hero__content {
+      position: relative;
+      z-index: 1;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 20px;
+    }
+
+    .status-hero__title {
+      margin: 0;
+
+      color: #f4faf7;
+
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 900;
+      letter-spacing: -0.025em;
+    }
+
+    .status-hero__description {
+      max-width: 640px;
+
+      margin: 8px 0 0;
+
+      color: #9cafa8;
+
+      font-size: 0.86rem;
+      line-height: 1.85;
+    }
+
+    .status-hero__actions {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      flex-shrink: 0;
+    }
+
+    .status-hero__button {
+      min-height: 44px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      padding: 0 16px;
+
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+
+      background: rgba(255, 255, 255, 0.035);
+
+      color: #f4faf7;
+
+      font-family: inherit;
+      font-size: 0.81rem;
+      font-weight: 750;
+
+      cursor: pointer;
+
+      transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease;
+    }
+
+    .status-hero__button:hover {
+      transform: translateY(-1px);
+
+      border-color:
+        rgba(32, 212, 123, 0.24);
+
+      background:
+        rgba(32, 212, 123, 0.06);
+    }
+
+    .status-hero__button--primary {
+      border-color:
+        rgba(32, 212, 123, 0.28);
+
+      background:
+        rgba(32, 212, 123, 0.10);
+
+      color: #20d47b;
+    }
+
+    /* -----------------------------------------------------
+       Layout
+       ----------------------------------------------------- */
+
+    .status-layout {
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 1fr)
+        310px;
+
+      gap: 22px;
+
+      align-items: start;
+    }
+
+    .status-main {
+      min-width: 0;
+    }
+
+    .status-side {
+      display: grid;
+      gap: 18px;
+    }
+
+    /* -----------------------------------------------------
+       Panels
+       ----------------------------------------------------- */
+
+    .status-panel {
+      overflow: hidden;
+
+      border:
+        1px solid rgba(255, 255, 255, 0.07);
+
+      border-radius: 22px;
+
+      background:
+        rgba(12, 29, 23, 0.78);
+    }
+
+    .status-panel__header {
+      min-height: 68px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 14px;
+
+      padding: 15px 20px;
+
+      border-bottom:
+        1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .status-panel__title {
+      margin: 0;
+
+      color: #f4faf7;
+
+      font-size: 0.98rem;
+      font-weight: 850;
+    }
+
+    .status-panel__subtitle {
+      margin: 4px 0 0;
+
+      color: #91a49c;
+
+      font-size: 0.72rem;
+    }
+
+    .status-panel__action {
+      min-height: 38px;
+
+      padding: 0 13px;
+
+      border:
+        1px solid rgba(32, 212, 123, 0.20);
+
+      border-radius: 10px;
+
+      background:
+        rgba(32, 212, 123, 0.06);
+
+      color: #20d47b;
+
+      font-family: inherit;
+      font-size: 0.75rem;
+      font-weight: 750;
+
+      cursor: pointer;
+    }
+
+    /* -----------------------------------------------------
+       My Status
+       ----------------------------------------------------- */
+
+    .status-create {
+      display: grid;
+
+      grid-template-columns:
+        auto
+        minmax(0, 1fr)
+        auto;
+
+      align-items: center;
+
+      gap: 14px;
+
+      padding: 17px 20px;
+
+      border-bottom:
+        1px solid rgba(255, 255, 255, 0.055);
+    }
+
+    .status-avatar {
+      position: relative;
+
+      width: 52px;
+      height: 52px;
+
+      flex: 0 0 52px;
+
+      display: grid;
+      place-items: center;
+
+      overflow: hidden;
+
+      border-radius: 50%;
+
+      border:
+        2px solid rgba(32, 212, 123, 0.65);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(32, 212, 123, 0.13),
+          rgba(255, 255, 255, 0.04)
+        );
+
+      color: #20d47b;
+
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .status-avatar img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+    }
+
+    .status-avatar__add {
+      position: absolute;
+
+      left: -1px;
+      bottom: -1px;
+
+      width: 19px;
+      height: 19px;
+
+      display: grid;
+      place-items: center;
+
+      border:
+        2px solid #0c1d17;
+
+      border-radius: 50%;
+
+      background: #20d47b;
+
+      color: #04100a;
+
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .status-create__content {
+      min-width: 0;
+    }
+
+    .status-create__title {
+      display: block;
+
+      color: #f4faf7;
+
+      font-size: 0.86rem;
+      font-weight: 800;
+    }
+
+    .status-create__description {
+      display: block;
+
+      margin-top: 3px;
+
+      color: #91a49c;
+
+      font-size: 0.72rem;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .status-create__actions {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .status-create__button {
+      width: 40px;
+      height: 40px;
+
+      display: grid;
+      place-items: center;
+
+      border:
+        1px solid rgba(255, 255, 255, 0.07);
+
+      border-radius: 11px;
+
+      background:
+        rgba(255, 255, 255, 0.035);
+
+      color: #c7d4ce;
+
+      font-family: inherit;
+      font-size: 17px;
+
+      cursor: pointer;
+
+      transition:
+        color 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease;
+    }
+
+    .status-create__button:hover {
+      color: #20d47b;
+
+      border-color:
+        rgba(32, 212, 123, 0.20);
+
+      background:
+        rgba(32, 212, 123, 0.055);
+    }
+
+    /* -----------------------------------------------------
+       Status List
+       ----------------------------------------------------- */
+
+    .status-list {
+      min-height: 260px;
+    }
+
+    .status-list__items {
+      display: grid;
+    }
+
+    .status-empty {
+      min-height: 280px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      padding: 42px 24px;
+
+      text-align: center;
+    }
+
+    .status-empty__icon {
+      width: 68px;
+      height: 68px;
+
+      display: grid;
+      place-items: center;
+
+      margin-bottom: 17px;
+
+      border:
+        1px solid rgba(32, 212, 123, 0.14);
+
+      border-radius: 21px;
+
+      background:
+        rgba(32, 212, 123, 0.07);
+
+      color: #20d47b;
+
+      font-size: 27px;
+    }
+
+    .status-empty__title {
+      margin: 0;
+
+      color: #f4faf7;
+
+      font-size: 0.98rem;
+      font-weight: 850;
+    }
+
+    .status-empty__text {
+      max-width: 410px;
+
+      margin: 8px 0 0;
+
+      color: #91a49c;
+
+      font-size: 0.76rem;
+      line-height: 1.8;
+    }
+
+    .status-loading {
+      min-height: 280px;
+
+      display: none;
+
+      align-items: center;
+      justify-content: center;
+
+      flex-direction: column;
+
+      gap: 12px;
+
+      color: #91a49c;
+
+      font-size: 0.76rem;
+    }
+
+    .status-loading.is-active {
+      display: flex;
+    }
+
+    .status-loading__spinner {
+      width: 34px;
+      height: 34px;
+
+      border:
+        3px solid rgba(255, 255, 255, 0.08);
+
+      border-top-color: #20d47b;
+
+      border-radius: 50%;
+
+      animation:
+        nova-status-spin 800ms linear infinite;
+    }
+
+    @keyframes nova-status-spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* -----------------------------------------------------
+       Side — Create Options
+       ----------------------------------------------------- */
+
+    .status-options {
+      display: grid;
+      gap: 9px;
+
+      padding: 15px;
+    }
+
+    .status-option {
+      width: 100%;
+
+      min-height: 60px;
+
+      display: flex;
+      align-items: center;
+
+      gap: 12px;
+
+      padding: 9px 11px;
+
+      border:
+        1px solid rgba(255, 255, 255, 0.06);
+
+      border-radius: 14px;
+
+      background:
+        rgba(255, 255, 255, 0.025);
+
+      color: #f4faf7;
+
+      text-align: right;
+
+      font-family: inherit;
+
+      cursor: pointer;
+
+      transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease;
+    }
+
+    .status-option:hover {
+      transform: translateY(-1px);
+
+      border-color:
+        rgba(32, 212, 123, 0.20);
+
+      background:
+        rgba(32, 212, 123, 0.045);
+    }
+
+    .status-option__icon {
+      width: 39px;
+      height: 39px;
+
+      flex: 0 0 39px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 11px;
+
+      background:
+        rgba(32, 212, 123, 0.08);
+
+      color: #20d47b;
+
+      font-size: 17px;
+    }
+
+    .status-option__content {
+      min-width: 0;
+    }
+
+    .status-option__title {
+      display: block;
+
+      color: #f4faf7;
+
+      font-size: 0.79rem;
+      font-weight: 800;
+    }
+
+    .status-option__text {
+      display: block;
+
+      margin-top: 2px;
+
+      color: #91a49c;
+
+      font-size: 0.68rem;
+    }
+
+    /* -----------------------------------------------------
+       Privacy Card
+       ----------------------------------------------------- */
+
+    .status-privacy {
+      padding: 18px;
+    }
+
+    .status-privacy__row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .status-privacy__icon {
+      flex: 0 0 auto;
+
+      color: #20d47b;
+    }
+
+    .status-privacy__text {
+      margin: 0;
+
+      color: #91a49c;
+
+      font-size: 0.72rem;
+      line-height: 1.8;
+    }
+
+    /* -----------------------------------------------------
+       Responsive
+       ----------------------------------------------------- */
+
+    @media (max-width: 1050px) {
+      .status-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .status-side {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .status-page__content {
+        padding: 14px;
+      }
+
+      .status-hero {
+        padding: 20px;
+        border-radius: 19px;
+      }
+
+      .status-hero__content {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .status-hero__actions {
+        width: 100%;
+      }
+
+      .status-hero__button {
+        flex: 1;
+      }
+
+      .status-side {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .status-page__content {
+        padding:
+          10px
+          10px
+          calc(76px + env(safe-area-inset-bottom));
+      }
+
+      .status-hero {
+        margin-bottom: 14px;
+        padding: 17px;
+      }
+
+      .status-hero__title {
+        font-size: 1.25rem;
+      }
+
+      .status-hero__description {
+        font-size: 0.75rem;
+      }
+
+      .status-panel {
+        border-radius: 17px;
+      }
+
+      .status-panel__header {
+        min-height: 60px;
+        padding: 13px 15px;
+      }
+
+      .status-create {
+        grid-template-columns:
+          auto
+          minmax(0, 1fr);
+
+        padding: 14px;
+      }
+
+      .status-create__actions {
+        grid-column: 1 / -1;
+        justify-content: flex-start;
+      }
+
+      .status-create__button {
+        flex: 1;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .status-hero__button,
+      .status-option {
+        transition: none;
+      }
+
+      .status-loading__spinner {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+
+<body
+  class="app-body status-page"
+  data-page="status"
+  data-module="status"
+>
+
+  <!-- =====================================================
+       Global Header
+       ===================================================== -->
+
+  <div
+    id="app-header"
+    data-component="header"
+  ></div>
+
+  <!-- =====================================================
+       Global Sidebar
+       ===================================================== -->
+
+  <div
+    id="app-sidebar"
+    data-component="sidebar"
+  ></div>
+
+  <!-- =====================================================
+       Main
+       ===================================================== -->
+
+  <main
+    id="status-page"
+    class="app-main status-page__content"
+  >
+
+    <div class="status-page__inner">
+
+      <!-- ===================================================
+           Hero
+           =================================================== -->
+
+      <section class="status-hero">
+
+        <div class="status-hero__content">
+
+          <div>
+            <h1 class="status-hero__title">
+              الحالات
+            </h1>
+
+            <p class="status-hero__description">
+              شارك تحديثاتك اليومية مع الأشخاص الذين تختارهم
+              وتابع الحالات المتاحة لحسابك.
+            </p>
+          </div>
+
+          <div class="status-hero__actions">
+
+            <button
+              type="button"
+              class="status-hero__button status-hero__button--primary"
+              data-action="create-text-status"
+            >
+              <span aria-hidden="true">✎</span>
+              حالة نصية
+            </button>
+
+            <button
+              type="button"
+              class="status-hero__button"
+              data-action="create-media-status"
+            >
+              <span aria-hidden="true">＋</span>
+              حالة وسائط
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ===================================================
+           Main Layout
+           =================================================== -->
+
+      <div class="status-layout">
+
+        <!-- =================================================
+             Main Status Area
+             ================================================= -->
+
+        <section
+          class="status-main status-panel"
+          aria-labelledby="status-list-title"
+        >
+
+          <header class="status-panel__header">
+
+            <div>
+              <h2
+                id="status-list-title"
+                class="status-panel__title"
+              >
+                تحديثات الحالة
+              </h2>
+
+              <p class="status-panel__subtitle">
+                الحالات المتاحة لحسابك
+              </p>
+            </div>
+
+            <button
+              type="button"
+              class="status-panel__action"
+              data-action="refresh-status"
+            >
+              تحديث
+            </button>
+
+          </header>
+
+          <!-- =================================================
+               My Status
+               ================================================= -->
+
+          <div class="status-create">
+
+            <div
+              class="status-avatar"
+              data-profile-avatar
+              aria-hidden="true"
+            >
+              <span>+</span>
+
+              <span
+                class="status-avatar__add"
+              >
+                +
+              </span>
+            </div>
+
+            <div class="status-create__content">
+
+              <span class="status-create__title">
+                حالتك
+              </span>
+
+              <span class="status-create__description">
+                أضف تحديثًا جديدًا لحسابك
+              </span>
+
+            </div>
+
+            <div class="status-create__actions">
+
+              <button
+                type="button"
+                class="status-create__button"
+                data-action="create-text-status"
+                aria-label="إضافة حالة نصية"
+                title="حالة نصية"
+              >
+                T
+              </button>
+
+              <button
+                type="button"
+                class="status-create__button"
+                data-action="create-image-status"
+                aria-label="إضافة صورة"
+                title="صورة"
+              >
+                ▧
+              </button>
+
+              <button
+                type="button"
+                class="status-create__button"
+                data-action="create-video-status"
+                aria-label="إضافة فيديو"
+                title="فيديو"
+              >
+                ▶
+              </button>
+
+            </div>
+
+          </div>
+
+          <!-- =================================================
+               Dynamic Status List
+               ================================================= -->
+
+          <div
+            id="status-list"
+            class="status-list"
+            data-status-list
+            aria-live="polite"
+          >
+
+            <!--
+              لا توجد بيانات وهمية.
+              js/status.js مسؤول عن تحميل الحالات
+              الحقيقية من الـAPI.
+            -->
+
+            <div
+              id="status-loading"
+              class="status-loading"
+              data-status-loading
+            >
+              <span
+                class="status-loading__spinner"
+                aria-hidden="true"
+              ></span>
+
+              <span>
+                جاري تحميل الحالات...
+              </span>
+            </div>
+
+            <div
+              id="status-empty"
+              class="status-empty"
+              data-status-empty
+            >
+
+              <div
+                class="status-empty__icon"
+                aria-hidden="true"
+              >
+                ◌
+              </div>
+
+              <h3 class="status-empty__title">
+                لا توجد حالات متاحة
+              </h3>
+
+              <p class="status-empty__text">
+                عند وجود حالات حقيقية مرتبطة بحسابك
+                ستظهر هنا تلقائيًا.
+              </p>
+
+            </div>
+
+            <div
+              id="status-items"
+              class="status-list__items"
+              data-status-items
+            ></div>
+
+          </div>
+
+        </section>
+
+        <!-- =================================================
+             Sidebar
+             ================================================= -->
+
+        <aside class="status-side">
+
+          <!-- Create -->
+
+          <section
+            class="status-panel"
+            aria-labelledby="status-create-title"
+          >
+
+            <header class="status-panel__header">
+
+              <div>
+                <h2
+                  id="status-create-title"
+                  class="status-panel__title"
+                >
+                  إنشاء حالة
+                </h2>
+
+                <p class="status-panel__subtitle">
+                  اختر نوع التحديث
+                </p>
+              </div>
+
+            </header>
+
+            <div class="status-options">
+
+              <button
+                type="button"
+                class="status-option"
+                data-action="create-text-status"
+              >
+
+                <span
+                  class="status-option__icon"
+                  aria-hidden="true"
+                >
+                  T
+                </span>
+
+                <span class="status-option__content">
+
+                  <span class="status-option__title">
+                    نص
+                  </span>
+
+                  <span class="status-option__text">
+                    اكتب تحديثًا قصيرًا
+                  </span>
+
+                </span>
+
+              </button>
+
+              <button
+                type="button"
+                class="status-option"
+                data-action="create-image-status"
+              >
+
+                <span
+                  class="status-option__icon"
+                  aria-hidden="true"
+                >
+                  ▧
+                </span>
+
+                <span class="status-option__content">
+
+                  <span class="status-option__title">
+                    صورة
+                  </span>
+
+                  <span class="status-option__text">
+                    شارك صورة من جهازك
+                  </span>
+
+                </span>
+
+              </button>
+
+              <button
+                type="button"
+                class="status-option"
+                data-action="create-video-status"
+              >
+
+                <span
+                  class="status-option__icon"
+                  aria-hidden="true"
+                >
+                  ▶
+                </span>
+
+                <span class="status-option__content">
+
+                  <span class="status-option__title">
+                    فيديو
+                  </span>
+
+                  <span class="status-option__text">
+                    شارك فيديو مع جهاتك
+                  </span>
+
+                </span>
+
+              </button>
+
+            </div>
+
+          </section>
+
+          <!-- Privacy -->
+
+          <section
+            class="status-panel"
+            aria-labelledby="status-privacy-title"
+          >
+
+            <header class="status-panel__header">
+
+              <div>
+                <h2
+                  id="status-privacy-title"
+                  class="status-panel__title"
+                >
+                  خصوصية الحالة
+                </h2>
+
+                <p class="status-panel__subtitle">
+                  تحكم في من يمكنه المشاهدة
+                </p>
+              </div>
+
+            </header>
+
+            <div class="status-privacy">
+
+              <div class="status-privacy__row">
+
+                <span
+                  class="status-privacy__icon"
+                  aria-hidden="true"
+                >
+                  ●
+                </span>
+
+                <p class="status-privacy__text">
+                  إعدادات الخصوصية يتم تحميلها من حسابك
+                  ويمكن تعديلها من صفحة الخصوصية.
+                </p>
+
+              </div>
+
+            </div>
+
+          </section>
+
+        </aside>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- =====================================================
+       Mobile Bottom Navigation
+       ===================================================== -->
+
+  <div
+    id="app-bottom-nav"
+    data-component="bottom-nav"
+  ></div>
+
+  <!-- =====================================================
+       Modal Host
+       ===================================================== -->
+
+  <div
+    id="app-modal"
+    data-component="modal"
+  ></div>
+
+  <!-- =====================================================
+       Scripts
+       ===================================================== -->
+
+  <script src="../js/config.js"></script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/router.js"></script>
+  <script src="../js/realtime.js"></script>
+  <script src="../js/status.js"></script>
+  <script src="../js/app.js"></script>
+
+</body>
+</html>
