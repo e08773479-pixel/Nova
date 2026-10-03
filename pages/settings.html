@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  >
+
+  <meta name="theme-color" content="#06110D">
+  <meta
+    name="description"
+    content="NOVA — إعدادات الحساب والتطبيق والإشعارات."
+  >
+  <meta name="color-scheme" content="dark">
+
+  <title>الإعدادات | NOVA</title>
+
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/settings.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/animations.css">
+
+  <style>
+    /* =========================================================
+       NOVA — SETTINGS PAGE
+       Page-specific fallback styling
+       ========================================================= */
+
+    .settings-page {
+      min-height: 100%;
+      width: 100%;
+    }
+
+    .settings-page__content {
+      width: 100%;
+      max-width: 1350px;
+      margin-inline: auto;
+      padding-bottom: 110px;
+    }
+
+    /* =========================================================
+       Hero
+       ========================================================= */
+
+    .settings-hero {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 20px;
+      padding: 28px;
+      border: 1px solid rgba(32, 212, 123, 0.14);
+      border-radius: 26px;
+      background:
+        radial-gradient(
+          circle at 82% 20%,
+          rgba(32, 212, 123, 0.13),
+          transparent 34%
+        ),
+        linear-gradient(
+          145deg,
+          rgba(15, 35, 27, 0.97),
+          rgba(7, 18, 14, 0.97)
+        );
+      box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.24),
+        inset 0 1px 0 rgba(255, 255, 255, 0.035);
+    }
+
+    .settings-hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 9px;
+      padding: 6px 11px;
+      border: 1px solid rgba(32, 212, 123, 0.13);
+      border-radius: 999px;
+      background: rgba(32, 212, 123, 0.06);
+      color: #20d47b;
+      font-size: 0.76rem;
+      font-weight: 800;
+    }
+
+    .settings-hero__title {
+      margin: 0;
+      color: #fff;
+      font-size: clamp(1.55rem, 3vw, 2.15rem);
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    .settings-hero__description {
+      max-width: 680px;
+      margin: 9px 0 0;
+      color: rgba(255,255,255,.58);
+      font-size: .9rem;
+      line-height: 1.85;
+    }
+
+    .settings-hero__action {
+      flex: 0 0 auto;
+    }
+
+    /* =========================================================
+       Main layout
+       ========================================================= */
+
+    .settings-layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0,1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .settings-nav,
+    .settings-main-card {
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 23px;
+      background: rgba(9,20,16,.88);
+      box-shadow:
+        0 20px 60px rgba(0,0,0,.18),
+        inset 0 1px 0 rgba(255,255,255,.025);
+    }
+
+    .settings-nav {
+      position: sticky;
+      top: 20px;
+      padding: 12px;
+    }
+
+    .settings-nav__title {
+      padding: 8px 10px 12px;
+      color: rgba(255,255,255,.38);
+      font-size: .68rem;
+      font-weight: 900;
+      letter-spacing: .02em;
+    }
+
+    .settings-nav__items {
+      display: grid;
+      gap: 5px;
+    }
+
+    .settings-nav__item {
+      width: 100%;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 0 11px;
+      border: 1px solid transparent;
+      border-radius: 13px;
+      background: transparent;
+      color: rgba(255,255,255,.58);
+      font: inherit;
+      font-size: .8rem;
+      font-weight: 800;
+      text-align: right;
+      cursor: pointer;
+      transition:
+        background 180ms ease,
+        color 180ms ease,
+        border-color 180ms ease;
+    }
+
+    .settings-nav__item:hover {
+      color: #fff;
+      background: rgba(255,255,255,.035);
+    }
+
+    .settings-nav__item.is-active,
+    .settings-nav__item[aria-selected="true"] {
+      border-color: rgba(32,212,123,.14);
+      background: rgba(32,212,123,.08);
+      color: #20d47b;
+    }
+
+    .settings-nav__icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 34px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.035);
+      font-size: .95rem;
+    }
+
+    .settings-nav__item.is-active .settings-nav__icon {
+      background: rgba(32,212,123,.10);
+    }
+
+    /* =========================================================
+       Settings sections
+       ========================================================= */
+
+    .settings-section {
+      padding: 22px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    .settings-section:last-child {
+      border-bottom: 0;
+    }
+
+    .settings-section__header {
+      margin-bottom: 17px;
+    }
+
+    .settings-section__title {
+      margin: 0;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 900;
+    }
+
+    .settings-section__description {
+      margin: 5px 0 0;
+      color: rgba(255,255,255,.42);
+      font-size: .75rem;
+      line-height: 1.8;
+    }
+
+    /* =========================================================
+       Account identity
+       ========================================================= */
+
+    .settings-account {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 16px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .settings-account__avatar {
+      width: 56px;
+      height: 56px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      flex: 0 0 56px;
+      border-radius: 17px;
+      background: linear-gradient(
+        145deg,
+        rgba(32,212,123,.17),
+        rgba(255,255,255,.04)
+      );
+      color: #20d47b;
+      font-size: 1.35rem;
+      font-weight: 900;
+    }
+
+    .settings-account__avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .settings-account__info {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .settings-account__name {
+      margin: 0;
+      overflow: hidden;
+      color: #fff;
+      font-size: .9rem;
+      font-weight: 900;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .settings-account__meta {
+      margin: 4px 0 0;
+      overflow: hidden;
+      color: rgba(255,255,255,.40);
+      font-size: .73rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* =========================================================
+       Rows
+       ========================================================= */
+
+    .settings-list {
+      display: grid;
+      gap: 7px;
+    }
+
+    .settings-row {
+      min-height: 62px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 9px 11px;
+      border: 1px solid rgba(255,255,255,.045);
+      border-radius: 15px;
+      background: rgba(255,255,255,.022);
+    }
+
+    .settings-row__icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 38px;
+      border-radius: 11px;
+      background: rgba(32,212,123,.07);
+      color: #20d47b;
+    }
+
+    .settings-row__content {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .settings-row__title {
+      display: block;
+      color: rgba(255,255,255,.82);
+      font-size: .81rem;
+      font-weight: 800;
+    }
+
+    .settings-row__description {
+      display: block;
+      margin-top: 3px;
+      color: rgba(255,255,255,.38);
+      font-size: .69rem;
+      line-height: 1.6;
+    }
+
+    .settings-row__value {
+      flex: 0 0 auto;
+      color: rgba(255,255,255,.43);
+      font-size: .72rem;
+    }
+
+    .settings-row__action {
+      min-height: 38px;
+      padding: 0 12px;
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 10px;
+      background: rgba(255,255,255,.035);
+      color: rgba(255,255,255,.75);
+      font: inherit;
+      font-size: .72rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .settings-row__action:hover {
+      border-color: rgba(32,212,123,.17);
+      background: rgba(32,212,123,.07);
+      color: #20d47b;
+    }
+
+    /* =========================================================
+       Toggle
+       ========================================================= */
+
+    .settings-toggle {
+      position: relative;
+      width: 48px;
+      height: 28px;
+      flex: 0 0 48px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255,255,255,.11);
+      cursor: pointer;
+      transition: background 180ms ease;
+    }
+
+    .settings-toggle::after {
+      content: "";
+      position: absolute;
+      top: 4px;
+      inset-inline-start: 4px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.72);
+      transition: transform 180ms ease;
+    }
+
+    .settings-toggle[aria-pressed="true"] {
+      background: #20d47b;
+    }
+
+    .settings-toggle[aria-pressed="true"]::after {
+      transform: translateX(-20px);
+      background: #06110d;
+    }
+
+    .settings-toggle:focus-visible {
+      outline: 2px solid #20d47b;
+      outline-offset: 3px;
+    }
+
+    /* =========================================================
+       Select
+       ========================================================= */
+
+    .settings-select {
+      min-height: 40px;
+      padding: 0 11px;
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 10px;
+      outline: none;
+      background: rgba(255,255,255,.035);
+      color: rgba(255,255,255,.75);
+      font: inherit;
+      font-size: .72rem;
+      cursor: pointer;
+    }
+
+    .settings-select:focus {
+      border-color: rgba(32,212,123,.30);
+    }
+
+    /* =========================================================
+       Danger
+       ========================================================= */
+
+    .settings-danger {
+      border-color: rgba(255,75,75,.12);
+      background: rgba(255,55,55,.025);
+    }
+
+    .settings-danger .settings-row__icon {
+      background: rgba(255,75,75,.07);
+      color: #ff7777;
+    }
+
+    .settings-danger .settings-row__action {
+      border-color: rgba(255,75,75,.12);
+      color: #ff8585;
+    }
+
+    .settings-danger .settings-row__action:hover {
+      background: rgba(255,75,75,.08);
+      border-color: rgba(255,75,75,.22);
+      color: #ff9b9b;
+    }
+
+    /* =========================================================
+       Save bar
+       ========================================================= */
+
+    .settings-savebar {
+      position: sticky;
+      bottom: 16px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 16px;
+      padding: 13px 16px;
+      border: 1px solid rgba(32,212,123,.14);
+      border-radius: 17px;
+      background: rgba(6,17,13,.94);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 15px 40px rgba(0,0,0,.25);
+    }
+
+    .settings-savebar__text {
+      color: rgba(255,255,255,.45);
+      font-size: .74rem;
+    }
+
+    .settings-savebar__actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .settings-btn {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 0 15px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 11px;
+      background: rgba(255,255,255,.04);
+      color: #fff;
+      font: inherit;
+      font-size: .76rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .settings-btn--primary {
+      border-color: rgba(32,212,123,.24);
+      background: linear-gradient(
+        135deg,
+        #20d47b,
+        #13ad63
+      );
+      color: #03100a;
+    }
+
+    .settings-btn:hover {
+      border-color: rgba(255,255,255,.14);
+      background: rgba(255,255,255,.075);
+    }
+
+    .settings-btn--primary:hover {
+      background: linear-gradient(
+        135deg,
+        #2ce488,
+        #18bd6c
+      );
+    }
+
+    /* =========================================================
+       Loading
+       ========================================================= */
+
+    .settings-loading {
+      min-height: 300px;
+      display: grid;
+      place-items: center;
+      color: rgba(255,255,255,.45);
+    }
+
+    .settings-spinner {
+      width: 30px;
+      height: 30px;
+      margin-bottom: 10px;
+      border: 3px solid rgba(255,255,255,.08);
+      border-top-color: #20d47b;
+      border-radius: 50%;
+      animation: novaSettingsSpin .8s linear infinite;
+    }
+
+    /* =========================================================
+       Responsive
+       ========================================================= */
+
+    @media (max-width: 950px) {
+      .settings-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .settings-nav {
+        position: static;
+      }
+
+      .settings-nav__items {
+        display: flex;
+        overflow-x: auto;
+        padding-bottom: 2px;
+      }
+
+      .settings-nav__item {
+        flex: 0 0 auto;
+      }
+
+      .settings-nav__title {
+        display: none;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .settings-hero {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 22px;
+        border-radius: 21px;
+      }
+
+      .settings-hero__action {
+        width: 100%;
+      }
+
+      .settings-hero__action .settings-btn {
+        width: 100%;
+      }
+
+      .settings-section {
+        padding: 17px;
+      }
+
+      .settings-row {
+        align-items: flex-start;
+      }
+
+      .settings-row__action,
+      .settings-select,
+      .settings-toggle {
+        flex: 0 0 auto;
+      }
+
+      .settings-savebar {
+        bottom: 8px;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .settings-savebar__actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .settings-page__content {
+        padding-bottom: 95px;
+      }
+
+      .settings-row {
+        flex-wrap: wrap;
+      }
+
+      .settings-row__content {
+        min-width: calc(100% - 55px);
+      }
+
+      .settings-row__value,
+      .settings-row__action,
+      .settings-select,
+      .settings-toggle {
+        margin-inline-start: auto;
+      }
+
+      .settings-savebar__actions {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @keyframes novaSettingsSpin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .settings-nav__item,
+      .settings-row__action,
+      .settings-btn,
+      .settings-toggle {
+        transition: none;
+      }
+
+      .settings-spinner {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+
+<body class="nova-page settings-page">
+
+  <!-- Global header -->
+  <div id="global-header"></div>
+
+  <!-- Global sidebar -->
+  <div id="global-sidebar"></div>
+
+  <main class="app-main settings-page__content">
+
+    <!-- =======================================================
+         Hero
+         ======================================================= -->
+    <section
+      class="settings-hero"
+      aria-labelledby="settings-title"
+    >
+
+      <div>
+        <div class="settings-hero__eyebrow">
+          <span aria-hidden="true">⚙</span>
+          <span>إعدادات NOVA</span>
+        </div>
+
+        <h1
+          id="settings-title"
+          class="settings-hero__title"
+        >
+          تحكم كامل في تجربتك
+        </h1>
+
+        <p class="settings-hero__description">
+          إدارة الحساب والمظهر والإشعارات والخصوصية والاتصالات
+          من مكان واحد، مع حفظ الإعدادات عبر طبقة البيانات الخاصة بالتطبيق.
+        </p>
+      </div>
+
+      <div class="settings-hero__action">
+
+        <button
+          type="button"
+          class="settings-btn"
+          data-action="reset-settings"
+        >
+          ↶
+          <span>استعادة الإعدادات</span>
+        </button>
+
+      </div>
+
+    </section>
+
+    <!-- =======================================================
+         Settings layout
+         ======================================================= -->
+    <section class="settings-layout">
+
+      <!-- =====================================================
+           Navigation
+           ===================================================== -->
+      <aside
+        class="settings-nav"
+        aria-label="أقسام الإعدادات"
+      >
+
+        <div class="settings-nav__title">
+          أقسام الإعدادات
+        </div>
+
+        <div
+          class="settings-nav__items"
+          role="tablist"
+          aria-label="أقسام الإعدادات"
+        >
+
+          <button
+            type="button"
+            class="settings-nav__item is-active"
+            role="tab"
+            aria-selected="true"
+            data-settings-section="general"
+          >
+            <span
+              class="settings-nav__icon"
+              aria-hidden="true"
+            >
+              ⚙
+            </span>
+            <span>عام</span>
+          </button>
+
+          <button
+            type="button"
+            class="settings-nav__item"
+            role="tab"
+            aria-selected="false"
+            data-settings-section="notifications"
+          >
+            <span
+              class="settings-nav__icon"
+              aria-hidden="true"
+            >
+              🔔
+            </span>
+            <span>الإشعارات</span>
+          </button>
+
+          <button
+            type="button"
+            class="settings-nav__item"
+            role="tab"
+            aria-selected="false"
+            data-settings-section="privacy"
+          >
+            <span
+              class="settings-nav__icon"
+              aria-hidden="true"
+            >
+              ◉
+            </span>
+            <span>الخصوصية</span>
+          </button>
+
+          <button
+            type="button"
+            class="settings-nav__item"
+            role="tab"
+            aria-selected="false"
+            data-settings-section="security"
+          >
+            <span
+              class="settings-nav__icon"
+              aria-hidden="true"
+            >
+              ⛨
+            </span>
+            <span>الأمان</span>
+          </button>
+
+          <button
+            type="button"
+            class="settings-nav__item"
+            role="tab"
+            aria-selected="false"
+            data-settings-section="appearance"
+          >
+            <span
+              class="settings-nav__icon"
+              aria-hidden="true"
+            >
+              ◐
+            </span>
+            <span>المظهر</span>
+          </button>
+
+        </div>
+
+      </aside>
+
+      <!-- =====================================================
+           Main settings
+           ===================================================== -->
+      <div class="settings-main-card">
+
+        <div
+          id="settings-loading"
+          class="settings-loading"
+          hidden
+          aria-live="polite"
+        >
+          <div>
+            <div
+              class="settings-spinner"
+              aria-hidden="true"
+            ></div>
+
+            <span>
+              جاري تحميل الإعدادات...
+            </span>
+          </div>
+        </div>
+
+        <!-- ===================================================
+             General
+             =================================================== -->
+        <section
+          class="settings-section"
+          data-settings-panel="general"
+          aria-labelledby="general-settings-title"
+        >
+
+          <div class="settings-section__header">
+            <h2
+              id="general-settings-title"
+              class="settings-section__title"
+            >
+              الإعدادات العامة
+            </h2>
+
+            <p class="settings-section__description">
+              معلومات الحساب واللغة والمنطقة الزمنية وبعض التفضيلات الأساسية.
+            </p>
+          </div>
+
+          <div class="settings-list">
+
+            <div class="settings-account">
+
+              <div
+                id="settings-account-avatar"
+                class="settings-account__avatar"
+              >
+                👤
+              </div>
+
+              <div class="settings-account__info">
+
+                <p
+                  id="settings-account-name"
+                  class="settings-account__name"
+                >
+                  حسابك
+                </p>
+
+                <p
+                  id="settings-account-meta"
+                  class="settings-account__meta"
+                >
+                  يتم تحميل بيانات الحساب...
+                </p>
+
+              </div>
+
+              <button
+                type="button"
+                class="settings-row__action"
+                data-action="open-profile"
+              >
+                الملف الشخصي
+              </button>
+
+            </div>
+
+            <div class="settings-row">
+
+              <span
+                class="settings-row__icon"
+                aria-hidden="true"
+              >
+                🌐
+              </span>
+
+              <div class="settings-row__content">
+                <span class="settings-row__title">
+                  اللغة
+                </span>
+
+                <span class="settings-row__description">
+                  لغة واجهة NOVA
+                </span>
+              </div>
+
+              <select
+                id="settings-language"
+                class="settings-select"
+                data-setting="language"
+                aria-label="لغة التطبيق"
+              >
+                <option value="ar">العربية</option>
+                <option value="en">English</option>
+              </select>
+
+            </div>
+
+            <div class="settings-row">
+
+              <span
+                class="settings-row__icon"
+                aria-hidden="true"
+              >
+                ◷
+              </span>
+
+              <div class="settings-row__content">
+                <span class="settings-row__title">
+                  المنطقة الزمنية
+                </span>
+
+                <span class="settings-row__description">
+                  تستخدم لتنسيق أوقات الرسائل والمكالمات والإشعارات.
+                </span>
+              </div>
+
+              <span
+                id="settings-timezone"
+                class="settings-row__value"
+              >
+                Africa/Cairo
+              </span>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- ===================================================
+             Notifications
+             =================================================== -->
+        <section
+          class="settings-section"
+          data-settings-panel="notifications"
+          aria-labelledby="notifications-settings-title"
+          hidden
+        >
+
+          <div class="settings-section__header">
+            <h2
+              id="notifications-settings-title"
+              class="settings-section__title"
+            >
+              الإشعارات
+            </h2>
+
+            <p class="settings-section__description">
+              اختر أنواع التنبيهات التي تريد استقبالها.
+            </p>
+          </div>
+
+          <div class="settings-list">
+
+            <div class="settings-row">
+
+              <span
+                class="settings-row__icon"
+                aria-hidden="true"
+              >
+                💬
+              </span>
+
+              <div class="settings-row__content">
+                <span class="settings-row__title">
+                  رسائل جديدة
+                </span>
+
+                <span class="settings-row__description">
+                  إشعار عند وصول رسالة جديدة.
+                </span>
+              </div>
+
+              <button
+                type="button"
+                class="settings-toggle"
+                aria-pressed="false"
+                data-setting-toggle="message-notifications"
+                aria-label="تفعيل إشعارات الرسائل"
+              ></button>
+
+            </div>
+
+            <div class="settings-row">
+
+              <span
+                class="settings-row__icon"
+                aria-hidden="true"
+              >
+                📞
+              </span>
+
+              <div class="settings-row__content">
+                <span class="settings-row__title">
+                  المكالمات
+                </span>
+
+                <span class="settings-row__description">
+                  إشعارات المكالمات الواردة والمكالمات الفائتة.
+                </span>
+              </div>
+
+              <button
+                type="button"
+                class="settings-toggle"
+                aria-pressed="false"
+                data-setting-toggle="call-notifications"
+                aria-label="تفعيل إشعارات المكالمات"
+              ></button>
+
+            </div>
+
+            <div class="settings-row">
+
+              <span
+                class="settings-row__icon"
+                aria-hidden="true"
+              >
+                👥
+              </span>
+
+              <div class="settings-row__content">
+                <span class="settings-row__title">
+                  المجموعات والمجتمعات
+                </span>
+
+                <span class="settings-row__description">
+                  إشعارات الأنشطة المهمة داخل المجموعات والمجتمعات.
+                </span>
+              </div>
+
+              <button
+                type="button"
+                class="settings-toggle"
+                aria-pressed="false"
+                data-setting-toggle="group-notifications"
+                aria-label="تفعيل إشعارات المجموعات والمجتمعات"
+              ></button>
+
+            </div>
+
+            <div class="settings-row">
+
+              <span
+                class="settings-row__icon"
+                aria-hidden="true"
+              >
+                🔔
+              </span>
+
+              <div class="settings-row__content">
+                <span class="settings-row__title">
+                  الإشعارات العامة
+                </span>
+
+                <span class="settings-row__description">
+                  تنبيهات النظام والتحديثات المهمة.
+                </span>
+              </div>
+
+              <button
+                type="button"
+                class="settings-toggle"
+                aria-pressed="false"
+                data-setting-toggle="system-notifications"
+                aria-label="تفعيل الإشعارات العامة"
+              ></button>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- ===================================================
+             Privacy
+             =================================================== -->
+        <section
+          class="settings-section"
+          data-settings-panel="privacy"
+          aria-labelledby="privacy-settings-title"
+          hidden
+        >
+
+          <div class="settings-section__header">
+            <h2
+              id="privacy-settings-title"
+              class="settings-section__title"
+            >
+              الخصوصية
+            </h2>
+
+            <p class="settings-section__description">
+              التحكم في ظهور معلوماتك والتواصل معك.
+            </p>
+          </div>
+
+          <div class="settings-list">
+
+            <div class="settings-row">
+
+              <span
+                class="settings-row__icon"
+                aria-hidden="true"
+              >
+                👤
+              </span>
+
+              <div class="settings-row__content">
+                <span class="settings-row__title">
+                  من يمكنه رؤية ملفك الشخصي
+                </span>
+
+                <span class="settings-row__description">
+                  تحديد نطاق ظهور معلومات الملف الشخصي.
+                </span>
+              </div>
+
+              <select
+                class="settings-select"
+                data-setting="profile-visibility"
+                aria-label="ظهور الملف الشخصي"
+              >
+                <option value="everyone">الجميع</option>
+                <option value="contacts">جهات الاتصال</option>
+                <option value="private">خاص</option>
+              </select>
+
+            </div>
+
+            <div class="settings-row">
+
+              <span
+                class="settings-row__icon"
+                aria-hidden="true"
+              >
+                🟢
+              </span>
+
+              <div class="settings-row__content">
+                <span class="settings-row__title">
+                  حالة الاتصال
+                </span>
+
+                <span class="settings-row__description">
+                  السماح للآخرين بمعرفة حالة اتصالك.
+                </span>
+              </div>
+
+              <button
+                type="button"
+                class="settings-toggle"
+                aria-pressed="false"
+                data-setting-toggle="online-status"
+                aria-label="إظهار حالة الاتصال"
+              ></button>
+
+            </div>
+
+            <div class="settings-row">
+
+              <span
+                class="settings-row__icon"
+                aria-hidden="true"
+              >
+                ✓
+              </span>
+
+              <div class="settings-row__content">
+                <span class="settings-row__title">
+                  إيصالات القراءة
+                </span>
+
+                <span class="settings-row__description">
+                  التحكم في ظهور حالة قراءة الرسائل.
+                </span>
+              </div>
+
+              <button
+                type="button"
+                class="settings-toggle"
+                aria-pressed="false"
+                data-setting-toggle="read-receipts"
+                aria-label="تفعيل إيصالات القراءة"
+              ></button>
+
+            </div>
+
+            <div class="settings-row">
+
+              <span
+                class="settings-row__icon"
+                aria-hidden="true"
+              >
+                ⌨
+              </span>
+
+              <div class="settings-row__content">
+                <span class="settings-row__title">
+                  مؤشر الكتابة
+                </span>
+
+                <span class="settings-row__description">
+                  السماح للآخرين بمعرفة أنك تكتب رسالة.
+                </span>
+              </div>
+
+              <button
+                type="button"
+                class="settings-toggle"
+                aria-pressed="false"
+                data-setting-toggle="typing-indicator"
+                aria-label="إظهار مؤشر الكتابة"
+              ></button>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- ===================================================
+             Security
+             =================================================== -->
+        <section
+          class="settings-section"
+          data-settings-panel="security"
+          aria-labelledby="security-settings-title"
+          hidden
+        >
+
+          <div class="settings-section__header">
+            <h2
+              id="security-settings-title"
+              class="settings-section__title"
+            >
+              الأمان
+            </h2>
+
+            <p class="settings-section__description">
+              أدوات حماية الحساب والجلسات والأجهزة المرتبطة.
+            </p>
+          </div>
+
+          <div class="settings-list">
+
+            <div class="settings-row">
+
+              <span
+                class="settings-row__icon"
+                aria-hidden="true"
+              >
+                🔐
+              </span>
+
+              <div class="settings-row__content">
+                <span class="settings-row__title">
+                  كلمة المرور
+                </span>
+
+                <span class="settings-row__description">
+                  تحديث كلمة مرور الحساب.
+                </span>
+              </div>
+
+              <button
+                type="button"
+                class="settings-row__action"
+                data-action="change-password"
+              >
+                تغيير
+              </button>
+
+            </div>
+
+            <div class="settings-row">
+
+              <span
+                class="settings-row__icon"
+                aria-hidden="true"
+              >
+                🛡
+              </span>
+
+              <div class="settings-row__content">
+                <span class="settings-row__title">
+                  التحقق بخطوتين
+                </span>
+
+                <span class="settings-row__description">
+                  طبقة حماية إضافية للحساب عند تسجيل الدخول.
+                </span>
+              </div>
+
+              <button
+                type="button"
+                class="settings-row__action"
+                data-action="two-factor-auth"
+              >
+                إدارة
+              </button>
+
+            </div>
+
+            <div class="settings-row">
+
+              <span
+                class="settings-row__icon"
+                aria-hidden="true"
+              >
+                📱
+              </span>
+
+              <div class="settings-row__content">
+                <span class="settings-row__title">
+                  الأجهزة والجلسات
+                </span>
+
+                <span class="settings-row__description">
+                  مراجعة الأجهزة التي سجلت الدخول إلى حسابك.
+                </span>
+              </div>
+
+              <button
+                type="button"
+                class="settings-row__action"
+                data-action="open-devices"
+              >
+                عرض
+              </button>
+
+            </div>
+
+            <div class="settings-row settings-danger">
+
+              <span
+                class="settings-row__icon"
+                aria-hidden="true"
+              >
+                ⚠
+              </span>
+
+              <div class="settings-row__content">
+                <span class="settings-row__title">
+                  تسجيل الخروج من جميع الأجهزة
+                </span>
+
+                <span class="settings-row__description">
+                  إنهاء الجلسات الأخرى المرتبطة بالحساب.
+                </span>
+              </div>
+
+              <button
+                type="button"
+                class="settings-row__action"
+                data-action="logout-all-devices"
+              >
+                تسجيل الخروج
+              </button>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- ===================================================
+             Appearance
+             =================================================== -->
+        <section
+          class="settings-section"
+          data-settings-panel="appearance"
+          aria-labelledby="appearance-settings-title"
+          hidden
+        >
+
+          <div class="settings-section__header">
+            <h2
+              id="appearance-settings-title"
+              class="settings-section__title"
+            >
+              المظهر
+            </h2>
+
+            <p class="settings-section__description">
+              تخصيص طريقة عرض NOVA حسب تفضيلاتك.
+            </p>
+          </div>
+
+          <div class="settings-list">
+
+            <div class="settings-row">
+
+              <span
+                class="settings-row__icon"
+                aria-hidden="true"
+              >
+                ◐
+              </span>
+
+              <div class="settings-row__content">
+                <span class="settings-row__title">
+                  المظهر
+                </span>
+
+                <span class="settings-row__description">
+                  اختيار نمط واجهة التطبيق.
+                </span>
+              </div>
+
+              <select
+                id="settings-theme"
+                class="settings-select"
+                data-setting="theme"
+                aria-label="مظهر التطبيق"
+              >
+                <option value="dark">داكن</option>
+                <option value="light">فاتح</option>
+                <option value="system">حسب الجهاز</option>
+              </select>
+
+            </div>
+
+            <div class="settings-row">
+
+              <span
+                class="settings-row__icon"
+                aria-hidden="true"
+              >
+                ✨
+              </span>
+
+              <div class="settings-row__content">
+                <span class="settings-row__title">
+                  الحركة والمؤثرات
+                </span>
+
+                <span class="settings-row__description">
+                  التحكم في الحركات البصرية داخل الواجهة.
+                </span>
+              </div>
+
+              <button
+                type="button"
+                class="settings-toggle"
+                aria-pressed="false"
+                data-setting-toggle="animations"
+                aria-label="تفعيل الحركة والمؤثرات"
+              ></button>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </div>
+
+    </section>
+
+    <!-- =======================================================
+         Save bar
+         ======================================================= -->
+    <div
+      id="settings-savebar"
+      class="settings-savebar"
+    >
+
+      <span class="settings-savebar__text">
+        يتم حفظ التغييرات من خلال نظام إعدادات NOVA.
+      </span>
+
+      <div class="settings-savebar__actions">
+
+        <button
+          type="button"
+          class="settings-btn"
+          data-action="discard-settings"
+        >
+          إلغاء التغييرات
+        </button>
+
+        <button
+          type="button"
+          class="settings-btn settings-btn--primary"
+          data-action="save-settings"
+        >
+          ✓
+          <span>حفظ التغييرات</span>
+        </button>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Global bottom navigation -->
+  <div id="global-bottom-nav"></div>
+
+  <!-- Global modal -->
+  <div id="global-modal"></div>
+
+  <!-- =========================================================
+       JavaScript
+       ========================================================= -->
+  <script src="../js/config.js"></script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/router.js"></script>
+  <script src="../js/realtime.js"></script>
+  <script src="../js/settings.js"></script>
+  <script src="../js/app.js"></script>
+
+</body>
+              </html>
