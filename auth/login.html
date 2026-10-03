@@ -1,0 +1,2451 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#06110D"
+  >
+
+  <meta
+    name="description"
+    content="تسجيل الدخول إلى NOVA"
+  >
+
+  <title>NOVA — تسجيل الدخول</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- NOVA CSS -->
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/animations.css">
+
+  <style>
+    /* =====================================================
+       NOVA — Login Page
+       ===================================================== */
+
+    :root {
+      --login-max-width: 1180px;
+    }
+
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      min-height: 100dvh;
+
+      font-family:
+        "IBM Plex Sans Arabic",
+        "Cairo",
+        sans-serif;
+
+      background:
+        #06110D;
+
+      color:
+        var(--nova-text);
+
+      overflow-x: hidden;
+    }
+
+
+    /* =====================================================
+       PAGE
+       ===================================================== */
+
+    .nova-auth {
+      position: relative;
+
+      min-height: 100vh;
+      min-height: 100dvh;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding:
+        32px 20px;
+
+      overflow: hidden;
+    }
+
+
+    /* =====================================================
+       BACKGROUND
+       ===================================================== */
+
+    .nova-auth__background {
+      position: absolute;
+
+      inset: 0;
+
+      overflow: hidden;
+
+      pointer-events: none;
+    }
+
+
+    .nova-auth__background::before {
+      content: "";
+
+      position: absolute;
+
+      width: 700px;
+      height: 700px;
+
+      top: -360px;
+      right: -220px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(32, 212, 123, 0.14),
+          rgba(32, 212, 123, 0.035) 42%,
+          transparent 70%
+        );
+
+      filter:
+        blur(8px);
+    }
+
+
+    .nova-auth__background::after {
+      content: "";
+
+      position: absolute;
+
+      width: 600px;
+      height: 600px;
+
+      bottom: -350px;
+      left: -200px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(18, 168, 94, 0.12),
+          transparent 68%
+        );
+
+      filter:
+        blur(10px);
+    }
+
+
+    .nova-auth-grid {
+      position: absolute;
+
+      inset: 0;
+
+      opacity: 0.18;
+
+      background-image:
+        linear-gradient(
+          rgba(255,255,255,0.025) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,0.025) 1px,
+          transparent 1px
+        );
+
+      background-size:
+        42px 42px;
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          black,
+          transparent 85%
+        );
+    }
+
+
+    /* =====================================================
+       MAIN CONTAINER
+       ===================================================== */
+
+    .nova-auth__container {
+      position: relative;
+      z-index: 2;
+
+      width: min(
+        100%,
+        var(--login-max-width)
+      );
+
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 1.05fr)
+        minmax(360px, 0.95fr);
+
+      gap: 70px;
+
+      align-items: center;
+    }
+
+
+    /* =====================================================
+       BRAND / INTRO
+       ===================================================== */
+
+    .nova-auth__intro {
+      min-width: 0;
+
+      padding:
+        20px;
+    }
+
+
+    .nova-auth__brand {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      margin-bottom: 34px;
+
+      text-decoration: none;
+
+      color: inherit;
+    }
+
+
+    .nova-auth__brand-icon {
+      width: 54px;
+      height: 54px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 17px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(32, 212, 123, 0.2),
+          rgba(32, 212, 123, 0.06)
+        );
+
+      border:
+        1px solid
+        rgba(32, 212, 123, 0.24);
+
+      box-shadow:
+        0 18px 50px
+        rgba(32, 212, 123, 0.08);
+
+      overflow: hidden;
+    }
+
+
+    .nova-auth__brand-icon img {
+      width: 34px;
+      height: 34px;
+
+      object-fit: contain;
+    }
+
+
+    .nova-auth__brand-name {
+      display: block;
+
+      font-family:
+        "Cairo",
+        sans-serif;
+
+      font-size: 25px;
+      font-weight: 900;
+
+      letter-spacing: 0.3px;
+    }
+
+
+    .nova-auth__brand-tagline {
+      display: block;
+
+      margin-top: 1px;
+
+      color:
+        var(--nova-text-muted);
+
+      font-size: 12px;
+    }
+
+
+    .nova-auth__badge {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      padding:
+        7px 12px;
+
+      border-radius: 999px;
+
+      background:
+        rgba(32, 212, 123, 0.07);
+
+      border:
+        1px solid
+        rgba(32, 212, 123, 0.14);
+
+      color:
+        var(--nova-primary);
+
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+
+    .nova-auth__badge-dot {
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background:
+        var(--nova-primary);
+
+      box-shadow:
+        0 0 0 5px
+        rgba(32, 212, 123, 0.07);
+    }
+
+
+    .nova-auth__title {
+      max-width: 620px;
+
+      margin:
+        20px 0 0;
+
+      font-family:
+        "Cairo",
+        sans-serif;
+
+      font-size:
+        clamp(34px, 4vw, 58px);
+
+      line-height:
+        1.2;
+
+      font-weight:
+        900;
+
+      letter-spacing:
+        -1.3px;
+    }
+
+
+    .nova-auth__title span {
+      color:
+        var(--nova-primary);
+    }
+
+
+    .nova-auth__description {
+      max-width: 560px;
+
+      margin:
+        20px 0 0;
+
+      color:
+        var(--nova-text-secondary);
+
+      font-size:
+        16px;
+
+      line-height:
+        2;
+    }
+
+
+    /* =====================================================
+       FEATURES
+       ===================================================== */
+
+    .nova-auth__features {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      gap: 12px;
+
+      max-width: 580px;
+
+      margin-top: 30px;
+    }
+
+
+    .nova-auth__feature {
+      display: flex;
+
+      align-items: center;
+
+      gap: 11px;
+
+      min-height: 52px;
+
+      padding:
+        10px 12px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.06);
+
+      border-radius:
+        14px;
+
+      background:
+        rgba(255,255,255,0.025);
+    }
+
+
+    .nova-auth__feature-icon {
+      width: 32px;
+      height: 32px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      flex-shrink: 0;
+
+      border-radius:
+        10px;
+
+      background:
+        rgba(32,212,123,0.08);
+
+      color:
+        var(--nova-primary);
+
+      font-size:
+        14px;
+    }
+
+
+    .nova-auth__feature-text {
+      color:
+        var(--nova-text-secondary);
+
+      font-size:
+        12px;
+
+      font-weight:
+        600;
+    }
+
+
+    /* =====================================================
+       LOGIN CARD
+       ===================================================== */
+
+    .nova-auth__card {
+      width: 100%;
+
+      padding:
+        30px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.075);
+
+      border-radius:
+        24px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(16,39,31,0.92),
+          rgba(8,25,20,0.94)
+        );
+
+      box-shadow:
+        0 30px 90px
+        rgba(0,0,0,0.34),
+        0 0 0 1px
+        rgba(32,212,123,0.015);
+
+      backdrop-filter:
+        blur(24px);
+
+      -webkit-backdrop-filter:
+        blur(24px);
+    }
+
+
+    .nova-auth__card-header {
+      margin-bottom:
+        26px;
+    }
+
+
+    .nova-auth__card-title {
+      margin: 0;
+
+      font-family:
+        "Cairo",
+        sans-serif;
+
+      font-size:
+        25px;
+
+      font-weight:
+        900;
+    }
+
+
+    .nova-auth__card-description {
+      margin:
+        7px 0 0;
+
+      color:
+        var(--nova-text-muted);
+
+      font-size:
+        13px;
+
+      line-height:
+        1.8;
+    }
+
+
+    /* =====================================================
+       METHOD SWITCH
+       ===================================================== */
+
+    .nova-auth-methods {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 6px;
+
+      padding: 5px;
+
+      margin-bottom: 22px;
+
+      border-radius:
+        14px;
+
+      background:
+        rgba(0,0,0,0.18);
+
+      border:
+        1px solid
+        rgba(255,255,255,0.045);
+    }
+
+
+    .nova-auth-method {
+      min-height: 40px;
+
+      border: 0;
+
+      border-radius:
+        10px;
+
+      background:
+        transparent;
+
+      color:
+        var(--nova-text-muted);
+
+      font-family:
+        inherit;
+
+      font-size:
+        12px;
+
+      font-weight:
+        800;
+
+      cursor: pointer;
+
+      transition:
+        180ms ease;
+    }
+
+
+    .nova-auth-method:hover {
+      color:
+        var(--nova-text);
+    }
+
+
+    .nova-auth-method.is-active {
+      background:
+        rgba(32,212,123,0.11);
+
+      color:
+        var(--nova-primary);
+
+      box-shadow:
+        inset 0 0 0 1px
+        rgba(32,212,123,0.08);
+    }
+
+
+    /* =====================================================
+       FORM
+       ===================================================== */
+
+    .nova-login-form {
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      gap:
+        16px;
+    }
+
+
+    .nova-login-field {
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      gap:
+        7px;
+    }
+
+
+    .nova-login-label {
+      font-size:
+        12px;
+
+      font-weight:
+        800;
+
+      color:
+        var(--nova-text-secondary);
+    }
+
+
+    .nova-login-input-wrap {
+      position:
+        relative;
+    }
+
+
+    .nova-login-input {
+      width: 100%;
+
+      min-height: 50px;
+
+      padding:
+        0 14px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.08);
+
+      border-radius:
+        13px;
+
+      outline: none;
+
+      background:
+        rgba(0,0,0,0.17);
+
+      color:
+        var(--nova-text);
+
+      font-family:
+        inherit;
+
+      font-size:
+        13px;
+
+      transition:
+        180ms ease;
+    }
+
+
+    .nova-login-input::placeholder {
+      color:
+        rgba(199,212,206,0.42);
+    }
+
+
+    .nova-login-input:hover {
+      border-color:
+        rgba(255,255,255,0.13);
+    }
+
+
+    .nova-login-input:focus {
+      border-color:
+        rgba(32,212,123,0.52);
+
+      background:
+        rgba(0,0,0,0.23);
+
+      box-shadow:
+        0 0 0 4px
+        rgba(32,212,123,0.07);
+    }
+
+
+    .nova-login-input.is-invalid {
+      border-color:
+        rgba(255,92,103,0.65);
+    }
+
+
+    .nova-login-input-error {
+      display: none;
+
+      color:
+        var(--nova-danger);
+
+      font-size:
+        11px;
+    }
+
+
+    .nova-login-input-error.is-visible {
+      display: block;
+    }
+
+
+    /* =====================================================
+       PASSWORD
+       ===================================================== */
+
+    .nova-password-toggle {
+      position: absolute;
+
+      top: 50%;
+      left: 10px;
+
+      width: 34px;
+      height: 34px;
+
+      transform:
+        translateY(-50%);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 0;
+
+      border-radius:
+        9px;
+
+      background:
+        transparent;
+
+      color:
+        var(--nova-text-muted);
+
+      cursor: pointer;
+    }
+
+
+    .nova-password-toggle:hover {
+      background:
+        rgba(255,255,255,0.05);
+
+      color:
+        var(--nova-text);
+    }
+
+
+    .nova-login-input[type="password"] {
+      padding-left:
+        48px;
+    }
+
+
+    /* =====================================================
+       OPTIONS
+       ===================================================== */
+
+    .nova-login-options {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 12px;
+
+      margin-top: -2px;
+    }
+
+
+    .nova-remember {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      color:
+        var(--nova-text-muted);
+
+      font-size:
+        11px;
+
+      cursor: pointer;
+    }
+
+
+    .nova-remember input {
+      accent-color:
+        var(--nova-primary);
+    }
+
+
+    .nova-login-link {
+      color:
+        var(--nova-primary);
+
+      font-size:
+        11px;
+
+      font-weight:
+        700;
+
+      text-decoration:
+        none;
+    }
+
+
+    .nova-login-link:hover {
+      text-decoration:
+        underline;
+    }
+
+
+    /* =====================================================
+       LOGIN BUTTON
+       ===================================================== */
+
+    .nova-login-submit {
+      width: 100%;
+
+      min-height:
+        52px;
+
+      margin-top:
+        3px;
+
+      border: 0;
+
+      border-radius:
+        14px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--nova-primary),
+          var(--nova-primary-dark)
+        );
+
+      color:
+        #03100A;
+
+      font-family:
+        inherit;
+
+      font-size:
+        13px;
+
+      font-weight:
+        900;
+
+      cursor:
+        pointer;
+
+      box-shadow:
+        0 12px 30px
+        rgba(32,212,123,0.13);
+
+      transition:
+        180ms ease;
+    }
+
+
+    .nova-login-submit:hover {
+      transform:
+        translateY(-1px);
+
+      box-shadow:
+        0 16px 34px
+        rgba(32,212,123,0.18);
+    }
+
+
+    .nova-login-submit:active {
+      transform:
+        translateY(0)
+        scale(0.99);
+    }
+
+
+    .nova-login-submit:disabled {
+      opacity:
+        0.6;
+
+      cursor:
+        not-allowed;
+
+      transform:
+        none;
+    }
+
+
+    /* =====================================================
+       DIVIDER
+       ===================================================== */
+
+    .nova-auth-divider {
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        12px;
+
+      margin:
+        22px 0;
+    }
+
+
+    .nova-auth-divider::before,
+    .nova-auth-divider::after {
+      content:
+        "";
+
+      flex:
+        1;
+
+      height:
+        1px;
+
+      background:
+        rgba(255,255,255,0.07);
+    }
+
+
+    .nova-auth-divider span {
+      color:
+        var(--nova-text-muted);
+
+      font-size:
+        10px;
+    }
+
+
+    /* =====================================================
+       GOOGLE BUTTON
+       ===================================================== */
+
+    .nova-google-btn {
+      width:
+        100%;
+
+      min-height:
+        48px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      gap:
+        10px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.09);
+
+      border-radius:
+        13px;
+
+      background:
+        rgba(255,255,255,0.025);
+
+      color:
+        var(--nova-text);
+
+      font-family:
+        inherit;
+
+      font-size:
+        12px;
+
+      font-weight:
+        800;
+
+      cursor:
+        pointer;
+
+      transition:
+        180ms ease;
+    }
+
+
+    .nova-google-btn:hover {
+      background:
+        rgba(255,255,255,0.055);
+
+      border-color:
+        rgba(255,255,255,0.14);
+    }
+
+
+    .nova-google-icon {
+      width:
+        20px;
+
+      height:
+        20px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      font-family:
+        Arial,
+        sans-serif;
+
+      font-weight:
+        900;
+
+      font-size:
+        15px;
+    }
+
+
+    /* =====================================================
+       REGISTER
+       ===================================================== */
+
+    .nova-auth-register {
+      margin:
+        24px 0 0;
+
+      text-align:
+        center;
+
+      color:
+        var(--nova-text-muted);
+
+      font-size:
+        11px;
+    }
+
+
+    .nova-auth-register a {
+      color:
+        var(--nova-primary);
+
+      font-weight:
+        800;
+
+      text-decoration:
+        none;
+    }
+
+
+    .nova-auth-register a:hover {
+      text-decoration:
+        underline;
+    }
+
+
+    /* =====================================================
+       SECURITY NOTE
+       ===================================================== */
+
+    .nova-auth-security {
+      display:
+        flex;
+
+      align-items:
+        flex-start;
+
+      gap:
+        9px;
+
+      margin-top:
+        20px;
+
+      padding:
+        11px 12px;
+
+      border-radius:
+        12px;
+
+      background:
+        rgba(32,212,123,0.035);
+
+      border:
+        1px solid
+        rgba(32,212,123,0.08);
+
+      color:
+        var(--nova-text-muted);
+
+      font-size:
+        10px;
+
+      line-height:
+        1.7;
+    }
+
+
+    .nova-auth-security-icon {
+      flex-shrink:
+        0;
+
+      color:
+        var(--nova-primary);
+
+      font-size:
+        13px;
+    }
+
+
+    /* =====================================================
+       STATUS
+       ===================================================== */
+
+    .nova-login-status {
+      display:
+        none;
+
+      padding:
+        10px 12px;
+
+      border-radius:
+        11px;
+
+      font-size:
+        11px;
+
+      line-height:
+        1.7;
+    }
+
+
+    .nova-login-status.is-visible {
+      display:
+        block;
+    }
+
+
+    .nova-login-status.is-error {
+      color:
+        var(--nova-danger);
+
+      background:
+        rgba(255,92,103,0.07);
+
+      border:
+        1px solid
+        rgba(255,92,103,0.12);
+    }
+
+
+    .nova-login-status.is-success {
+      color:
+        var(--nova-primary);
+
+      background:
+        rgba(32,212,123,0.07);
+
+      border:
+        1px solid
+        rgba(32,212,123,0.12);
+    }
+
+
+    /* =====================================================
+       RESPONSIVE
+       ===================================================== */
+
+    @media (max-width: 1023px) {
+
+      .nova-auth__container {
+        grid-template-columns:
+          minmax(0, 1fr)
+          minmax(340px, 440px);
+
+        gap:
+          36px;
+      }
+
+
+      .nova-auth__title {
+        font-size:
+          clamp(32px, 5vw, 46px);
+      }
+
+
+      .nova-auth__features {
+        grid-template-columns:
+          1fr;
+      }
+    }
+
+
+    @media (max-width: 820px) {
+
+      .nova-auth {
+        align-items:
+          flex-start;
+
+        padding:
+          24px 16px;
+      }
+
+
+      .nova-auth__container {
+        grid-template-columns:
+          1fr;
+
+        max-width:
+          520px;
+
+        margin-inline:
+          auto;
+      }
+
+
+      .nova-auth__intro {
+        text-align:
+          center;
+
+        padding:
+          10px;
+      }
+
+
+      .nova-auth__brand {
+        margin-bottom:
+          20px;
+      }
+
+
+      .nova-auth__badge {
+        justify-content:
+          center;
+      }
+
+
+      .nova-auth__title {
+        margin-inline:
+          auto;
+
+        font-size:
+          clamp(30px, 8vw, 42px);
+      }
+
+
+      .nova-auth__description {
+        margin-inline:
+          auto;
+
+        font-size:
+          14px;
+      }
+
+
+      .nova-auth__features {
+        max-width:
+          420px;
+
+        margin-inline:
+          auto;
+
+        text-align:
+          start;
+      }
+    }
+
+
+    @media (max-width: 575px) {
+
+      .nova-auth {
+        padding:
+          14px 12px;
+      }
+
+
+      .nova-auth__container {
+        gap:
+          18px;
+      }
+
+
+      .nova-auth__intro {
+        padding:
+          6px;
+      }
+
+
+      .nova-auth__brand-name {
+        font-size:
+          22px;
+      }
+
+
+      .nova-auth__brand-icon {
+        width:
+          48px;
+
+        height:
+          48px;
+      }
+
+
+      .nova-auth__title {
+        font-size:
+          29px;
+
+        letter-spacing:
+          -0.6px;
+      }
+
+
+      .nova-auth__description {
+        font-size:
+          13px;
+
+        line-height:
+          1.9;
+      }
+
+
+      .nova-auth__features {
+        display:
+          none;
+      }
+
+
+      .nova-auth__card {
+        padding:
+          21px 17px;
+
+        border-radius:
+          19px;
+      }
+
+
+      .nova-auth__card-title {
+        font-size:
+          21px;
+      }
+
+
+      .nova-auth-method {
+        min-height:
+          38px;
+      }
+
+
+      .nova-login-options {
+        align-items:
+          flex-start;
+
+        flex-direction:
+          column;
+      }
+
+
+      .nova-login-submit {
+        min-height:
+          50px;
+      }
+    }
+
+
+    @media (max-width: 380px) {
+
+      .nova-auth__title {
+        font-size:
+          26px;
+      }
+
+
+      .nova-auth__card {
+        padding:
+          18px 14px;
+      }
+
+
+      .nova-auth__card-header {
+        margin-bottom:
+          20px;
+      }
+    }
+
+
+    /* =====================================================
+       REDUCED MOTION
+       ===================================================== */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation:
+          none !important;
+
+        transition:
+          none !important;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <main class="nova-auth">
+
+    <!-- Background -->
+    <div
+      class="nova-auth__background"
+      aria-hidden="true"
+    >
+      <div class="nova-auth-grid"></div>
+    </div>
+
+
+    <section class="nova-auth__container">
+
+      <!-- =================================================
+           INTRO
+           ================================================= -->
+
+      <section class="nova-auth__intro">
+
+        <a
+          class="nova-auth__brand"
+          href="../index.html"
+          aria-label="NOVA — الصفحة الرئيسية"
+        >
+
+          <span class="nova-auth__brand-icon">
+            <img
+              src="../assets/brand/logo.svg"
+              alt=""
+              onerror="this.style.display='none';"
+            >
+          </span>
+
+          <span>
+            <strong class="nova-auth__brand-name">
+              NOVA
+            </strong>
+
+            <small class="nova-auth__brand-tagline">
+              تواصل ببساطة
+            </small>
+          </span>
+
+        </a>
+
+
+        <div class="nova-auth__badge">
+          <span
+            class="nova-auth__badge-dot"
+            aria-hidden="true"
+          ></span>
+
+          منصة تواصل حديثة
+        </div>
+
+
+        <h1 class="nova-auth__title">
+          مرحبًا بعودتك إلى
+          <span>NOVA</span>
+        </h1>
+
+
+        <p class="nova-auth__description">
+          سجّل الدخول للوصول إلى محادثاتك، مجموعاتك،
+          مكالماتك، مجتمعاتك وإعدادات حسابك من مكان واحد.
+        </p>
+
+
+        <div class="nova-auth__features">
+
+          <div class="nova-auth__feature">
+            <span class="nova-auth__feature-icon">
+              💬
+            </span>
+
+            <span class="nova-auth__feature-text">
+              مراسلة خاصة ومحادثات جماعية
+            </span>
+          </div>
+
+
+          <div class="nova-auth__feature">
+            <span class="nova-auth__feature-icon">
+              📞
+            </span>
+
+            <span class="nova-auth__feature-text">
+              مكالمات صوتية ومرئية
+            </span>
+          </div>
+
+
+          <div class="nova-auth__feature">
+            <span class="nova-auth__feature-icon">
+              🔒
+            </span>
+
+            <span class="nova-auth__feature-text">
+              إعدادات خصوصية وأمان متقدمة
+            </span>
+          </div>
+
+
+          <div class="nova-auth__feature">
+            <span class="nova-auth__feature-icon">
+              👥
+            </span>
+
+            <span class="nova-auth__feature-text">
+              مجموعات ومجتمعات منظمة
+            </span>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           LOGIN CARD
+           ================================================= -->
+
+      <section
+        class="nova-auth__card nova-animate-scale-in"
+        aria-labelledby="login-title"
+      >
+
+        <header class="nova-auth__card-header">
+
+          <h2
+            id="login-title"
+            class="nova-auth__card-title"
+          >
+            تسجيل الدخول
+          </h2>
+
+          <p class="nova-auth__card-description">
+            استخدم بيانات الحساب المرتبطة بـ NOVA.
+          </p>
+
+        </header>
+
+
+        <!-- Login method -->
+
+        <div
+          class="nova-auth-methods"
+          role="tablist"
+          aria-label="طريقة تسجيل الدخول"
+        >
+
+          <button
+            type="button"
+            class="nova-auth-method is-active"
+            data-login-method="phone"
+            role="tab"
+            aria-selected="true"
+          >
+            رقم الهاتف
+          </button>
+
+
+          <button
+            type="button"
+            class="nova-auth-method"
+            data-login-method="email"
+            role="tab"
+            aria-selected="false"
+          >
+            البريد الإلكتروني
+          </button>
+
+        </div>
+
+
+        <!-- Status -->
+
+        <div
+          id="login-status"
+          class="nova-login-status"
+          role="status"
+          aria-live="polite"
+        ></div>
+
+
+        <!-- Form -->
+
+        <form
+          id="login-form"
+          class="nova-login-form"
+          novalidate
+        >
+
+          <!-- Phone -->
+
+          <div
+            class="nova-login-field"
+            data-login-field="phone"
+          >
+
+            <label
+              class="nova-login-label"
+              for="login-phone"
+            >
+              رقم الهاتف
+            </label>
+
+            <div class="nova-login-input-wrap">
+
+              <input
+                id="login-phone"
+                class="nova-login-input"
+                type="tel"
+                name="phone"
+                inputmode="tel"
+                autocomplete="tel"
+                placeholder="أدخل رقم الهاتف"
+                dir="ltr"
+              >
+
+            </div>
+
+            <small
+              class="nova-login-input-error"
+              data-error-for="phone"
+            ></small>
+
+          </div>
+
+
+          <!-- Email -->
+
+          <div
+            class="nova-login-field"
+            data-login-field="email"
+            hidden
+          >
+
+            <label
+              class="nova-login-label"
+              for="login-email"
+            >
+              البريد الإلكتروني
+            </label>
+
+            <div class="nova-login-input-wrap">
+
+              <input
+                id="login-email"
+                class="nova-login-input"
+                type="email"
+                name="email"
+                inputmode="email"
+                autocomplete="email"
+                placeholder="example@email.com"
+                dir="ltr"
+                disabled
+              >
+
+            </div>
+
+            <small
+              class="nova-login-input-error"
+              data-error-for="email"
+            ></small>
+
+          </div>
+
+
+          <!-- Password -->
+
+          <div class="nova-login-field">
+
+            <label
+              class="nova-login-label"
+              for="login-password"
+            >
+              كلمة المرور
+            </label>
+
+            <div class="nova-login-input-wrap">
+
+              <input
+                id="login-password"
+                class="nova-login-input"
+                type="password"
+                name="password"
+                autocomplete="current-password"
+                placeholder="أدخل كلمة المرور"
+                dir="rtl"
+                minlength="8"
+                required
+              >
+
+              <button
+                type="button"
+                class="nova-password-toggle"
+                id="password-toggle"
+                aria-label="إظهار كلمة المرور"
+                title="إظهار كلمة المرور"
+              >
+                👁
+              </button>
+
+            </div>
+
+            <small
+              class="nova-login-input-error"
+              data-error-for="password"
+            ></small>
+
+          </div>
+
+
+          <!-- Options -->
+
+          <div class="nova-login-options">
+
+            <label class="nova-remember">
+
+              <input
+                type="checkbox"
+                name="remember"
+                value="true"
+              >
+
+              <span>
+                تذكر هذا الجهاز
+              </span>
+
+            </label>
+
+
+            <a
+              id="forgot-password-link"
+              class="nova-login-link"
+              href="../auth/forgot-password.html"
+            >
+              هل نسيت كلمة المرور؟
+            </a>
+
+          </div>
+
+
+          <!-- Submit -->
+
+          <button
+            id="login-submit"
+            class="nova-login-submit"
+            type="submit"
+          >
+            تسجيل الدخول
+          </button>
+
+        </form>
+
+
+        <!-- Divider -->
+
+        <div
+          class="nova-auth-divider"
+          aria-hidden="true"
+        >
+          <span>أو</span>
+        </div>
+
+
+        <!-- Google -->
+
+        <button
+          id="google-login"
+          class="nova-google-btn"
+          type="button"
+        >
+
+          <span
+            class="nova-google-icon"
+            aria-hidden="true"
+          >
+            G
+          </span>
+
+          المتابعة باستخدام Google
+
+        </button>
+
+
+        <!-- Register -->
+
+        <p class="nova-auth-register">
+
+          ليس لديك حساب؟
+
+          <a href="../auth/register.html">
+            إنشاء حساب جديد
+          </a>
+
+        </p>
+
+
+        <!-- Security -->
+
+        <div class="nova-auth-security">
+
+          <span
+            class="nova-auth-security-icon"
+            aria-hidden="true"
+          >
+            🔒
+          </span>
+
+          <span>
+            بيانات تسجيل الدخول تُرسل لاحقًا عبر قناة
+            آمنة إلى واجهة المصادقة الخاصة بالخادم.
+            لا يتم إنشاء حساب أو جلسة محلية وهمية من هذه الصفحة.
+          </span>
+
+        </div>
+
+      </section>
+
+    </section>
+
+  </main>
+
+
+  <!-- =====================================================
+       CONFIG
+       ===================================================== -->
+
+  <script src="../js/config.js"></script>
+
+
+  <!-- =====================================================
+       PAGE LOGIC
+       ===================================================== -->
+
+  <script>
+    (() => {
+      "use strict";
+
+      const form =
+        document.getElementById("login-form");
+
+      const submitButton =
+        document.getElementById("login-submit");
+
+      const passwordInput =
+        document.getElementById("login-password");
+
+      const passwordToggle =
+        document.getElementById("password-toggle");
+
+      const statusBox =
+        document.getElementById("login-status");
+
+      const googleButton =
+        document.getElementById("google-login");
+
+      const methodButtons =
+        document.querySelectorAll(
+          "[data-login-method]"
+        );
+
+      const phoneField =
+        document.querySelector(
+          '[data-login-field="phone"]'
+        );
+
+      const emailField =
+        document.querySelector(
+          '[data-login-field="email"]'
+        );
+
+      const phoneInput =
+        document.getElementById("login-phone");
+
+      const emailInput =
+        document.getElementById("login-email");
+
+
+      let loginMethod = "phone";
+
+
+      /* ===================================================
+         Helpers
+         =================================================== */
+
+      function showStatus(message, type = "error") {
+
+        statusBox.textContent = message;
+
+        statusBox.className =
+          "nova-login-status is-visible";
+
+        statusBox.classList.add(
+          type === "success"
+            ? "is-success"
+            : "is-error"
+        );
+      }
+
+
+      function clearStatus() {
+
+        statusBox.textContent = "";
+
+        statusBox.className =
+          "nova-login-status";
+      }
+
+
+      function setError(
+        field,
+        message
+      ) {
+
+        const input =
+          document.querySelector(
+            `[name="${field}"]`
+          );
+
+        const error =
+          document.querySelector(
+            `[data-error-for="${field}"]`
+          );
+
+        if (!input || !error) {
+          return;
+        }
+
+        input.classList.add(
+          "is-invalid"
+        );
+
+        error.textContent =
+          message;
+
+        error.classList.add(
+          "is-visible"
+        );
+      }
+
+
+      function clearErrors() {
+
+        document
+          .querySelectorAll(
+            ".nova-login-input"
+          )
+          .forEach((input) => {
+            input.classList.remove(
+              "is-invalid"
+            );
+          });
+
+        document
+          .querySelectorAll(
+            ".nova-login-input-error"
+          )
+          .forEach((error) => {
+            error.textContent = "";
+
+            error.classList.remove(
+              "is-visible"
+            );
+          });
+      }
+
+
+      function setLoading(
+        loading
+      ) {
+
+        submitButton.disabled =
+          loading;
+
+        submitButton.textContent =
+          loading
+            ? "جارٍ التحقق..."
+            : "تسجيل الدخول";
+      }
+
+
+      /* ===================================================
+         Login Method
+         =================================================== */
+
+      function changeLoginMethod(
+        method
+      ) {
+
+        loginMethod =
+          method;
+
+        clearErrors();
+        clearStatus();
+
+        const isPhone =
+          method === "phone";
+
+        phoneField.hidden =
+          !isPhone;
+
+        emailField.hidden =
+          isPhone;
+
+        phoneInput.disabled =
+          !isPhone;
+
+        emailInput.disabled =
+          isPhone;
+
+        methodButtons.forEach(
+          (button) => {
+
+            const active =
+              button.dataset.loginMethod ===
+              method;
+
+            button.classList.toggle(
+              "is-active",
+              active
+            );
+
+            button.setAttribute(
+              "aria-selected",
+              String(active)
+            );
+          }
+        );
+
+        if (isPhone) {
+          phoneInput.focus();
+        } else {
+          emailInput.focus();
+        }
+      }
+
+
+      methodButtons.forEach(
+        (button) => {
+
+          button.addEventListener(
+            "click",
+            () => {
+
+              changeLoginMethod(
+                button.dataset.loginMethod
+              );
+
+            }
+          );
+
+        }
+      );
+
+
+      /* ===================================================
+         Password Visibility
+         =================================================== */
+
+      passwordToggle.addEventListener(
+        "click",
+        () => {
+
+          const isPassword =
+            passwordInput.type ===
+            "password";
+
+          passwordInput.type =
+            isPassword
+              ? "text"
+              : "password";
+
+          passwordToggle.textContent =
+            isPassword
+              ? "🙈"
+              : "👁";
+
+          passwordToggle.setAttribute(
+            "aria-label",
+            isPassword
+              ? "إخفاء كلمة المرور"
+              : "إظهار كلمة المرور"
+          );
+
+        }
+      );
+
+
+      /* ===================================================
+         Validation
+         =================================================== */
+
+      function validate() {
+
+        clearErrors();
+        clearStatus();
+
+        let valid = true;
+
+        if (loginMethod === "phone") {
+
+          const phone =
+            phoneInput.value.trim();
+
+          if (!phone) {
+
+            setError(
+              "phone",
+              "يرجى إدخال رقم الهاتف."
+            );
+
+            valid = false;
+
+          } else if (
+            phone.length < 8
+          ) {
+
+            setError(
+              "phone",
+              "يرجى إدخال رقم هاتف صحيح."
+            );
+
+            valid = false;
+          }
+
+        } else {
+
+          const email =
+            emailInput.value.trim();
+
+          const emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+          if (!email) {
+
+            setError(
+              "email",
+              "يرجى إدخال البريد الإلكتروني."
+            );
+
+            valid = false;
+
+          } else if (
+            !emailPattern.test(email)
+          ) {
+
+            setError(
+              "email",
+              "يرجى إدخال بريد إلكتروني صحيح."
+            );
+
+            valid = false;
+          }
+        }
+
+
+        const password =
+          passwordInput.value;
+
+        if (!password) {
+
+          setError(
+            "password",
+            "يرجى إدخال كلمة المرور."
+          );
+
+          valid = false;
+
+        } else if (
+          password.length < 8
+        ) {
+
+          setError(
+            "password",
+            "يجب ألا تقل كلمة المرور عن 8 أحرف."
+          );
+
+          valid = false;
+        }
+
+
+        return valid;
+      }
+
+
+      /* ===================================================
+         Login Request
+         =================================================== */
+
+      async function login() {
+
+        /*
+         * لا يوجد Backend حاليًا.
+         *
+         * عند تنفيذ مرحلة الـBackend سيتم استبدال
+         * هذا الجزء بطلب API حقيقي إلى:
+         *
+         * POST /api/v1/auth/login
+         *
+         * بدون إنشاء بيانات وهمية.
+         */
+
+        const endpoint =
+          window.APP?.getApiURL
+            ? window.APP.getApiURL(
+                "auth/login"
+              )
+            : "/api/v1/auth/login";
+
+
+        const payload = {
+          method: loginMethod,
+          identifier:
+            loginMethod === "phone"
+              ? phoneInput.value.trim()
+              : emailInput.value.trim(),
+          password:
+            passwordInput.value,
+          remember:
+            document.querySelector(
+              '[name="remember"]'
+            )?.checked === true
+        };
+
+
+        /*
+         * تجهيز الطلب فقط.
+         * لا يتم إرسال الطلب قبل وجود Backend فعلي.
+         */
+
+        if (
+          !window.APP_CONFIG ||
+          window.APP_CONFIG.environment ===
+            "development"
+        ) {
+
+          showStatus(
+            "خدمة المصادقة غير متصلة حاليًا. سيتم ربط هذا النموذج بواجهة الخادم في مرحلة Backend.",
+            "error"
+          );
+
+          console.info(
+            "[NOVA] Login payload prepared:",
+            {
+              endpoint,
+              method: payload.method,
+              identifier:
+                payload.identifier,
+              remember:
+                payload.remember
+            }
+          );
+
+          return;
+        }
+
+
+        setLoading(true);
+
+        try {
+
+          const response =
+            await fetch(
+              endpoint,
+              {
+                method: "POST",
+
+                headers: {
+                  "Content-Type":
+                    "application/json",
+
+                  "Accept":
+                    "application/json"
+                },
+
+                credentials:
+                  window.APP_CONFIG.api.credentials,
+
+                body:
+                  JSON.stringify(payload)
+              }
+            );
+
+
+          const data =
+            await response.json()
+              .catch(() => ({}));
+
+
+          if (!response.ok) {
+
+            throw new Error(
+              data.message ||
+              "تعذر تسجيل الدخول."
+            );
+          }
+
+
+          showStatus(
+            "تم تسجيل الدخول بنجاح.",
+            "success"
+          );
+
+
+          /*
+           * التوجيه النهائي سيتم ربطه
+           * بـ session/auth state في auth.js.
+           */
+
+          setTimeout(
+            () => {
+
+              window.location.href =
+                window.APP?.getRoute
+                  ? window.APP.getRoute(
+                      "pages.chats"
+                    )
+                  : "../pages/chats.html";
+
+            },
+            400
+          );
+
+        } catch (error) {
+
+          showStatus(
+            error.message ||
+            "حدث خطأ أثناء تسجيل الدخول."
+          );
+
+        } finally {
+
+          setLoading(false);
+        }
+      }
+
+
+      /* ===================================================
+         Form Submit
+         =================================================== */
+
+      form.addEventListener(
+        "submit",
+        async (event) => {
+
+          event.preventDefault();
+
+          if (!validate()) {
+            return;
+          }
+
+          await login();
+
+        }
+      );
+
+
+      /* ===================================================
+         Google Login
+         =================================================== */
+
+      googleButton.addEventListener(
+        "click",
+        () => {
+
+          /*
+           * Google OAuth سيتم ربطه من Backend.
+           * لا يتم إنشاء تسجيل دخول وهمي.
+           */
+
+          showStatus(
+            "تسجيل الدخول باستخدام Google سيُفعّل بعد إعداد خدمة OAuth في الخادم."
+          );
+
+        }
+      );
+
+
+      /* ===================================================
+         Initial State
+         =================================================== */
+
+      changeLoginMethod("phone");
+
+    })();
+  </script>
+
+</body>
+                </html>
