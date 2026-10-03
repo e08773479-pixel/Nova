@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta name="theme-color" content="#06110D">
+  <meta
+    name="description"
+    content="NOVA — إعدادات المجموعة وإدارة الأعضاء والصلاحيات"
+  >
+
+  <title>إعدادات المجموعة | NOVA</title>
+
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="../assets/brand/logo.svg"
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/groups.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/animations.css">
+</head>
+
+<body
+  class="nova-app-page nova-group-settings-page"
+  data-page="group-settings"
+  data-module="groups"
+>
+
+  <div id="app-shell" class="app-shell">
+
+    <!-- =====================================================
+         Global Header
+         ===================================================== -->
+
+    <header
+      id="global-header"
+      class="global-header"
+      data-component="header"
+    ></header>
+
+
+    <!-- =====================================================
+         Global Sidebar
+         ===================================================== -->
+
+    <aside
+      id="global-sidebar"
+      class="global-sidebar"
+      data-component="sidebar"
+    ></aside>
+
+
+    <!-- =====================================================
+         Main
+         ===================================================== -->
+
+    <main id="main-content" class="main-content">
+
+      <section
+        class="group-settings-page"
+        aria-labelledby="group-settings-title"
+      >
+
+        <!-- Page Header -->
+
+        <div class="page-heading">
+
+          <div class="page-heading-start">
+
+            <button
+              type="button"
+              class="icon-button"
+              id="group-settings-back"
+              aria-label="العودة"
+              title="العودة"
+            >
+              →
+            </button>
+
+            <div>
+
+              <span class="eyebrow">
+                إدارة المجموعة
+              </span>
+
+              <h1 id="group-settings-title">
+                إعدادات المجموعة
+              </h1>
+
+              <p id="group-settings-subtitle">
+                جارٍ تحميل بيانات المجموعة...
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             Loading State
+             ================================================= -->
+
+        <div
+          id="group-settings-loading"
+          class="group-state group-state-loading"
+          aria-live="polite"
+        >
+          <div class="loading-spinner" aria-hidden="true"></div>
+          <p>جارٍ تحميل إعدادات المجموعة...</p>
+        </div>
+
+
+        <!-- =================================================
+             Error State
+             ================================================= -->
+
+        <div
+          id="group-settings-error"
+          class="group-state group-state-error"
+          role="alert"
+          hidden
+        >
+
+          <div
+            class="group-state-icon"
+            aria-hidden="true"
+          >
+            !
+          </div>
+
+          <h2>
+            تعذر تحميل الإعدادات
+          </h2>
+
+          <p id="group-settings-error-text">
+            حدث خطأ أثناء تحميل بيانات المجموعة.
+          </p>
+
+          <button
+            type="button"
+            class="button button-primary"
+            id="group-settings-retry"
+          >
+            إعادة المحاولة
+          </button>
+
+        </div>
+
+
+        <!-- =================================================
+             Settings Content
+             ================================================= -->
+
+        <div
+          id="group-settings-content"
+          class="group-settings-layout"
+          hidden
+        >
+
+          <!-- ===============================================
+               Group Identity
+               =============================================== -->
+
+          <section class="group-settings-card glass-panel">
+
+            <div class="card-heading">
+
+              <div class="card-heading-icon">
+                👥
+              </div>
+
+              <div>
+                <h2>
+                  معلومات المجموعة
+                </h2>
+
+                <p>
+                  تعديل الاسم والوصف والصورة.
+                </p>
+              </div>
+
+            </div>
+
+
+            <!-- Avatar -->
+
+            <div class="group-avatar-editor">
+
+              <div
+                id="settings-avatar-preview"
+                class="group-avatar group-avatar-xxl"
+              >
+
+                <span
+                  id="settings-avatar-placeholder"
+                  aria-hidden="true"
+                >
+                  N
+                </span>
+
+                <img
+                  id="settings-avatar-image"
+                  src=""
+                  alt="صورة المجموعة"
+                  hidden
+                >
+
+              </div>
+
+
+              <div class="avatar-editor-actions">
+
+                <label
+                  for="settings-avatar-input"
+                  class="button button-secondary"
+                >
+                  <span aria-hidden="true">
+                    📷
+                  </span>
+
+                  تغيير الصورة
+                </label>
+
+                <input
+                  id="settings-avatar-input"
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  hidden
+                >
+
+                <button
+                  type="button"
+                  class="text-button danger-text"
+                  id="settings-avatar-remove"
+                  hidden
+                >
+                  إزالة الصورة
+                </button>
+
+                <small>
+                  سيتم حفظ التغيير من خلال خادم NOVA.
+                </small>
+
+              </div>
+
+            </div>
+
+
+            <!-- Name -->
+
+            <div class="form-field">
+
+              <label for="settings-group-name">
+                اسم المجموعة
+              </label>
+
+              <input
+                id="settings-group-name"
+                type="text"
+                maxlength="100"
+                autocomplete="off"
+                required
+              >
+
+              <div class="field-meta">
+
+                <small>
+                  الحد الأقصى 100 حرف.
+                </small>
+
+                <span id="settings-name-count">
+                  0/100
+                </span>
+
+              </div>
+
+              <p
+                id="settings-name-error"
+                class="field-error"
+                role="alert"
+                hidden
+              ></p>
+
+            </div>
+
+
+            <!-- Description -->
+
+            <div class="form-field">
+
+              <label for="settings-group-description">
+                وصف المجموعة
+              </label>
+
+              <textarea
+                id="settings-group-description"
+                rows="4"
+                maxlength="500"
+                placeholder="وصف المجموعة..."
+              ></textarea>
+
+              <div class="field-meta">
+
+                <small>
+                  الحد الأقصى 500 حرف.
+                </small>
+
+                <span id="settings-description-count">
+                  0/500
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="form-actions">
+
+              <button
+                type="button"
+                class="button button-primary"
+                id="save-group-info"
+              >
+                حفظ التغييرات
+              </button>
+
+            </div>
+
+          </section>
+
+
+          <!-- ===============================================
+               Privacy
+               =============================================== -->
+
+          <section class="group-settings-card glass-panel">
+
+            <div class="card-heading">
+
+              <div class="card-heading-icon">
+                🔐
+              </div>
+
+              <div>
+                <h2>
+                  الخصوصية والوصول
+                </h2>
+
+                <p>
+                  تحكم في طريقة الوصول إلى المجموعة.
+                </p>
+              </div>
+
+            </div>
+
+
+            <div class="privacy-options">
+
+              <label class="radio-card">
+
+                <input
+                  type="radio"
+                  name="group-privacy"
+                  value="private"
+                >
+
+                <span class="radio-card-content">
+
+                  <span class="radio-card-icon">
+                    🔒
+                  </span>
+
+                  <span class="radio-card-text">
+
+                    <strong>
+                      مجموعة خاصة
+                    </strong>
+
+                    <small>
+                      الانضمام متاح من خلال دعوة فقط.
+                    </small>
+
+                  </span>
+
+                  <span
+                    class="radio-card-check"
+                    aria-hidden="true"
+                  >
+                    ✓
+                  </span>
+
+                </span>
+
+              </label>
+
+
+              <label class="radio-card">
+
+                <input
+                  type="radio"
+                  name="group-privacy"
+                  value="invite"
+                >
+
+                <span class="radio-card-content">
+
+                  <span class="radio-card-icon">
+                    🔗
+                  </span>
+
+                  <span class="radio-card-text">
+
+                    <strong>
+                      عبر رابط الدعوة
+                    </strong>
+
+                    <small>
+                      يمكن مشاركة رابط المجموعة مع الآخرين.
+                    </small>
+
+                  </span>
+
+                  <span
+                    class="radio-card-check"
+                    aria-hidden="true"
+                  >
+                    ✓
+                  </span>
+
+                </span>
+
+              </label>
+
+            </div>
+
+
+            <div class="form-actions">
+
+              <button
+                type="button"
+                class="button button-primary"
+                id="save-group-privacy"
+              >
+                حفظ الخصوصية
+              </button>
+
+            </div>
+
+          </section>
+
+
+          <!-- ===============================================
+               Permissions
+               =============================================== -->
+
+          <section class="group-settings-card glass-panel">
+
+            <div class="card-heading">
+
+              <div class="card-heading-icon">
+                ⚙
+              </div>
+
+              <div>
+                <h2>
+                  الصلاحيات
+                </h2>
+
+                <p>
+                  تحديد الإجراءات المتاحة لأعضاء المجموعة.
+                </p>
+              </div>
+
+            </div>
+
+
+            <div class="settings-list">
+
+              <!-- Send Messages -->
+
+              <label class="setting-row">
+
+                <span
+                  class="setting-icon"
+                  aria-hidden="true"
+                >
+                  💬
+                </span>
+
+                <span class="setting-content">
+
+                  <strong>
+                    إرسال الرسائل
+                  </strong>
+
+                  <small>
+                    السماح للأعضاء بإرسال رسائل داخل المجموعة.
+                  </small>
+
+                </span>
+
+                <input
+                  id="permission-send-messages"
+                  type="checkbox"
+                >
+
+              </label>
+
+
+              <!-- Send Media -->
+
+              <label class="setting-row">
+
+                <span
+                  class="setting-icon"
+                  aria-hidden="true"
+                >
+                  🖼
+                </span>
+
+                <span class="setting-content">
+
+                  <strong>
+                    إرسال الوسائط والملفات
+                  </strong>
+
+                  <small>
+                    الصور والفيديوهات والملفات والرسائل الصوتية.
+                  </small>
+
+                </span>
+
+                <input
+                  id="permission-send-media"
+                  type="checkbox"
+                >
+
+              </label>
+
+
+              <!-- Invite -->
+
+              <label class="setting-row">
+
+                <span
+                  class="setting-icon"
+                  aria-hidden="true"
+                >
+                  🔗
+                </span>
+
+                <span class="setting-content">
+
+                  <strong>
+                    دعوة أعضاء جدد
+                  </strong>
+
+                  <small>
+                    السماح للأعضاء بإرسال دعوات.
+                  </small>
+
+                </span>
+
+                <input
+                  id="permission-invite-members"
+                  type="checkbox"
+                >
+
+              </label>
+
+
+              <!-- Edit Info -->
+
+              <label class="setting-row">
+
+                <span
+                  class="setting-icon"
+                  aria-hidden="true"
+                >
+                  ✎
+                </span>
+
+                <span class="setting-content">
+
+                  <strong>
+                    تعديل معلومات المجموعة
+                  </strong>
+
+                  <small>
+                    السماح للأعضاء بتعديل بيانات المجموعة.
+                  </small>
+
+                </span>
+
+                <input
+                  id="permission-edit-info"
+                  type="checkbox"
+                >
+
+              </label>
+
+            </div>
+
+
+            <div class="form-actions">
+
+              <button
+                type="button"
+                class="button button-primary"
+                id="save-group-permissions"
+              >
+                حفظ الصلاحيات
+              </button>
+
+            </div>
+
+          </section>
+
+
+          <!-- ===============================================
+               Administrators
+               =============================================== -->
+
+          <section class="group-settings-card glass-panel">
+
+            <div class="card-heading">
+
+              <div class="card-heading-icon">
+                🛡
+              </div>
+
+              <div>
+
+                <h2>
+                  المشرفون
+                </h2>
+
+                <p>
+                  إدارة أعضاء الإدارة وصلاحياتهم.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div
+              id="group-admins-list"
+              class="group-members-list"
+            ></div>
+
+
+            <div
+              id="group-admins-empty"
+              class="group-state group-state-empty"
+              hidden
+            >
+
+              <div
+                class="group-state-icon"
+                aria-hidden="true"
+              >
+                👤
+              </div>
+
+              <p>
+                لا توجد بيانات مشرفين متاحة.
+              </p>
+
+            </div>
+
+          </section>
+
+
+          <!-- ===============================================
+               Members
+               =============================================== -->
+
+          <section class="group-settings-card glass-panel">
+
+            <div class="card-heading">
+
+              <div class="card-heading-icon">
+                👥
+              </div>
+
+              <div>
+
+                <h2>
+                  الأعضاء
+                </h2>
+
+                <p id="group-members-settings-summary">
+                  جارٍ تحميل الأعضاء...
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="member-search">
+
+              <input
+                id="settings-member-search"
+                type="search"
+                autocomplete="off"
+                placeholder="البحث عن عضو..."
+                aria-label="البحث عن عضو"
+              >
+
+            </div>
+
+
+            <div
+              id="group-settings-members"
+              class="group-members-list"
+            ></div>
+
+
+            <div
+              id="group-settings-members-empty"
+              class="group-state group-state-empty"
+              hidden
+            >
+
+              <div
+                class="group-state-icon"
+                aria-hidden="true"
+              >
+                👥
+              </div>
+
+              <p>
+                لا توجد بيانات أعضاء متاحة.
+              </p>
+
+            </div>
+
+          </section>
+
+
+          <!-- ===============================================
+               Invite Link
+               =============================================== -->
+
+          <section class="group-settings-card glass-panel">
+
+            <div class="card-heading">
+
+              <div class="card-heading-icon">
+                🔗
+              </div>
+
+              <div>
+
+                <h2>
+                  رابط الدعوة
+                </h2>
+
+                <p>
+                  إنشاء وإدارة رابط دعوة المجموعة.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="invite-link-box">
+
+              <div class="invite-link-icon">
+                🔗
+              </div>
+
+              <div class="invite-link-content">
+
+                <span>
+                  رابط الدعوة الحالي
+                </span>
+
+                <strong
+                  id="group-current-invite-link"
+                >
+                  غير متاح
+                </strong>
+
+              </div>
+
+              <button
+                type="button"
+                class="button button-secondary"
+                id="copy-group-invite"
+              >
+                نسخ
+              </button>
+
+            </div>
+
+
+            <div class="form-actions">
+
+              <button
+                type="button"
+                class="button button-secondary"
+                id="regenerate-group-invite"
+              >
+                إنشاء رابط جديد
+              </button>
+
+            </div>
+
+          </section>
+
+
+          <!-- ===============================================
+               Notifications
+               =============================================== -->
+
+          <section class="group-settings-card glass-panel">
+
+            <div class="card-heading">
+
+              <div class="card-heading-icon">
+                🔔
+              </div>
+
+              <div>
+
+                <h2>
+                  إشعارات المجموعة
+                </h2>
+
+                <p>
+                  التحكم في إشعارات هذه المجموعة على حسابك.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="settings-list">
+
+              <label class="setting-row">
+
+                <span
+                  class="setting-icon"
+                  aria-hidden="true"
+                >
+                  🔔
+                </span>
+
+                <span class="setting-content">
+
+                  <strong>
+                    إشعارات الرسائل
+                  </strong>
+
+                  <small>
+                    استقبال إشعارات عند وصول رسائل جديدة.
+                  </small>
+
+                </span>
+
+                <input
+                  id="group-notifications-toggle"
+                  type="checkbox"
+                >
+
+              </label>
+
+            </div>
+
+          </section>
+
+
+          <!-- ===============================================
+               Danger Zone
+               =============================================== -->
+
+          <section class="group-settings-card group-danger-card">
+
+            <div class="card-heading">
+
+              <div class="card-heading-icon danger-icon">
+                ⚠
+              </div>
+
+              <div>
+
+                <h2>
+                  منطقة الخطر
+                </h2>
+
+                <p>
+                  إجراءات تؤثر بشكل دائم على المجموعة.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="danger-actions">
+
+              <button
+                type="button"
+                class="danger-button"
+                id="leave-group-button"
+              >
+                مغادرة المجموعة
+              </button>
+
+              <button
+                type="button"
+                class="danger-button danger-button-critical"
+                id="delete-group-button"
+                hidden
+              >
+                حذف المجموعة نهائيًا
+              </button>
+
+            </div>
+
+          </section>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         Bottom Navigation
+         ===================================================== -->
+
+    <nav
+      id="global-bottom-nav"
+      class="global-bottom-nav"
+      data-component="bottom-nav"
+      aria-label="التنقل الرئيسي"
+    ></nav>
+
+  </div>
+
+
+  <!-- =======================================================
+       Confirm Modal
+       ======================================================= -->
+
+  <div
+    id="group-settings-confirm-modal"
+    class="modal-backdrop"
+    hidden
+    aria-hidden="true"
+  >
+
+    <div
+      class="modal-card"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="group-confirm-title"
+    >
+
+      <div class="modal-header">
+
+        <h2 id="group-confirm-title">
+          تأكيد الإجراء
+        </h2>
+
+        <button
+          type="button"
+          class="icon-button"
+          id="group-confirm-close"
+          aria-label="إغلاق"
+        >
+          ×
+        </button>
+
+      </div>
+
+      <p id="group-confirm-message">
+        هل أنت متأكد من تنفيذ هذا الإجراء؟
+      </p>
+
+      <div class="modal-actions">
+
+        <button
+          type="button"
+          class="button button-secondary"
+          id="group-confirm-cancel"
+        >
+          إلغاء
+        </button>
+
+        <button
+          type="button"
+          class="danger-button"
+          id="group-confirm-action"
+        >
+          تأكيد
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =======================================================
+       Scripts
+       ======================================================= -->
+
+  <script src="../js/config.js" defer></script>
+  <script src="../js/storage.js" defer></script>
+  <script src="../js/router.js" defer></script>
+  <script src="../js/realtime.js" defer></script>
+  <script src="../js/groups.js" defer></script>
+  <script src="../js/notifications.js" defer></script>
+  <script src="../js/app.js" defer></script>
+
+
+  <!-- =======================================================
+       Page Hooks
+       ======================================================= -->
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+
+      document.documentElement.lang = "ar";
+      document.documentElement.dir = "rtl";
+
+      const params =
+        new URLSearchParams(window.location.search);
+
+      const groupId = params.get("id");
+
+      if (groupId) {
+        document.body.dataset.groupId = groupId;
+      }
+
+
+      /* -----------------------------------------------
+         Character Counters
+         ----------------------------------------------- */
+
+      const nameInput =
+        document.getElementById("settings-group-name");
+
+      const descriptionInput =
+        document.getElementById(
+          "settings-group-description"
+        );
+
+      const nameCounter =
+        document.getElementById(
+          "settings-name-count"
+        );
+
+      const descriptionCounter =
+        document.getElementById(
+          "settings-description-count"
+        );
+
+      function updateCounter(input, counter) {
+
+        if (!input || !counter) return;
+
+        counter.textContent =
+          `${input.value.length}/${input.maxLength}`;
+      }
+
+      if (nameInput) {
+        nameInput.addEventListener("input", () => {
+          updateCounter(nameInput, nameCounter);
+        });
+      }
+
+      if (descriptionInput) {
+        descriptionInput.addEventListener(
+          "input",
+          () => {
+            updateCounter(
+              descriptionInput,
+              descriptionCounter
+            );
+          }
+        );
+      }
+
+
+      /* -----------------------------------------------
+         Avatar Preview
+         ----------------------------------------------- */
+
+      const avatarInput =
+        document.getElementById(
+          "settings-avatar-input"
+        );
+
+      const avatarImage =
+        document.getElementById(
+          "settings-avatar-image"
+        );
+
+      const avatarPlaceholder =
+        document.getElementById(
+          "settings-avatar-placeholder"
+        );
+
+      const avatarRemove =
+        document.getElementById(
+          "settings-avatar-remove"
+        );
+
+      if (avatarInput) {
+
+        avatarInput.addEventListener(
+          "change",
+          () => {
+
+            const file =
+              avatarInput.files?.[0];
+
+            if (!file) return;
+
+            if (!file.type.startsWith("image/")) {
+              avatarInput.value = "";
+              return;
+            }
+
+            const objectURL =
+              URL.createObjectURL(file);
+
+            if (avatarImage) {
+              avatarImage.src = objectURL;
+              avatarImage.hidden = false;
+            }
+
+            if (avatarPlaceholder) {
+              avatarPlaceholder.hidden = true;
+            }
+
+            if (avatarRemove) {
+              avatarRemove.hidden = false;
+            }
+
+          }
+        );
+      }
+
+
+      if (avatarRemove) {
+
+        avatarRemove.addEventListener(
+          "click",
+          () => {
+
+            if (avatarInput) {
+              avatarInput.value = "";
+            }
+
+            if (
+              avatarImage &&
+              avatarImage.src.startsWith("blob:")
+            ) {
+              URL.revokeObjectURL(
+                avatarImage.src
+              );
+            }
+
+            if (avatarImage) {
+              avatarImage.src = "";
+              avatarImage.hidden = true;
+            }
+
+            if (avatarPlaceholder) {
+              avatarPlaceholder.hidden = false;
+            }
+
+            avatarRemove.hidden = true;
+
+          }
+        );
+      }
+
+
+      /* -----------------------------------------------
+         Back
+         ----------------------------------------------- */
+
+      const backButton =
+        document.getElementById(
+          "group-settings-back"
+        );
+
+      if (backButton) {
+
+        backButton.addEventListener(
+          "click",
+          () => {
+
+            if (
+              window.NOVA_ROUTER &&
+              typeof window.NOVA_ROUTER.back ===
+                "function"
+            ) {
+              window.NOVA_ROUTER.back();
+            } else {
+              window.history.back();
+            }
+
+          }
+        );
+      }
+
+
+      /* -----------------------------------------------
+         Copy Invite Link
+         ----------------------------------------------- */
+
+      const copyInvite =
+        document.getElementById(
+          "copy-group-invite"
+        );
+
+      if (copyInvite) {
+
+        copyInvite.addEventListener(
+          "click",
+          async () => {
+
+            const value =
+              document.getElementById(
+                "group-current-invite-link"
+              )?.textContent?.trim();
+
+            if (
+              !value ||
+              value === "غير متاح"
+            ) {
+              return;
+            }
+
+            try {
+
+              await navigator.clipboard.writeText(
+                value
+              );
+
+              if (
+                window.NOVA &&
+                typeof window.NOVA.toast ===
+                  "function"
+              ) {
+                window.NOVA.toast(
+                  "تم نسخ رابط الدعوة"
+                );
+              }
+
+            } catch (error) {
+
+              console.error(
+                "NOVA: unable to copy invite link",
+                error
+              );
+
+            }
+
+          }
+        );
+      }
+
+
+      /* -----------------------------------------------
+         Announce Page Ready
+         ----------------------------------------------- */
+
+      if (
+        window.NOVA &&
+        typeof window.NOVA.emit ===
+          "function"
+      ) {
+        window.NOVA.emit(
+          "group:settings-page-ready",
+          {
+            groupId: groupId || null
+          }
+        );
+      }
+
+    });
+  </script>
+
+</body>
+  </html>
