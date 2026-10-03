@@ -1,0 +1,2252 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  >
+
+  <meta name="theme-color" content="#06110D">
+  <meta
+    name="description"
+    content="تأكيد الحساب — NOVA"
+  >
+
+  <title>تأكيد الحساب — NOVA</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/animations.css">
+
+  <style>
+    /* =========================================================
+       NOVA — Verification Page
+       ========================================================= */
+
+    :root {
+      --verify-max-width: 1120px;
+      --verify-card-width: 500px;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+
+      background:
+        radial-gradient(
+          circle at 20% 15%,
+          rgba(32, 212, 123, 0.10),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 85% 80%,
+          rgba(32, 212, 123, 0.065),
+          transparent 32%
+        ),
+        #06110D;
+    }
+
+    .verify-page {
+      position: relative;
+      min-height: 100vh;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 28px 18px;
+
+      isolation: isolate;
+    }
+
+    /* ---------------------------------------------------------
+       Background
+       --------------------------------------------------------- */
+
+    .verify-page::before {
+      content: "";
+
+      position: fixed;
+      inset: 0;
+
+      z-index: -3;
+      pointer-events: none;
+
+      background-image:
+        linear-gradient(
+          rgba(255,255,255,0.024) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,0.024) 1px,
+          transparent 1px
+        );
+
+      background-size: 44px 44px;
+
+      mask-image:
+        radial-gradient(
+          ellipse at center,
+          black 25%,
+          transparent 82%
+        );
+    }
+
+    .verify-glow {
+      position: fixed;
+
+      width: 480px;
+      height: 480px;
+
+      left: -190px;
+      top: -190px;
+
+      border-radius: 50%;
+
+      background: rgba(32, 212, 123, 0.065);
+      filter: blur(85px);
+
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    .verify-glow-two {
+      position: fixed;
+
+      width: 400px;
+      height: 400px;
+
+      right: -180px;
+      bottom: -180px;
+
+      border-radius: 50%;
+
+      background: rgba(32, 212, 123, 0.055);
+      filter: blur(80px);
+
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    /* ---------------------------------------------------------
+       Shell
+       --------------------------------------------------------- */
+
+    .verify-shell {
+      width: min(100%, var(--verify-max-width));
+
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 1fr)
+        var(--verify-card-width);
+
+      gap: 70px;
+
+      align-items: center;
+    }
+
+    /* ---------------------------------------------------------
+       Intro
+       --------------------------------------------------------- */
+
+    .verify-intro {
+      padding: 20px 0;
+    }
+
+    .verify-brand {
+      display: inline-flex;
+      align-items: center;
+
+      gap: 12px;
+
+      margin-bottom: 30px;
+
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .verify-brand-icon {
+      width: 54px;
+      height: 54px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 17px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(32,212,123,0.17),
+          rgba(32,212,123,0.035)
+        );
+
+      border: 1px solid rgba(32,212,123,0.23);
+
+      box-shadow:
+        0 15px 38px rgba(0,0,0,0.24),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+
+    .verify-brand-icon img {
+      width: 31px;
+      height: 31px;
+      object-fit: contain;
+    }
+
+    .verify-brand-fallback {
+      display: none;
+
+      color: #20D47B;
+
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .verify-brand-name {
+      display: block;
+
+      font-family: "Cairo", sans-serif;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 800;
+    }
+
+    .verify-brand-tagline {
+      display: block;
+
+      margin-top: 5px;
+
+      color: #8CA199;
+      font-size: 12px;
+    }
+
+    .verify-intro h1 {
+      margin: 0;
+
+      max-width: 610px;
+
+      color: #F4FAF7;
+
+      font-family: "Cairo", sans-serif;
+      font-size: clamp(34px, 4vw, 56px);
+      line-height: 1.28;
+      font-weight: 800;
+
+      letter-spacing: -1.2px;
+    }
+
+    .verify-intro h1 span {
+      color: #20D47B;
+    }
+
+    .verify-intro-text {
+      max-width: 600px;
+
+      margin: 21px 0 0;
+
+      color: #A6B8B0;
+
+      font-size: 15px;
+      line-height: 2;
+    }
+
+    /* ---------------------------------------------------------
+       Verification Visual
+       --------------------------------------------------------- */
+
+    .verify-visual {
+      position: relative;
+
+      width: 250px;
+      height: 250px;
+
+      margin-top: 42px;
+    }
+
+    .verify-orbit {
+      position: absolute;
+      inset: 0;
+
+      border-radius: 50%;
+
+      border: 1px solid rgba(32,212,123,0.10);
+
+      animation:
+        verifyOrbit 14s linear infinite;
+    }
+
+    .verify-orbit::before {
+      content: "";
+
+      position: absolute;
+
+      width: 9px;
+      height: 9px;
+
+      top: 17px;
+      left: 50%;
+
+      margin-left: -4px;
+
+      border-radius: 50%;
+
+      background: #20D47B;
+
+      box-shadow:
+        0 0 18px rgba(32,212,123,0.8);
+    }
+
+    .verify-orbit-two {
+      position: absolute;
+
+      inset: 30px;
+
+      border-radius: 50%;
+
+      border: 1px dashed rgba(255,255,255,0.075);
+
+      animation:
+        verifyOrbitReverse 18s linear infinite;
+    }
+
+    .verify-center {
+      position: absolute;
+
+      inset: 62px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(32,212,123,0.13),
+          rgba(32,212,123,0.025) 65%,
+          transparent
+        );
+
+      border: 1px solid rgba(32,212,123,0.15);
+
+      box-shadow:
+        0 0 70px rgba(32,212,123,0.09),
+        inset 0 0 35px rgba(32,212,123,0.035);
+    }
+
+    .verify-lock {
+      width: 74px;
+      height: 74px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 23px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(32,212,123,0.17),
+          rgba(32,212,123,0.055)
+        );
+
+      border: 1px solid rgba(32,212,123,0.20);
+
+      color: #20D47B;
+
+      font-size: 30px;
+
+      box-shadow:
+        0 15px 35px rgba(0,0,0,0.25);
+    }
+
+    @keyframes verifyOrbit {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes verifyOrbitReverse {
+      to {
+        transform: rotate(-360deg);
+      }
+    }
+
+    /* ---------------------------------------------------------
+       Card
+       --------------------------------------------------------- */
+
+    .verify-card {
+      width: 100%;
+      box-sizing: border-box;
+
+      padding: 30px;
+
+      border-radius: 28px;
+
+      border: 1px solid rgba(255,255,255,0.085);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(15,38,29,0.96),
+          rgba(7,22,16,0.97)
+        );
+
+      box-shadow:
+        0 35px 100px rgba(0,0,0,0.38),
+        inset 0 1px 0 rgba(255,255,255,0.045);
+
+      backdrop-filter: blur(24px);
+    }
+
+    .verify-card-header {
+      margin-bottom: 23px;
+    }
+
+    .verify-card-header h2 {
+      margin: 0;
+
+      color: #F5FAF7;
+
+      font-family: "Cairo", sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .verify-card-header p {
+      margin: 8px 0 0;
+
+      color: #8FA39B;
+
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    /* ---------------------------------------------------------
+       Destination
+       --------------------------------------------------------- */
+
+    .verify-destination {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      padding: 13px;
+
+      margin-bottom: 21px;
+
+      border-radius: 15px;
+
+      background: rgba(32,212,123,0.045);
+
+      border: 1px solid rgba(32,212,123,0.11);
+    }
+
+    .verify-destination-icon {
+      width: 40px;
+      height: 40px;
+
+      flex: 0 0 auto;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 12px;
+
+      background: rgba(32,212,123,0.10);
+
+      color: #20D47B;
+
+      font-size: 17px;
+    }
+
+    .verify-destination-content {
+      min-width: 0;
+    }
+
+    .verify-destination-label {
+      display: block;
+
+      margin-bottom: 3px;
+
+      color: #71867D;
+
+      font-size: 10px;
+    }
+
+    .verify-destination-value {
+      display: block;
+
+      overflow: hidden;
+
+      color: #E8F1ED;
+
+      font-size: 12px;
+      font-weight: 700;
+
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      direction: ltr;
+      text-align: right;
+    }
+
+    .verify-change {
+      margin-right: auto;
+
+      padding: 5px 8px;
+
+      border: 0;
+
+      border-radius: 8px;
+
+      background: transparent;
+
+      color: #20D47B;
+
+      font-family: inherit;
+      font-size: 10px;
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+
+    .verify-change:hover {
+      background: rgba(32,212,123,0.08);
+    }
+
+    /* ---------------------------------------------------------
+       OTP
+       --------------------------------------------------------- */
+
+    .verify-otp-label {
+      display: block;
+
+      margin-bottom: 10px;
+
+      color: #DDE8E3;
+
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .verify-otp {
+      direction: ltr;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(6, minmax(0, 1fr));
+
+      gap: 8px;
+    }
+
+    .verify-otp input {
+      width: 100%;
+      height: 54px;
+
+      box-sizing: border-box;
+
+      border: 1px solid rgba(255,255,255,0.085);
+      border-radius: 14px;
+
+      outline: none;
+
+      background: rgba(3,13,9,0.62);
+
+      color: #F4FAF7;
+
+      font-family: "Cairo", sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+
+      text-align: center;
+
+      caret-color: #20D47B;
+
+      transition:
+        border-color 180ms ease,
+        background 180ms ease,
+        box-shadow 180ms ease,
+        transform 180ms ease;
+    }
+
+    .verify-otp input:focus {
+      border-color: rgba(32,212,123,0.65);
+
+      background: rgba(5,20,14,0.85);
+
+      box-shadow:
+        0 0 0 4px rgba(32,212,123,0.07);
+
+      transform: translateY(-1px);
+    }
+
+    .verify-otp input.filled {
+      border-color: rgba(32,212,123,0.30);
+    }
+
+    .verify-otp input.invalid {
+      border-color: rgba(255,92,103,0.60);
+
+      box-shadow:
+        0 0 0 4px rgba(255,92,103,0.055);
+    }
+
+    /* ---------------------------------------------------------
+       Timer
+       --------------------------------------------------------- */
+
+    .verify-timer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin-top: 14px;
+    }
+
+    .verify-timer {
+      color: #788D84;
+
+      font-size: 10px;
+    }
+
+    .verify-timer strong {
+      color: #20D47B;
+
+      font-family: "Cairo", sans-serif;
+      font-size: 12px;
+    }
+
+    .verify-resend {
+      border: 0;
+
+      padding: 6px 9px;
+
+      border-radius: 8px;
+
+      background: transparent;
+
+      color: #20D47B;
+
+      font-family: inherit;
+      font-size: 10px;
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+
+    .verify-resend:hover:not(:disabled) {
+      background: rgba(32,212,123,0.08);
+    }
+
+    .verify-resend:disabled {
+      color: #53675F;
+      cursor: not-allowed;
+    }
+
+    /* ---------------------------------------------------------
+       Feedback
+       --------------------------------------------------------- */
+
+    .verify-feedback {
+      display: none;
+
+      margin: 15px 0 0;
+      padding: 11px 13px;
+
+      border-radius: 12px;
+
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .verify-feedback.visible {
+      display: block;
+    }
+
+    .verify-feedback.error {
+      color: #FFB6BC;
+
+      background: rgba(255,92,103,0.08);
+
+      border: 1px solid rgba(255,92,103,0.18);
+    }
+
+    .verify-feedback.success {
+      color: #B7EBD2;
+
+      background: rgba(32,212,123,0.07);
+
+      border: 1px solid rgba(32,212,123,0.15);
+    }
+
+    .verify-feedback.info {
+      color: #B7E1FF;
+
+      background: rgba(90,169,255,0.065);
+
+      border: 1px solid rgba(90,169,255,0.13);
+    }
+
+    /* ---------------------------------------------------------
+       Verify Button
+       --------------------------------------------------------- */
+
+    .verify-submit {
+      width: 100%;
+
+      min-height: 52px;
+
+      margin-top: 21px;
+
+      border: 0;
+      border-radius: 15px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #20D47B,
+          #13B965
+        );
+
+      color: #03130B;
+
+      font-family: "Cairo", sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 12px 28px rgba(32,212,123,0.15);
+
+      transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        filter 180ms ease;
+    }
+
+    .verify-submit:hover {
+      transform: translateY(-1px);
+
+      filter: brightness(1.04);
+
+      box-shadow:
+        0 16px 34px rgba(32,212,123,0.22);
+    }
+
+    .verify-submit:active {
+      transform: translateY(0);
+    }
+
+    .verify-submit:disabled {
+      opacity: 0.55;
+
+      cursor: not-allowed;
+
+      transform: none;
+
+      box-shadow: none;
+    }
+
+    .verify-submit.loading {
+      position: relative;
+
+      color: transparent;
+
+      pointer-events: none;
+    }
+
+    .verify-submit.loading::after {
+      content: "";
+
+      position: absolute;
+
+      top: 50%;
+      left: 50%;
+
+      width: 20px;
+      height: 20px;
+
+      margin: -10px;
+
+      border: 2px solid rgba(3,19,11,0.25);
+
+      border-top-color: #03130B;
+
+      border-radius: 50%;
+
+      animation:
+        verifySpin 700ms linear infinite;
+    }
+
+    @keyframes verifySpin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* ---------------------------------------------------------
+       Help / Footer
+       --------------------------------------------------------- */
+
+    .verify-help {
+      margin-top: 18px;
+
+      text-align: center;
+
+      color: #667A72;
+
+      font-size: 10px;
+      line-height: 1.8;
+    }
+
+    .verify-help a {
+      color: #20D47B;
+
+      text-decoration: none;
+
+      font-weight: 700;
+    }
+
+    .verify-help a:hover {
+      text-decoration: underline;
+    }
+
+    .verify-security {
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 6px;
+
+      margin-top: 17px;
+
+      color: #5D7168;
+
+      font-size: 9px;
+    }
+
+    /* ---------------------------------------------------------
+       Responsive
+       --------------------------------------------------------- */
+
+    @media (max-width: 1030px) {
+      .verify-shell {
+        grid-template-columns: 1fr;
+
+        max-width: 520px;
+
+        gap: 20px;
+      }
+
+      .verify-intro {
+        text-align: center;
+      }
+
+      .verify-brand {
+        margin-bottom: 17px;
+      }
+
+      .verify-intro h1 {
+        margin-inline: auto;
+      }
+
+      .verify-intro-text {
+        margin-inline: auto;
+      }
+
+      .verify-visual {
+        margin: 25px auto 0;
+
+        width: 170px;
+        height: 170px;
+      }
+
+      .verify-orbit-two {
+        inset: 21px;
+      }
+
+      .verify-center {
+        inset: 43px;
+      }
+
+      .verify-lock {
+        width: 58px;
+        height: 58px;
+
+        border-radius: 18px;
+
+        font-size: 23px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .verify-page {
+        align-items: flex-start;
+
+        padding: 18px 11px 30px;
+      }
+
+      .verify-intro {
+        padding-top: 3px;
+      }
+
+      .verify-brand-icon {
+        width: 46px;
+        height: 46px;
+
+        border-radius: 14px;
+      }
+
+      .verify-brand-icon img {
+        width: 27px;
+        height: 27px;
+      }
+
+      .verify-brand-name {
+        font-size: 21px;
+      }
+
+      .verify-brand-tagline {
+        font-size: 10px;
+      }
+
+      .verify-intro h1 {
+        font-size: 29px;
+      }
+
+      .verify-intro-text {
+        margin-top: 10px;
+
+        font-size: 12px;
+        line-height: 1.9;
+      }
+
+      .verify-visual {
+        display: none;
+      }
+
+      .verify-card {
+        padding: 21px 15px;
+
+        border-radius: 22px;
+      }
+
+      .verify-card-header h2 {
+        font-size: 21px;
+      }
+
+      .verify-card-header p {
+        font-size: 11px;
+      }
+
+      .verify-destination {
+        padding: 11px;
+      }
+
+      .verify-otp {
+        gap: 6px;
+      }
+
+      .verify-otp input {
+        height: 49px;
+
+        border-radius: 12px;
+
+        font-size: 18px;
+      }
+    }
+
+    @media (max-width: 370px) {
+      .verify-page {
+        padding-inline: 7px;
+      }
+
+      .verify-card {
+        padding-inline: 12px;
+      }
+
+      .verify-otp {
+        gap: 4px;
+      }
+
+      .verify-otp input {
+        height: 46px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .verify-orbit,
+      .verify-orbit-two,
+      .verify-submit {
+        animation: none;
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="verify-page">
+
+    <div class="verify-glow"></div>
+    <div class="verify-glow-two"></div>
+
+    <div class="verify-shell">
+
+      <!-- =====================================================
+           Intro
+           ===================================================== -->
+
+      <section class="verify-intro">
+
+        <a
+          class="verify-brand"
+          href="../index.html"
+          aria-label="NOVA"
+        >
+
+          <span class="verify-brand-icon">
+
+            <img
+              src="../assets/brand/logo.svg"
+              alt=""
+              onerror="
+                this.style.display='none';
+                this.nextElementSibling.style.display='block';
+              "
+            >
+
+            <span class="verify-brand-fallback">
+              N
+            </span>
+
+          </span>
+
+          <span>
+            <span class="verify-brand-name">
+              NOVA
+            </span>
+
+            <span class="verify-brand-tagline">
+              تواصل ببساطة
+            </span>
+          </span>
+
+        </a>
+
+
+        <h1>
+          خطوة واحدة
+          <span>وتكمل.</span>
+        </h1>
+
+
+        <p class="verify-intro-text">
+          أرسلنا رمز تحقق إلى وسيلة التواصل التي اخترتها.
+          أدخل الرمز لإثبات ملكية الحساب والمتابعة إلى NOVA.
+        </p>
+
+
+        <div class="verify-visual" aria-hidden="true">
+
+          <div class="verify-orbit"></div>
+
+          <div class="verify-orbit-two"></div>
+
+          <div class="verify-center">
+
+            <div class="verify-lock">
+              ✓
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           Verification Card
+           ===================================================== -->
+
+      <section class="verify-card">
+
+        <header class="verify-card-header">
+
+          <h2>
+            تأكيد الحساب
+          </h2>
+
+          <p>
+            أدخل رمز التحقق المكوّن من 6 أرقام.
+          </p>
+
+        </header>
+
+
+        <!-- Destination -->
+
+        <div class="verify-destination">
+
+          <div class="verify-destination-icon">
+            @
+          </div>
+
+          <div class="verify-destination-content">
+
+            <span class="verify-destination-label">
+              تم إرسال الرمز إلى
+            </span>
+
+            <strong
+              id="destinationValue"
+              class="verify-destination-value"
+            >
+              جاري تحديد وسيلة التحقق...
+            </strong>
+
+          </div>
+
+          <button
+            id="changeDestination"
+            type="button"
+            class="verify-change"
+          >
+            تغيير
+          </button>
+
+        </div>
+
+
+        <!-- Feedback -->
+
+        <div
+          id="verifyFeedback"
+          class="verify-feedback"
+          role="alert"
+          aria-live="polite"
+        ></div>
+
+
+        <!-- OTP -->
+
+        <form
+          id="verifyForm"
+          novalidate
+        >
+
+          <label
+            class="verify-otp-label"
+            for="otp-1"
+          >
+            رمز التحقق
+          </label>
+
+
+          <div
+            id="otpContainer"
+            class="verify-otp"
+            dir="ltr"
+            aria-label="رمز التحقق"
+          >
+
+            <input
+              id="otp-1"
+              type="text"
+              inputmode="numeric"
+              autocomplete="one-time-code"
+              maxlength="1"
+              aria-label="الرقم الأول"
+            >
+
+            <input
+              id="otp-2"
+              type="text"
+              inputmode="numeric"
+              maxlength="1"
+              aria-label="الرقم الثاني"
+            >
+
+            <input
+              id="otp-3"
+              type="text"
+              inputmode="numeric"
+              maxlength="1"
+              aria-label="الرقم الثالث"
+            >
+
+            <input
+              id="otp-4"
+              type="text"
+              inputmode="numeric"
+              maxlength="1"
+              aria-label="الرقم الرابع"
+            >
+
+            <input
+              id="otp-5"
+              type="text"
+              inputmode="numeric"
+              maxlength="1"
+              aria-label="الرقم الخامس"
+            >
+
+            <input
+              id="otp-6"
+              type="text"
+              inputmode="numeric"
+              maxlength="1"
+              aria-label="الرقم السادس"
+            >
+
+          </div>
+
+
+          <!-- Timer -->
+
+          <div class="verify-timer-row">
+
+            <span class="verify-timer">
+              يمكنك طلب رمز جديد بعد
+              <strong id="timer">
+                01:00
+              </strong>
+            </span>
+
+            <button
+              id="resendCode"
+              type="button"
+              class="verify-resend"
+              disabled
+            >
+              إعادة إرسال الرمز
+            </button>
+
+          </div>
+
+
+          <!-- Submit -->
+
+          <button
+            id="verifySubmit"
+            type="submit"
+            class="verify-submit"
+          >
+            تأكيد الحساب
+          </button>
+
+        </form>
+
+
+        <div class="verify-help">
+
+          لم يصلك الرمز؟
+
+          <br>
+
+          تأكد من صحة وسيلة التواصل أو
+          <a
+            href="#"
+            id="supportLink"
+          >
+            تواصل مع الدعم
+          </a>
+
+        </div>
+
+
+        <div class="verify-security">
+
+          <span>🔒</span>
+
+          <span>
+            رمز التحقق مؤقت ولا يجب مشاركته مع أي شخص.
+          </span>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+
+  <!-- =========================================================
+       Configuration
+       ========================================================= -->
+
+  <script src="../js/config.js"></script>
+
+
+  <!-- =========================================================
+       Verification Logic
+       ========================================================= -->
+
+  <script>
+    (() => {
+      "use strict";
+
+      const config = window.APP_CONFIG;
+      const app = window.APP;
+
+      if (!config || !app) {
+        console.error(
+          "[NOVA] Configuration is unavailable."
+        );
+        return;
+      }
+
+
+      /* -------------------------------------------------------
+         Elements
+         ------------------------------------------------------- */
+
+      const form =
+        document.getElementById("verifyForm");
+
+      const otpInputs =
+        Array.from(
+          document.querySelectorAll(
+            "#otpContainer input"
+          )
+        );
+
+      const feedback =
+        document.getElementById(
+          "verifyFeedback"
+        );
+
+      const destinationValue =
+        document.getElementById(
+          "destinationValue"
+        );
+
+      const verifySubmit =
+        document.getElementById(
+          "verifySubmit"
+        );
+
+      const resendButton =
+        document.getElementById(
+          "resendCode"
+        );
+
+      const timerElement =
+        document.getElementById(
+          "timer"
+        );
+
+      const changeDestination =
+        document.getElementById(
+          "changeDestination"
+        );
+
+      const supportLink =
+        document.getElementById(
+          "supportLink"
+        );
+
+
+      /* -------------------------------------------------------
+         State
+         ------------------------------------------------------- */
+
+      let countdown = 60;
+
+      let timerInterval = null;
+
+      let verificationMethod =
+        "phone";
+
+      let verificationDestination =
+        "";
+
+
+      /* -------------------------------------------------------
+         Safe Storage
+         ------------------------------------------------------- */
+
+      function readRegistrationContext() {
+
+        try {
+
+          const raw =
+            sessionStorage.getItem(
+              app.getStorageKey(
+                "registration_context"
+              )
+            );
+
+          if (!raw) {
+            return null;
+          }
+
+          return JSON.parse(raw);
+
+        } catch (error) {
+
+          if (
+            config.development.debug
+          ) {
+            console.warn(
+              "[NOVA] Could not read registration context:",
+              error
+            );
+          }
+
+          return null;
+        }
+      }
+
+
+      /* -------------------------------------------------------
+         Mask Destination
+         ------------------------------------------------------- */
+
+      function maskPhone(phone) {
+
+        const value =
+          String(phone || "");
+
+        if (value.length < 7) {
+          return value;
+        }
+
+        return (
+          value.slice(0, 4) +
+          "****" +
+          value.slice(-3)
+        );
+      }
+
+
+      function maskEmail(email) {
+
+        const value =
+          String(email || "");
+
+        const parts =
+          value.split("@");
+
+        if (parts.length !== 2) {
+          return value;
+        }
+
+        const username =
+          parts[0];
+
+        const domain =
+          parts[1];
+
+        if (username.length <= 2) {
+          return (
+            "*".repeat(username.length) +
+            "@" +
+            domain
+          );
+        }
+
+        return (
+          username.slice(0, 2) +
+          "****@" +
+          domain
+        );
+      }
+
+
+      /* -------------------------------------------------------
+         Load Context
+         ------------------------------------------------------- */
+
+      function loadContext() {
+
+        const context =
+          readRegistrationContext();
+
+        if (!context) {
+
+          destinationValue.textContent =
+            "لم يتم تحديد وسيلة التحقق";
+
+          showFeedback(
+            "لم يتم العثور على بيانات التسجيل الحالية. ارجع إلى صفحة إنشاء الحساب وابدأ العملية من جديد.",
+            "error"
+          );
+
+          return;
+        }
+
+
+        verificationMethod =
+          context.registrationMethod ||
+          "phone";
+
+
+        if (
+          verificationMethod === "email"
+        ) {
+
+          verificationDestination =
+            context.email || "";
+
+          destinationValue.textContent =
+            maskEmail(
+              verificationDestination
+            );
+
+        } else {
+
+          verificationDestination =
+            context.phone || "";
+
+          destinationValue.textContent =
+            maskPhone(
+              verificationDestination
+            );
+
+        }
+
+      }
+
+
+      /* -------------------------------------------------------
+         Feedback
+         ------------------------------------------------------- */
+
+      function showFeedback(
+        message,
+        type = "info"
+      ) {
+
+        feedback.textContent =
+          message;
+
+        feedback.className =
+          "verify-feedback visible " +
+          type;
+      }
+
+
+      function clearFeedback() {
+
+        feedback.textContent = "";
+
+        feedback.className =
+          "verify-feedback";
+      }
+
+
+      /* -------------------------------------------------------
+         OTP Helpers
+         ------------------------------------------------------- */
+
+      function getOTP() {
+
+        return otpInputs
+          .map(
+            input =>
+              input.value
+          )
+          .join("");
+      }
+
+
+      function clearOTP() {
+
+        otpInputs.forEach(
+          input => {
+            input.value = "";
+            input.classList.remove(
+              "filled",
+              "invalid"
+            );
+          }
+        );
+
+        otpInputs[0].focus();
+      }
+
+
+      function markOTPInvalid() {
+
+        otpInputs.forEach(
+          input => {
+            input.classList.add(
+              "invalid"
+            );
+          }
+        );
+
+      }
+
+
+      /* -------------------------------------------------------
+         OTP Input Behavior
+         ------------------------------------------------------- */
+
+      otpInputs.forEach(
+        (input, index) => {
+
+          input.addEventListener(
+            "input",
+            event => {
+
+              clearFeedback();
+
+              let value =
+                event.target.value
+                  .replace(/\D/g, "");
+
+              if (value.length > 1) {
+                value = value[0];
+              }
+
+              event.target.value =
+                value;
+
+              event.target.classList.toggle(
+                "filled",
+                Boolean(value)
+              );
+
+              event.target.classList.remove(
+                "invalid"
+              );
+
+
+              if (
+                value &&
+                index <
+                  otpInputs.length - 1
+              ) {
+
+                otpInputs[index + 1]
+                  .focus();
+
+              }
+
+
+              if (
+                getOTP().length === 6
+              ) {
+
+                verifySubmit.focus();
+
+              }
+
+            }
+          );
+
+
+          input.addEventListener(
+            "keydown",
+            event => {
+
+              if (
+                event.key ===
+                  "Backspace" &&
+                !input.value &&
+                index > 0
+              ) {
+
+                otpInputs[index - 1]
+                  .focus();
+
+              }
+
+
+              if (
+                event.key === "ArrowLeft" &&
+                index > 0
+              ) {
+
+                otpInputs[index - 1]
+                  .focus();
+
+              }
+
+
+              if (
+                event.key === "ArrowRight" &&
+                index <
+                  otpInputs.length - 1
+              ) {
+
+                otpInputs[index + 1]
+                  .focus();
+
+              }
+
+            }
+          );
+
+        }
+      );
+
+
+      /* -------------------------------------------------------
+         Paste OTP
+         ------------------------------------------------------- */
+
+      document
+        .getElementById("otpContainer")
+        .addEventListener(
+          "paste",
+          event => {
+
+            event.preventDefault();
+
+            const pasted =
+              (
+                event.clipboardData ||
+                window.clipboardData
+              )
+                .getData("text")
+                .replace(/\D/g, "")
+                .slice(0, 6);
+
+            if (!pasted) {
+              return;
+            }
+
+
+            pasted
+              .split("")
+              .forEach(
+                (digit, index) => {
+
+                  if (
+                    otpInputs[index]
+                  ) {
+
+                    otpInputs[index].value =
+                      digit;
+
+                    otpInputs[index]
+                      .classList.add(
+                        "filled"
+                      );
+
+                  }
+
+                }
+              );
+
+
+            const nextIndex =
+              Math.min(
+                pasted.length,
+                otpInputs.length - 1
+              );
+
+            otpInputs[nextIndex].focus();
+
+          }
+        );
+
+
+      /* -------------------------------------------------------
+         Timer
+         ------------------------------------------------------- */
+
+      function updateTimer() {
+
+        const minutes =
+          Math.floor(
+            countdown / 60
+          );
+
+        const seconds =
+          countdown % 60;
+
+        timerElement.textContent =
+          `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+
+
+        if (countdown <= 0) {
+
+          resendButton.disabled =
+            false;
+
+          timerElement.textContent =
+            "جاهز";
+
+          stopTimer();
+
+          return;
+        }
+
+        resendButton.disabled =
+          true;
+      }
+
+
+      function startTimer(
+        seconds = 60
+      ) {
+
+        stopTimer();
+
+        countdown =
+          Math.max(
+            0,
+            Number(seconds) || 60
+          );
+
+        updateTimer();
+
+        timerInterval =
+          window.setInterval(
+            () => {
+
+              countdown--;
+
+              updateTimer();
+
+            },
+            1000
+          );
+      }
+
+
+      function stopTimer() {
+
+        if (timerInterval) {
+
+          window.clearInterval(
+            timerInterval
+          );
+
+          timerInterval = null;
+
+        }
+
+      }
+
+
+      /* -------------------------------------------------------
+         Verify API
+         ------------------------------------------------------- */
+
+      async function verifyCode() {
+
+        const otp =
+          getOTP();
+
+
+        if (otp.length !== 6) {
+
+          markOTPInvalid();
+
+          showFeedback(
+            "أدخل رمز التحقق المكوّن من 6 أرقام.",
+            "error"
+          );
+
+          const firstEmpty =
+            otpInputs.find(
+              input => !input.value
+            );
+
+          (
+            firstEmpty ||
+            otpInputs[0]
+          ).focus();
+
+          return;
+        }
+
+
+        /*
+         * لا يوجد تحقق وهمي.
+         * الـBackend هو المسؤول عن قبول أو رفض الكود.
+         */
+
+        if (
+          config.environment ===
+          "development"
+        ) {
+
+          showFeedback(
+            "صفحة التحقق جاهزة للربط. لم يتم قبول الرمز محليًا لأن خدمة الـBackend غير مفعلة.",
+            "info"
+          );
+
+          console.info(
+            "[NOVA] Verification request prepared:",
+            {
+              method:
+                verificationMethod,
+              destination:
+                verificationMethod === "phone"
+                  ? "[phone]"
+                  : "[email]",
+              otp: "[hidden]"
+            }
+          );
+
+          return;
+        }
+
+
+        verifySubmit.disabled =
+          true;
+
+        verifySubmit.classList.add(
+          "loading"
+        );
+
+        clearFeedback();
+
+
+        try {
+
+          const response =
+            await fetch(
+              app.getApiURL(
+                "auth/verify"
+              ),
+              {
+                method: "POST",
+
+                headers: {
+                  "Content-Type":
+                    "application/json",
+
+                  "Accept":
+                    "application/json"
+                },
+
+                credentials:
+                  config.api.credentials,
+
+                body:
+                  JSON.stringify({
+                    method:
+                      verificationMethod,
+
+                    destination:
+                      verificationDestination,
+
+                    code: otp
+                  })
+              }
+            );
+
+
+          let data = null;
+
+          try {
+            data =
+              await response.json();
+          } catch {
+            data = null;
+          }
+
+
+          if (!response.ok) {
+
+            throw new Error(
+              data &&
+              typeof data.message ===
+                "string"
+                ? data.message
+                : "رمز التحقق غير صحيح أو انتهت صلاحيته."
+            );
+
+          }
+
+
+          showFeedback(
+            "تم تأكيد الحساب بنجاح.",
+            "success"
+          );
+
+
+          /*
+           * بعد نجاح الـBackend فقط:
+           * يمكن الانتقال إلى الصفحة الرئيسية.
+           */
+
+          window.setTimeout(
+            () => {
+
+              window.location.href =
+                app.getRoute("pages.chats");
+
+            },
+            700
+          );
+
+
+        } catch (error) {
+
+          console.error(
+            "[NOVA] Verification failed:",
+            error
+          );
+
+          markOTPInvalid();
+
+          showFeedback(
+            error.message ||
+              "تعذر تأكيد الرمز حاليًا.",
+            "error"
+          );
+
+        } finally {
+
+          verifySubmit.disabled =
+            false;
+
+          verifySubmit.classList.remove(
+            "loading"
+          );
+
+        }
+
+      }
+
+
+      form.addEventListener(
+        "submit",
+        event => {
+
+          event.preventDefault();
+
+          verifyCode();
+
+        }
+      );
+
+
+      /* -------------------------------------------------------
+         Resend API
+         ------------------------------------------------------- */
+
+      async function resendCode() {
+
+        if (
+          resendButton.disabled
+        ) {
+          return;
+        }
+
+
+        clearFeedback();
+
+        resendButton.disabled =
+          true;
+
+
+        if (
+          config.environment ===
+          "development"
+        ) {
+
+          showFeedback(
+            "إعادة إرسال الرمز مجهزة للـBackend، ولم يتم إرسال رمز تجريبي.",
+            "info"
+          );
+
+          startTimer(60);
+
+          return;
+        }
+
+
+        try {
+
+          const response =
+            await fetch(
+              app.getApiURL(
+                "auth/resend-verification"
+              ),
+              {
+                method: "POST",
+
+                headers: {
+                  "Content-Type":
+                    "application/json",
+
+                  "Accept":
+                    "application/json"
+                },
+
+                credentials:
+                  config.api.credentials,
+
+                body:
+                  JSON.stringify({
+                    method:
+                      verificationMethod,
+
+                    destination:
+                      verificationDestination
+                  })
+              }
+            );
+
+
+          let data = null;
+
+          try {
+            data =
+              await response.json();
+          } catch {
+            data = null;
+          }
+
+
+          if (!response.ok) {
+
+            throw new Error(
+              data &&
+              typeof data.message ===
+                "string"
+                ? data.message
+                : "تعذر إرسال رمز جديد."
+            );
+
+          }
+
+
+          clearOTP();
+
+          showFeedback(
+            "تم طلب رمز تحقق جديد. تحقق من وسيلة التواصل الخاصة بك.",
+            "success"
+          );
+
+          startTimer(
+            data &&
+            Number.isFinite(
+              Number(data.cooldown)
+            )
+              ? Number(data.cooldown)
+              : 60
+          );
+
+
+        } catch (error) {
+
+          console.error(
+            "[NOVA] Resend verification failed:",
+            error
+          );
+
+          showFeedback(
+            error.message ||
+              "تعذر إعادة إرسال الرمز.",
+            "error"
+          );
+
+          resendButton.disabled =
+            false;
+
+        }
+
+      }
+
+
+      resendButton.addEventListener(
+        "click",
+        resendCode
+      );
+
+
+      /* -------------------------------------------------------
+         Change Destination
+         ------------------------------------------------------- */
+
+      changeDestination.addEventListener(
+        "click",
+        event => {
+
+          event.preventDefault();
+
+          window.location.href =
+            app.getRoute(
+              "auth.register"
+            );
+
+        }
+      );
+
+
+      /* -------------------------------------------------------
+         Support
+         ------------------------------------------------------- */
+
+      supportLink.addEventListener(
+        "click",
+        event => {
+
+          event.preventDefault();
+
+          showFeedback(
+            "سيتم ربط مركز الدعم بنظام NOVA في مرحلة الصفحات والخدمات المساندة.",
+            "info"
+          );
+
+        }
+      );
+
+
+      /* -------------------------------------------------------
+         Initialization
+         ------------------------------------------------------- */
+
+      loadContext();
+
+      startTimer(60);
+
+      window.setTimeout(
+        () => {
+          otpInputs[0].focus();
+        },
+        250
+      );
+
+
+      if (
+        config.development.debug
+      ) {
+
+        console.info(
+          "[NOVA] Verify page initialized."
+        );
+
+      }
+
+    })();
+  </script>
+
+</body>
+  </html>
