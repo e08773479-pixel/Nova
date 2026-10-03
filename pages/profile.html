@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  >
+
+  <meta name="theme-color" content="#06110D">
+  <meta
+    name="description"
+    content="NOVA — الملف الشخصي وإدارة معلومات الحساب."
+  >
+  <meta name="color-scheme" content="dark">
+
+  <title>الملف الشخصي | NOVA</title>
+
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/profile.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/animations.css">
+
+  <style>
+    /* =========================================================
+       NOVA — PROFILE PAGE
+       ========================================================= */
+
+    .profile-page {
+      min-height: 100%;
+      width: 100%;
+    }
+
+    .profile-page__content {
+      width: 100%;
+      max-width: 1450px;
+      margin-inline: auto;
+      padding-bottom: 110px;
+    }
+
+    /* =========================================================
+       Hero / Cover
+       ========================================================= */
+
+    .profile-hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 330px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 28px;
+      background:
+        radial-gradient(
+          circle at 75% 25%,
+          rgba(32,212,123,.16),
+          transparent 35%
+        ),
+        radial-gradient(
+          circle at 15% 90%,
+          rgba(32,212,123,.07),
+          transparent 30%
+        ),
+        linear-gradient(
+          145deg,
+          #10271d,
+          #07130f 65%,
+          #050b08
+        );
+      box-shadow:
+        0 28px 80px rgba(0,0,0,.28),
+        inset 0 1px 0 rgba(255,255,255,.035);
+    }
+
+    .profile-cover {
+      position: absolute;
+      inset: 0;
+      height: 210px;
+      overflow: hidden;
+    }
+
+    .profile-cover::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(0,0,0,.02),
+          rgba(6,17,13,.35)
+        );
+    }
+
+    .profile-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: .82;
+    }
+
+    .profile-cover-placeholder {
+      width: 100%;
+      height: 100%;
+      background:
+        radial-gradient(
+          circle at 75% 25%,
+          rgba(32,212,123,.20),
+          transparent 28%
+        ),
+        linear-gradient(
+          135deg,
+          rgba(32,212,123,.10),
+          rgba(255,255,255,.025)
+        );
+    }
+
+    .profile-cover-actions {
+      position: absolute;
+      top: 16px;
+      inset-inline-start: 16px;
+      z-index: 3;
+      display: flex;
+      gap: 8px;
+    }
+
+    .profile-icon-btn {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 13px;
+      background: rgba(0,0,0,.34);
+      backdrop-filter: blur(10px);
+      color: #fff;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .profile-icon-btn:hover {
+      border-color: rgba(32,212,123,.25);
+      background: rgba(32,212,123,.10);
+      color: #20d47b;
+    }
+
+    /* =========================================================
+       Profile identity
+       ========================================================= */
+
+    .profile-identity {
+      position: absolute;
+      inset-inline: 28px;
+      bottom: 25px;
+      z-index: 4;
+      display: flex;
+      align-items: flex-end;
+      gap: 18px;
+    }
+
+    .profile-avatar-wrap {
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .profile-avatar {
+      width: 112px;
+      height: 112px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border: 5px solid #07130f;
+      border-radius: 34px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(32,212,123,.25),
+          rgba(255,255,255,.06)
+        );
+      box-shadow:
+        0 12px 35px rgba(0,0,0,.30),
+        0 0 0 1px rgba(255,255,255,.08);
+      color: #20d47b;
+      font-size: 2.2rem;
+      font-weight: 900;
+    }
+
+    .profile-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-online {
+      position: absolute;
+      right: 5px;
+      bottom: 5px;
+      width: 18px;
+      height: 18px;
+      border: 3px solid #07130f;
+      border-radius: 50%;
+      background: #20d47b;
+    }
+
+    .profile-main-info {
+      min-width: 0;
+      padding-bottom: 5px;
+    }
+
+    .profile-name-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .profile-name {
+      margin: 0;
+      color: #fff;
+      font-size: clamp(1.35rem,3vw,1.85rem);
+      font-weight: 900;
+    }
+
+    .profile-verified {
+      width: 21px;
+      height: 21px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #20d47b;
+      color: #04100a;
+      font-size: .72rem;
+      font-weight: 900;
+    }
+
+    .profile-username {
+      margin: 5px 0 0;
+      color: rgba(255,255,255,.52);
+      font-size: .86rem;
+    }
+
+    .profile-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+      color: rgba(255,255,255,.68);
+      font-size: .76rem;
+    }
+
+    .profile-status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #20d47b;
+      box-shadow: 0 0 0 4px rgba(32,212,123,.08);
+    }
+
+    /* =========================================================
+       Action buttons
+       ========================================================= */
+
+    .profile-hero-actions {
+      position: absolute;
+      bottom: 30px;
+      inset-inline-start: 28px;
+      z-index: 5;
+      display: flex;
+      gap: 9px;
+    }
+
+    .profile-btn {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 16px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 13px;
+      background: rgba(255,255,255,.055);
+      color: #fff;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      transition:
+        transform 180ms ease,
+        background 180ms ease,
+        border-color 180ms ease;
+    }
+
+    .profile-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.09);
+      border-color: rgba(255,255,255,.14);
+    }
+
+    .profile-btn:focus-visible {
+      outline: 2px solid #20d47b;
+      outline-offset: 3px;
+    }
+
+    .profile-btn--primary {
+      border-color: rgba(32,212,123,.26);
+      background: linear-gradient(
+        135deg,
+        #20d47b,
+        #13ad63
+      );
+      color: #03100a;
+    }
+
+    .profile-btn--icon {
+      width: 44px;
+      padding: 0;
+    }
+
+    /* =========================================================
+       Stats
+       ========================================================= */
+
+    .profile-stats {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      margin-top: 210px;
+      padding: 17px 28px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      background: rgba(3,10,7,.45);
+      backdrop-filter: blur(8px);
+    }
+
+    .profile-stat {
+      display: grid;
+      justify-items: center;
+      gap: 4px;
+      min-width: 0;
+      border-inline-start: 1px solid rgba(255,255,255,.06);
+    }
+
+    .profile-stat:first-child {
+      border-inline-start: 0;
+    }
+
+    .profile-stat__value {
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 900;
+    }
+
+    .profile-stat__label {
+      color: rgba(255,255,255,.43);
+      font-size: .73rem;
+    }
+
+    /* =========================================================
+       Content layout
+       ========================================================= */
+
+    .profile-layout {
+      display: grid;
+      grid-template-columns: minmax(0,1fr) 320px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .profile-card {
+      min-width: 0;
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 24px;
+      background: rgba(9,20,16,.88);
+      box-shadow:
+        0 20px 60px rgba(0,0,0,.18),
+        inset 0 1px 0 rgba(255,255,255,.025);
+    }
+
+    .profile-card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 20px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    .profile-card__title {
+      margin: 0;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 900;
+    }
+
+    .profile-card__subtitle {
+      margin: 5px 0 0;
+      color: rgba(255,255,255,.43);
+      font-size: .76rem;
+    }
+
+    .profile-card__body {
+      padding: 20px;
+    }
+
+    /* =========================================================
+       About
+       ========================================================= */
+
+    .profile-about {
+      display: grid;
+      gap: 15px;
+    }
+
+    .profile-about__bio {
+      margin: 0;
+      color: rgba(255,255,255,.72);
+      font-size: .88rem;
+      line-height: 1.9;
+    }
+
+    .profile-detail {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 45px;
+      padding: 8px 10px;
+      border: 1px solid rgba(255,255,255,.05);
+      border-radius: 13px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .profile-detail__icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 34px;
+      border-radius: 10px;
+      background: rgba(32,212,123,.08);
+      color: #20d47b;
+    }
+
+    .profile-detail__content {
+      min-width: 0;
+    }
+
+    .profile-detail__label {
+      display: block;
+      color: rgba(255,255,255,.39);
+      font-size: .68rem;
+      margin-bottom: 3px;
+    }
+
+    .profile-detail__value {
+      display: block;
+      overflow: hidden;
+      color: rgba(255,255,255,.78);
+      font-size: .80rem;
+      font-weight: 700;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* =========================================================
+       Profile tabs
+       ========================================================= */
+
+    .profile-tabs {
+      display: flex;
+      gap: 7px;
+      padding: 12px 18px;
+      overflow-x: auto;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    .profile-tab {
+      flex: 0 0 auto;
+      min-height: 38px;
+      padding: 0 14px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      background: transparent;
+      color: rgba(255,255,255,.45);
+      font: inherit;
+      font-size: .78rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .profile-tab:hover {
+      color: #fff;
+      background: rgba(255,255,255,.04);
+    }
+
+    .profile-tab.is-active,
+    .profile-tab[aria-selected="true"] {
+      border-color: rgba(32,212,123,.16);
+      background: rgba(32,212,123,.08);
+      color: #20d47b;
+    }
+
+    /* =========================================================
+       Dynamic content
+       ========================================================= */
+
+    .profile-content {
+      min-height: 300px;
+      padding: 20px;
+    }
+
+    .profile-content-loading {
+      min-height: 280px;
+      display: grid;
+      place-items: center;
+      color: rgba(255,255,255,.48);
+    }
+
+    .profile-spinner {
+      width: 30px;
+      height: 30px;
+      margin-bottom: 10px;
+      border: 3px solid rgba(255,255,255,.08);
+      border-top-color: #20d47b;
+      border-radius: 50%;
+      animation: novaProfileSpin .8s linear infinite;
+    }
+
+    .profile-empty {
+      min-height: 280px;
+      display: grid;
+      place-items: center;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .profile-empty__icon {
+      width: 65px;
+      height: 65px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 13px;
+      border-radius: 20px;
+      background: rgba(32,212,123,.06);
+      border: 1px solid rgba(32,212,123,.12);
+      color: #20d47b;
+      font-size: 1.5rem;
+    }
+
+    .profile-empty__title {
+      margin: 0;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 900;
+    }
+
+    .profile-empty__text {
+      max-width: 440px;
+      margin: 7px 0 0;
+      color: rgba(255,255,255,.43);
+      font-size: .79rem;
+      line-height: 1.8;
+    }
+
+    /* =========================================================
+       Sidebar
+       ========================================================= */
+
+    .profile-side {
+      display: grid;
+      gap: 20px;
+    }
+
+    .profile-side-actions {
+      display: grid;
+      gap: 8px;
+    }
+
+    .profile-side-action {
+      width: 100%;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 13px;
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 13px;
+      background: rgba(255,255,255,.03);
+      color: rgba(255,255,255,.76);
+      font: inherit;
+      font-weight: 700;
+      text-align: right;
+      cursor: pointer;
+    }
+
+    .profile-side-action:hover {
+      border-color: rgba(32,212,123,.14);
+      background: rgba(32,212,123,.055);
+      color: #fff;
+    }
+
+    .profile-side-action__icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 34px;
+      border-radius: 10px;
+      background: rgba(32,212,123,.08);
+      color: #20d47b;
+    }
+
+    .profile-privacy-note {
+      padding: 15px;
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 15px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .profile-privacy-note__title {
+      margin: 0 0 6px;
+      color: rgba(255,255,255,.82);
+      font-size: .80rem;
+      font-weight: 900;
+    }
+
+    .profile-privacy-note__text {
+      margin: 0;
+      color: rgba(255,255,255,.42);
+      font-size: .74rem;
+      line-height: 1.8;
+    }
+
+    /* =========================================================
+       Responsive
+       ========================================================= */
+
+    @media (max-width: 1050px) {
+      .profile-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-side {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .profile-hero {
+        min-height: 390px;
+        border-radius: 22px;
+      }
+
+      .profile-cover {
+        height: 210px;
+      }
+
+      .profile-identity {
+        inset-inline: 18px;
+        bottom: 72px;
+        align-items: flex-end;
+      }
+
+      .profile-avatar {
+        width: 88px;
+        height: 88px;
+        border-radius: 27px;
+        font-size: 1.7rem;
+      }
+
+      .profile-hero-actions {
+        inset-inline: 18px;
+        bottom: 16px;
+      }
+
+      .profile-hero-actions .profile-btn {
+        flex: 1;
+      }
+
+      .profile-stats {
+        margin-top: 210px;
+        padding-inline: 15px;
+      }
+
+      .profile-side {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .profile-page__content {
+        padding-bottom: 90px;
+      }
+
+      .profile-hero {
+        min-height: 420px;
+      }
+
+      .profile-identity {
+        bottom: 82px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 9px;
+      }
+
+      .profile-name {
+        font-size: 1.3rem;
+      }
+
+      .profile-hero-actions {
+        flex-wrap: wrap;
+      }
+
+      .profile-hero-actions .profile-btn {
+        min-width: 0;
+      }
+
+      .profile-btn--icon {
+        flex: 0 0 44px !important;
+      }
+
+      .profile-stats {
+        margin-top: 210px;
+      }
+    }
+
+    @keyframes novaProfileSpin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .profile-btn,
+      .profile-side-action {
+        transition: none;
+      }
+
+      .profile-spinner {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+
+<body class="nova-page profile-page">
+
+  <!-- Global header -->
+  <div id="global-header"></div>
+
+  <!-- Global sidebar -->
+  <div id="global-sidebar"></div>
+
+  <main class="app-main profile-page__content">
+
+    <!-- =======================================================
+         Profile hero
+         ======================================================= -->
+    <section
+      class="profile-hero"
+      aria-labelledby="profile-name"
+    >
+
+      <div class="profile-cover">
+        <div
+          id="profile-cover-placeholder"
+          class="profile-cover-placeholder"
+          aria-hidden="true"
+        ></div>
+
+        <img
+          id="profile-cover-image"
+          src=""
+          alt=""
+          hidden
+        >
+      </div>
+
+      <div class="profile-cover-actions">
+
+        <button
+          type="button"
+          class="profile-icon-btn"
+          data-action="change-cover"
+          aria-label="تغيير صورة الغلاف"
+          title="تغيير صورة الغلاف"
+        >
+          🖼️
+        </button>
+
+      </div>
+
+      <div class="profile-identity">
+
+        <div class="profile-avatar-wrap">
+
+          <div
+            id="profile-avatar"
+            class="profile-avatar"
+            aria-label="صورة الملف الشخصي"
+          >
+            👤
+          </div>
+
+          <span
+            id="profile-online"
+            class="profile-online"
+            hidden
+            aria-label="متصل الآن"
+          ></span>
+
+        </div>
+
+        <div class="profile-main-info">
+
+          <div class="profile-name-row">
+
+            <h1
+              id="profile-name"
+              class="profile-name"
+            >
+              الملف الشخصي
+            </h1>
+
+            <span
+              id="profile-verified"
+              class="profile-verified"
+              hidden
+              aria-label="حساب موثق"
+            >
+              ✓
+            </span>
+
+          </div>
+
+          <p
+            id="profile-username"
+            class="profile-username"
+          >
+            —
+          </p>
+
+          <div
+            id="profile-status"
+            class="profile-status"
+            hidden
+          >
+            <span
+              class="profile-status-dot"
+              aria-hidden="true"
+            ></span>
+
+            <span id="profile-status-text">
+              متصل الآن
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="profile-hero-actions">
+
+        <button
+          type="button"
+          class="profile-btn profile-btn--primary"
+          data-action="edit-profile"
+        >
+          ✎
+          <span>تعديل الملف</span>
+        </button>
+
+        <button
+          type="button"
+          class="profile-btn"
+          data-action="share-profile"
+        >
+          ↗
+          <span>مشاركة</span>
+        </button>
+
+        <button
+          type="button"
+          class="profile-btn profile-btn--icon"
+          data-action="profile-more"
+          aria-label="المزيد من خيارات الملف الشخصي"
+          title="المزيد"
+        >
+          ⋮
+        </button>
+
+      </div>
+
+      <!-- Stats -->
+      <div class="profile-stats">
+
+        <div class="profile-stat">
+          <span
+            id="profile-followers"
+            class="profile-stat__value"
+          >
+            —
+          </span>
+
+          <span class="profile-stat__label">
+            المتابعون
+          </span>
+        </div>
+
+        <div class="profile-stat">
+          <span
+            id="profile-following"
+            class="profile-stat__value"
+          >
+            —
+          </span>
+
+          <span class="profile-stat__label">
+            يتابع
+          </span>
+        </div>
+
+        <div class="profile-stat">
+          <span
+            id="profile-friends"
+            class="profile-stat__value"
+          >
+            —
+          </span>
+
+          <span class="profile-stat__label">
+            الأصدقاء
+          </span>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =======================================================
+         Profile content
+         ======================================================= -->
+    <section class="profile-layout">
+
+      <div class="profile-card">
+
+        <!-- Tabs -->
+        <div
+          class="profile-tabs"
+          role="tablist"
+          aria-label="محتوى الملف الشخصي"
+        >
+
+          <button
+            type="button"
+            class="profile-tab is-active"
+            role="tab"
+            aria-selected="true"
+            data-profile-tab="posts"
+          >
+            المنشورات
+          </button>
+
+          <button
+            type="button"
+            class="profile-tab"
+            role="tab"
+            aria-selected="false"
+            data-profile-tab="media"
+          >
+            الوسائط
+          </button>
+
+          <button
+            type="button"
+            class="profile-tab"
+            role="tab"
+            aria-selected="false"
+            data-profile-tab="groups"
+          >
+            المجتمعات
+          </button>
+
+          <button
+            type="button"
+            class="profile-tab"
+            role="tab"
+            aria-selected="false"
+            data-profile-tab="about"
+          >
+            حول
+          </button>
+
+        </div>
+
+        <!-- Dynamic profile content -->
+        <div
+          id="profile-content"
+          class="profile-content"
+          aria-live="polite"
+        >
+
+          <div
+            id="profile-loading"
+            class="profile-content-loading"
+            hidden
+          >
+            <div>
+              <div
+                class="profile-spinner"
+                aria-hidden="true"
+              ></div>
+
+              <span>
+                جاري تحميل الملف الشخصي...
+              </span>
+            </div>
+          </div>
+
+          <div
+            id="profile-empty"
+            class="profile-empty"
+            hidden
+          >
+
+            <div
+              class="profile-empty__icon"
+              aria-hidden="true"
+            >
+              👤
+            </div>
+
+            <h2 class="profile-empty__title">
+              لا توجد بيانات معروضة حاليًا
+            </h2>
+
+            <p class="profile-empty__text">
+              سيتم عرض محتوى الملف الشخصي عند توفر بيانات حقيقية من الحساب والخادم.
+            </p>
+
+          </div>
+
+          <div
+            id="profile-items"
+            hidden
+          >
+            <!-- js/profile.js renders real profile content here -->
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- =====================================================
+           Sidebar
+           ===================================================== -->
+      <aside class="profile-side">
+
+        <section class="profile-card">
+
+          <div class="profile-card__header">
+
+            <div>
+              <h2 class="profile-card__title">
+                معلومات الحساب
+              </h2>
+
+              <p class="profile-card__subtitle">
+                بيانات الملف الشخصي
+              </p>
+            </div>
+
+          </div>
+
+          <div class="profile-card__body">
+
+            <div class="profile-about">
+
+              <p
+                id="profile-bio"
+                class="profile-about__bio"
+              >
+                لا توجد نبذة مضافة.
+              </p>
+
+              <div class="profile-detail">
+
+                <span
+                  class="profile-detail__icon"
+                  aria-hidden="true"
+                >
+                  @
+                </span>
+
+                <div class="profile-detail__content">
+
+                  <span class="profile-detail__label">
+                    المعرّف
+                  </span>
+
+                  <span
+                    id="profile-handle"
+                    class="profile-detail__value"
+                  >
+                    —
+                  </span>
+
+                </div>
+
+              </div>
+
+              <div class="profile-detail">
+
+                <span
+                  class="profile-detail__icon"
+                  aria-hidden="true"
+                >
+                  ✉
+                </span>
+
+                <div class="profile-detail__content">
+
+                  <span class="profile-detail__label">
+                    البريد الإلكتروني
+                  </span>
+
+                  <span
+                    id="profile-email"
+                    class="profile-detail__value"
+                  >
+                    —
+                  </span>
+
+                </div>
+
+              </div>
+
+              <div class="profile-detail">
+
+                <span
+                  class="profile-detail__icon"
+                  aria-hidden="true"
+                >
+                  ☎
+                </span>
+
+                <div class="profile-detail__content">
+
+                  <span class="profile-detail__label">
+                    رقم الهاتف
+                  </span>
+
+                  <span
+                    id="profile-phone"
+                    class="profile-detail__value"
+                  >
+                    —
+                  </span>
+
+                </div>
+
+              </div>
+
+              <div class="profile-detail">
+
+                <span
+                  class="profile-detail__icon"
+                  aria-hidden="true"
+                >
+                  ◷
+                </span>
+
+                <div class="profile-detail__content">
+
+                  <span class="profile-detail__label">
+                    تاريخ الانضمام
+                  </span>
+
+                  <span
+                    id="profile-joined"
+                    class="profile-detail__value"
+                  >
+                    —
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <section class="profile-card">
+
+          <div class="profile-card__header">
+
+            <div>
+              <h2 class="profile-card__title">
+                اختصارات
+              </h2>
+
+              <p class="profile-card__subtitle">
+                الوصول السريع لإعدادات الحساب
+              </p>
+            </div>
+
+          </div>
+
+          <div class="profile-card__body">
+
+            <div class="profile-side-actions">
+
+              <button
+                type="button"
+                class="profile-side-action"
+                data-action="edit-profile"
+              >
+                <span
+                  class="profile-side-action__icon"
+                  aria-hidden="true"
+                >
+                  ✎
+                </span>
+
+                <span>
+                  تعديل الملف الشخصي
+                </span>
+              </button>
+
+              <button
+                type="button"
+                class="profile-side-action"
+                data-action="profile-settings"
+              >
+                <span
+                  class="profile-side-action__icon"
+                  aria-hidden="true"
+                >
+                  ⚙
+                </span>
+
+                <span>
+                  إعدادات الحساب
+                </span>
+              </button>
+
+              <button
+                type="button"
+                class="profile-side-action"
+                data-action="privacy-settings"
+              >
+                <span
+                  class="profile-side-action__icon"
+                  aria-hidden="true"
+                >
+                  ◉
+                </span>
+
+                <span>
+                  الخصوصية
+                </span>
+              </button>
+
+              <button
+                type="button"
+                class="profile-side-action"
+                data-action="security-settings"
+              >
+                <span
+                  class="profile-side-action__icon"
+                  aria-hidden="true"
+                >
+                  ⛨
+                </span>
+
+                <span>
+                  الأمان
+                </span>
+              </button>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <div class="profile-privacy-note">
+
+          <h3 class="profile-privacy-note__title">
+            بيانات حقيقية فقط
+          </h3>
+
+          <p class="profile-privacy-note__text">
+            الصفحة لا تفترض اسمًا أو صورة أو رصيدًا أو أرقام متابعين.
+            القيم تبدأ فارغة إلى أن تصل بيانات الحساب الفعلية من الـAPI.
+          </p>
+
+        </div>
+
+      </aside>
+
+    </section>
+
+  </main>
+
+  <!-- Global bottom navigation -->
+  <div id="global-bottom-nav"></div>
+
+  <!-- Global modal -->
+  <div id="global-modal"></div>
+
+  <!-- =========================================================
+       JavaScript
+       ========================================================= -->
+  <script src="../js/config.js"></script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/router.js"></script>
+  <script src="../js/realtime.js"></script>
+  <script src="../js/profile.js"></script>
+  <script src="../js/app.js"></script>
+
+</body>
+</html>
