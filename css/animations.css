@@ -1,0 +1,1388 @@
+ /* =========================================================
+    NOVA — Animation System
+    File: css/animations.css
+    Version: 1.0.0
+
+    مسؤول عن:
+    - Page transitions
+    - Fade / Slide / Scale
+    - Modal animations
+    - Toast animations
+    - Message animations
+    - Typing indicator
+    - Loading states
+    - Pulse / Glow
+    - Skeleton
+    - Hover motion
+    - Reduced motion
+    ========================================================= */
+
+
+/* =========================================================
+   01. ANIMATION VARIABLES
+   ========================================================= */
+
+:root {
+  --nova-animation-fast: 140ms;
+  --nova-animation-normal: 250ms;
+  --nova-animation-medium: 360ms;
+  --nova-animation-slow: 520ms;
+
+  --nova-ease-standard:
+    cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  --nova-ease-emphasized:
+    cubic-bezier(0.16, 1, 0.3, 1);
+
+  --nova-ease-smooth:
+    cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* =========================================================
+   02. BASE TRANSITIONS
+   ========================================================= */
+
+.nova-transition {
+  transition:
+    all var(--nova-animation-normal)
+    var(--nova-ease-standard);
+}
+
+
+.nova-transition-fast {
+  transition:
+    all var(--nova-animation-fast)
+    var(--nova-ease-standard);
+}
+
+
+.nova-transition-slow {
+  transition:
+    all var(--nova-animation-slow)
+    var(--nova-ease-standard);
+}
+
+
+/* =========================================================
+   03. FADE
+   ========================================================= */
+
+@keyframes nova-fade-in {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+@keyframes nova-fade-out {
+
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+
+.nova-animate-fade-in {
+  animation:
+    nova-fade-in
+    var(--nova-animation-normal)
+    var(--nova-ease-standard)
+    both;
+}
+
+
+.nova-animate-fade-out {
+  animation:
+    nova-fade-out
+    var(--nova-animation-normal)
+    var(--nova-ease-standard)
+    both;
+}
+
+
+/* =========================================================
+   04. SLIDE
+   ========================================================= */
+
+@keyframes nova-slide-up {
+
+  from {
+    opacity: 0;
+    transform:
+      translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateY(0);
+  }
+}
+
+
+@keyframes nova-slide-down {
+
+  from {
+    opacity: 0;
+    transform:
+      translateY(-18px);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateY(0);
+  }
+}
+
+
+@keyframes nova-slide-start {
+
+  from {
+    opacity: 0;
+    transform:
+      translateX(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateX(0);
+  }
+}
+
+
+@keyframes nova-slide-end {
+
+  from {
+    opacity: 0;
+    transform:
+      translateX(-18px);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateX(0);
+  }
+}
+
+
+.nova-animate-slide-up {
+  animation:
+    nova-slide-up
+    var(--nova-animation-medium)
+    var(--nova-ease-emphasized)
+    both;
+}
+
+
+.nova-animate-slide-down {
+  animation:
+    nova-slide-down
+    var(--nova-animation-medium)
+    var(--nova-ease-emphasized)
+    both;
+}
+
+
+.nova-animate-slide-start {
+  animation:
+    nova-slide-start
+    var(--nova-animation-medium)
+    var(--nova-ease-emphasized)
+    both;
+}
+
+
+.nova-animate-slide-end {
+  animation:
+    nova-slide-end
+    var(--nova-animation-medium)
+    var(--nova-ease-emphasized)
+    both;
+}
+
+
+/* =========================================================
+   05. SCALE
+   ========================================================= */
+
+@keyframes nova-scale-in {
+
+  from {
+    opacity: 0;
+    transform:
+      scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      scale(1);
+  }
+}
+
+
+@keyframes nova-scale-out {
+
+  from {
+    opacity: 1;
+    transform:
+      scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform:
+      scale(0.94);
+  }
+}
+
+
+.nova-animate-scale-in {
+  animation:
+    nova-scale-in
+    var(--nova-animation-medium)
+    var(--nova-ease-emphasized)
+    both;
+}
+
+
+.nova-animate-scale-out {
+  animation:
+    nova-scale-out
+    var(--nova-animation-medium)
+    var(--nova-ease-emphasized)
+    both;
+}
+
+
+/* =========================================================
+   06. PAGE ENTER
+   ========================================================= */
+
+@keyframes nova-page-enter {
+
+  from {
+    opacity: 0;
+    transform:
+      translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateY(0);
+  }
+}
+
+
+.nova-page-enter {
+  animation:
+    nova-page-enter
+    360ms
+    var(--nova-ease-emphasized)
+    both;
+}
+
+
+/* =========================================================
+   07. STAGGERED CONTENT
+   ========================================================= */
+
+.nova-stagger > * {
+  animation:
+    nova-slide-up
+    360ms
+    var(--nova-ease-emphasized)
+    both;
+}
+
+
+.nova-stagger > *:nth-child(1) {
+  animation-delay: 40ms;
+}
+
+
+.nova-stagger > *:nth-child(2) {
+  animation-delay: 80ms;
+}
+
+
+.nova-stagger > *:nth-child(3) {
+  animation-delay: 120ms;
+}
+
+
+.nova-stagger > *:nth-child(4) {
+  animation-delay: 160ms;
+}
+
+
+.nova-stagger > *:nth-child(5) {
+  animation-delay: 200ms;
+}
+
+
+.nova-stagger > *:nth-child(6) {
+  animation-delay: 240ms;
+}
+
+
+.nova-stagger > *:nth-child(7) {
+  animation-delay: 280ms;
+}
+
+
+.nova-stagger > *:nth-child(8) {
+  animation-delay: 320ms;
+}
+
+
+/* =========================================================
+   08. LOADER
+   ========================================================= */
+
+@keyframes nova-loader-spin {
+
+  to {
+    transform:
+      rotate(360deg);
+  }
+}
+
+
+@keyframes nova-loader-pulse {
+
+  0%,
+  100% {
+    transform:
+      scale(1);
+
+    opacity:
+      0.65;
+  }
+
+  50% {
+    transform:
+      scale(1.08);
+
+    opacity:
+      1;
+  }
+}
+
+
+@keyframes nova-loader-glow {
+
+  0%,
+  100% {
+    opacity:
+      0.35;
+
+    transform:
+      scale(0.96);
+  }
+
+  50% {
+    opacity:
+      0.8;
+
+    transform:
+      scale(1.04);
+  }
+}
+
+
+.nova-loader-spin {
+  animation:
+    nova-loader-spin
+    1s
+    linear
+    infinite;
+}
+
+
+.nova-loader-pulse {
+  animation:
+    nova-loader-pulse
+    1.6s
+    ease-in-out
+    infinite;
+}
+
+
+.nova-loader-glow {
+  animation:
+    nova-loader-glow
+    2s
+    ease-in-out
+    infinite;
+}
+
+
+/* =========================================================
+   09. DOT LOADER
+   ========================================================= */
+
+@keyframes nova-dot-bounce {
+
+  0%,
+  60%,
+  100% {
+    transform:
+      translateY(0);
+
+    opacity:
+      0.45;
+  }
+
+  30% {
+    transform:
+      translateY(-5px);
+
+    opacity:
+      1;
+  }
+}
+
+
+.nova-dot-loader {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 4px;
+}
+
+
+.nova-dot-loader span {
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background:
+    currentColor;
+
+  animation:
+    nova-dot-bounce
+    1.2s
+    ease-in-out
+    infinite;
+}
+
+
+.nova-dot-loader span:nth-child(2) {
+  animation-delay:
+    120ms;
+}
+
+
+.nova-dot-loader span:nth-child(3) {
+  animation-delay:
+    240ms;
+}
+
+
+/* =========================================================
+   10. TYPING INDICATOR
+   ========================================================= */
+
+.nova-typing {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  min-height: 22px;
+}
+
+
+.nova-typing span {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background:
+    var(--nova-text-muted);
+
+  animation:
+    nova-dot-bounce
+    1.3s
+    ease-in-out
+    infinite;
+}
+
+
+.nova-typing span:nth-child(2) {
+  animation-delay:
+    130ms;
+}
+
+
+.nova-typing span:nth-child(3) {
+  animation-delay:
+    260ms;
+}
+
+
+/* =========================================================
+   11. MESSAGE APPEAR
+   ========================================================= */
+
+@keyframes nova-message-in {
+
+  from {
+    opacity: 0;
+    transform:
+      translateY(8px)
+      scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+.nova-message-enter {
+  animation:
+    nova-message-in
+    240ms
+    var(--nova-ease-emphasized)
+    both;
+}
+
+
+/* =========================================================
+   12. MESSAGE SEND
+   ========================================================= */
+
+@keyframes nova-message-send {
+
+  from {
+    opacity: 0.5;
+
+    transform:
+      translateY(5px)
+      scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+.nova-message-sent {
+  animation:
+    nova-message-send
+    220ms
+    var(--nova-ease-emphasized)
+    both;
+}
+
+
+/* =========================================================
+   13. MESSAGE STATUS
+   ========================================================= */
+
+@keyframes nova-status-check {
+
+  from {
+    opacity: 0;
+
+    transform:
+      scale(0.5)
+      rotate(-15deg);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      scale(1)
+      rotate(0);
+  }
+}
+
+
+.nova-message-status-animate {
+  animation:
+    nova-status-check
+    180ms
+    var(--nova-ease-emphasized)
+    both;
+}
+
+
+/* =========================================================
+   14. PULSE
+   ========================================================= */
+
+@keyframes nova-pulse {
+
+  0% {
+    transform:
+      scale(1);
+
+    opacity:
+      1;
+  }
+
+  50% {
+    transform:
+      scale(1.06);
+
+    opacity:
+      0.8;
+  }
+
+  100% {
+    transform:
+      scale(1);
+
+    opacity:
+      1;
+  }
+}
+
+
+.nova-pulse {
+  animation:
+    nova-pulse
+    1.8s
+    ease-in-out
+    infinite;
+}
+
+
+/* =========================================================
+   15. SOFT PULSE
+   ========================================================= */
+
+@keyframes nova-soft-pulse {
+
+  0%,
+  100% {
+    opacity:
+      0.65;
+  }
+
+  50% {
+    opacity:
+      1;
+  }
+}
+
+
+.nova-soft-pulse {
+  animation:
+    nova-soft-pulse
+    2s
+    ease-in-out
+    infinite;
+}
+
+
+/* =========================================================
+   16. ONLINE PULSE
+   ========================================================= */
+
+@keyframes nova-online-pulse {
+
+  0% {
+    box-shadow:
+      0 0 0 0
+      rgba(32, 212, 123, 0.45);
+  }
+
+  70% {
+    box-shadow:
+      0 0 0 7px
+      rgba(32, 212, 123, 0);
+  }
+
+  100% {
+    box-shadow:
+      0 0 0 0
+      rgba(32, 212, 123, 0);
+  }
+}
+
+
+.nova-online-pulse {
+  animation:
+    nova-online-pulse
+    1.8s
+    ease-out
+    infinite;
+}
+
+
+/* =========================================================
+   17. GLOW
+   ========================================================= */
+
+@keyframes nova-glow {
+
+  0%,
+  100% {
+    opacity:
+      0.45;
+  }
+
+  50% {
+    opacity:
+      0.9;
+  }
+}
+
+
+.nova-glow {
+  animation:
+    nova-glow
+    2.4s
+    ease-in-out
+    infinite;
+}
+
+
+/* =========================================================
+   18. MODAL
+   ========================================================= */
+
+@keyframes nova-modal-backdrop-in {
+
+  from {
+    opacity:
+      0;
+  }
+
+  to {
+    opacity:
+      1;
+  }
+}
+
+
+@keyframes nova-modal-in {
+
+  from {
+    opacity:
+      0;
+
+    transform:
+      translateY(16px)
+      scale(0.96);
+  }
+
+  to {
+    opacity:
+      1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+.nova-modal.is-open {
+  animation:
+    nova-modal-backdrop-in
+    200ms
+    var(--nova-ease-standard)
+    both;
+}
+
+
+.nova-modal.is-open .nova-modal__dialog {
+  animation:
+    nova-modal-in
+    280ms
+    var(--nova-ease-emphasized)
+    both;
+}
+
+
+/* =========================================================
+   19. DROPDOWN
+   ========================================================= */
+
+@keyframes nova-dropdown-in {
+
+  from {
+    opacity:
+      0;
+
+    transform:
+      translateY(-5px)
+      scale(0.98);
+  }
+
+  to {
+    opacity:
+      1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+.nova-dropdown.is-open,
+.nova-menu.is-open {
+  transform-origin:
+    top center;
+
+  animation:
+    nova-dropdown-in
+    180ms
+    var(--nova-ease-emphasized)
+    both;
+}
+
+
+/* =========================================================
+   20. TOAST
+   ========================================================= */
+
+@keyframes nova-toast-in {
+
+  from {
+    opacity:
+      0;
+
+    transform:
+      translateY(12px)
+      scale(0.97);
+  }
+
+  to {
+    opacity:
+      1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+@keyframes nova-toast-out {
+
+  from {
+    opacity:
+      1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+  to {
+    opacity:
+      0;
+
+    transform:
+      translateY(8px)
+      scale(0.98);
+  }
+}
+
+
+.nova-toast.is-entering {
+  animation:
+    nova-toast-in
+    260ms
+    var(--nova-ease-emphasized)
+    both;
+}
+
+
+.nova-toast.is-leaving {
+  animation:
+    nova-toast-out
+    200ms
+    var(--nova-ease-standard)
+    both;
+}
+
+
+/* =========================================================
+   21. SKELETON
+   ========================================================= */
+
+@keyframes nova-skeleton {
+
+  0% {
+    background-position:
+      200% 0;
+  }
+
+  100% {
+    background-position:
+      -200% 0;
+  }
+}
+
+
+.nova-skeleton {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.035) 25%,
+      rgba(255,255,255,0.09) 50%,
+      rgba(255,255,255,0.035) 75%
+    );
+
+  background-size:
+    400% 100%;
+
+  animation:
+    nova-skeleton
+    1.5s
+    linear
+    infinite;
+}
+
+
+/* =========================================================
+   22. AVATAR RING
+   ========================================================= */
+
+@keyframes nova-avatar-ring {
+
+  0% {
+    transform:
+      rotate(0deg);
+  }
+
+  100% {
+    transform:
+      rotate(360deg);
+  }
+}
+
+
+.nova-avatar--loading::after {
+  content: "";
+
+  position: absolute;
+
+  inset: -3px;
+
+  border-radius:
+    50%;
+
+  border:
+    2px solid transparent;
+
+  border-top-color:
+    var(--nova-primary);
+
+  animation:
+    nova-avatar-ring
+    1s
+    linear
+    infinite;
+}
+
+
+/* =========================================================
+   23. RECORDING
+   ========================================================= */
+
+@keyframes nova-recording {
+
+  0%,
+  100% {
+    opacity:
+      0.45;
+
+    transform:
+      scale(0.92);
+  }
+
+  50% {
+    opacity:
+      1;
+
+    transform:
+      scale(1);
+  }
+}
+
+
+.nova-recording {
+  animation:
+    nova-recording
+    1s
+    ease-in-out
+    infinite;
+}
+
+
+/* =========================================================
+   24. CALL CONNECTING
+   ========================================================= */
+
+@keyframes nova-call-wave {
+
+  0% {
+    transform:
+      scale(0.7);
+
+    opacity:
+      0.8;
+  }
+
+  100% {
+    transform:
+      scale(1.7);
+
+    opacity:
+      0;
+  }
+}
+
+
+.nova-call-wave {
+  position: absolute;
+
+  border-radius:
+    50%;
+
+  animation:
+    nova-call-wave
+    1.8s
+    ease-out
+    infinite;
+}
+
+
+.nova-call-wave:nth-child(2) {
+  animation-delay:
+    600ms;
+}
+
+
+.nova-call-wave:nth-child(3) {
+  animation-delay:
+    1200ms;
+}
+
+
+/* =========================================================
+   25. SHAKE
+   ========================================================= */
+
+@keyframes nova-shake {
+
+  0%,
+  100% {
+    transform:
+      translateX(0);
+  }
+
+  20% {
+    transform:
+      translateX(-5px);
+  }
+
+  40% {
+    transform:
+      translateX(5px);
+  }
+
+  60% {
+    transform:
+      translateX(-4px);
+  }
+
+  80% {
+    transform:
+      translateX(4px);
+  }
+}
+
+
+.nova-shake {
+  animation:
+    nova-shake
+    320ms
+    ease-in-out
+    both;
+}
+
+
+/* =========================================================
+   26. SUCCESS
+   ========================================================= */
+
+@keyframes nova-success {
+
+  0% {
+    opacity:
+      0;
+
+    transform:
+      scale(0.7);
+  }
+
+  70% {
+    opacity:
+      1;
+
+    transform:
+      scale(1.08);
+  }
+
+  100% {
+    opacity:
+      1;
+
+    transform:
+      scale(1);
+  }
+}
+
+
+.nova-success-animation {
+  animation:
+    nova-success
+    360ms
+    var(--nova-ease-emphasized)
+    both;
+}
+
+
+/* =========================================================
+   27. ERROR
+   ========================================================= */
+
+@keyframes nova-error {
+
+  0% {
+    transform:
+      scale(0.95);
+  }
+
+  50% {
+    transform:
+      scale(1.04);
+  }
+
+  100% {
+    transform:
+      scale(1);
+  }
+}
+
+
+.nova-error-animation {
+  animation:
+    nova-error
+    260ms
+    var(--nova-ease-emphasized)
+    both;
+}
+
+
+/* =========================================================
+   28. BUTTON PRESS
+   ========================================================= */
+
+.nova-btn,
+.nova-btn-icon {
+  transition:
+    transform var(--nova-animation-fast)
+    var(--nova-ease-standard),
+    background var(--nova-animation-fast)
+    var(--nova-ease-standard),
+    border-color var(--nova-animation-fast)
+    var(--nova-ease-standard),
+    color var(--nova-animation-fast)
+    var(--nova-ease-standard);
+}
+
+
+.nova-btn:active,
+.nova-btn-icon:active {
+  transform:
+    scale(0.97);
+}
+
+
+/* =========================================================
+   29. CONVERSATION MOTION
+   ========================================================= */
+
+.nova-conversation {
+  transition:
+    background var(--nova-animation-fast)
+    var(--nova-ease-standard),
+    transform var(--nova-animation-fast)
+    var(--nova-ease-standard);
+}
+
+
+.nova-conversation.is-new {
+  animation:
+    nova-message-in
+    300ms
+    var(--nova-ease-emphasized)
+    both;
+}
+
+
+/* =========================================================
+   30. NAV ITEM MOTION
+   ========================================================= */
+
+.nova-sidebar-nav__item,
+.nova-bottom-nav__item {
+  transition:
+    background var(--nova-animation-fast)
+    var(--nova-ease-standard),
+    color var(--nova-animation-fast)
+    var(--nova-ease-standard),
+    transform var(--nova-animation-fast)
+    var(--nova-ease-standard);
+}
+
+
+.nova-sidebar-nav__item:active,
+.nova-bottom-nav__item:active {
+  transform:
+    scale(0.97);
+}
+
+
+/* =========================================================
+   31. PAGE EXIT HELPERS
+   ========================================================= */
+
+.nova-exit-fade {
+  animation:
+    nova-fade-out
+    200ms
+    var(--nova-ease-standard)
+    both;
+}
+
+
+.nova-exit-slide {
+  animation:
+    nova-slide-down
+    260ms
+    var(--nova-ease-standard)
+    reverse
+    both;
+}
+
+
+/* =========================================================
+   32. UTILITY DELAYS
+   ========================================================= */
+
+.nova-delay-1 {
+  animation-delay:
+    50ms !important;
+}
+
+
+.nova-delay-2 {
+  animation-delay:
+    100ms !important;
+}
+
+
+.nova-delay-3 {
+  animation-delay:
+    150ms !important;
+}
+
+
+.nova-delay-4 {
+  animation-delay:
+    200ms !important;
+}
+
+
+.nova-delay-5 {
+  animation-delay:
+    250ms !important;
+}
+
+
+/* =========================================================
+   33. REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+
+    animation-duration:
+      0.01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+
+    transition-duration:
+      0.01ms !important;
+
+    scroll-behavior:
+      auto !important;
+  }
+}
+
+
+/* =========================================================
+   34. DISABLE ANIMATIONS UTILITY
+   ========================================================= */
+
+html[data-motion="off"] *,
+html[data-motion="off"] *::before,
+html[data-motion="off"] *::after {
+
+  animation:
+    none !important;
+
+  transition:
+    none !important;
+
+  scroll-behavior:
+    auto !important;
+}
+
+
+/* =========================================================
+   END OF NOVA ANIMATION SYSTEM
+   ========================================================= */
