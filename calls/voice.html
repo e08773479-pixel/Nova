@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta name="theme-color" content="#06110D">
+  <meta
+    name="description"
+    content="NOVA — مكالمة صوتية"
+  >
+
+  <title>مكالمة صوتية | NOVA</title>
+
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="../assets/brand/logo.svg"
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/calls.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/animations.css">
+</head>
+
+<body
+  class="nova-call-page nova-voice-call-page"
+  data-page="voice-call"
+  data-call-type="voice"
+  data-module="calls"
+>
+
+  <div id="call-app" class="call-app">
+
+    <!-- =====================================================
+         Call Header
+         ===================================================== -->
+
+    <header class="call-header">
+
+      <div class="call-header-start">
+
+        <button
+          type="button"
+          class="icon-button call-back-button"
+          id="voice-call-back"
+          aria-label="العودة"
+          title="العودة"
+        >
+          →
+        </button>
+
+        <div class="call-brand">
+
+          <img
+            src="../assets/brand/logo.svg"
+            alt="NOVA"
+            class="call-brand-logo"
+          >
+
+          <span>
+            NOVA
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="call-header-status">
+
+        <span
+          id="voice-security-indicator"
+          class="call-security-indicator"
+          title="حالة الاتصال"
+        >
+          <span aria-hidden="true">🔒</span>
+          <span id="voice-security-text">
+            اتصال آمن
+          </span>
+        </span>
+
+      </div>
+
+
+      <div class="call-header-actions">
+
+        <button
+          type="button"
+          class="icon-button"
+          id="voice-call-more"
+          aria-label="المزيد"
+          title="المزيد"
+        >
+          ⋮
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         Main Call Stage
+         ===================================================== -->
+
+    <main class="call-stage">
+
+      <!-- Connection Status -->
+
+      <div
+        id="voice-connection-status"
+        class="call-connection-status"
+        aria-live="polite"
+      >
+        جارٍ تجهيز المكالمة...
+      </div>
+
+
+      <!-- ===================================================
+           Remote Participant
+           =================================================== -->
+
+      <section
+        id="voice-participant"
+        class="voice-participant"
+        aria-label="المشارك في المكالمة"
+      >
+
+        <div
+          id="voice-participant-avatar"
+          class="call-avatar call-avatar-xl"
+        >
+
+          <span
+            id="voice-participant-avatar-placeholder"
+            aria-hidden="true"
+          >
+            N
+          </span>
+
+          <img
+            id="voice-participant-avatar-image"
+            src=""
+            alt=""
+            hidden
+          >
+
+        </div>
+
+
+        <h1 id="voice-participant-name">
+          جارٍ الاتصال...
+        </h1>
+
+        <p id="voice-participant-state">
+          انتظار الاتصال
+        </p>
+
+
+        <!-- Audio Visualizer -->
+
+        <div
+          id="voice-visualizer"
+          class="voice-visualizer"
+          aria-hidden="true"
+        >
+
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           Call Timer
+           =================================================== -->
+
+      <div
+        id="voice-call-timer"
+        class="call-timer"
+        aria-live="off"
+      >
+        00:00
+      </div>
+
+
+      <!-- ===================================================
+           Local Audio
+           =================================================== -->
+
+      <audio
+        id="voice-remote-audio"
+        class="call-remote-audio"
+        autoplay
+        playsinline
+      ></audio>
+
+      <audio
+        id="voice-local-audio"
+        class="call-local-audio"
+        muted
+        autoplay
+        playsinline
+      ></audio>
+
+
+      <!-- ===================================================
+           Call Controls
+           =================================================== -->
+
+      <section
+        class="call-controls"
+        aria-label="أدوات المكالمة"
+      >
+
+        <!-- Mute -->
+
+        <button
+          type="button"
+          class="call-control"
+          id="voice-mute-button"
+          data-action="toggle-mute"
+          aria-label="كتم الميكروفون"
+          aria-pressed="false"
+        >
+
+          <span
+            class="call-control-icon"
+            aria-hidden="true"
+          >
+            🎙
+          </span>
+
+          <span
+            id="voice-mute-label"
+            class="call-control-label"
+          >
+            كتم الصوت
+          </span>
+
+        </button>
+
+
+        <!-- Speaker -->
+
+        <button
+          type="button"
+          class="call-control"
+          id="voice-speaker-button"
+          data-action="toggle-speaker"
+          aria-label="تفعيل مكبر الصوت"
+          aria-pressed="false"
+        >
+
+          <span
+            class="call-control-icon"
+            aria-hidden="true"
+          >
+            🔊
+          </span>
+
+          <span class="call-control-label">
+            مكبر الصوت
+          </span>
+
+        </button>
+
+
+        <!-- Add Participant -->
+
+        <button
+          type="button"
+          class="call-control"
+          id="voice-add-participant"
+          data-action="add-participant"
+          aria-label="إضافة مشارك"
+        >
+
+          <span
+            class="call-control-icon"
+            aria-hidden="true"
+          >
+            +
+          </span>
+
+          <span class="call-control-label">
+            إضافة
+          </span>
+
+        </button>
+
+
+        <!-- End -->
+
+        <button
+          type="button"
+          class="call-control call-control-danger"
+          id="voice-end-call"
+          data-action="end-call"
+          aria-label="إنهاء المكالمة"
+        >
+
+          <span
+            class="call-control-icon"
+            aria-hidden="true"
+          >
+            ☎
+          </span>
+
+          <span class="call-control-label">
+            إنهاء
+          </span>
+
+        </button>
+
+      </section>
+
+
+      <!-- ===================================================
+           Reconnecting
+           =================================================== -->
+
+      <div
+        id="voice-reconnecting"
+        class="call-reconnecting"
+        hidden
+        aria-live="polite"
+      >
+
+        <span
+          class="loading-spinner"
+          aria-hidden="true"
+        ></span>
+
+        <span>
+          جارٍ إعادة الاتصال...
+        </span>
+
+      </div>
+
+
+      <!-- ===================================================
+           Error
+           =================================================== -->
+
+      <div
+        id="voice-call-error"
+        class="call-error-panel"
+        hidden
+        role="alert"
+      >
+
+        <strong>
+          تعذر الاتصال
+        </strong>
+
+        <p id="voice-call-error-text">
+          حدث خطأ أثناء إنشاء المكالمة.
+        </p>
+
+        <button
+          type="button"
+          class="button button-secondary"
+          id="voice-call-retry"
+        >
+          إعادة المحاولة
+        </button>
+
+      </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         Incoming Call Overlay
+         ===================================================== -->
+
+    <section
+      id="voice-incoming-overlay"
+      class="incoming-call-overlay"
+      hidden
+      aria-labelledby="voice-incoming-title"
+    >
+
+      <div class="incoming-call-card">
+
+        <div
+          id="voice-incoming-avatar"
+          class="call-avatar call-avatar-lg"
+        >
+          <span aria-hidden="true">N</span>
+        </div>
+
+        <span class="incoming-call-label">
+          مكالمة صوتية واردة
+        </span>
+
+        <h2 id="voice-incoming-title">
+          اتصال وارد
+        </h2>
+
+        <p id="voice-incoming-name">
+          —
+        </p>
+
+        <div class="incoming-call-actions">
+
+          <button
+            type="button"
+            class="call-answer-button"
+            id="voice-answer-call"
+            aria-label="قبول المكالمة"
+          >
+            <span aria-hidden="true">☎</span>
+            قبول
+          </button>
+
+          <button
+            type="button"
+            class="call-reject-button"
+            id="voice-reject-call"
+            aria-label="رفض المكالمة"
+          >
+            <span aria-hidden="true">☎</span>
+            رفض
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         Add Participant Modal
+         ===================================================== -->
+
+    <div
+      id="voice-participant-modal"
+      class="modal-backdrop"
+      hidden
+      aria-hidden="true"
+    >
+
+      <div
+        class="modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="voice-participant-modal-title"
+      >
+
+        <div class="modal-header">
+
+          <div>
+
+            <h2 id="voice-participant-modal-title">
+              إضافة مشارك
+            </h2>
+
+            <p class="modal-subtitle">
+              اختر شخصًا من جهات اتصالك.
+            </p>
+
+          </div>
+
+          <button
+            type="button"
+            class="icon-button"
+            id="voice-participant-modal-close"
+            aria-label="إغلاق"
+          >
+            ×
+          </button>
+
+        </div>
+
+
+        <div class="member-search">
+
+          <input
+            id="voice-participant-search"
+            type="search"
+            autocomplete="off"
+            placeholder="البحث عن شخص..."
+            aria-label="البحث عن شخص"
+          >
+
+        </div>
+
+
+        <div
+          id="voice-participant-list"
+          class="call-participant-list"
+        ></div>
+
+
+        <div
+          id="voice-participant-empty"
+          class="group-state group-state-empty"
+          hidden
+        >
+          <div class="group-state-icon" aria-hidden="true">
+            👤
+          </div>
+
+          <p>
+            لا توجد جهات اتصال متاحة.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         More Menu
+         ===================================================== -->
+
+    <div
+      id="voice-more-menu"
+      class="context-menu"
+      hidden
+    >
+
+      <button
+        type="button"
+        id="voice-report-call"
+      >
+        <span aria-hidden="true">⚑</span>
+        الإبلاغ عن مشكلة
+      </button>
+
+      <button
+        type="button"
+        id="voice-copy-call-id"
+      >
+        <span aria-hidden="true">▣</span>
+        نسخ معرّف المكالمة
+      </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         Scripts
+         ===================================================== -->
+
+    <script src="../js/config.js" defer></script>
+    <script src="../js/storage.js" defer></script>
+    <script src="../js/router.js" defer></script>
+    <script src="../js/realtime.js" defer></script>
+    <script src="../js/calls.js" defer></script>
+    <script src="../js/notifications.js" defer></script>
+    <script src="../js/app.js" defer></script>
+
+
+    <!-- =====================================================
+         Page Hooks
+         ===================================================== -->
+
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+
+        document.documentElement.lang = "ar";
+        document.documentElement.dir = "rtl";
+
+        const params =
+          new URLSearchParams(window.location.search);
+
+        const callId =
+          params.get("id");
+
+        const userId =
+          params.get("user");
+
+        const action =
+          params.get("action");
+
+        if (callId) {
+          document.body.dataset.callId = callId;
+        }
+
+        if (userId) {
+          document.body.dataset.userId = userId;
+        }
+
+        if (action) {
+          document.body.dataset.callAction = action;
+        }
+
+
+        /* -----------------------------------------------
+           Back
+           ----------------------------------------------- */
+
+        const backButton =
+          document.getElementById(
+            "voice-call-back"
+          );
+
+        if (backButton) {
+
+          backButton.addEventListener(
+            "click",
+            () => {
+
+              if (
+                window.NOVA_ROUTER &&
+                typeof window.NOVA_ROUTER.back ===
+                  "function"
+              ) {
+                window.NOVA_ROUTER.back();
+              } else {
+                window.history.back();
+              }
+
+            }
+          );
+        }
+
+
+        /* -----------------------------------------------
+           Announce page ready
+           ----------------------------------------------- */
+
+        if (
+          window.NOVA &&
+          typeof window.NOVA.emit ===
+            "function"
+        ) {
+
+          window.NOVA.emit(
+            "call:voice-page-ready",
+            {
+              callId: callId || null,
+              userId: userId || null,
+              action: action || null
+            }
+          );
+
+        }
+
+      });
+    </script>
+
+  </div>
+
+</body>
+</html>
