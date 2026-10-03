@@ -1,0 +1,1022 @@
+<!-- =========================================================
+     NOVA — Global Header
+     File: components/header.html
+     Version: 1.0.0
+     ========================================================= -->
+
+<header
+  class="nova-header"
+  id="nova-header"
+  data-component="header"
+  aria-label="رأس المنصة"
+>
+
+  <!-- زر القائمة للموبايل -->
+  <button
+    type="button"
+    class="nova-header__menu"
+    data-action="toggle-sidebar"
+    aria-label="فتح القائمة"
+    aria-controls="nova-sidebar"
+    aria-expanded="false"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+
+  <!-- العلامة التجارية -->
+  <a
+    class="nova-header__brand"
+    href="../index.html"
+    data-route="home"
+    aria-label="NOVA — الصفحة الرئيسية"
+  >
+    <span
+      class="nova-header__logo"
+      aria-hidden="true"
+    >
+      N
+    </span>
+
+    <span class="nova-header__brand-text">
+      <strong>NOVA</strong>
+      <small>تواصل ببساطة</small>
+    </span>
+  </a>
+
+
+  <!-- مساحة البحث -->
+  <div
+    class="nova-header__search"
+    role="search"
+  >
+    <label
+      class="sr-only"
+      for="nova-global-search"
+    >
+      البحث في NOVA
+    </label>
+
+    <input
+      id="nova-global-search"
+      type="search"
+      name="q"
+      placeholder="ابحث في NOVA..."
+      autocomplete="off"
+      data-global-search
+    />
+
+    <button
+      type="button"
+      class="nova-header__search-button"
+      data-action="global-search"
+      aria-label="بحث"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        width="20"
+        height="20"
+        fill="none"
+        aria-hidden="true"
+      >
+        <circle
+          cx="11"
+          cy="11"
+          r="7"
+          stroke="currentColor"
+          stroke-width="1.8"
+        />
+
+        <path
+          d="M16.5 16.5L21 21"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+        />
+      </svg>
+    </button>
+  </div>
+
+
+  <!-- إجراءات الرأس -->
+  <div class="nova-header__actions">
+
+    <!-- المكالمات -->
+    <a
+      href="../pages/calls.html"
+      class="nova-header__action"
+      data-route="calls"
+      aria-label="المكالمات"
+      title="المكالمات"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        width="21"
+        height="21"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M7.2 4.5H5.4C4.63 4.5 4 5.13 4 5.9
+             C4 13.68 10.32 20 18.1 20
+             C18.87 20 19.5 19.37 19.5 18.6V16.8
+             C19.5 16.25 19.18 15.75 18.68 15.5
+             L15.9 14.11
+             C15.4 13.86 14.8 13.96 14.41 14.35
+             L13.15 15.61
+             C10.94 14.53 9.47 13.06 8.39 10.85
+             L9.65 9.59
+             C10.04 9.2 10.14 8.6 9.89 8.1
+             L8.5 5.32
+             C8.25 4.82 7.75 4.5 7.2 4.5Z"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </a>
+
+
+    <!-- الإشعارات -->
+    <button
+      type="button"
+      class="nova-header__action nova-header__notification"
+      data-action="notifications"
+      aria-label="الإشعارات"
+      aria-haspopup="true"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        width="21"
+        height="21"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M18 9.5
+             C18 6.46 15.76 4 13 4
+             H11
+             C8.24 4 6 6.46 6 9.5
+             V13
+             L4.5 16
+             H19.5
+             L18 13
+             V9.5Z"
+          stroke="currentColor"
+          stroke-width="1.7"
+          stroke-linejoin="round"
+        />
+
+        <path
+          d="M9.5 19
+             C10.15 19.63 11.03 20 12 20
+             C12.97 20 13.85 19.63 14.5 19"
+          stroke="currentColor"
+          stroke-width="1.7"
+          stroke-linecap="round"
+        />
+      </svg>
+
+      <span
+        class="nova-header__badge"
+        data-notifications-count
+        hidden
+        aria-label="عدد الإشعارات غير المقروءة"
+      ></span>
+    </button>
+
+
+    <!-- الملف الشخصي -->
+    <button
+      type="button"
+      class="nova-header__profile"
+      data-action="profile-menu"
+      aria-haspopup="menu"
+      aria-expanded="false"
+    >
+
+      <span class="nova-header__avatar">
+        <img
+          src=""
+          alt=""
+          data-profile-avatar
+          hidden
+        />
+
+        <span
+          class="nova-header__avatar-placeholder"
+          data-profile-avatar-placeholder
+          aria-hidden="true"
+        ></span>
+
+        <span
+          class="nova-header__online"
+          data-profile-online
+          hidden
+          aria-label="متصل الآن"
+        ></span>
+      </span>
+
+      <span class="nova-header__profile-info">
+        <strong
+          data-profile-name
+        ></strong>
+
+        <small
+          data-profile-username
+        ></small>
+      </span>
+
+      <svg
+        class="nova-header__profile-arrow"
+        viewBox="0 0 24 24"
+        width="16"
+        height="16"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M7 9L12 14L17 9"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+
+    </button>
+
+  </div>
+
+
+  <!-- قائمة الحساب -->
+  <div
+    class="nova-header__menu-panel"
+    data-profile-menu
+    role="menu"
+    hidden
+  >
+
+    <div class="nova-header__menu-profile">
+
+      <div class="nova-header__menu-avatar">
+        <img
+          src=""
+          alt=""
+          data-profile-avatar
+          hidden
+        />
+
+        <span
+          data-profile-avatar-placeholder
+          aria-hidden="true"
+        ></span>
+      </div>
+
+      <div>
+        <strong
+          data-profile-name
+        ></strong>
+
+        <small
+          data-profile-username
+        ></small>
+      </div>
+
+    </div>
+
+
+    <div class="nova-header__menu-divider"></div>
+
+
+    <a
+      href="../pages/profile.html"
+      data-route="profile"
+      role="menuitem"
+    >
+      <span aria-hidden="true">👤</span>
+      <span>الملف الشخصي</span>
+    </a>
+
+
+    <a
+      href="../pages/settings.html"
+      data-route="settings"
+      role="menuitem"
+    >
+      <span aria-hidden="true">⚙️</span>
+      <span>الإعدادات</span>
+    </a>
+
+
+    <a
+      href="../pages/privacy.html"
+      data-route="privacy"
+      role="menuitem"
+    >
+      <span aria-hidden="true">🔐</span>
+      <span>الخصوصية</span>
+    </a>
+
+
+    <a
+      href="../pages/security.html"
+      data-route="security"
+      role="menuitem"
+    >
+      <span aria-hidden="true">🛡️</span>
+      <span>الأمان</span>
+    </a>
+
+
+    <div class="nova-header__menu-divider"></div>
+
+
+    <button
+      type="button"
+      role="menuitem"
+      data-action="logout"
+    >
+      <span aria-hidden="true">↪</span>
+      <span>تسجيل الخروج</span>
+    </button>
+
+  </div>
+
+
+  <!-- نتائج البحث -->
+  <div
+    class="nova-header__search-results"
+    data-global-search-results
+    hidden
+    aria-live="polite"
+  ></div>
+
+</header>
+
+
+<!-- =========================================================
+     Header Styles
+     مخصصة للمكوّن فقط.
+     ========================================================= -->
+
+<style>
+  .nova-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    min-height: 72px;
+    padding: 12px 20px;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(6, 17, 13, 0.96),
+        rgba(6, 17, 13, 0.88)
+      );
+
+    border-bottom:
+      1px solid rgba(255,255,255,.07);
+
+    backdrop-filter:
+      blur(18px);
+
+    -webkit-backdrop-filter:
+      blur(18px);
+  }
+
+
+  .nova-header__brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-width: 155px;
+
+    color: inherit;
+    text-decoration: none;
+  }
+
+
+  .nova-header__logo {
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 13px;
+
+    background:
+      linear-gradient(
+        145deg,
+        #20D47B,
+        #12A85E
+      );
+
+    color: #06110D;
+
+    font-size: 21px;
+    font-weight: 900;
+
+    box-shadow:
+      0 8px 28px
+      rgba(32,212,123,.18);
+  }
+
+
+  .nova-header__brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+
+
+  .nova-header__brand-text strong {
+    font-size: 17px;
+    letter-spacing: .4px;
+  }
+
+
+  .nova-header__brand-text small {
+    margin-top: 3px;
+
+    color: #9CAFA8;
+
+    font-size: 10px;
+  }
+
+
+  .nova-header__menu {
+    display: none;
+
+    width: 42px;
+    height: 42px;
+
+    padding: 0;
+
+    border: 0;
+    border-radius: 12px;
+
+    background:
+      rgba(255,255,255,.05);
+
+    color: #F4FAF7;
+
+    cursor: pointer;
+  }
+
+
+  .nova-header__menu span {
+    display: block;
+
+    width: 19px;
+    height: 2px;
+
+    margin: 4px auto;
+
+    border-radius: 10px;
+
+    background: currentColor;
+  }
+
+
+  .nova-header__search {
+    position: relative;
+
+    flex: 1;
+
+    max-width: 620px;
+
+    margin-inline: auto;
+  }
+
+
+  .nova-header__search input {
+    width: 100%;
+    height: 44px;
+
+    padding:
+      0 17px
+      0 48px;
+
+    border:
+      1px solid rgba(255,255,255,.07);
+
+    border-radius: 14px;
+
+    outline: none;
+
+    background:
+      rgba(255,255,255,.045);
+
+    color: #F4FAF7;
+
+    font:
+      inherit;
+  }
+
+
+  .nova-header__search input::placeholder {
+    color: #71847D;
+  }
+
+
+  .nova-header__search input:focus {
+    border-color:
+      rgba(32,212,123,.45);
+
+    background:
+      rgba(255,255,255,.06);
+
+    box-shadow:
+      0 0 0 3px
+      rgba(32,212,123,.08);
+  }
+
+
+  .nova-header__search-button {
+    position: absolute;
+
+    left: 7px;
+    top: 50%;
+
+    width: 36px;
+    height: 36px;
+
+    transform: translateY(-50%);
+
+    display: grid;
+    place-items: center;
+
+    border: 0;
+    border-radius: 10px;
+
+    background: transparent;
+
+    color: #9CAFA8;
+
+    cursor: pointer;
+  }
+
+
+  .nova-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+
+  .nova-header__action {
+    position: relative;
+
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+    place-items: center;
+
+    border: 0;
+    border-radius: 12px;
+
+    background:
+      rgba(255,255,255,.045);
+
+    color: #C7D4CE;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+      background .2s ease,
+      color .2s ease,
+      transform .2s ease;
+  }
+
+
+  .nova-header__action:hover {
+    background:
+      rgba(32,212,123,.10);
+
+    color: #20D47B;
+
+    transform:
+      translateY(-1px);
+  }
+
+
+  .nova-header__badge {
+    position: absolute;
+
+    top: 4px;
+    right: 4px;
+
+    min-width: 17px;
+    height: 17px;
+
+    padding: 0 4px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 999px;
+
+    background: #FF5C67;
+    color: white;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    border:
+      2px solid #06110D;
+  }
+
+
+  .nova-header__profile {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    min-width: 145px;
+
+    padding: 5px 9px 5px 6px;
+
+    border: 0;
+    border-radius: 14px;
+
+    background:
+      rgba(255,255,255,.045);
+
+    color: #F4FAF7;
+
+    cursor: pointer;
+
+    text-align: right;
+  }
+
+
+  .nova-header__avatar {
+    position: relative;
+
+    width: 36px;
+    height: 36px;
+
+    flex: 0 0 36px;
+
+    overflow: visible;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background:
+      linear-gradient(
+        145deg,
+        #163A2D,
+        #0C2119
+      );
+  }
+
+
+  .nova-header__avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+  }
+
+
+  .nova-header__avatar-placeholder,
+  .nova-header__menu-avatar
+  [data-profile-avatar-placeholder] {
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    color: #20D47B;
+
+    font-weight: 800;
+  }
+
+
+  .nova-header__online {
+    position: absolute;
+
+    bottom: -1px;
+    left: -1px;
+
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    background: #20D47B;
+
+    border:
+      2px solid #06110D;
+  }
+
+
+  .nova-header__profile-info {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .nova-header__profile-info strong {
+    max-width: 95px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    font-size: 12px;
+  }
+
+
+  .nova-header__profile-info small {
+    margin-top: 2px;
+
+    color: #8FA19A;
+
+    max-width: 95px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    direction: ltr;
+    text-align: right;
+
+    font-size: 9px;
+  }
+
+
+  .nova-header__profile-arrow {
+    color: #8FA19A;
+  }
+
+
+  .nova-header__menu-panel {
+    position: absolute;
+
+    top: calc(100% + 8px);
+    left: 20px;
+
+    width: 270px;
+
+    padding: 10px;
+
+    border:
+      1px solid rgba(255,255,255,.08);
+
+    border-radius: 18px;
+
+    background:
+      rgba(10, 25, 19, .98);
+
+    box-shadow:
+      0 24px 70px
+      rgba(0,0,0,.35);
+
+    backdrop-filter:
+      blur(20px);
+  }
+
+
+  .nova-header__menu-profile {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    padding: 9px;
+  }
+
+
+  .nova-header__menu-avatar {
+    width: 44px;
+    height: 44px;
+
+    flex: 0 0 44px;
+
+    display: grid;
+    place-items: center;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    background:
+      rgba(32,212,123,.10);
+  }
+
+
+  .nova-header__menu-avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+  }
+
+
+  .nova-header__menu-profile > div:last-child {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .nova-header__menu-profile strong,
+  .nova-header__menu-profile small {
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+
+  .nova-header__menu-profile small {
+    margin-top: 3px;
+
+    color: #8FA19A;
+
+    font-size: 10px;
+  }
+
+
+  .nova-header__menu-divider {
+    height: 1px;
+
+    margin: 6px 4px;
+
+    background:
+      rgba(255,255,255,.07);
+  }
+
+
+  .nova-header__menu-panel a,
+  .nova-header__menu-panel button {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 11px 12px;
+
+    border: 0;
+    border-radius: 11px;
+
+    background: transparent;
+
+    color: #C7D4CE;
+
+    font:
+      inherit;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    text-align: right;
+  }
+
+
+  .nova-header__menu-panel a:hover,
+  .nova-header__menu-panel button:hover {
+    background:
+      rgba(32,212,123,.08);
+
+    color: #20D47B;
+  }
+
+
+  .nova-header__search-results {
+    position: absolute;
+
+    top: calc(100% + 7px);
+    right: 0;
+
+    width: min(620px, 90vw);
+
+    max-height: 420px;
+
+    overflow: auto;
+
+    padding: 8px;
+
+    border:
+      1px solid rgba(255,255,255,.08);
+
+    border-radius: 16px;
+
+    background:
+      rgba(10,25,19,.98);
+
+    box-shadow:
+      0 24px 60px
+      rgba(0,0,0,.35);
+  }
+
+
+  .sr-only {
+    position: absolute !important;
+
+    width: 1px !important;
+    height: 1px !important;
+
+    padding: 0 !important;
+    margin: -1px !important;
+
+    overflow: hidden !important;
+
+    clip: rect(0,0,0,0) !important;
+
+    white-space: nowrap !important;
+
+    border: 0 !important;
+  }
+
+
+  @media (max-width: 900px) {
+    .nova-header {
+      gap: 10px;
+      padding: 10px 13px;
+    }
+
+    .nova-header__menu {
+      display: block;
+    }
+
+    .nova-header__brand {
+      min-width: auto;
+    }
+
+    .nova-header__brand-text {
+      display: none;
+    }
+
+    .nova-header__search {
+      max-width: none;
+    }
+
+    .nova-header__profile {
+      min-width: auto;
+    }
+
+    .nova-header__profile-info,
+    .nova-header__profile-arrow {
+      display: none;
+    }
+  }
+
+
+  @media (max-width: 620px) {
+    .nova-header__search {
+      display: none;
+    }
+
+    .nova-header__actions {
+      margin-inline-start: auto;
+    }
+
+    .nova-header__action {
+      width: 39px;
+      height: 39px;
+    }
+
+    .nova-header__profile {
+      padding: 4px;
+      background: transparent;
+    }
+
+    .nova-header__menu-panel {
+      left: 10px;
+      right: 10px;
+
+      width: auto;
+    }
+  }
+  </style>
