@@ -1,0 +1,3047 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#06110D">
+
+  <meta
+    name="description"
+    content="NOVA — محادثة خاصة آمنة وحديثة."
+  >
+
+  <meta name="color-scheme" content="dark light">
+
+  <title>المحادثة | NOVA</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/chat.css">
+  <link rel="stylesheet" href="../css/calls.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/animations.css">
+
+  <style>
+    /* =====================================================
+       NOVA — Chat Page
+       ===================================================== */
+
+    :root {
+      --nova-chat-width: 1180px;
+      --nova-chat-radius: 19px;
+      --nova-chat-green: #20D47B;
+      --nova-chat-bg: #06110D;
+      --nova-chat-surface: #0C1D17;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+
+      font-family:
+        "Cairo",
+        "IBM Plex Sans Arabic",
+        system-ui,
+        sans-serif;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+    /* =====================================================
+       Page shell
+       ===================================================== */
+
+    .chat-page {
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .chat-shell {
+      width: min(100%, var(--nova-chat-width));
+      min-height: calc(100vh - 40px);
+      margin-inline: auto;
+
+      display: flex;
+      flex-direction: column;
+
+      overflow: hidden;
+
+      border: 1px solid rgba(255,255,255,0.075);
+      border-radius: var(--nova-chat-radius);
+
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(32,212,123,0.035),
+          transparent 40%
+        ),
+        #07150F;
+
+      box-shadow:
+        0 25px 70px rgba(0,0,0,0.24);
+    }
+
+    /* =====================================================
+       Chat header
+       ===================================================== */
+
+    .chat-header {
+      position: relative;
+      z-index: 10;
+
+      min-height: 72px;
+
+      display: flex;
+      align-items: center;
+      gap: 11px;
+
+      padding: 9px 13px;
+
+      border-bottom: 1px solid rgba(255,255,255,0.065);
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(13,35,26,0.98),
+          rgba(8,24,17,0.96)
+        );
+
+      backdrop-filter: blur(18px);
+    }
+
+    .chat-header__back {
+      width: 39px;
+      height: 39px;
+      flex: 0 0 39px;
+
+      display: grid;
+      place-items: center;
+
+      border: 0;
+      border-radius: 10px;
+
+      color: #9DB0A8;
+      background: rgba(255,255,255,0.035);
+
+      cursor: pointer;
+    }
+
+    .chat-header__back:hover {
+      color: #F4FAF7;
+      background: rgba(255,255,255,0.07);
+    }
+
+    .chat-header__identity {
+      min-width: 0;
+      flex: 1;
+
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      cursor: pointer;
+    }
+
+    .chat-header__avatar {
+      position: relative;
+
+      width: 43px;
+      height: 43px;
+      flex: 0 0 43px;
+
+      overflow: hidden;
+
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 13px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #143528,
+          #081A12
+        );
+    }
+
+    .chat-header__avatar img {
+      width: 100%;
+      height: 100%;
+      display: block;
+
+      object-fit: cover;
+    }
+
+    .chat-header__online {
+      position: absolute;
+
+      right: -1px;
+      bottom: -1px;
+
+      width: 12px;
+      height: 12px;
+
+      border: 2px solid #07150F;
+      border-radius: 50%;
+
+      background: #20D47B;
+    }
+
+    .chat-header__info {
+      min-width: 0;
+    }
+
+    .chat-header__name {
+      overflow: hidden;
+
+      color: #F4FAF7;
+
+      font-size: 0.69rem;
+      font-weight: 900;
+
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .chat-header__status {
+      margin-top: 2px;
+
+      color: #83968E;
+
+      font-size: 0.52rem;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chat-header__actions {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .chat-header__action {
+      width: 37px;
+      height: 37px;
+
+      display: grid;
+      place-items: center;
+
+      border: 0;
+      border-radius: 10px;
+
+      color: #9DB0A8;
+      background: transparent;
+
+      cursor: pointer;
+
+      transition:
+        color 150ms ease,
+        background 150ms ease;
+    }
+
+    .chat-header__action:hover {
+      color: #20D47B;
+      background: rgba(32,212,123,0.065);
+    }
+
+    .chat-header__action:focus-visible,
+    .chat-header__back:focus-visible {
+      outline: 2px solid #20D47B;
+      outline-offset: 2px;
+    }
+
+    /* =====================================================
+       Encryption / security strip
+       ===================================================== */
+
+    .chat-security {
+      min-height: 31px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+
+      padding: 5px 12px;
+
+      color: #779087;
+
+      background: rgba(32,212,123,0.018);
+
+      border-bottom: 1px solid rgba(255,255,255,0.035);
+
+      font-size: 0.49rem;
+      text-align: center;
+    }
+
+    .chat-security svg {
+      flex: 0 0 auto;
+      color: #20D47B;
+    }
+
+    /* =====================================================
+       Messages area
+       ===================================================== */
+
+    .chat-messages {
+      position: relative;
+
+      min-height: 0;
+      flex: 1;
+
+      overflow-y: auto;
+
+      padding:
+        18px
+        18px
+        12px;
+
+      scrollbar-width: thin;
+      scrollbar-color:
+        rgba(255,255,255,0.11)
+        transparent;
+
+      background:
+        radial-gradient(
+          circle at 20% 15%,
+          rgba(32,212,123,0.025),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 80% 70%,
+          rgba(32,212,123,0.018),
+          transparent 35%
+        );
+    }
+
+    .chat-messages::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .chat-messages::-webkit-scrollbar-thumb {
+      border-radius: 99px;
+      background: rgba(255,255,255,0.11);
+    }
+
+    .chat-messages__inner {
+      width: min(100%, 820px);
+      min-height: 100%;
+
+      margin-inline: auto;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      gap: 8px;
+    }
+
+    /* =====================================================
+       Loading
+       ===================================================== */
+
+    .chat-loading {
+      min-height: 240px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+    }
+
+    .chat-loading__spinner {
+      width: 35px;
+      height: 35px;
+
+      border: 3px solid rgba(255,255,255,0.08);
+      border-top-color: #20D47B;
+
+      border-radius: 50%;
+
+      animation: nova-chat-spin 800ms linear infinite;
+    }
+
+    .chat-loading__text {
+      margin-top: 11px;
+
+      color: #83968E;
+
+      font-size: 0.55rem;
+    }
+
+    @keyframes nova-chat-spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* =====================================================
+       Empty conversation
+       ===================================================== */
+
+    .chat-empty {
+      min-height: 300px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      padding: 30px;
+
+      text-align: center;
+    }
+
+    .chat-empty__icon {
+      width: 69px;
+      height: 69px;
+
+      display: grid;
+      place-items: center;
+
+      margin-bottom: 13px;
+
+      border: 1px solid rgba(32,212,123,0.12);
+      border-radius: 21px;
+
+      color: #20D47B;
+      background: rgba(32,212,123,0.05);
+    }
+
+    .chat-empty__title {
+      margin: 0;
+
+      color: #F4FAF7;
+
+      font-size: 0.76rem;
+      font-weight: 900;
+    }
+
+    .chat-empty__text {
+      max-width: 300px;
+
+      margin: 7px 0 0;
+
+      color: #80938B;
+
+      font-size: 0.55rem;
+      line-height: 1.8;
+    }
+
+    /* =====================================================
+       Date divider
+       ===================================================== */
+
+    .chat-date {
+      align-self: center;
+
+      margin: 9px 0;
+
+      padding: 5px 10px;
+
+      border: 1px solid rgba(255,255,255,0.045);
+      border-radius: 999px;
+
+      color: #71847C;
+      background: rgba(255,255,255,0.025);
+
+      font-size: 0.48rem;
+    }
+
+    /* =====================================================
+       Message fallback markup
+       ===================================================== */
+
+    .chat-message {
+      max-width: min(78%, 590px);
+
+      display: flex;
+      flex-direction: column;
+
+      gap: 3px;
+    }
+
+    .chat-message--mine {
+      align-self: flex-start;
+      align-items: flex-start;
+    }
+
+    .chat-message--theirs {
+      align-self: flex-end;
+      align-items: flex-end;
+    }
+
+    .chat-message__bubble {
+      position: relative;
+
+      padding: 8px 11px;
+
+      border: 1px solid rgba(255,255,255,0.055);
+      border-radius: 14px;
+
+      color: #E9F4EF;
+
+      background: #10251D;
+
+      font-size: 0.62rem;
+      line-height: 1.8;
+
+      word-break: break-word;
+    }
+
+    .chat-message--mine .chat-message__bubble {
+      border-color: rgba(32,212,123,0.13);
+      border-bottom-right-radius: 4px;
+
+      color: #07150F;
+
+      background: #20D47B;
+    }
+
+    .chat-message--theirs .chat-message__bubble {
+      border-bottom-left-radius: 4px;
+    }
+
+    .chat-message__meta {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      padding-inline: 4px;
+
+      color: #6E8279;
+
+      font-size: 0.44rem;
+    }
+
+    .chat-message--mine .chat-message__meta {
+      color: #71877D;
+    }
+
+    .chat-message__status {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    /* =====================================================
+       Typing indicator
+       ===================================================== */
+
+    .chat-typing {
+      align-self: flex-end;
+
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+
+      min-height: 31px;
+
+      padding: 0 10px;
+
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+
+      color: #82958D;
+      background: #0D2119;
+
+      font-size: 0.49rem;
+    }
+
+    .chat-typing__dots {
+      display: flex;
+      gap: 3px;
+    }
+
+    .chat-typing__dots span {
+      width: 4px;
+      height: 4px;
+
+      border-radius: 50%;
+
+      background: #20D47B;
+
+      animation: nova-chat-dot 1.1s infinite ease-in-out;
+    }
+
+    .chat-typing__dots span:nth-child(2) {
+      animation-delay: 120ms;
+    }
+
+    .chat-typing__dots span:nth-child(3) {
+      animation-delay: 240ms;
+    }
+
+    @keyframes nova-chat-dot {
+      0%,
+      60%,
+      100% {
+        transform: translateY(0);
+        opacity: 0.45;
+      }
+
+      30% {
+        transform: translateY(-3px);
+        opacity: 1;
+      }
+    }
+
+    /* =====================================================
+       Reply preview
+       ===================================================== */
+
+    .chat-reply-preview {
+      display: none;
+
+      width: min(100%, 820px);
+
+      margin-inline: auto;
+
+      padding: 8px 10px;
+
+      border-inline-start: 3px solid #20D47B;
+      border-radius: 9px;
+
+      color: #93A59E;
+      background: rgba(255,255,255,0.025);
+    }
+
+    .chat-reply-preview.is-visible {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .chat-reply-preview__content {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .chat-reply-preview__label {
+      color: #20D47B;
+      font-size: 0.48rem;
+      font-weight: 800;
+    }
+
+    .chat-reply-preview__text {
+      margin-top: 2px;
+
+      overflow: hidden;
+
+      color: #82958D;
+
+      font-size: 0.51rem;
+
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .chat-reply-preview__close {
+      width: 28px;
+      height: 28px;
+
+      display: grid;
+      place-items: center;
+
+      border: 0;
+      border-radius: 7px;
+
+      color: #899C94;
+      background: transparent;
+
+      cursor: pointer;
+    }
+
+    /* =====================================================
+       Composer
+       ===================================================== */
+
+    .chat-composer {
+      position: relative;
+      z-index: 8;
+
+      padding: 8px 13px 12px;
+
+      border-top: 1px solid rgba(255,255,255,0.055);
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(7,20,14,0.97),
+          rgba(6,17,13,1)
+        );
+    }
+
+    .chat-composer__inner {
+      width: min(100%, 820px);
+
+      margin-inline: auto;
+
+      display: flex;
+      align-items: flex-end;
+      gap: 7px;
+    }
+
+    .chat-composer__tools {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .chat-composer__tool {
+      width: 38px;
+      height: 38px;
+
+      display: grid;
+      place-items: center;
+
+      flex: 0 0 38px;
+
+      border: 0;
+      border-radius: 10px;
+
+      color: #91A39B;
+      background: transparent;
+
+      cursor: pointer;
+    }
+
+    .chat-composer__tool:hover {
+      color: #20D47B;
+      background: rgba(32,212,123,0.055);
+    }
+
+    .chat-composer__input-wrap {
+      min-width: 0;
+      flex: 1;
+
+      display: flex;
+      align-items: flex-end;
+
+      min-height: 42px;
+
+      border: 1px solid rgba(255,255,255,0.075);
+      border-radius: 13px;
+
+      background: rgba(255,255,255,0.035);
+
+      transition:
+        border-color 150ms ease,
+        box-shadow 150ms ease;
+    }
+
+    .chat-composer__input-wrap:focus-within {
+      border-color: rgba(32,212,123,0.32);
+
+      box-shadow:
+        0 0 0 3px rgba(32,212,123,0.045);
+    }
+
+    .chat-composer__textarea {
+      width: 100%;
+      min-height: 40px;
+      max-height: 140px;
+
+      padding: 9px 12px;
+
+      border: 0;
+      outline: 0;
+      resize: none;
+
+      color: #F4FAF7;
+      background: transparent;
+
+      font-size: 0.61rem;
+      line-height: 1.8;
+    }
+
+    .chat-composer__textarea::placeholder {
+      color: #71847C;
+    }
+
+    .chat-composer__send {
+      width: 41px;
+      height: 41px;
+
+      display: grid;
+      place-items: center;
+
+      flex: 0 0 41px;
+
+      border: 0;
+      border-radius: 12px;
+
+      color: #06110D;
+      background: #20D47B;
+
+      cursor: pointer;
+
+      transition:
+        transform 150ms ease,
+        filter 150ms ease;
+    }
+
+    .chat-composer__send:hover {
+      filter: brightness(1.05);
+    }
+
+    .chat-composer__send:active {
+      transform: scale(0.95);
+    }
+
+    .chat-composer__send:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .chat-composer__send:focus-visible,
+    .chat-composer__tool:focus-visible {
+      outline: 2px solid #20D47B;
+      outline-offset: 2px;
+    }
+
+    .chat-composer__hint {
+      width: min(100%, 820px);
+
+      margin: 5px auto 0;
+
+      color: #52675E;
+
+      font-size: 0.42rem;
+
+      text-align: center;
+    }
+
+    /* =====================================================
+       Attachment input
+       ===================================================== */
+
+    .chat-file-input {
+      display: none;
+    }
+
+    /* =====================================================
+       Context menu
+       ===================================================== */
+
+    .chat-context-menu {
+      width: min(260px, calc(100vw - 24px));
+
+      padding: 6px;
+
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 13px;
+
+      color: #F4FAF7;
+      background: #0C1D17;
+
+      box-shadow:
+        0 25px 70px rgba(0,0,0,0.4);
+    }
+
+    .chat-context-menu::backdrop {
+      background: transparent;
+    }
+
+    .chat-context-menu__button {
+      width: 100%;
+      min-height: 39px;
+
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      padding: 0 10px;
+
+      border: 0;
+      border-radius: 9px;
+
+      color: #B5C4BE;
+      background: transparent;
+
+      font-size: 0.57rem;
+      font-weight: 700;
+
+      text-align: start;
+
+      cursor: pointer;
+    }
+
+    .chat-context-menu__button:hover {
+      color: #F4FAF7;
+      background: rgba(255,255,255,0.055);
+    }
+
+    .chat-context-menu__button--danger {
+      color: #FF7C85;
+    }
+
+    /* =====================================================
+       Media preview
+       ===================================================== */
+
+    .chat-media-preview {
+      display: none;
+
+      width: min(100%, 820px);
+
+      margin: 0 auto 7px;
+
+      padding: 8px;
+
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+
+      background: rgba(255,255,255,0.025);
+    }
+
+    .chat-media-preview.is-visible {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .chat-media-preview__thumb {
+      width: 48px;
+      height: 48px;
+
+      overflow: hidden;
+
+      border-radius: 9px;
+
+      background: #07150F;
+    }
+
+    .chat-media-preview__thumb img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .chat-media-preview__info {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .chat-media-preview__name {
+      overflow: hidden;
+
+      color: #E9F4EF;
+
+      font-size: 0.54rem;
+
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .chat-media-preview__size {
+      margin-top: 2px;
+
+      color: #6F837A;
+
+      font-size: 0.46rem;
+    }
+
+    .chat-media-preview__remove {
+      width: 30px;
+      height: 30px;
+
+      display: grid;
+      place-items: center;
+
+      border: 0;
+      border-radius: 8px;
+
+      color: #8B9D96;
+      background: rgba(255,255,255,0.035);
+
+      cursor: pointer;
+    }
+
+    /* =====================================================
+       Modal
+       ===================================================== */
+
+    .chat-dialog {
+      width: min(
+        calc(100vw - 28px),
+        470px
+      );
+
+      padding: 0;
+
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 18px;
+
+      color: #F4FAF7;
+      background: #0B1D16;
+
+      box-shadow:
+        0 30px 100px rgba(0,0,0,0.5);
+    }
+
+    .chat-dialog::backdrop {
+      background: rgba(0,0,0,0.70);
+      backdrop-filter: blur(5px);
+    }
+
+    .chat-dialog__header {
+      min-height: 57px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 15px;
+
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .chat-dialog__title {
+      margin: 0;
+
+      color: #F4FAF7;
+
+      font-size: 0.73rem;
+      font-weight: 900;
+    }
+
+    .chat-dialog__close {
+      width: 33px;
+      height: 33px;
+
+      display: grid;
+      place-items: center;
+
+      border: 0;
+      border-radius: 9px;
+
+      color: #899B94;
+      background: rgba(255,255,255,0.035);
+
+      cursor: pointer;
+    }
+
+    .chat-dialog__body {
+      padding: 15px;
+    }
+
+    .chat-dialog__text {
+      margin: 0;
+
+      color: #8B9D96;
+
+      font-size: 0.56rem;
+      line-height: 1.8;
+    }
+
+    .chat-dialog__actions {
+      display: flex;
+      justify-content: flex-start;
+      gap: 7px;
+
+      padding: 0 15px 15px;
+    }
+
+    .chat-dialog__button {
+      min-height: 38px;
+
+      padding: 0 14px;
+
+      border: 0;
+      border-radius: 10px;
+
+      font-size: 0.56rem;
+      font-weight: 800;
+
+      cursor: pointer;
+    }
+
+    .chat-dialog__button--primary {
+      color: #06110D;
+      background: #20D47B;
+    }
+
+    .chat-dialog__button--secondary {
+      color: #A0B0AA;
+      background: rgba(255,255,255,0.045);
+    }
+
+    /* =====================================================
+       Mobile
+       ===================================================== */
+
+    @media (max-width: 760px) {
+      .chat-page {
+        padding: 0 0 calc(68px + env(safe-area-inset-bottom));
+      }
+
+      .chat-shell {
+        width: 100%;
+        min-height: 100vh;
+
+        border: 0;
+        border-radius: 0;
+
+        box-shadow: none;
+      }
+
+      .chat-header {
+        min-height: 63px;
+
+        padding:
+          max(7px, env(safe-area-inset-top))
+          9px
+          7px;
+      }
+
+      .chat-header__back {
+        width: 36px;
+        height: 36px;
+        flex-basis: 36px;
+      }
+
+      .chat-header__avatar {
+        width: 39px;
+        height: 39px;
+        flex-basis: 39px;
+
+        border-radius: 11px;
+      }
+
+      .chat-header__name {
+        font-size: 0.63rem;
+      }
+
+      .chat-header__status {
+        font-size: 0.48rem;
+      }
+
+      .chat-header__actions {
+        gap: 1px;
+      }
+
+      .chat-header__action {
+        width: 34px;
+        height: 34px;
+      }
+
+      .chat-security {
+        min-height: 28px;
+        font-size: 0.44rem;
+      }
+
+      .chat-messages {
+        padding:
+          13px
+          10px
+          8px;
+      }
+
+      .chat-message {
+        max-width: 85%;
+      }
+
+      .chat-composer {
+        padding:
+          6px
+          8px
+          calc(8px + env(safe-area-inset-bottom));
+      }
+
+      .chat-composer__inner {
+        gap: 4px;
+      }
+
+      .chat-composer__tool {
+        width: 35px;
+        height: 38px;
+        flex-basis: 35px;
+      }
+
+      .chat-composer__send {
+        width: 39px;
+        height: 39px;
+        flex-basis: 39px;
+      }
+
+      .chat-composer__hint {
+        display: none;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .chat-header__action:nth-child(3) {
+        display: none;
+      }
+
+      .chat-message {
+        max-width: 90%;
+      }
+
+      .chat-composer__tool:nth-child(2) {
+        display: none;
+      }
+
+      .chat-dialog {
+        width: calc(100vw - 18px);
+        border-radius: 16px;
+      }
+    }
+
+    /* =====================================================
+       Light theme
+       ===================================================== */
+
+    [data-theme="light"] .chat-shell {
+      background: #F5FAF7;
+      border-color: rgba(8,35,24,0.08);
+    }
+
+    [data-theme="light"] .chat-header {
+      border-color: rgba(8,35,24,0.07);
+      background: rgba(255,255,255,0.96);
+    }
+
+    [data-theme="light"] .chat-header__name,
+    [data-theme="light"] .chat-empty__title {
+      color: #0A2117;
+    }
+
+    [data-theme="light"] .chat-header__back,
+    [data-theme="light"] .chat-header__action {
+      color: #6C8178;
+    }
+
+    [data-theme="light"] .chat-security,
+    [data-theme="light"] .chat-composer {
+      background: rgba(255,255,255,0.96);
+      border-color: rgba(8,35,24,0.07);
+    }
+
+    [data-theme="light"] .chat-messages {
+      background:
+        radial-gradient(
+          circle at 20% 15%,
+          rgba(32,212,123,0.035),
+          transparent 30%
+        ),
+        #F5FAF7;
+    }
+
+    [data-theme="light"] .chat-composer__input-wrap {
+      border-color: rgba(8,35,24,0.10);
+      background: rgba(8,35,24,0.025);
+    }
+
+    [data-theme="light"] .chat-composer__textarea {
+      color: #0A2117;
+    }
+
+    [data-theme="light"] .chat-dialog {
+      color: #0A2117;
+      background: #FFFFFF;
+      border-color: rgba(8,35,24,0.09);
+    }
+
+    /* =====================================================
+       Reduced motion
+       ===================================================== */
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body data-page="chat">
+
+  <div id="app-shell" class="app-shell">
+
+    <!-- Global header -->
+    <div
+      id="global-header"
+      data-component="header"
+    ></div>
+
+    <!-- Global sidebar -->
+    <aside
+      id="global-sidebar"
+      data-component="sidebar"
+    ></aside>
+
+    <main
+      id="main-content"
+      class="app-main"
+      tabindex="-1"
+    >
+
+      <section
+        class="chat-page"
+        aria-label="المحادثة"
+      >
+
+        <div class="chat-shell">
+
+          <!-- =================================================
+               Header
+               ================================================= -->
+
+          <header class="chat-header">
+
+            <button
+              id="chat-back-button"
+              class="chat-header__back"
+              type="button"
+              aria-label="العودة إلى المحادثات"
+              title="العودة"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="m14.5 5-7 7 7 7"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+
+            <button
+              id="chat-contact-button"
+              class="chat-header__identity"
+              type="button"
+              aria-label="فتح ملف جهة الاتصال"
+            >
+
+              <div class="chat-header__avatar">
+                <img
+                  id="chat-contact-avatar"
+                  src="../assets/brand/avatar-placeholder.svg"
+                  alt=""
+                  hidden
+                >
+
+                <div
+                  id="chat-contact-avatar-fallback"
+                  aria-hidden="true"
+                >
+                  <svg
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <circle
+                      cx="12"
+                      cy="8"
+                      r="3.3"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                    />
+                    <path
+                      d="M5.5 19c.9-3.3 3.05-5 6.5-5s5.6 1.7 6.5 5"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </div>
+
+                <span
+                  id="chat-contact-online"
+                  class="chat-header__online"
+                  hidden
+                ></span>
+              </div>
+
+              <div class="chat-header__info">
+
+                <div
+                  id="chat-contact-name"
+                  class="chat-header__name"
+                >
+                  المحادثة
+                </div>
+
+                <div
+                  id="chat-contact-status"
+                  class="chat-header__status"
+                >
+                  جارٍ تحميل بيانات المحادثة...
+                </div>
+
+              </div>
+
+            </button>
+
+            <div class="chat-header__actions">
+
+              <button
+                id="chat-voice-call"
+                class="chat-header__action"
+                type="button"
+                aria-label="مكالمة صوتية"
+                title="مكالمة صوتية"
+                data-call-type="voice"
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M7.2 4.8 5.5 6.1c-.7.55-.95 1.5-.6 2.35 1.75 4.25 5.1 7.6 9.35 9.35.85.35 1.8.1 2.35-.6l1.3-1.7c.45-.6.35-1.45-.2-1.95l-2.15-1.95c-.5-.45-1.25-.45-1.8-.05l-1.15.85a12.2 12.2 0 0 1-4.7-4.7l.85-1.15c.4-.55.4-1.3-.05-1.8L6.8 4.6c-.5-.55-1.35-.65-1.95-.2Z"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+
+              <button
+                id="chat-video-call"
+                class="chat-header__action"
+                type="button"
+                aria-label="مكالمة فيديو"
+                title="مكالمة فيديو"
+                data-call-type="video"
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <rect
+                    x="3"
+                    y="6"
+                    width="12"
+                    height="12"
+                    rx="2"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  />
+                  <path
+                    d="m15 10 5-3v10l-5-3"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+
+              <button
+                id="chat-more-button"
+                class="chat-header__action"
+                type="button"
+                aria-label="المزيد من خيارات المحادثة"
+                title="المزيد"
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <circle
+                    cx="5"
+                    cy="12"
+                    r="1.5"
+                    fill="currentColor"
+                  />
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="1.5"
+                    fill="currentColor"
+                  />
+                  <circle
+                    cx="19"
+                    cy="12"
+                    r="1.5"
+                    fill="currentColor"
+                  />
+                </svg>
+              </button>
+
+            </div>
+
+          </header>
+
+          <!-- =================================================
+               Security notice
+               ================================================= -->
+
+          <div
+            class="chat-security"
+            role="status"
+          >
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <rect
+                x="5"
+                y="10"
+                width="14"
+                height="10"
+                rx="2"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+              <path
+                d="M8 10V7a4 4 0 0 1 8 0v3"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              />
+            </svg>
+
+            <span>
+              لا يتم عرض أي بيانات غير موجودة في حسابك أو مصدر البيانات.
+            </span>
+          </div>
+
+          <!-- =================================================
+               Messages
+               ================================================= -->
+
+          <section
+            id="chat-messages"
+            class="chat-messages"
+            aria-label="الرسائل"
+            aria-live="polite"
+            aria-busy="true"
+          >
+
+            <div
+              id="chat-messages-inner"
+              class="chat-messages__inner"
+            >
+
+              <div
+                id="chat-loading"
+                class="chat-loading"
+              >
+                <div
+                  class="chat-loading__spinner"
+                  aria-hidden="true"
+                ></div>
+
+                <div class="chat-loading__text">
+                  جاري تحميل الرسائل...
+                </div>
+              </div>
+
+              <div
+                id="chat-empty"
+                class="chat-empty"
+                hidden
+              >
+
+                <div
+                  class="chat-empty__icon"
+                  aria-hidden="true"
+                >
+                  <svg
+                    width="31"
+                    height="31"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5c-1.1 0-2.14-.24-3.08-.67L5 20l1.67-3.92A7.47 7.47 0 0 1 5 11.5 7.5 7.5 0 0 1 12.5 4 7.5 7.5 0 0 1 20 11.5Z"
+                      stroke="currentColor"
+                      stroke-width="1.45"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M8.8 11.8h.01M12.5 11.8h.01M16.2 11.8h.01"
+                      stroke="currentColor"
+                      stroke-width="2.1"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </div>
+
+                <h2 class="chat-empty__title">
+                  لا توجد رسائل بعد
+                </h2>
+
+                <p class="chat-empty__text">
+                  يمكنك بدء المحادثة بإرسال رسالة من مربع الكتابة بالأسفل.
+                </p>
+
+              </div>
+
+            </div>
+
+          </section>
+
+          <!-- =================================================
+               Reply preview
+               ================================================= -->
+
+          <div
+            id="chat-reply-preview"
+            class="chat-reply-preview"
+            aria-live="polite"
+          >
+
+            <div class="chat-reply-preview__content">
+
+              <div class="chat-reply-preview__label">
+                الرد على رسالة
+              </div>
+
+              <div
+                id="chat-reply-text"
+                class="chat-reply-preview__text"
+              ></div>
+
+            </div>
+
+            <button
+              id="chat-cancel-reply"
+              class="chat-reply-preview__close"
+              type="button"
+              aria-label="إلغاء الرد"
+              title="إلغاء الرد"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="m7 7 10 10M17 7 7 17"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+
+          </div>
+
+          <!-- =================================================
+               Media preview
+               ================================================= -->
+
+          <div
+            id="chat-media-preview"
+            class="chat-media-preview"
+            aria-live="polite"
+          >
+
+            <div
+              id="chat-media-thumb"
+              class="chat-media-preview__thumb"
+            ></div>
+
+            <div class="chat-media-preview__info">
+
+              <div
+                id="chat-media-name"
+                class="chat-media-preview__name"
+              ></div>
+
+              <div
+                id="chat-media-size"
+                class="chat-media-preview__size"
+              ></div>
+
+            </div>
+
+            <button
+              id="chat-media-remove"
+              class="chat-media-preview__remove"
+              type="button"
+              aria-label="إزالة المرفق"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="m7 7 10 10M17 7 7 17"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+
+          </div>
+
+          <!-- =================================================
+               Composer
+               ================================================= -->
+
+          <form
+            id="chat-composer"
+            class="chat-composer"
+            autocomplete="off"
+          >
+
+            <div class="chat-composer__inner">
+
+              <div class="chat-composer__tools">
+
+                <button
+                  id="chat-attachment-button"
+                  class="chat-composer__tool"
+                  type="button"
+                  aria-label="إرفاق ملف"
+                  title="إرفاق ملف"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="m20.5 11.5-8.15 8.15a5 5 0 0 1-7.07-7.07l8.15-8.15a3.5 3.5 0 0 1 4.95 4.95l-8.15 8.15a2 2 0 1 1-2.83-2.83l7.8-7.8"
+                      stroke="currentColor"
+                      stroke-width="1.55"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+
+                <button
+                  id="chat-mic-button"
+                  class="chat-composer__tool"
+                  type="button"
+                  aria-label="تسجيل رسالة صوتية"
+                  title="رسالة صوتية"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <rect
+                      x="8"
+                      y="3"
+                      width="8"
+                      height="13"
+                      rx="4"
+                      stroke="currentColor"
+                      stroke-width="1.55"
+                    />
+                    <path
+                      d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"
+                      stroke="currentColor"
+                      stroke-width="1.55"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </button>
+
+              </div>
+
+              <div class="chat-composer__input-wrap">
+
+                <label
+                  class="sr-only"
+                  for="chat-message-input"
+                >
+                  اكتب رسالة
+                </label>
+
+                <textarea
+                  id="chat-message-input"
+                  class="chat-composer__textarea"
+                  rows="1"
+                  maxlength="4096"
+                  placeholder="اكتب رسالة..."
+                  aria-label="اكتب رسالة"
+                  spellcheck="true"
+                  enterkeyhint="send"
+                ></textarea>
+
+              </div>
+
+              <button
+                id="chat-send-button"
+                class="chat-composer__send"
+                type="submit"
+                aria-label="إرسال الرسالة"
+                title="إرسال"
+                disabled
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="m5 12 14-7-4.5 14-3-6-6.5-1Z"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M11.5 13 19 5"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+
+            </div>
+
+            <div class="chat-composer__hint">
+              Enter للإرسال • Shift + Enter لسطر جديد
+            </div>
+
+          </form>
+
+          <input
+            id="chat-file-input"
+            class="chat-file-input"
+            type="file"
+            multiple
+            accept="image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm,audio/mpeg,audio/mp4,audio/wav,audio/webm,application/pdf,text/plain"
+          >
+
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Mobile bottom navigation -->
+    <div
+      id="global-bottom-nav"
+      data-component="bottom-nav"
+    ></div>
+
+  </div>
+
+
+  <!-- =====================================================
+       Context menu
+       ===================================================== -->
+
+  <dialog
+    id="chat-context-menu"
+    class="chat-context-menu"
+    aria-labelledby="chat-context-title"
+  >
+
+    <h2
+      id="chat-context-title"
+      class="sr-only"
+    >
+      خيارات الرسالة
+    </h2>
+
+    <button
+      class="chat-context-menu__button"
+      type="button"
+      data-message-action="reply"
+    >
+      <span aria-hidden="true">↩</span>
+      الرد
+    </button>
+
+    <button
+      class="chat-context-menu__button"
+      type="button"
+      data-message-action="copy"
+    >
+      <span aria-hidden="true">⧉</span>
+      نسخ
+    </button>
+
+    <button
+      class="chat-context-menu__button"
+      type="button"
+      data-message-action="forward"
+    >
+      <span aria-hidden="true">↗</span>
+      إعادة توجيه
+    </button>
+
+    <button
+      class="chat-context-menu__button"
+      type="button"
+      data-message-action="pin"
+    >
+      <span aria-hidden="true">⌖</span>
+      تثبيت
+    </button>
+
+    <button
+      class="chat-context-menu__button chat-context-menu__button--danger"
+      type="button"
+      data-message-action="delete"
+    >
+      <span aria-hidden="true">⌫</span>
+      حذف
+    </button>
+
+    <button
+      class="chat-context-menu__button"
+      type="button"
+      data-dialog-close
+    >
+      إلغاء
+    </button>
+
+  </dialog>
+
+
+  <!-- =====================================================
+       More menu
+       ===================================================== -->
+
+  <dialog
+    id="chat-more-dialog"
+    class="chat-dialog"
+    aria-labelledby="chat-more-title"
+  >
+
+    <header class="chat-dialog__header">
+
+      <h2
+        id="chat-more-title"
+        class="chat-dialog__title"
+      >
+        خيارات المحادثة
+      </h2>
+
+      <button
+        class="chat-dialog__close"
+        type="button"
+        data-dialog-close="chat-more-dialog"
+        aria-label="إغلاق"
+      >
+        <svg
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="m7 7 10 10M17 7 7 17"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+
+    </header>
+
+    <div class="chat-dialog__body">
+
+      <p class="chat-dialog__text">
+        إدارة هذه المحادثة تتم من خلال الحساب ومصدر البيانات الحقيقي.
+      </p>
+
+      <div style="
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+        margin-top:14px;
+      ">
+
+        <button
+          class="chat-context-menu__button"
+          type="button"
+          data-chat-option="search"
+        >
+          🔎 البحث داخل المحادثة
+        </button>
+
+        <button
+          class="chat-context-menu__button"
+          type="button"
+          data-chat-option="mute"
+        >
+          🔕 كتم الإشعارات
+        </button>
+
+        <button
+          class="chat-context-menu__button"
+          type="button"
+          data-chat-option="pin"
+        >
+          📌 تثبيت المحادثة
+        </button>
+
+        <button
+          class="chat-context-menu__button chat-context-menu__button--danger"
+          type="button"
+          data-chat-option="delete"
+        >
+          🗑 حذف المحادثة
+        </button>
+
+      </div>
+
+    </div>
+
+  </dialog>
+
+
+  <!-- =====================================================
+       JavaScript
+       ===================================================== -->
+
+  <script src="../js/config.js"></script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/router.js"></script>
+  <script src="../js/realtime.js"></script>
+  <script src="../js/notifications.js"></script>
+  <script src="../js/contacts.js"></script>
+  <script src="../js/calls.js"></script>
+  <script src="../js/chat.js"></script>
+  <script src="../js/chats.js"></script>
+  <script src="../js/app.js"></script>
+
+
+  <!-- =====================================================
+       Page controller
+       ===================================================== -->
+
+  <script>
+    (() => {
+      "use strict";
+
+      const state = {
+        conversationId: null,
+        selectedMessageId: null,
+        replyMessageId: null,
+        selectedFile: null
+      };
+
+      const qs = (selector, root = document) =>
+        root.querySelector(selector);
+
+      const qsa = (selector, root = document) =>
+        Array.from(root.querySelectorAll(selector));
+
+      const elements = {
+        back:
+          qs("#chat-back-button"),
+
+        contactButton:
+          qs("#chat-contact-button"),
+
+        contactName:
+          qs("#chat-contact-name"),
+
+        contactStatus:
+          qs("#chat-contact-status"),
+
+        contactAvatar:
+          qs("#chat-contact-avatar"),
+
+        contactAvatarFallback:
+          qs("#chat-contact-avatar-fallback"),
+
+        contactOnline:
+          qs("#chat-contact-online"),
+
+        voiceCall:
+          qs("#chat-voice-call"),
+
+        videoCall:
+          qs("#chat-video-call"),
+
+        more:
+          qs("#chat-more-button"),
+
+        messages:
+          qs("#chat-messages"),
+
+        messagesInner:
+          qs("#chat-messages-inner"),
+
+        loading:
+          qs("#chat-loading"),
+
+        empty:
+          qs("#chat-empty"),
+
+        composer:
+          qs("#chat-composer"),
+
+        input:
+          qs("#chat-message-input"),
+
+        send:
+          qs("#chat-send-button"),
+
+        attachment:
+          qs("#chat-attachment-button"),
+
+        file:
+          qs("#chat-file-input"),
+
+        mic:
+          qs("#chat-mic-button"),
+
+        replyPreview:
+          qs("#chat-reply-preview"),
+
+        replyText:
+          qs("#chat-reply-text"),
+
+        cancelReply:
+          qs("#chat-cancel-reply"),
+
+        mediaPreview:
+          qs("#chat-media-preview"),
+
+        mediaThumb:
+          qs("#chat-media-thumb"),
+
+        mediaName:
+          qs("#chat-media-name"),
+
+        mediaSize:
+          qs("#chat-media-size"),
+
+        mediaRemove:
+          qs("#chat-media-remove"),
+
+        contextMenu:
+          qs("#chat-context-menu"),
+
+        moreDialog:
+          qs("#chat-more-dialog")
+      };
+
+      /* ===================================================
+         Helpers
+         =================================================== */
+
+      function toast(message, type = "info") {
+        if (
+          window.NOVA &&
+          typeof window.NOVA.toast === "function"
+        ) {
+          window.NOVA.toast(message, type);
+        }
+      }
+
+      function getConversationId() {
+        const params =
+          new URLSearchParams(window.location.search);
+
+        return (
+          params.get("conversation") ||
+          params.get("conversationId") ||
+          params.get("chat") ||
+          params.get("id") ||
+          ""
+        );
+      }
+
+      function safeFocus(element) {
+        if (!element) {
+          return;
+        }
+
+        window.requestAnimationFrame(() => {
+          try {
+            element.focus();
+          } catch (_) {}
+        });
+      }
+
+      function closeDialog(dialog) {
+        if (!dialog) {
+          return;
+        }
+
+        if (
+          typeof dialog.close === "function" &&
+          dialog.open
+        ) {
+          dialog.close();
+        }
+      }
+
+      function openDialog(dialog) {
+        if (!dialog) {
+          return;
+        }
+
+        if (
+          typeof dialog.showModal === "function" &&
+          !dialog.open
+        ) {
+          dialog.showModal();
+        }
+      }
+
+      /* ===================================================
+         Conversation identity
+         =================================================== */
+
+      function renderConversationIdentity(data = {}) {
+        const name =
+          data.name ||
+          data.title ||
+          data.displayName ||
+          "المحادثة";
+
+        const status =
+          data.statusText ||
+          data.status ||
+          "متصل";
+
+        if (elements.contactName) {
+          elements.contactName.textContent = name;
+        }
+
+        if (elements.contactStatus) {
+          elements.contactStatus.textContent = status;
+        }
+
+        if (
+          elements.contactAvatar &&
+          data.avatar
+        ) {
+          elements.contactAvatar.src = data.avatar;
+          elements.contactAvatar.alt =
+            `صورة ${name}`;
+          elements.contactAvatar.hidden = false;
+
+          if (elements.contactAvatarFallback) {
+            elements.contactAvatarFallback.hidden = true;
+          }
+        }
+
+        if (
+          elements.contactOnline &&
+          data.online === true
+        ) {
+          elements.contactOnline.hidden = false;
+        }
+      }
+
+      /* ===================================================
+         Loading state
+         =================================================== */
+
+      function setLoading(loading) {
+        if (elements.loading) {
+          elements.loading.hidden = !loading;
+        }
+
+        if (elements.messages) {
+          elements.messages.setAttribute(
+            "aria-busy",
+            String(loading)
+          );
+        }
+      }
+
+      function showEmpty(show) {
+        if (elements.empty) {
+          elements.empty.hidden = !show;
+        }
+      }
+
+      /* ===================================================
+         Composer
+         =================================================== */
+
+      function updateSendState() {
+        if (!elements.send || !elements.input) {
+          return;
+        }
+
+        const hasText =
+          elements.input.value.trim().length > 0;
+
+        const hasFile =
+          Boolean(state.selectedFile);
+
+        elements.send.disabled =
+          !hasText &&
+          !hasFile;
+      }
+
+      function autoResizeTextarea() {
+        const textarea = elements.input;
+
+        if (!textarea) {
+          return;
+        }
+
+        textarea.style.height = "auto";
+
+        const maxHeight = 140;
+
+        textarea.style.height =
+          `${Math.min(
+            textarea.scrollHeight,
+            maxHeight
+          )}px`;
+      }
+
+      elements.input?.addEventListener(
+        "input",
+        () => {
+          autoResizeTextarea();
+          updateSendState();
+
+          if (
+            window.NOVA_CHAT &&
+            typeof window.NOVA_CHAT.handleTyping === "function"
+          ) {
+            window.NOVA_CHAT.handleTyping();
+          }
+
+          document.dispatchEvent(
+            new CustomEvent("nova:chat-typing", {
+              detail: {
+                conversationId:
+                  state.conversationId
+              }
+            })
+          );
+        }
+      );
+
+      elements.input?.addEventListener(
+        "keydown",
+        (event) => {
+          if (
+            event.key === "Enter" &&
+            !event.shiftKey
+          ) {
+            event.preventDefault();
+
+            if (!elements.send?.disabled) {
+              elements.composer?.requestSubmit();
+            }
+          }
+        }
+      );
+
+      /* ===================================================
+         Send
+         =================================================== */
+
+      async function sendMessage() {
+        const text =
+          String(elements.input?.value || "")
+            .trim();
+
+        const file =
+          state.selectedFile;
+
+        if (!text && !file) {
+          return;
+        }
+
+        if (!state.conversationId) {
+          toast(
+            "لم يتم تحديد محادثة صالحة.",
+            "warning"
+          );
+          return;
+        }
+
+        if (elements.send) {
+          elements.send.disabled = true;
+          elements.send.setAttribute(
+            "aria-busy",
+            "true"
+          );
+        }
+
+        try {
+          let result = null;
+
+          if (
+            file &&
+            window.NOVA_CHAT &&
+            typeof window.NOVA_CHAT.sendMedia === "function"
+          ) {
+            result =
+              await window.NOVA_CHAT.sendMedia(
+                file,
+                text
+              );
+          } else if (
+            text &&
+            window.NOVA_CHAT &&
+            typeof window.NOVA_CHAT.sendMessage === "function"
+          ) {
+            result =
+              await window.NOVA_CHAT.sendMessage(
+                text,
+                {
+                  replyTo:
+                    state.replyMessageId || null
+                }
+              );
+          } else {
+            throw new Error(
+              "Chat module is not initialized."
+            );
+          }
+
+          if (result === false) {
+            throw new Error(
+              "Message was not accepted."
+            );
+          }
+
+          if (elements.input) {
+            elements.input.value = "";
+          }
+
+          clearReply();
+          clearMedia();
+
+          autoResizeTextarea();
+
+          document.dispatchEvent(
+            new CustomEvent(
+              "nova:message-sent",
+              {
+                detail: {
+                  conversationId:
+                    state.conversationId,
+                  result
+                }
+              }
+            )
+          );
+
+          scrollMessagesToBottom();
+
+        } catch (error) {
+          console.error(
+            "[NOVA] Send message failed:",
+            error
+          );
+
+          toast(
+            "تعذر إرسال الرسالة. حاول مرة أخرى.",
+            "error"
+          );
+
+        } finally {
+          if (elements.send) {
+            elements.send.removeAttribute(
+              "aria-busy"
+            );
+          }
+
+          updateSendState();
+        }
+      }
+
+      elements.composer?.addEventListener(
+        "submit",
+        (event) => {
+          event.preventDefault();
+          sendMessage();
+        }
+      );
+
+      /* ===================================================
+         Scroll
+         =================================================== */
+
+      function scrollMessagesToBottom(smooth = false) {
+        const container =
+          elements.messages;
+
+        if (!container) {
+          return;
+        }
+
+        window.requestAnimationFrame(() => {
+          container.scrollTo({
+            top: container.scrollHeight,
+            behavior: smooth
+              ? "smooth"
+              : "auto"
+          });
+        });
+      }
+
+      /* ===================================================
+         Attachments
+         =================================================== */
+
+      elements.attachment?.addEventListener(
+        "click",
+        () => {
+          elements.file?.click();
+        }
+      );
+
+      function formatBytes(bytes) {
+        if (!bytes) {
+          return "0 بايت";
+        }
+
+        const units = [
+          "بايت",
+          "KB",
+          "MB",
+          "GB"
+        ];
+
+        let size = bytes;
+        let index = 0;
+
+        while (
+          size >= 1024 &&
+          index < units.length - 1
+        ) {
+          size /= 1024;
+          index++;
+        }
+
+        return `${size.toFixed(index === 0 ? 0 : 1)} ${units[index]}`;
+      }
+
+      function renderFilePreview(file) {
+        if (
+          !elements.mediaPreview ||
+          !file
+        ) {
+          return;
+        }
+
+        elements.mediaPreview.classList.add(
+          "is-visible"
+        );
+
+        if (elements.mediaName) {
+          elements.mediaName.textContent =
+            file.name;
+        }
+
+        if (elements.mediaSize) {
+          elements.mediaSize.textContent =
+            formatBytes(file.size);
+        }
+
+        if (elements.mediaThumb) {
+          elements.mediaThumb.replaceChildren();
+
+          if (
+            file.type.startsWith("image/")
+          ) {
+            const img =
+              document.createElement("img");
+
+            img.alt = "";
+
+            img.src =
+              URL.createObjectURL(file);
+
+            elements.mediaThumb.appendChild(img);
+          } else {
+            elements.mediaThumb.textContent =
+              "📎";
+            elements.mediaThumb.style.display =
+              "grid";
+            elements.mediaThumb.style.placeItems =
+              "center";
+            elements.mediaThumb.style.fontSize =
+              "1.1rem";
+          }
+        }
+      }
+
+      function clearMedia() {
+        state.selectedFile = null;
+
+        if (elements.file) {
+          elements.file.value = "";
+        }
+
+        if (elements.mediaPreview) {
+          elements.mediaPreview.classList.remove(
+            "is-visible"
+          );
+        }
+
+        if (elements.mediaThumb) {
+          elements.mediaThumb.replaceChildren();
+        }
+
+        updateSendState();
+      }
+
+      elements.file?.addEventListener(
+        "change",
+        () => {
+          const file =
+            elements.file.files?.[0];
+
+          if (!file) {
+            return;
+          }
+
+          state.selectedFile = file;
+
+          renderFilePreview(file);
+
+          updateSendState();
+        }
+      );
+
+      elements.mediaRemove?.addEventListener(
+        "click",
+        clearMedia
+      );
+
+      /* ===================================================
+         Reply
+         =================================================== */
+
+      function setReply(message) {
+        if (!message) {
+          return;
+        }
+
+        state.replyMessageId =
+          message.id ||
+          message.messageId ||
+          null;
+
+        if (!state.replyMessageId) {
+          return;
+        }
+
+        if (elements.replyText) {
+          elements.replyText.textContent =
+            message.text ||
+            message.content ||
+            "رسالة";
+        }
+
+        elements.replyPreview?.classList.add(
+          "is-visible"
+        );
+
+        safeFocus(elements.input);
+      }
+
+      function clearReply() {
+        state.replyMessageId = null;
+
+        elements.replyPreview?.classList.remove(
+          "is-visible"
+        );
+
+        if (elements.replyText) {
+          elements.replyText.textContent = "";
+        }
+      }
+
+      elements.cancelReply?.addEventListener(
+        "click",
+        clearReply
+      );
+
+      /* ===================================================
+         Message actions
+         =================================================== */
+
+      function handleMessageAction(
+        action,
+        message
+      ) {
+        if (!action || !message) {
+          return;
+        }
+
+        state.selectedMessageId =
+          message.id ||
+          message.messageId ||
+          null;
+
+        switch (action) {
+          case "reply":
+            setReply(message);
+            break;
+
+          case "copy":
+            safeCopyMessage(message);
+            break;
+
+          case "forward":
+            document.dispatchEvent(
+              new CustomEvent(
+                "nova:forward-message",
+                {
+                  detail: {
+                    message
+                  }
+                }
+              )
+            );
+            break;
+
+          case "pin":
+            if (
+              window.NOVA_CHAT &&
+              typeof window.NOVA_CHAT.pinMessage === "function"
+            ) {
+              window.NOVA_CHAT.pinMessage(
+                state.selectedMessageId
+              );
+            }
+            break;
+
+          case "delete":
+            if (
+              window.NOVA_CHAT &&
+              typeof window.NOVA_CHAT.deleteMessage === "function"
+            ) {
+              window.NOVA_CHAT.deleteMessage(
+                state.selectedMessageId
+              );
+            }
+            break;
+
+          default:
+            break;
+        }
+
+        closeDialog(elements.contextMenu);
+      }
+
+      async function safeCopyMessage(message) {
+        const text =
+          message.text ||
+          message.content ||
+          "";
+
+        if (!text) {
+          return;
+        }
+
+        try {
+          await navigator.clipboard.writeText(
+            text
+          );
+
+          toast(
+            "تم نسخ الرسالة.",
+            "success"
+          );
+        } catch (_) {
+          toast(
+            "تعذر نسخ الرسالة.",
+            "warning"
+          );
+        }
+      }
+
+      qsa(
+        "[data-message-action]",
+        elements.contextMenu
+      ).forEach((button) => {
+        button.addEventListener(
+          "click",
+          () => {
+            const action =
+              button.dataset.messageAction;
+
+            const message =
+              window.NOVA_CHAT?.getSelectedMessage?.() ||
+              window.NOVA_CHAT?.selectedMessage ||
+              null;
+
+            handleMessageAction(
+              action,
+              message
+            );
+          }
+        );
+      });
+
+      /* ===================================================
+         Event delegation for generated messages
+         =================================================== */
+
+      elements.messagesInner?.addEventListener(
+        "contextmenu",
+        (event) => {
+          const messageElement =
+            event.target.closest(
+              "[data-message-id]"
+            );
+
+          if (!messageElement) {
+            return;
+          }
+
+          event.preventDefault();
+
+          const id =
+            messageElement.dataset.messageId;
+
+          state.selectedMessageId = id;
+
+          if (
+            window.NOVA_CHAT &&
+            typeof window.NOVA_CHAT.selectMessage === "function"
+          ) {
+            window.NOVA_CHAT.selectMessage(id);
+          }
+
+          openDialog(
+            elements.contextMenu
+          );
+        }
+      );
+
+      elements.messagesInner?.addEventListener(
+        "click",
+        (event) => {
+          const actionButton =
+            event.target.closest(
+              "[data-message-action]"
+            );
+
+          if (!actionButton) {
+            return;
+          }
+
+          const messageElement =
+            actionButton.closest(
+              "[data-message-id]"
+            );
+
+          const messageId =
+            messageElement?.dataset?.messageId;
+
+          const action =
+            actionButton.dataset.messageAction;
+
+          if (
+            messageId &&
+            window.NOVA_CHAT &&
+            typeof window.NOVA_CHAT.getMessage === "function"
+          ) {
+            const message =
+              window.NOVA_CHAT.getMessage(
+                messageId
+              );
+
+            handleMessageAction(
+              action,
+              message
+            );
+          }
+        }
+      );
+
+      /* ===================================================
+         More menu
+         =================================================== */
+
+      elements.more?.addEventListener(
+        "click",
+        () => {
+          openDialog(
+            elements.moreDialog
+          );
+        }
+      );
+
+      qsa(
+        "[data-dialog-close]"
+      ).forEach((button) => {
+        button.addEventListener(
+          "click",
+          () => {
+            const target =
+              button.dataset.dialogClose;
+
+            if (target) {
+              closeDialog(
+                document.getElementById(target)
+              );
+            } else {
+              closeDialog(
+                button.closest("dialog")
+              );
+            }
+          }
+        );
+      });
+
+      qsa(
+        "[data-chat-option]"
+      ).forEach((button) => {
+        button.addEventListener(
+          "click",
+          () => {
+            const option =
+              button.dataset.chatOption;
+
+            closeDialog(
+              elements.moreDialog
+            );
+
+            if (
+              option === "search"
+            ) {
+              document.dispatchEvent(
+                new CustomEvent(
+                  "nova:chat-search-request",
+                  {
+                    detail: {
+                      conversationId:
+                        state.conversationId
+                    }
+                  }
+                )
+              );
+
+              return;
+            }
+
+            if (
+              window.NOVA_CHAT &&
+              typeof window.NOVA_CHAT[option] === "function"
+            ) {
+              window.NOVA_CHAT[option](
+                state.conversationId
+              );
+            }
+          }
+        );
+      });
+
+      /* ===================================================
+         Navigation
+         =================================================== */
+
+      elements.back?.addEventListener(
+        "click",
+        () => {
+          if (
+            window.NOVA_ROUTER &&
+            typeof window.NOVA_ROUTER.back === "function"
+          ) {
+            window.NOVA_ROUTER.back();
+          } else {
+            window.location.href =
+              "../pages/chats.html";
+          }
+        }
+      );
+
+      elements.contactButton?.addEventListener(
+        "click",
+        () => {
+          const contactId =
+            window.NOVA_CHAT?.getContactId?.() ||
+            null;
+
+          if (
+            contactId &&
+            window.NOVA_ROUTER &&
+            typeof window.NOVA_ROUTER.navigate === "function"
+          ) {
+            window.NOVA_ROUTER.navigate(
+              "pages.profile"
+            );
+
+            return;
+          }
+
+          document
