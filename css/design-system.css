@@ -1,0 +1,1191 @@
+/* =========================================================
+   NOVA — Design System
+   Version: 1.0.0
+   Direction: RTL
+   ========================================================= */
+
+
+/* =========================================================
+   01 — Root Variables
+   ========================================================= */
+
+:root {
+
+  /* -------------------------------------------------------
+     Brand
+  ------------------------------------------------------- */
+
+  --nova-primary: #20d47b;
+  --nova-primary-dark: #12a85e;
+  --nova-primary-soft: rgba(32, 212, 123, 0.12);
+  --nova-primary-border: rgba(32, 212, 123, 0.25);
+
+
+  /* -------------------------------------------------------
+     Background
+  ------------------------------------------------------- */
+
+  --nova-bg: #06110d;
+  --nova-bg-secondary: #081914;
+  --nova-bg-tertiary: #0b2119;
+
+
+  /* -------------------------------------------------------
+     Surfaces
+  ------------------------------------------------------- */
+
+  --nova-surface: #0c1d17;
+  --nova-surface-2: #10271f;
+  --nova-surface-3: #143027;
+
+  --nova-surface-transparent:
+    rgba(12, 29, 23, 0.78);
+
+  --nova-surface-glass:
+    rgba(10, 27, 21, 0.72);
+
+
+  /* -------------------------------------------------------
+     Borders
+  ------------------------------------------------------- */
+
+  --nova-border:
+    rgba(255, 255, 255, 0.08);
+
+  --nova-border-light:
+    rgba(255, 255, 255, 0.12);
+
+  --nova-border-dark:
+    rgba(0, 0, 0, 0.35);
+
+
+  /* -------------------------------------------------------
+     Text
+  ------------------------------------------------------- */
+
+  --nova-text: #f4faf7;
+
+  --nova-text-secondary: #d3dfd9;
+
+  --nova-text-muted: #9cafaa;
+
+  --nova-text-disabled: #63746d;
+
+
+  /* -------------------------------------------------------
+     Status
+  ------------------------------------------------------- */
+
+  --nova-success: #20d47b;
+
+  --nova-warning: #f2c94c;
+
+  --nova-danger: #ff5c67;
+
+  --nova-info: #5aa9ff;
+
+
+  /* -------------------------------------------------------
+     Message Colors
+  ------------------------------------------------------- */
+
+  --nova-message-own:
+    #144d35;
+
+  --nova-message-other:
+    #10231c;
+
+  --nova-message-own-hover:
+    #185b40;
+
+  --nova-message-other-hover:
+    #143026;
+
+
+  /* -------------------------------------------------------
+     Typography
+  ------------------------------------------------------- */
+
+  --nova-font-primary:
+    "Cairo",
+    "IBM Plex Sans Arabic",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  --nova-font-secondary:
+    "IBM Plex Sans Arabic",
+    "Cairo",
+    system-ui,
+    sans-serif;
+
+
+  /* -------------------------------------------------------
+     Font Sizes
+  ------------------------------------------------------- */
+
+  --nova-font-xs: 11px;
+
+  --nova-font-sm: 12px;
+
+  --nova-font-md: 14px;
+
+  --nova-font-lg: 16px;
+
+  --nova-font-xl: 18px;
+
+  --nova-font-2xl: 22px;
+
+  --nova-font-3xl: 28px;
+
+  --nova-font-4xl: 36px;
+
+
+  /* -------------------------------------------------------
+     Font Weights
+  ------------------------------------------------------- */
+
+  --nova-weight-regular: 400;
+
+  --nova-weight-medium: 500;
+
+  --nova-weight-semibold: 600;
+
+  --nova-weight-bold: 700;
+
+  --nova-weight-extrabold: 800;
+
+
+  /* -------------------------------------------------------
+     Spacing
+  ------------------------------------------------------- */
+
+  --nova-space-1: 4px;
+
+  --nova-space-2: 8px;
+
+  --nova-space-3: 12px;
+
+  --nova-space-4: 16px;
+
+  --nova-space-5: 20px;
+
+  --nova-space-6: 24px;
+
+  --nova-space-7: 28px;
+
+  --nova-space-8: 32px;
+
+  --nova-space-9: 40px;
+
+  --nova-space-10: 48px;
+
+  --nova-space-11: 56px;
+
+  --nova-space-12: 64px;
+
+
+  /* -------------------------------------------------------
+     Radius
+  ------------------------------------------------------- */
+
+  --nova-radius-xs: 6px;
+
+  --nova-radius-sm: 10px;
+
+  --nova-radius-md: 14px;
+
+  --nova-radius-lg: 18px;
+
+  --nova-radius-xl: 24px;
+
+  --nova-radius-2xl: 30px;
+
+  --nova-radius-full: 999px;
+
+
+  /* -------------------------------------------------------
+     Shadows
+  ------------------------------------------------------- */
+
+  --nova-shadow-sm:
+    0 4px 15px rgba(0, 0, 0, 0.20);
+
+  --nova-shadow-md:
+    0 10px 35px rgba(0, 0, 0, 0.30);
+
+  --nova-shadow-lg:
+    0 25px 70px rgba(0, 0, 0, 0.40);
+
+  --nova-shadow-primary:
+    0 12px 35px rgba(32, 212, 123, 0.18);
+
+
+  /* -------------------------------------------------------
+     Layout
+  ------------------------------------------------------- */
+
+  --nova-header-height: 72px;
+
+  --nova-sidebar-width: 300px;
+
+  --nova-chat-width: minmax(0, 1fr);
+
+  --nova-info-width: 320px;
+
+  --nova-container-width: 1180px;
+
+
+  /* -------------------------------------------------------
+     Z Index
+  ------------------------------------------------------- */
+
+  --nova-z-background: -1;
+
+  --nova-z-base: 1;
+
+  --nova-z-header: 100;
+
+  --nova-z-sidebar: 200;
+
+  --nova-z-dropdown: 500;
+
+  --nova-z-modal: 1000;
+
+  --nova-z-toast: 2000;
+
+  --nova-z-loader: 9999;
+
+
+  /* -------------------------------------------------------
+     Motion
+  ------------------------------------------------------- */
+
+  --nova-duration-fast: 150ms;
+
+  --nova-duration-normal: 250ms;
+
+  --nova-duration-slow: 400ms;
+
+  --nova-ease:
+    cubic-bezier(0.4, 0, 0.2, 1);
+
+  --nova-ease-spring:
+    cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+/* =========================================================
+   02 — Global Reset
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+html {
+  min-height: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  font-size: 16px;
+
+  scroll-behavior: smooth;
+
+  background: var(--nova-bg);
+
+  color-scheme: dark;
+}
+
+
+body {
+  min-height: 100vh;
+
+  margin: 0;
+  padding: 0;
+
+  font-family: var(--nova-font-primary);
+
+  font-size: var(--nova-font-md);
+
+  font-weight: var(--nova-weight-regular);
+
+  line-height: 1.6;
+
+  color: var(--nova-text);
+
+  background:
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(32, 212, 123, 0.06),
+      transparent 30%
+    ),
+    var(--nova-bg);
+
+  -webkit-font-smoothing: antialiased;
+
+  text-rendering: optimizeLegibility;
+}
+
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+
+  max-width: 100%;
+}
+
+
+img {
+  height: auto;
+}
+
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+
+button {
+  color: inherit;
+}
+
+
+a {
+  color: inherit;
+
+  text-decoration: none;
+}
+
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+
+/* =========================================================
+   03 — Selection
+   ========================================================= */
+
+::selection {
+  color: #041109;
+
+  background:
+    var(--nova-primary);
+}
+
+
+/* =========================================================
+   04 — Scrollbar
+   ========================================================= */
+
+* {
+  scrollbar-width: thin;
+
+  scrollbar-color:
+    rgba(32, 212, 123, 0.30)
+    transparent;
+}
+
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+*::-webkit-scrollbar-thumb {
+  border-radius: var(--nova-radius-full);
+
+  background:
+    rgba(32, 212, 123, 0.25);
+}
+
+
+*::-webkit-scrollbar-thumb:hover {
+  background:
+    rgba(32, 212, 123, 0.40);
+}
+
+
+/* =========================================================
+   05 — Typography
+   ========================================================= */
+
+.nova-heading-1 {
+  font-family: var(--nova-font-primary);
+
+  font-size: clamp(
+    32px,
+    5vw,
+    58px
+  );
+
+  font-weight:
+    var(--nova-weight-extrabold);
+
+  line-height: 1.15;
+
+  letter-spacing: -1px;
+}
+
+
+.nova-heading-2 {
+  font-size: var(--nova-font-3xl);
+
+  font-weight:
+    var(--nova-weight-bold);
+
+  line-height: 1.3;
+}
+
+
+.nova-heading-3 {
+  font-size: var(--nova-font-2xl);
+
+  font-weight:
+    var(--nova-weight-bold);
+
+  line-height: 1.4;
+}
+
+
+.nova-text {
+  color: var(--nova-text);
+
+  font-size: var(--nova-font-md);
+
+  line-height: 1.8;
+}
+
+
+.nova-text-muted {
+  color: var(--nova-text-muted);
+
+  font-size: var(--nova-font-sm);
+
+  line-height: 1.8;
+}
+
+
+/* =========================================================
+   06 — Container
+   ========================================================= */
+
+.nova-container {
+  width:
+    min(
+      calc(100% - 40px),
+      var(--nova-container-width)
+    );
+
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+.nova-container-fluid {
+  width: 100%;
+
+  padding-right: var(--nova-space-5);
+  padding-left: var(--nova-space-5);
+}
+
+
+/* =========================================================
+   07 — Surface
+   ========================================================= */
+
+.nova-surface {
+
+  border:
+    1px solid var(--nova-border);
+
+  border-radius:
+    var(--nova-radius-lg);
+
+  background:
+    var(--nova-surface);
+
+  box-shadow:
+    var(--nova-shadow-sm);
+}
+
+
+.nova-surface-glass {
+
+  border:
+    1px solid var(--nova-border);
+
+  border-radius:
+    var(--nova-radius-lg);
+
+  background:
+    var(--nova-surface-glass);
+
+  backdrop-filter:
+    blur(18px);
+
+  -webkit-backdrop-filter:
+    blur(18px);
+
+  box-shadow:
+    var(--nova-shadow-md);
+}
+
+
+/* =========================================================
+   08 — Buttons
+   ========================================================= */
+
+.nova-btn {
+
+  min-height: 46px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: var(--nova-space-2);
+
+  padding:
+    0 var(--nova-space-5);
+
+  border:
+    1px solid transparent;
+
+  border-radius:
+    var(--nova-radius-md);
+
+  font-size:
+    var(--nova-font-md);
+
+  font-weight:
+    var(--nova-weight-semibold);
+
+  cursor: pointer;
+
+  user-select: none;
+
+  transition:
+    transform var(--nova-duration-normal) var(--nova-ease),
+    background var(--nova-duration-normal) var(--nova-ease),
+    border-color var(--nova-duration-normal) var(--nova-ease),
+    box-shadow var(--nova-duration-normal) var(--nova-ease),
+    opacity var(--nova-duration-normal) var(--nova-ease);
+}
+
+
+.nova-btn:hover {
+  transform: translateY(-1px);
+}
+
+
+.nova-btn:active {
+  transform: translateY(0);
+}
+
+
+.nova-btn:disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+
+/* Primary */
+
+.nova-btn-primary {
+
+  color: #041109;
+
+  background:
+    var(--nova-primary);
+
+  box-shadow:
+    var(--nova-shadow-primary);
+}
+
+
+.nova-btn-primary:hover {
+
+  background:
+    #38df8c;
+
+  box-shadow:
+    0 15px 42px
+    rgba(32, 212, 123, 0.24);
+}
+
+
+/* Secondary */
+
+.nova-btn-secondary {
+
+  color:
+    var(--nova-text);
+
+  border-color:
+    var(--nova-border-light);
+
+  background:
+    rgba(255,255,255,0.04);
+}
+
+
+.nova-btn-secondary:hover {
+
+  border-color:
+    var(--nova-primary-border);
+
+  background:
+    var(--nova-primary-soft);
+}
+
+
+/* Ghost */
+
+.nova-btn-ghost {
+
+  color:
+    var(--nova-text-secondary);
+
+  background:
+    transparent;
+}
+
+
+.nova-btn-ghost:hover {
+
+  color:
+    var(--nova-primary);
+
+  background:
+    var(--nova-primary-soft);
+}
+
+
+/* Danger */
+
+.nova-btn-danger {
+
+  color:
+    #fff;
+
+  background:
+    var(--nova-danger);
+}
+
+
+/* =========================================================
+   09 — Icon Button
+   ========================================================= */
+
+.nova-icon-btn {
+
+  width: 42px;
+  height: 42px;
+
+  display: inline-grid;
+
+  place-items: center;
+
+  flex: 0 0 auto;
+
+  border:
+    1px solid var(--nova-border);
+
+  border-radius:
+    var(--nova-radius-md);
+
+  background:
+    rgba(255,255,255,0.035);
+
+  color:
+    var(--nova-text-secondary);
+
+  cursor: pointer;
+
+  transition:
+    transform var(--nova-duration-normal) var(--nova-ease),
+    color var(--nova-duration-normal) var(--nova-ease),
+    background var(--nova-duration-normal) var(--nova-ease),
+    border-color var(--nova-duration-normal) var(--nova-ease);
+}
+
+
+.nova-icon-btn:hover {
+
+  color:
+    var(--nova-primary);
+
+  border-color:
+    var(--nova-primary-border);
+
+  background:
+    var(--nova-primary-soft);
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* =========================================================
+   10 — Form Controls
+   ========================================================= */
+
+.nova-input,
+.nova-textarea,
+.nova-select {
+
+  width: 100%;
+
+  border:
+    1px solid var(--nova-border-light);
+
+  border-radius:
+    var(--nova-radius-md);
+
+  outline: none;
+
+  color:
+    var(--nova-text);
+
+  background:
+    rgba(255,255,255,0.035);
+
+  transition:
+    border-color var(--nova-duration-normal) var(--nova-ease),
+    background var(--nova-duration-normal) var(--nova-ease),
+    box-shadow var(--nova-duration-normal) var(--nova-ease);
+}
+
+
+.nova-input {
+
+  min-height: 48px;
+
+  padding:
+    0 var(--nova-space-4);
+}
+
+
+.nova-textarea {
+
+  min-height: 120px;
+
+  padding:
+    var(--nova-space-4);
+
+  resize: vertical;
+}
+
+
+.nova-select {
+
+  min-height: 48px;
+
+  padding:
+    0 var(--nova-space-4);
+
+  cursor: pointer;
+}
+
+
+.nova-input::placeholder,
+.nova-textarea::placeholder {
+
+  color:
+    var(--nova-text-disabled);
+}
+
+
+.nova-input:focus,
+.nova-textarea:focus,
+.nova-select:focus {
+
+  border-color:
+    var(--nova-primary-border);
+
+  background:
+    rgba(32,212,123,0.045);
+
+  box-shadow:
+    0 0 0 4px
+    rgba(32,212,123,0.07);
+}
+
+
+/* =========================================================
+   11 — Avatar
+   ========================================================= */
+
+.nova-avatar {
+
+  width: 46px;
+  height: 46px;
+
+  display: grid;
+
+  place-items: center;
+
+  flex: 0 0 auto;
+
+  overflow: hidden;
+
+  border-radius:
+    50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #193a2d,
+      #10251c
+    );
+
+  color:
+    #c8f8dc;
+
+  font-weight:
+    var(--nova-weight-bold);
+}
+
+
+.nova-avatar img {
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+.nova-avatar-sm {
+
+  width: 36px;
+  height: 36px;
+}
+
+
+.nova-avatar-lg {
+
+  width: 60px;
+  height: 60px;
+}
+
+
+.nova-avatar-xl {
+
+  width: 88px;
+  height: 88px;
+}
+
+
+/* =========================================================
+   12 — Badge
+   ========================================================= */
+
+.nova-badge {
+
+  min-height: 24px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  padding:
+    0 9px;
+
+  border-radius:
+    var(--nova-radius-full);
+
+  font-size:
+    var(--nova-font-xs);
+
+  font-weight:
+    var(--nova-weight-semibold);
+}
+
+
+.nova-badge-primary {
+
+  color:
+    #c9f8dd;
+
+  background:
+    var(--nova-primary-soft);
+
+  border:
+    1px solid var(--nova-primary-border);
+}
+
+
+.nova-badge-success {
+
+  color:
+    #c9f8dd;
+
+  background:
+    rgba(32,212,123,0.10);
+}
+
+
+.nova-badge-warning {
+
+  color:
+    #ffe9a5;
+
+  background:
+    rgba(242,201,76,0.10);
+}
+
+
+.nova-badge-danger {
+
+  color:
+    #ffc5c9;
+
+  background:
+    rgba(255,92,103,0.10);
+}
+
+
+/* =========================================================
+   13 — Divider
+   ========================================================= */
+
+.nova-divider {
+
+  width: 100%;
+
+  height: 1px;
+
+  background:
+    var(--nova-border);
+}
+
+
+/* =========================================================
+   14 — Status Dot
+   ========================================================= */
+
+.nova-status-dot {
+
+  width: 9px;
+  height: 9px;
+
+  display: inline-block;
+
+  border-radius: 50%;
+
+  background:
+    var(--nova-text-disabled);
+}
+
+
+.nova-status-dot.online {
+
+  background:
+    var(--nova-success);
+
+  box-shadow:
+    0 0 10px
+    rgba(32,212,123,0.55);
+}
+
+
+.nova-status-dot.busy {
+
+  background:
+    var(--nova-danger);
+}
+
+
+.nova-status-dot.away {
+
+  background:
+    var(--nova-warning);
+}
+
+
+/* =========================================================
+   15 — Focus Accessibility
+   ========================================================= */
+
+:focus-visible {
+
+  outline:
+    2px solid var(--nova-primary);
+
+  outline-offset:
+    3px;
+}
+
+
+/* =========================================================
+   16 — Hidden Utility
+   ========================================================= */
+
+.nova-hidden {
+  display: none !important;
+}
+
+
+.nova-invisible {
+  visibility: hidden !important;
+}
+
+
+.nova-no-pointer {
+  pointer-events: none !important;
+}
+
+
+/* =========================================================
+   17 — Text Utilities
+   ========================================================= */
+
+.nova-text-center {
+  text-align: center;
+}
+
+
+.nova-text-right {
+  text-align: right;
+}
+
+
+.nova-text-left {
+  text-align: left;
+}
+
+
+.nova-truncate {
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   18 — Flex Utilities
+   ========================================================= */
+
+.nova-flex {
+  display: flex;
+}
+
+
+.nova-flex-center {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+
+.nova-flex-between {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+
+.nova-flex-column {
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+/* =========================================================
+   19 — Safe Area
+   ========================================================= */
+
+.nova-safe-top {
+
+  padding-top:
+    env(safe-area-inset-top);
+}
+
+
+.nova-safe-bottom {
+
+  padding-bottom:
+    env(safe-area-inset-bottom);
+}
+
+
+/* =========================================================
+   20 — Reduced Motion
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+
+    animation-duration:
+      0.01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+
+    transition-duration:
+      0.01ms !important;
+
+    scroll-behavior:
+      auto !important;
+  }
+  }
