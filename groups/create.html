@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#06110D">
+  <meta
+    name="description"
+    content="NOVA — إنشاء مجموعة جديدة"
+  >
+
+  <title>إنشاء مجموعة | NOVA</title>
+
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/logo.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/groups.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/animations.css">
+</head>
+
+<body
+  class="nova-app-page nova-group-create-page"
+  data-page="group-create"
+  data-module="groups"
+>
+
+  <div id="app-shell" class="app-shell">
+
+    <!-- =====================================================
+         Global Header
+         ===================================================== -->
+
+    <header
+      id="global-header"
+      class="global-header"
+      data-component="header"
+    ></header>
+
+
+    <!-- =====================================================
+         Global Sidebar
+         ===================================================== -->
+
+    <aside
+      id="global-sidebar"
+      class="global-sidebar"
+      data-component="sidebar"
+    ></aside>
+
+
+    <!-- =====================================================
+         Main
+         ===================================================== -->
+
+    <main id="main-content" class="main-content">
+
+      <section
+        class="group-create-page"
+        aria-labelledby="create-group-title"
+      >
+
+        <!-- Page Header -->
+        <div class="page-heading">
+
+          <div class="page-heading-start">
+
+            <button
+              type="button"
+              class="icon-button"
+              id="create-group-back"
+              aria-label="العودة"
+              title="العودة"
+            >
+              →
+            </button>
+
+            <div>
+              <span class="eyebrow">
+                المجموعات
+              </span>
+
+              <h1 id="create-group-title">
+                إنشاء مجموعة
+              </h1>
+
+              <p>
+                أنشئ مساحة خاصة للتواصل مع الأشخاص الذين تختارهم.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             Create Form
+             ================================================= -->
+
+        <form
+          id="create-group-form"
+          class="create-group-layout"
+          novalidate
+        >
+
+          <!-- ===============================================
+               Group Identity
+               =============================================== -->
+
+          <section class="create-group-card glass-panel">
+
+            <div class="card-heading">
+
+              <div class="card-heading-icon">
+                👥
+              </div>
+
+              <div>
+                <h2>
+                  بيانات المجموعة
+                </h2>
+
+                <p>
+                  أضف الاسم والصورة والوصف.
+                </p>
+              </div>
+
+            </div>
+
+
+            <!-- Group Avatar -->
+
+            <div class="group-avatar-editor">
+
+              <div
+                id="group-avatar-preview"
+                class="group-avatar group-avatar-xxl"
+                aria-label="صورة المجموعة"
+              >
+                <span
+                  id="group-avatar-placeholder"
+                  aria-hidden="true"
+                >
+                  N
+                </span>
+
+                <img
+                  id="group-avatar-image"
+                  src=""
+                  alt="معاينة صورة المجموعة"
+                  hidden
+                >
+              </div>
+
+              <div class="avatar-editor-actions">
+
+                <label
+                  for="group-avatar-input"
+                  class="button button-secondary"
+                >
+                  <span aria-hidden="true">📷</span>
+                  إضافة صورة
+                </label>
+
+                <input
+                  id="group-avatar-input"
+                  name="avatar"
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  hidden
+                >
+
+                <button
+                  type="button"
+                  class="text-button danger-text"
+                  id="group-avatar-remove"
+                  hidden
+                >
+                  إزالة الصورة
+                </button>
+
+                <small>
+                  JPG أو PNG أو WebP — سيتم رفع الصورة بعد تأكيد الإنشاء.
+                </small>
+
+              </div>
+
+            </div>
+
+
+            <!-- Group Name -->
+
+            <div class="form-field">
+
+              <label for="group-name">
+                اسم المجموعة
+              </label>
+
+              <input
+                id="group-name"
+                name="name"
+                type="text"
+                maxlength="100"
+                autocomplete="off"
+                placeholder="اكتب اسم المجموعة"
+                required
+              >
+
+              <div class="field-meta">
+
+                <small>
+                  اختر اسمًا واضحًا يمكن للأعضاء معرفته.
+                </small>
+
+                <span id="group-name-count">
+                  0/100
+                </span>
+
+              </div>
+
+              <p
+                id="group-name-error"
+                class="field-error"
+                role="alert"
+                hidden
+              ></p>
+
+            </div>
+
+
+            <!-- Description -->
+
+            <div class="form-field">
+
+              <label for="group-description">
+                وصف المجموعة
+                <span class="optional">
+                  اختياري
+                </span>
+              </label>
+
+              <textarea
+                id="group-description"
+                name="description"
+                rows="4"
+                maxlength="500"
+                placeholder="اكتب وصفًا مختصرًا للمجموعة..."
+              ></textarea>
+
+              <div class="field-meta">
+
+                <small>
+                  يمكن للأعضاء رؤية وصف المجموعة.
+                </small>
+
+                <span id="group-description-count">
+                  0/500
+                </span>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- ===============================================
+               Privacy
+               =============================================== -->
+
+          <section class="create-group-card glass-panel">
+
+            <div class="card-heading">
+
+              <div class="card-heading-icon">
+                🔐
+              </div>
+
+              <div>
+                <h2>
+                  خصوصية المجموعة
+                </h2>
+
+                <p>
+                  اختر من يمكنه الوصول إلى المجموعة.
+                </p>
+              </div>
+
+            </div>
+
+
+            <div class="privacy-options">
+
+              <!-- Private -->
+
+              <label class="radio-card">
+
+                <input
+                  type="radio"
+                  name="privacy"
+                  value="private"
+                  checked
+                >
+
+                <span class="radio-card-content">
+
+                  <span class="radio-card-icon">
+                    🔒
+                  </span>
+
+                  <span class="radio-card-text">
+
+                    <strong>
+                      خاصة
+                    </strong>
+
+                    <small>
+                      لا يمكن الانضمام إليها إلا بدعوة.
+                    </small>
+
+                  </span>
+
+                  <span
+                    class="radio-card-check"
+                    aria-hidden="true"
+                  >
+                    ✓
+                  </span>
+
+                </span>
+
+              </label>
+
+
+              <!-- Invite -->
+
+              <label class="radio-card">
+
+                <input
+                  type="radio"
+                  name="privacy"
+                  value="invite"
+                >
+
+                <span class="radio-card-content">
+
+                  <span class="radio-card-icon">
+                    🔗
+                  </span>
+
+                  <span class="radio-card-text">
+
+                    <strong>
+                      عبر رابط الدعوة
+                    </strong>
+
+                    <small>
+                      يمكن لمن يملك رابط الدعوة طلب الانضمام.
+                    </small>
+
+                  </span>
+
+                  <span
+                    class="radio-card-check"
+                    aria-hidden="true"
+                  >
+                    ✓
+                  </span>
+
+                </span>
+
+              </label>
+
+            </div>
+
+          </section>
+
+
+          <!-- ===============================================
+               Permissions
+               =============================================== -->
+
+          <section class="create-group-card glass-panel">
+
+            <div class="card-heading">
+
+              <div class="card-heading-icon">
+                ⚙
+              </div>
+
+              <div>
+                <h2>
+                  صلاحيات المجموعة
+                </h2>
+
+                <p>
+                  حدد ما يمكن للأعضاء القيام به.
+                </p>
+              </div>
+
+            </div>
+
+
+            <div class="settings-list">
+
+              <!-- Send Messages -->
+
+              <label class="setting-row">
+
+                <span class="setting-icon">
+                  💬
+                </span>
+
+                <span class="setting-content">
+
+                  <strong>
+                    السماح للأعضاء بإرسال الرسائل
+                  </strong>
+
+                  <small>
+                    يمكن للأعضاء إرسال الرسائل داخل المجموعة.
+                  </small>
+
+                </span>
+
+                <input
+                  type="checkbox"
+                  name="permissions.sendMessages"
+                  value="true"
+                  checked
+                >
+
+              </label>
+
+
+              <!-- Send Media -->
+
+              <label class="setting-row">
+
+                <span class="setting-icon">
+                  🖼
+                </span>
+
+                <span class="setting-content">
+
+                  <strong>
+                    السماح بإرسال الوسائط
+                  </strong>
+
+                  <small>
+                    صور وفيديوهات وملفات ورسائل صوتية.
+                  </small>
+
+                </span>
+
+                <input
+                  type="checkbox"
+                  name="permissions.sendMedia"
+                  value="true"
+                  checked
+                >
+
+              </label>
+
+
+              <!-- Add Members -->
+
+              <label class="setting-row">
+
+                <span class="setting-icon">
+                  👤
+                </span>
+
+                <span class="setting-content">
+
+                  <strong>
+                    السماح للأعضاء بدعوة أعضاء آخرين
+                  </strong>
+
+                  <small>
+                    يمكن للأعضاء مشاركة رابط الدعوة.
+                  </small>
+
+                </span>
+
+                <input
+                  type="checkbox"
+                  name="permissions.inviteMembers"
+                  value="true"
+                  checked
+                >
+
+              </label>
+
+            </div>
+
+          </section>
+
+
+          <!-- ===============================================
+               Submit
+               =============================================== -->
+
+          <section class="create-group-submit">
+
+            <div
+              id="create-group-error"
+              class="form-alert form-alert-error"
+              role="alert"
+              hidden
+            ></div>
+
+            <button
+              type="submit"
+              class="button button-primary button-large"
+              id="create-group-submit"
+            >
+              <span
+                id="create-group-submit-icon"
+                aria-hidden="true"
+              >
+                +
+              </span>
+
+              <span id="create-group-submit-text">
+                إنشاء المجموعة
+              </span>
+            </button>
+
+            <p>
+              سيتم إنشاء المجموعة باستخدام حسابك الحالي فقط.
+            </p>
+
+          </section>
+
+        </form>
+
+      </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         Bottom Navigation
+         ===================================================== -->
+
+    <nav
+      id="global-bottom-nav"
+      class="global-bottom-nav"
+      data-component="bottom-nav"
+      aria-label="التنقل الرئيسي"
+    ></nav>
+
+  </div>
+
+
+  <!-- =======================================================
+       Success Modal
+       ======================================================= -->
+
+  <div
+    id="group-create-success"
+    class="modal-backdrop"
+    hidden
+    aria-hidden="true"
+  >
+
+    <div
+      class="modal-card"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="group-created-title"
+    >
+
+      <div class="success-icon" aria-hidden="true">
+        ✓
+      </div>
+
+      <h2 id="group-created-title">
+        تم إنشاء المجموعة
+      </h2>
+
+      <p>
+        أصبحت المجموعة جاهزة ويمكنك الآن بدء المحادثة.
+      </p>
+
+      <div class="modal-actions">
+
+        <button
+          type="button"
+          class="button button-primary"
+          id="open-created-group"
+        >
+          فتح المجموعة
+        </button>
+
+        <button
+          type="button"
+          class="button button-secondary"
+          id="close-created-group"
+        >
+          العودة للمجموعات
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =======================================================
+       Scripts
+       ======================================================= -->
+
+  <script src="../js/config.js" defer></script>
+  <script src="../js/storage.js" defer></script>
+  <script src="../js/router.js" defer></script>
+  <script src="../js/realtime.js" defer></script>
+  <script src="../js/groups.js" defer></script>
+  <script src="../js/notifications.js" defer></script>
+  <script src="../js/app.js" defer></script>
+
+
+  <!-- =======================================================
+       Page UI Hooks
+       ======================================================= -->
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+
+      document.documentElement.lang = "ar";
+      document.documentElement.dir = "rtl";
+
+      const form = document.getElementById("create-group-form");
+      const nameInput = document.getElementById("group-name");
+      const descriptionInput =
+        document.getElementById("group-description");
+
+      const nameCount =
+        document.getElementById("group-name-count");
+
+      const descriptionCount =
+        document.getElementById("group-description-count");
+
+      const avatarInput =
+        document.getElementById("group-avatar-input");
+
+      const avatarImage =
+        document.getElementById("group-avatar-image");
+
+      const avatarPlaceholder =
+        document.getElementById("group-avatar-placeholder");
+
+      const avatarRemove =
+        document.getElementById("group-avatar-remove");
+
+      const backButton =
+        document.getElementById("create-group-back");
+
+      function updateCounter(input, counter) {
+        if (!input || !counter) return;
+
+        counter.textContent =
+          `${input.value.length}/${input.maxLength}`;
+      }
+
+      if (nameInput) {
+        nameInput.addEventListener("input", () => {
+          updateCounter(nameInput, nameCount);
+        });
+      }
+
+      if (descriptionInput) {
+        descriptionInput.addEventListener("input", () => {
+          updateCounter(
+            descriptionInput,
+            descriptionCount
+          );
+        });
+      }
+
+
+      /*
+       * Local preview only.
+       * The actual upload must be handled by groups.js/API.
+       */
+      if (avatarInput) {
+
+        avatarInput.addEventListener("change", () => {
+
+          const file = avatarInput.files?.[0];
+
+          if (!file) return;
+
+          if (!file.type.startsWith("image/")) {
+            avatarInput.value = "";
+            return;
+          }
+
+          const objectURL =
+            URL.createObjectURL(file);
+
+          if (avatarImage) {
+            avatarImage.src = objectURL;
+            avatarImage.hidden = false;
+          }
+
+          if (avatarPlaceholder) {
+            avatarPlaceholder.hidden = true;
+          }
+
+          if (avatarRemove) {
+            avatarRemove.hidden = false;
+          }
+        });
+      }
+
+
+      if (avatarRemove) {
+
+        avatarRemove.addEventListener("click", () => {
+
+          if (avatarInput) {
+            avatarInput.value = "";
+          }
+
+          if (avatarImage) {
+            if (avatarImage.src.startsWith("blob:")) {
+              URL.revokeObjectURL(avatarImage.src);
+            }
+
+            avatarImage.src = "";
+            avatarImage.hidden = true;
+          }
+
+          if (avatarPlaceholder) {
+            avatarPlaceholder.hidden = false;
+          }
+
+          avatarRemove.hidden = true;
+        });
+      }
+
+
+      if (backButton) {
+
+        backButton.addEventListener("click", () => {
+
+          if (
+            window.NOVA_ROUTER &&
+            typeof window.NOVA_ROUTER.back === "function"
+          ) {
+            window.NOVA_ROUTER.back();
+          } else {
+            window.history.back();
+          }
+
+        });
+      }
+
+
+      /*
+       * groups.js owns the actual submit/API operation.
+       * This event only announces that the page is ready.
+       */
+      if (
+        window.NOVA &&
+        typeof window.NOVA.emit === "function"
+      ) {
+        window.NOVA.emit("group:create-page-ready");
+      }
+
+
+      /*
+       * Prevent accidental duplicate submits while the
+       * real groups.js handler is processing the request.
+       */
+      if (form) {
+
+        form.addEventListener("submit", () => {
+
+          const submitButton =
+            document.getElementById(
+              "create-group-submit"
+            );
+
+          if (!submitButton) return;
+
+          submitButton.setAttribute(
+            "aria-busy",
+            "true"
+          );
+
+        });
+
+      }
+
+    });
+  </script>
+
+</body>
+</html>
