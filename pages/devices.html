@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <meta name="theme-color" content="#06110D">
+  <meta name="description" content="NOVA — إدارة الأجهزة والجلسات المرتبطة بحسابك.">
+
+  <title>الأجهزة | NOVA</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/animations.css">
+
+  <style>
+    .devices-page {
+      min-height: 100%;
+      padding: 24px;
+      padding-bottom: 100px;
+    }
+
+    .devices-container {
+      width: min(1250px, 100%);
+      margin: 0 auto;
+    }
+
+    .devices-hero {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 20px;
+      padding: clamp(22px, 4vw, 34px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 24px;
+      background:
+        radial-gradient(
+          circle at 88% 20%,
+          rgba(32, 212, 123, 0.13),
+          transparent 30%
+        ),
+        linear-gradient(
+          145deg,
+          rgba(14, 30, 23, 0.98),
+          rgba(6, 17, 13, 0.98)
+        );
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.18);
+    }
+
+    .devices-hero__copy {
+      position: relative;
+      z-index: 1;
+      min-width: 0;
+    }
+
+    .devices-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      color: #20d47b;
+      font-family: "Cairo", sans-serif;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .devices-eyebrow__dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #20d47b;
+      box-shadow: 0 0 14px rgba(32, 212, 123, 0.65);
+    }
+
+    .devices-hero h1 {
+      margin: 0;
+      color: #fff;
+      font-family: "Cairo", sans-serif;
+      font-size: clamp(1.7rem, 4vw, 2.3rem);
+      font-weight: 800;
+    }
+
+    .devices-hero p {
+      max-width: 720px;
+      margin: 8px 0 0;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem;
+      line-height: 1.9;
+    }
+
+    .devices-hero__icon {
+      width: 76px;
+      height: 76px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border: 1px solid rgba(32, 212, 123, 0.2);
+      border-radius: 23px;
+      color: #20d47b;
+      background: rgba(32, 212, 123, 0.07);
+    }
+
+    .devices-hero__icon svg {
+      width: 39px;
+      height: 39px;
+    }
+
+    .devices-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 18px;
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 18px;
+      background: rgba(9, 20, 15, 0.82);
+    }
+
+    .devices-toolbar__info {
+      min-width: 0;
+    }
+
+    .devices-toolbar__title {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.9);
+      font-family: "Cairo", sans-serif;
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .devices-toolbar__description {
+      margin: 3px 0 0;
+      color: rgba(255, 255, 255, 0.42);
+      font-size: 0.69rem;
+    }
+
+    .devices-toolbar__actions {
+      display: flex;
+      gap: 8px;
+      flex: 0 0 auto;
+    }
+
+    .devices-button {
+      min-height: 42px;
+      padding: 0 15px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 11px;
+      color: rgba(255, 255, 255, 0.75);
+      background: rgba(255, 255, 255, 0.045);
+      font-family: "Cairo", sans-serif;
+      font-size: 0.71rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .devices-button:hover {
+      border-color: rgba(32, 212, 123, 0.3);
+      color: #20d47b;
+      background: rgba(32, 212, 123, 0.055);
+    }
+
+    .devices-button--primary {
+      border-color: rgba(32, 212, 123, 0.32);
+      color: #04130b;
+      background: #20d47b;
+    }
+
+    .devices-button--primary:hover {
+      color: #04130b;
+      background: #29e688;
+    }
+
+    .devices-button--danger {
+      border-color: rgba(255, 87, 87, 0.2);
+      color: #ff9191;
+      background: rgba(255, 87, 87, 0.045);
+    }
+
+    .devices-button--danger:hover {
+      border-color: rgba(255, 87, 87, 0.4);
+      color: #ffb0b0;
+      background: rgba(255, 87, 87, 0.08);
+    }
+
+    .devices-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 310px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .devices-panel {
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 21px;
+      background: rgba(9, 20, 15, 0.82);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
+    }
+
+    .devices-panel__header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 20px 21px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .devices-panel__title {
+      margin: 0;
+      color: #fff;
+      font-family: "Cairo", sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .devices-panel__description {
+      margin: 5px 0 0;
+      color: rgba(255, 255, 255, 0.43);
+      font-size: 0.7rem;
+      line-height: 1.8;
+    }
+
+    .devices-badge {
+      padding: 6px 9px;
+      border: 1px solid rgba(32, 212, 123, 0.14);
+      border-radius: 9px;
+      color: #20d47b;
+      background: rgba(32, 212, 123, 0.055);
+      font-size: 0.63rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .devices-list {
+      display: grid;
+    }
+
+    .devices-loading {
+      min-height: 250px;
+      display: grid;
+      place-items: center;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .devices-spinner {
+      width: 38px;
+      height: 38px;
+      margin: 0 auto 14px;
+      border: 3px solid rgba(255, 255, 255, 0.08);
+      border-top-color: #20d47b;
+      border-radius: 50%;
+      animation: devices-spin 0.8s linear infinite;
+    }
+
+    @keyframes devices-spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .devices-empty {
+      min-height: 260px;
+      display: grid;
+      place-items: center;
+      padding: 35px;
+      text-align: center;
+    }
+
+    .devices-empty__icon {
+      width: 62px;
+      height: 62px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 13px;
+      border-radius: 18px;
+      color: rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .devices-empty h3 {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.8);
+      font-family: "Cairo", sans-serif;
+      font-size: 0.88rem;
+    }
+
+    .devices-empty p {
+      max-width: 440px;
+      margin: 7px auto 0;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.7rem;
+      line-height: 1.8;
+    }
+
+    .device-item {
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 13px;
+      min-height: 88px;
+      padding: 15px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.045);
+    }
+
+    .device-item:last-child {
+      border-bottom: 0;
+    }
+
+    .device-item__icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 14px;
+      color: #20d47b;
+      background: rgba(32, 212, 123, 0.055);
+    }
+
+    .device-item__icon svg {
+      width: 23px;
+      height: 23px;
+    }
+
+    .device-item__content {
+      min-width: 0;
+    }
+
+    .device-item__title {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 4px;
+      color: rgba(255, 255, 255, 0.88);
+      font-family: "Cairo", sans-serif;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .device-item__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 12px;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.65rem;
+      line-height: 1.7;
+    }
+
+    .device-current {
+      padding: 4px 7px;
+      border-radius: 7px;
+      color: #20d47b;
+      background: rgba(32, 212, 123, 0.08);
+      font-size: 0.58rem;
+      font-weight: 700;
+    }
+
+    .device-item__actions {
+      display: flex;
+      gap: 7px;
+      flex: 0 0 auto;
+    }
+
+    .device-action {
+      min-width: 42px;
+      min-height: 40px;
+      padding: 0 10px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      color: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.035);
+      font-family: "Cairo", sans-serif;
+      font-size: 0.64rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .device-action:hover {
+      border-color: rgba(32, 212, 123, 0.25);
+      color: #20d47b;
+    }
+
+    .device-action--danger {
+      color: #ff8585;
+    }
+
+    .device-action--danger:hover {
+      border-color: rgba(255, 87, 87, 0.3);
+      color: #ffaaaa;
+    }
+
+    .devices-info {
+      display: grid;
+      gap: 14px;
+    }
+
+    .devices-info-card {
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 19px;
+      background: rgba(9, 20, 15, 0.82);
+    }
+
+    .devices-info-card__icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 13px;
+      border-radius: 13px;
+      color: #20d47b;
+      background: rgba(32, 212, 123, 0.08);
+    }
+
+    .devices-info-card h3 {
+      margin: 0 0 6px;
+      color: rgba(255, 255, 255, 0.88);
+      font-family: "Cairo", sans-serif;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .devices-info-card p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.43);
+      font-size: 0.69rem;
+      line-height: 1.85;
+    }
+
+    .devices-info-list {
+      display: grid;
+      gap: 9px;
+      margin-top: 14px;
+    }
+
+    .devices-info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      color: rgba(255, 255, 255, 0.47);
+      font-size: 0.67rem;
+      line-height: 1.7;
+    }
+
+    .devices-info-row::before {
+      content: "•";
+      flex: 0 0 auto;
+      color: #20d47b;
+    }
+
+    .devices-page button:focus-visible {
+      outline: 2px solid rgba(32, 212, 123, 0.7);
+      outline-offset: 2px;
+    }
+
+    .devices-hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 1050px) {
+      .devices-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .devices-info {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
+      .devices-page {
+        padding: 14px;
+        padding-bottom: 90px;
+      }
+
+      .devices-hero {
+        align-items: flex-start;
+        padding: 20px;
+        border-radius: 19px;
+      }
+
+      .devices-hero__icon {
+        width: 58px;
+        height: 58px;
+        border-radius: 17px;
+      }
+
+      .devices-hero__icon svg {
+        width: 29px;
+        height: 29px;
+      }
+
+      .devices-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .devices-toolbar__actions {
+        width: 100%;
+      }
+
+      .devices-toolbar__actions .devices-button {
+        flex: 1;
+      }
+
+      .devices-panel {
+        border-radius: 18px;
+      }
+
+      .devices-panel__header {
+        padding: 17px;
+      }
+
+      .device-item {
+        grid-template-columns: 44px minmax(0, 1fr);
+        padding: 15px 17px;
+      }
+
+      .device-item__icon {
+        width: 44px;
+        height: 44px;
+      }
+
+      .device-item__actions {
+        grid-column: 2;
+        width: 100%;
+      }
+
+      .device-action {
+        flex: 1;
+      }
+
+      .devices-info {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .devices-hero__icon {
+        display: none;
+      }
+
+      .devices-toolbar__actions {
+        flex-direction: column;
+      }
+
+      .devices-toolbar__actions .devices-button {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .devices-button,
+      .device-action {
+        transition: none;
+      }
+
+      .devices-spinner {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+
+<body data-page="devices">
+
+  <!-- Global Header -->
+  <div id="global-header"></div>
+
+  <!-- Global Sidebar -->
+  <div id="global-sidebar"></div>
+
+  <main class="app-main devices-page">
+
+    <div class="devices-container">
+
+      <!-- Hero -->
+      <section class="devices-hero" aria-labelledby="devices-title">
+
+        <div class="devices-hero__copy">
+
+          <div class="devices-eyebrow">
+            <span class="devices-eyebrow__dot" aria-hidden="true"></span>
+            <span>إدارة الحساب</span>
+          </div>
+
+          <h1 id="devices-title">
+            الأجهزة والجلسات
+          </h1>
+
+          <p>
+            راجع الأجهزة التي تستخدم حساب NOVA وأدر الجلسات النشطة
+            بطريقة واضحة وآمنة.
+          </p>
+
+        </div>
+
+        <div class="devices-hero__icon" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+          >
+            <rect x="3" y="4" width="18" height="13" rx="2"></rect>
+            <path d="M8 21h8"></path>
+            <path d="M12 17v4"></path>
+          </svg>
+        </div>
+
+      </section>
+
+      <!-- Toolbar -->
+      <section class="devices-toolbar">
+
+        <div class="devices-toolbar__info">
+
+          <h2 class="devices-toolbar__title">
+            الجلسات المرتبطة بالحساب
+          </h2>
+
+          <p class="devices-toolbar__description">
+            البيانات المعروضة يتم تحميلها من مصدر الحساب الفعلي عند توفر الـAPI.
+          </p>
+
+        </div>
+
+        <div class="devices-toolbar__actions">
+
+          <button
+            type="button"
+            class="devices-button"
+            data-action="refresh-devices"
+          >
+            تحديث
+          </button>
+
+          <button
+            type="button"
+            class="devices-button devices-button--danger"
+            data-action="logout-all-other-devices"
+          >
+            إنهاء الجلسات الأخرى
+          </button>
+
+        </div>
+
+      </section>
+
+      <div class="devices-grid">
+
+        <!-- Devices -->
+        <section class="devices-panel" aria-labelledby="devices-list-title">
+
+          <header class="devices-panel__header">
+
+            <div>
+              <h2
+                id="devices-list-title"
+                class="devices-panel__title"
+              >
+                أجهزتك
+              </h2>
+
+              <p class="devices-panel__description">
+                لا يتم إنشاء أجهزة أو جلسات وهمية. القائمة تعتمد على بيانات الحساب.
+              </p>
+            </div>
+
+            <span class="devices-badge">
+              جلسات حقيقية
+            </span>
+
+          </header>
+
+          <div
+            id="devices-loading"
+            class="devices-loading"
+          >
+            <div>
+              <div
+                class="devices-spinner"
+                aria-hidden="true"
+              ></div>
+
+              <div
+                style="
+                  color:rgba(255,255,255,.48);
+                  font-size:.7rem;
+                "
+              >
+                جارٍ تحميل الأجهزة...
+              </div>
+            </div>
+          </div>
+
+          <div
+            id="devices-empty"
+            class="devices-empty devices-hidden"
+          >
+            <div>
+
+              <div
+                class="devices-empty__icon"
+                aria-hidden="true"
+              >
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                >
+                  <rect x="3" y="4" width="18" height="13" rx="2"></rect>
+                  <path d="M8 21h8"></path>
+                  <path d="M12 17v4"></path>
+                </svg>
+              </div>
+
+              <h3>
+                لا توجد بيانات أجهزة متاحة
+              </h3>
+
+              <p>
+                سيتم عرض الأجهزة والجلسات هنا عندما يعيد نظام الحساب
+                بيانات الجلسات الفعلية.
+              </p>
+
+            </div>
+          </div>
+
+          <div
+            id="devices-list"
+            class="devices-list devices-hidden"
+            aria-live="polite"
+          ></div>
+
+        </section>
+
+        <!-- Information -->
+        <aside class="devices-info">
+
+          <section class="devices-info-card">
+
+            <div class="devices-info-card__icon" aria-hidden="true">
+              ✓
+            </div>
+
+            <h3>
+              كيف تحافظ على حسابك؟
+            </h3>
+
+            <p>
+              راجع الجلسات بشكل دوري، وأنهِ أي جلسة لا تتعرف عليها،
+              واستخدم وسائل التحقق المتاحة لحسابك.
+            </p>
+
+            <div class="devices-info-list">
+
+              <div class="devices-info-row">
+                راجع الأجهزة غير المعروفة.
+              </div>
+
+              <div class="devices-info-row">
+                لا تشارك رموز تسجيل الدخول أو التحقق.
+              </div>
+
+              <div class="devices-info-row">
+                استخدم كلمة مرور قوية وفريدة.
+              </div>
+
+            </div>
+
+          </section>
+
+          <section class="devices-info-card">
+
+            <div class="devices-info-card__icon" aria-hidden="true">
+              ⓘ
+            </div>
+
+            <h3>
+              بيانات الجهاز
+            </h3>
+
+            <p>
+              قد يعرض الخادم معلومات مثل نوع الجهاز والمتصفح ووقت آخر نشاط
+              وعنوان الشبكة وفق سياسة الخصوصية ونظام الجلسات المستخدم.
+            </p>
+
+          </section>
+
+        </aside>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Global Bottom Navigation -->
+  <div id="global-bottom-nav"></div>
+
+  <!-- Global Modal -->
+  <div id="global-modal"></div>
+
+  <!-- Scripts -->
+  <script src="../js/config.js"></script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/router.js"></script>
+  <script src="../js/realtime.js"></script>
+  <script src="../js/settings.js"></script>
+  <script src="../js/app.js"></script>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const loading = document.getElementById("devices-loading");
+      const empty = document.getElementById("devices-empty");
+      const list = document.getElementById("devices-list");
+
+      function setLoading(state) {
+        if (!loading) return;
+
+        loading.classList.toggle(
+          "devices-hidden",
+          !state
+        );
+      }
+
+      function setEmpty(state) {
+        if (!empty) return;
+
+        empty.classList.toggle(
+          "devices-hidden",
+          !state
+        );
+      }
+
+      function setListVisible(state) {
+        if (!list) return;
+
+        list.classList.toggle(
+          "devices-hidden",
+          !state
+        );
+      }
+
+      function escapeHTML(value) {
+        const div = document.createElement("div");
+        div.textContent = value ?? "";
+        return div.innerHTML;
+      }
+
+      function deviceIcon(type) {
+        const normalized = String(type || "").toLowerCase();
+
+        if (
+          normalized.includes("phone") ||
+          normalized.includes("mobile") ||
+          normalized.includes("android") ||
+          normalized.includes("ios")
+        ) {
+          return `
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+            >
+              <rect x="7" y="2.5" width="10" height="19" rx="2"></rect>
+              <path d="M10 5h4"></path>
+              <path d="M11.5 18.5h1"></path>
+            </svg>
+          `;
+        }
+
+        return `
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+          >
+            <rect x="3" y="4" width="18" height="13" rx="2"></rect>
+            <path d="M8 21h8"></path>
+            <path d="M12 17v4"></path>
+          </svg>
+        `;
+      }
+
+      function renderDevices(devices) {
+        if (!Array.isArray(devices) || devices.length === 0) {
+          setLoading(false);
+          setListVisible(false);
+          setEmpty(true);
+          return;
+        }
+
+        setLoading(false);
+        setEmpty(false);
+        setListVisible(true);
+
+        list.innerHTML = devices.map((device) => {
+          const id = escapeHTML(device.id);
+          const name = escapeHTML(
+            device.name ||
+            device.deviceName ||
+            "جهاز"
+          );
+
+          const browser = escapeHTML(
+            device.browser ||
+            device.client ||
+            ""
+          );
+
+          const platform = escapeHTML(
+            device.platform ||
+            device.os ||
+            ""
+          );
+
+          const lastActive = escapeHTML(
+            device.lastActive ||
+            device.last_active_at ||
+            ""
+          );
+
+          const isCurrent = Boolean(
+            device.current ||
+            device.isCurrent ||
+            device.is_current
+          );
+
+          return `
+            <article
+              class="device-item"
+              data-device-id="${id}"
+            >
+
+              <div
+                class="device-item__icon"
+                aria-hidden="true"
+              >
+                ${deviceIcon(device.type || platform)}
+              </div>
+
+              <div class="device-item__content">
+
+                <div class="device-item__title">
+
+                  <span>
+                    ${name}
+                  </span>
+
+                  ${
+                    isCurrent
+                      ? `
+                        <span class="device-current">
+                          هذا الجهاز
+                        </span>
+                      `
+                      : ""
+                  }
+
+                </div>
+
+                <div class="device-item__meta">
+
+                  ${
+                    platform
+                      ? `<span>${platform}</span>`
+                      : ""
+                  }
+
+                  ${
+                    browser
+                      ? `<span>${browser}</span>`
+                      : ""
+                  }
+
+                  ${
+                    lastActive
+                      ? `<span>${lastActive}</span>`
+                      : ""
+                  }
+
+                </div>
+
+              </div>
+
+              <div class="device-item__actions">
+
+                <button
+                  type="button"
+                  class="device-action device-action--danger"
+                  data-action="logout-device"
+                  data-device-id="${id}"
+                  ${
+                    isCurrent
+                      ? "disabled aria-label=\"الجهاز الحالي\""
+                      : ""
+                  }
+                >
+                  ${
+                    isCurrent
+                      ? "الجهاز الحالي"
+                      : "إنهاء"
+                  }
+                </button>
+
+              </div>
+
+            </article>
+          `;
+        }).join("");
+      }
+
+      function showPageLoading() {
+        setLoading(true);
+        setEmpty(false);
+        setListVisible(false);
+      }
+
+      window.NOVA_DEVICES_PAGE = Object.freeze({
+        renderDevices,
+        showPageLoading
+      });
+
+      /*
+       * الصفحة لا تنشئ بيانات أجهزة من نفسها.
+       * js/settings.js أو طبقة الـAPI الفعلية يمكنها استخدام
+       * window.NOVA_DEVICES_PAGE.renderDevices(...)
+       * بعد جلب بيانات الجلسات الحقيقية.
+       */
+      showPageLoading();
+
+    })();
+  </script>
+
+</body>
+  </html>
