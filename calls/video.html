@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta name="theme-color" content="#06110D">
+  <meta
+    name="description"
+    content="NOVA — مكالمة فيديو"
+  >
+
+  <title>مكالمة فيديو | NOVA</title>
+
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="../assets/brand/logo.svg"
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/calls.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/animations.css">
+</head>
+
+<body
+  class="nova-call-page nova-video-call-page"
+  data-page="video-call"
+  data-call-type="video"
+  data-module="calls"
+>
+
+  <div id="video-call-app" class="call-app">
+
+    <!-- =====================================================
+         Call Header
+         ===================================================== -->
+
+    <header class="call-header video-call-header">
+
+      <div class="call-header-start">
+
+        <button
+          type="button"
+          class="icon-button call-back-button"
+          id="video-call-back"
+          aria-label="العودة"
+          title="العودة"
+        >
+          →
+        </button>
+
+        <div class="call-brand">
+
+          <img
+            src="../assets/brand/logo.svg"
+            alt="NOVA"
+            class="call-brand-logo"
+          >
+
+          <span>
+            NOVA
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="call-header-status">
+
+        <span
+          id="video-security-indicator"
+          class="call-security-indicator"
+        >
+          <span aria-hidden="true">🔒</span>
+
+          <span id="video-security-text">
+            اتصال آمن
+          </span>
+        </span>
+
+      </div>
+
+
+      <div class="call-header-actions">
+
+        <span
+          id="video-call-timer"
+          class="call-timer call-timer-header"
+          aria-live="off"
+        >
+          00:00
+        </span>
+
+        <button
+          type="button"
+          class="icon-button"
+          id="video-call-more"
+          aria-label="المزيد"
+          title="المزيد"
+        >
+          ⋮
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         Video Stage
+         ===================================================== -->
+
+    <main
+      class="video-call-stage"
+      id="video-call-stage"
+    >
+
+      <!-- ===================================================
+           Remote Video
+           =================================================== -->
+
+      <section
+        id="remote-video-container"
+        class="remote-video-container"
+        aria-label="فيديو الطرف الآخر"
+      >
+
+        <video
+          id="remote-video"
+          class="remote-video"
+          autoplay
+          playsinline
+        ></video>
+
+
+        <!-- Remote Video Placeholder -->
+
+        <div
+          id="remote-video-placeholder"
+          class="video-placeholder"
+        >
+
+          <div
+            id="remote-video-avatar"
+            class="call-avatar call-avatar-xl"
+          >
+
+            <span
+              id="remote-video-avatar-placeholder"
+              aria-hidden="true"
+            >
+              N
+            </span>
+
+            <img
+              id="remote-video-avatar-image"
+              src=""
+              alt=""
+              hidden
+            >
+
+          </div>
+
+          <h1 id="remote-video-name">
+            جارٍ الاتصال...
+          </h1>
+
+          <p id="remote-video-state">
+            انتظار الاتصال
+          </p>
+
+        </div>
+
+
+        <!-- Remote Mute Indicator -->
+
+        <div
+          id="remote-muted-indicator"
+          class="video-status-indicator"
+          hidden
+          aria-label="الميكروفون مكتوم"
+        >
+          🎙
+        </div>
+
+
+        <!-- Remote Connection Status -->
+
+        <div
+          id="video-connection-status"
+          class="call-connection-status video-connection-status"
+          aria-live="polite"
+        >
+          جارٍ تجهيز المكالمة...
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           Local Video Preview
+           =================================================== -->
+
+      <div
+        id="local-video-container"
+        class="local-video-container"
+        aria-label="الفيديو الخاص بك"
+      >
+
+        <video
+          id="local-video"
+          class="local-video"
+          autoplay
+          muted
+          playsinline
+        ></video>
+
+
+        <div
+          id="local-video-placeholder"
+          class="local-video-placeholder"
+          hidden
+        >
+          <span aria-hidden="true">📷</span>
+          <small>
+            الكاميرا متوقفة
+          </small>
+        </div>
+
+
+        <span class="local-video-label">
+          أنت
+        </span>
+
+      </div>
+
+
+      <!-- ===================================================
+           Video Overlays
+           =================================================== -->
+
+      <div class="video-stage-overlays">
+
+        <div
+          id="video-reconnecting"
+          class="call-reconnecting"
+          hidden
+          aria-live="polite"
+        >
+
+          <span
+            class="loading-spinner"
+            aria-hidden="true"
+          ></span>
+
+          <span>
+            جارٍ إعادة الاتصال...
+          </span>
+
+        </div>
+
+
+        <div
+          id="video-call-error"
+          class="call-error-panel"
+          hidden
+          role="alert"
+        >
+
+          <strong>
+            تعذر إنشاء مكالمة الفيديو
+          </strong>
+
+          <p id="video-call-error-text">
+            حدث خطأ أثناء إنشاء الاتصال.
+          </p>
+
+          <button
+            type="button"
+            class="button button-secondary"
+            id="video-call-retry"
+          >
+            إعادة المحاولة
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- ===================================================
+           Call Controls
+           =================================================== -->
+
+      <section
+        class="video-call-controls"
+        aria-label="أدوات مكالمة الفيديو"
+      >
+
+        <!-- Microphone -->
+
+        <button
+          type="button"
+          class="call-control"
+          id="video-mute-button"
+          data-action="toggle-mute"
+          aria-label="كتم الميكروفون"
+          aria-pressed="false"
+        >
+
+          <span
+            class="call-control-icon"
+            aria-hidden="true"
+          >
+            🎙
+          </span>
+
+          <span
+            id="video-mute-label"
+            class="call-control-label"
+          >
+            كتم الصوت
+          </span>
+
+        </button>
+
+
+        <!-- Camera -->
+
+        <button
+          type="button"
+          class="call-control"
+          id="video-camera-button"
+          data-action="toggle-camera"
+          aria-label="إيقاف الكاميرا"
+          aria-pressed="true"
+        >
+
+          <span
+            class="call-control-icon"
+            aria-hidden="true"
+          >
+            📷
+          </span>
+
+          <span
+            id="video-camera-label"
+            class="call-control-label"
+          >
+            الكاميرا
+          </span>
+
+        </button>
+
+
+        <!-- Flip Camera -->
+
+        <button
+          type="button"
+          class="call-control"
+          id="video-flip-camera"
+          data-action="flip-camera"
+          aria-label="تبديل الكاميرا"
+          title="تبديل الكاميرا"
+        >
+
+          <span
+            class="call-control-icon"
+            aria-hidden="true"
+          >
+            🔄
+          </span>
+
+          <span class="call-control-label">
+            تبديل
+          </span>
+
+        </button>
+
+
+        <!-- Speaker -->
+
+        <button
+          type="button"
+          class="call-control"
+          id="video-speaker-button"
+          data-action="toggle-speaker"
+          aria-label="تفعيل مكبر الصوت"
+          aria-pressed="false"
+        >
+
+          <span
+            class="call-control-icon"
+            aria-hidden="true"
+          >
+            🔊
+          </span>
+
+          <span class="call-control-label">
+            مكبر الصوت
+          </span>
+
+        </button>
+
+
+        <!-- Add Participant -->
+
+        <button
+          type="button"
+          class="call-control"
+          id="video-add-participant"
+          data-action="add-participant"
+          aria-label="إضافة مشارك"
+        >
+
+          <span
+            class="call-control-icon"
+            aria-hidden="true"
+          >
+            +
+          </span>
+
+          <span class="call-control-label">
+            إضافة
+          </span>
+
+        </button>
+
+
+        <!-- End -->
+
+        <button
+          type="button"
+          class="call-control call-control-danger"
+          id="video-end-call"
+          data-action="end-call"
+          aria-label="إنهاء المكالمة"
+        >
+
+          <span
+            class="call-control-icon"
+            aria-hidden="true"
+          >
+            ☎
+          </span>
+
+          <span class="call-control-label">
+            إنهاء
+          </span>
+
+        </button>
+
+      </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         Incoming Call Overlay
+         ===================================================== -->
+
+    <section
+      id="video-incoming-overlay"
+      class="incoming-call-overlay"
+      hidden
+      aria-labelledby="video-incoming-title"
+    >
+
+      <div class="incoming-call-card">
+
+        <div
+          id="video-incoming-avatar"
+          class="call-avatar call-avatar-lg"
+        >
+          <span aria-hidden="true">N</span>
+        </div>
+
+        <span class="incoming-call-label">
+          مكالمة فيديو واردة
+        </span>
+
+        <h2 id="video-incoming-title">
+          اتصال وارد
+        </h2>
+
+        <p id="video-incoming-name">
+          —
+        </p>
+
+        <div class="incoming-call-actions">
+
+          <button
+            type="button"
+            class="call-answer-button"
+            id="video-answer-call"
+            aria-label="قبول مكالمة الفيديو"
+          >
+            <span aria-hidden="true">📹</span>
+            قبول
+          </button>
+
+          <button
+            type="button"
+            class="call-reject-button"
+            id="video-reject-call"
+            aria-label="رفض مكالمة الفيديو"
+          >
+            <span aria-hidden="true">☎</span>
+            رفض
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         Add Participant Modal
+         ===================================================== -->
+
+    <div
+      id="video-participant-modal"
+      class="modal-backdrop"
+      hidden
+      aria-hidden="true"
+    >
+
+      <div
+        class="modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="video-participant-modal-title"
+      >
+
+        <div class="modal-header">
+
+          <div>
+
+            <h2 id="video-participant-modal-title">
+              إضافة مشارك
+            </h2>
+
+            <p class="modal-subtitle">
+              اختر شخصًا من جهات اتصالك.
+            </p>
+
+          </div>
+
+          <button
+            type="button"
+            class="icon-button"
+            id="video-participant-modal-close"
+            aria-label="إغلاق"
+          >
+            ×
+          </button>
+
+        </div>
+
+
+        <div class="member-search">
+
+          <input
+            id="video-participant-search"
+            type="search"
+            autocomplete="off"
+            placeholder="البحث عن شخص..."
+            aria-label="البحث عن شخص"
+          >
+
+        </div>
+
+
+        <div
+          id="video-participant-list"
+          class="call-participant-list"
+        ></div>
+
+
+        <div
+          id="video-participant-empty"
+          class="group-state group-state-empty"
+          hidden
+        >
+
+          <div
+            class="group-state-icon"
+            aria-hidden="true"
+          >
+            👤
+          </div>
+
+          <p>
+            لا توجد جهات اتصال متاحة.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         More Menu
+         ===================================================== -->
+
+    <div
+      id="video-more-menu"
+      class="context-menu"
+      hidden
+    >
+
+      <button
+        type="button"
+        id="video-report-call"
+      >
+        <span aria-hidden="true">⚑</span>
+        الإبلاغ عن مشكلة
+      </button>
+
+      <button
+        type="button"
+        id="video-copy-call-id"
+      >
+        <span aria-hidden="true">▣</span>
+        نسخ معرّف المكالمة
+      </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         Scripts
+         ===================================================== -->
+
+    <script src="../js/config.js" defer></script>
+    <script src="../js/storage.js" defer></script>
+    <script src="../js/router.js" defer></script>
+    <script src="../js/realtime.js" defer></script>
+    <script src="../js/calls.js" defer></script>
+    <script src="../js/notifications.js" defer></script>
+    <script src="../js/app.js" defer></script>
+
+
+    <!-- =====================================================
+         Page Hooks
+         ===================================================== -->
+
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+
+        document.documentElement.lang = "ar";
+        document.documentElement.dir = "rtl";
+
+        const params =
+          new URLSearchParams(window.location.search);
+
+        const callId =
+          params.get("id");
+
+        const userId =
+          params.get("user");
+
+        const action =
+          params.get("action");
+
+        if (callId) {
+          document.body.dataset.callId = callId;
+        }
+
+        if (userId) {
+          document.body.dataset.userId = userId;
+        }
+
+        if (action) {
+          document.body.dataset.callAction = action;
+        }
+
+
+        /* -----------------------------------------------
+           Back
+           ----------------------------------------------- */
+
+        const backButton =
+          document.getElementById(
+            "video-call-back"
+          );
+
+        if (backButton) {
+
+          backButton.addEventListener(
+            "click",
+            () => {
+
+              if (
+                window.NOVA_ROUTER &&
+                typeof window.NOVA_ROUTER.back ===
+                  "function"
+              ) {
+                window.NOVA_ROUTER.back();
+              } else {
+                window.history.back();
+              }
+
+            }
+          );
+        }
+
+
+        /* -----------------------------------------------
+           Announce page ready
+           ----------------------------------------------- */
+
+        if (
+          window.NOVA &&
+          typeof window.NOVA.emit ===
+            "function"
+        ) {
+
+          window.NOVA.emit(
+            "call:video-page-ready",
+            {
+              callId: callId || null,
+              userId: userId || null,
+              action: action || null
+            }
+          );
+
+        }
+
+      });
+    </script>
+
+  </div>
+
+</body>
+</html>
