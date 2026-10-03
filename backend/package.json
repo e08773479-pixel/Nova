@@ -1,0 +1,20 @@
+{
+  "name": "nova-backend",
+  "version": "1.0.0",
+  "description": "NOVA — Backend API for the Arabic social communication platform.",
+  "private": true,
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "check": "node --check server.js && node --check app.js && node --check api/index.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}
