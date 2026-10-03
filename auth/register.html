@@ -1,0 +1,2143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  >
+
+  <meta name="theme-color" content="#06110D">
+  <meta
+    name="description"
+    content="إنشاء حساب NOVA — تواصل ببساطة."
+  >
+
+  <title>إنشاء حساب — NOVA</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/animations.css">
+
+  <style>
+    /* =========================================================
+       NOVA — Register Page
+       ========================================================= */
+
+    :root {
+      --register-max-width: 1180px;
+      --register-card-width: 540px;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      background:
+        radial-gradient(
+          circle at 15% 15%,
+          rgba(32, 212, 123, 0.11),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 85% 75%,
+          rgba(32, 212, 123, 0.07),
+          transparent 30%
+        ),
+        #06110D;
+    }
+
+    /* ---------------------------------------------------------
+       Background
+       --------------------------------------------------------- */
+
+    .register-page {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 20px;
+      isolation: isolate;
+    }
+
+    .register-page::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      pointer-events: none;
+
+      background-image:
+        linear-gradient(
+          rgba(255,255,255,0.025) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,0.025) 1px,
+          transparent 1px
+        );
+
+      background-size: 44px 44px;
+
+      mask-image:
+        radial-gradient(
+          ellipse at center,
+          black 30%,
+          transparent 85%
+        );
+    }
+
+    .register-page::after {
+      content: "";
+      position: fixed;
+      width: 520px;
+      height: 520px;
+      left: -220px;
+      bottom: -240px;
+      border-radius: 50%;
+      z-index: -2;
+      pointer-events: none;
+
+      background: rgba(32, 212, 123, 0.055);
+      filter: blur(70px);
+    }
+
+    .register-glow {
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      right: -180px;
+      top: -180px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -2;
+
+      background: rgba(32, 212, 123, 0.08);
+      filter: blur(80px);
+    }
+
+    /* ---------------------------------------------------------
+       Main Container
+       --------------------------------------------------------- */
+
+    .register-shell {
+      width: min(100%, var(--register-max-width));
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) var(--register-card-width);
+      gap: 70px;
+      align-items: center;
+    }
+
+    /* ---------------------------------------------------------
+       Brand / Intro
+       --------------------------------------------------------- */
+
+    .register-intro {
+      padding: 24px 0;
+    }
+
+    .register-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 30px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .register-brand-icon {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 17px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(32,212,123,0.18),
+          rgba(32,212,123,0.04)
+        );
+
+      border: 1px solid rgba(32,212,123,0.25);
+
+      box-shadow:
+        0 12px 35px rgba(0,0,0,0.25),
+        inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+
+    .register-brand-icon img {
+      width: 31px;
+      height: 31px;
+      object-fit: contain;
+    }
+
+    .register-brand-fallback {
+      font-size: 24px;
+      font-weight: 800;
+      color: #20D47B;
+    }
+
+    .register-brand-name {
+      display: block;
+      font-family: "Cairo", sans-serif;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+    }
+
+    .register-brand-tagline {
+      display: block;
+      margin-top: 5px;
+      color: #91A69E;
+      font-size: 12px;
+    }
+
+    .register-intro h1 {
+      margin: 0;
+      max-width: 600px;
+
+      font-family: "Cairo", sans-serif;
+      font-size: clamp(34px, 4vw, 58px);
+      line-height: 1.25;
+      font-weight: 800;
+      letter-spacing: -1.4px;
+
+      color: #F4FAF7;
+    }
+
+    .register-intro h1 span {
+      color: #20D47B;
+    }
+
+    .register-intro-text {
+      max-width: 590px;
+      margin: 22px 0 0;
+
+      color: #A9BBB4;
+      font-size: 16px;
+      line-height: 2;
+    }
+
+    /* ---------------------------------------------------------
+       Feature Cards
+       --------------------------------------------------------- */
+
+    .register-features {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 34px;
+      max-width: 620px;
+    }
+
+    .register-feature {
+      min-height: 110px;
+      padding: 17px;
+
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.065);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,0.045),
+          rgba(255,255,255,0.018)
+        );
+
+      backdrop-filter: blur(12px);
+    }
+
+    .register-feature-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 12px;
+
+      border-radius: 12px;
+
+      background: rgba(32,212,123,0.10);
+      color: #20D47B;
+
+      font-size: 18px;
+    }
+
+    .register-feature strong {
+      display: block;
+      margin-bottom: 5px;
+
+      color: #F1F7F4;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .register-feature span {
+      color: #849A92;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    /* ---------------------------------------------------------
+       Register Card
+       --------------------------------------------------------- */
+
+    .register-card {
+      width: 100%;
+      box-sizing: border-box;
+
+      padding: 30px;
+
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.085);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(15,38,29,0.96),
+          rgba(7,22,16,0.97)
+        );
+
+      box-shadow:
+        0 35px 100px rgba(0,0,0,0.38),
+        inset 0 1px 0 rgba(255,255,255,0.045);
+
+      backdrop-filter: blur(24px);
+    }
+
+    .register-card-header {
+      margin-bottom: 24px;
+    }
+
+    .register-card-header h2 {
+      margin: 0;
+      font-family: "Cairo", sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: #F5FAF7;
+    }
+
+    .register-card-header p {
+      margin: 7px 0 0;
+      color: #8EA49B;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    /* ---------------------------------------------------------
+       Progress
+       --------------------------------------------------------- */
+
+    .register-progress {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .register-progress-line {
+      flex: 1;
+      height: 4px;
+      overflow: hidden;
+      border-radius: 99px;
+      background: rgba(255,255,255,0.07);
+    }
+
+    .register-progress-line.active {
+      background: #20D47B;
+      box-shadow: 0 0 14px rgba(32,212,123,0.25);
+    }
+
+    /* ---------------------------------------------------------
+       Method Switch
+       --------------------------------------------------------- */
+
+    .register-method {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+
+      padding: 5px;
+      margin-bottom: 20px;
+
+      border-radius: 15px;
+      background: rgba(0,0,0,0.20);
+      border: 1px solid rgba(255,255,255,0.055);
+    }
+
+    .register-method button {
+      border: 0;
+      outline: 0;
+      cursor: pointer;
+
+      min-height: 43px;
+      border-radius: 11px;
+
+      background: transparent;
+      color: #81968E;
+
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+
+      transition:
+        background 180ms ease,
+        color 180ms ease,
+        box-shadow 180ms ease;
+    }
+
+    .register-method button:hover {
+      color: #DCE9E4;
+    }
+
+    .register-method button.active {
+      color: #F5FBF8;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(32,212,123,0.18),
+          rgba(32,212,123,0.07)
+        );
+
+      box-shadow:
+        inset 0 0 0 1px rgba(32,212,123,0.13);
+    }
+
+    /* ---------------------------------------------------------
+       Form
+       --------------------------------------------------------- */
+
+    .register-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .register-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .register-label {
+      color: #DCE8E3;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .register-input-wrap {
+      position: relative;
+    }
+
+    .register-input {
+      width: 100%;
+      height: 50px;
+      box-sizing: border-box;
+
+      padding: 0 15px;
+
+      border: 1px solid rgba(255,255,255,0.085);
+      border-radius: 14px;
+
+      outline: none;
+
+      background:
+        rgba(3, 13, 9, 0.60);
+
+      color: #F5FAF7;
+
+      font-family: "IBM Plex Sans Arabic", sans-serif;
+      font-size: 13px;
+
+      transition:
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        background 180ms ease;
+    }
+
+    .register-input::placeholder {
+      color: #61766D;
+    }
+
+    .register-input:hover {
+      border-color: rgba(255,255,255,0.13);
+    }
+
+    .register-input:focus {
+      border-color: rgba(32,212,123,0.60);
+
+      background: rgba(4,17,12,0.80);
+
+      box-shadow:
+        0 0 0 4px rgba(32,212,123,0.075);
+    }
+
+    .register-input.has-icon {
+      padding-right: 45px;
+    }
+
+    .register-input-action {
+      position: absolute;
+      top: 50%;
+      right: 9px;
+      transform: translateY(-50%);
+
+      width: 32px;
+      height: 32px;
+
+      display: grid;
+      place-items: center;
+
+      border: 0;
+      background: transparent;
+      color: #738980;
+
+      cursor: pointer;
+      border-radius: 9px;
+    }
+
+    .register-input-action:hover {
+      color: #20D47B;
+      background: rgba(32,212,123,0.07);
+    }
+
+    .register-phone-row {
+      display: grid;
+      grid-template-columns: 108px 1fr;
+      gap: 8px;
+      direction: ltr;
+    }
+
+    .register-country {
+      width: 100%;
+      height: 50px;
+
+      padding: 0 10px;
+
+      border: 1px solid rgba(255,255,255,0.085);
+      border-radius: 14px;
+
+      background: rgba(3,13,9,0.60);
+      color: #DCE8E3;
+
+      outline: none;
+      font-family: inherit;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .register-country:focus {
+      border-color: rgba(32,212,123,0.60);
+      box-shadow: 0 0 0 4px rgba(32,212,123,0.075);
+    }
+
+    .register-phone {
+      direction: ltr;
+      text-align: left;
+    }
+
+    .register-password-strength {
+      display: none;
+      height: 4px;
+      margin-top: 4px;
+
+      border-radius: 99px;
+      overflow: hidden;
+
+      background: rgba(255,255,255,0.06);
+    }
+
+    .register-password-strength.visible {
+      display: block;
+    }
+
+    .register-password-strength span {
+      display: block;
+      height: 100%;
+      width: 0;
+
+      border-radius: inherit;
+      background: #20D47B;
+
+      transition:
+        width 220ms ease,
+        background 220ms ease;
+    }
+
+    .register-password-hint {
+      color: #6F847B;
+      font-size: 10px;
+      line-height: 1.7;
+    }
+
+    /* ---------------------------------------------------------
+       Terms
+       --------------------------------------------------------- */
+
+    .register-terms {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 2px;
+    }
+
+    .register-terms input {
+      width: 17px;
+      height: 17px;
+      margin: 2px 0 0;
+      flex: 0 0 auto;
+
+      accent-color: #20D47B;
+      cursor: pointer;
+    }
+
+    .register-terms label {
+      color: #82978F;
+      font-size: 11px;
+      line-height: 1.8;
+      cursor: pointer;
+    }
+
+    .register-terms a {
+      color: #20D47B;
+      text-decoration: none;
+    }
+
+    .register-terms a:hover {
+      text-decoration: underline;
+    }
+
+    /* ---------------------------------------------------------
+       Submit
+       --------------------------------------------------------- */
+
+    .register-submit {
+      width: 100%;
+      min-height: 52px;
+      margin-top: 2px;
+
+      border: 0;
+      border-radius: 15px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #20D47B,
+          #13B965
+        );
+
+      color: #03130B;
+
+      font-family: "Cairo", sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 12px 28px rgba(32,212,123,0.15);
+
+      transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        filter 180ms ease;
+    }
+
+    .register-submit:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.04);
+
+      box-shadow:
+        0 16px 34px rgba(32,212,123,0.22);
+    }
+
+    .register-submit:active {
+      transform: translateY(0);
+    }
+
+    .register-submit:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .register-submit.loading {
+      position: relative;
+      color: transparent;
+      pointer-events: none;
+    }
+
+    .register-submit.loading::after {
+      content: "";
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      width: 20px;
+      height: 20px;
+
+      margin: -10px;
+
+      border: 2px solid rgba(3,19,11,0.25);
+      border-top-color: #03130B;
+
+      border-radius: 50%;
+
+      animation: registerSpin 700ms linear infinite;
+    }
+
+    @keyframes registerSpin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* ---------------------------------------------------------
+       Google
+       --------------------------------------------------------- */
+
+    .register-separator {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .register-separator::before,
+    .register-separator::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.07);
+    }
+
+    .register-separator span {
+      color: #657A71;
+      font-size: 10px;
+    }
+
+    .register-google {
+      width: 100%;
+      min-height: 48px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 14px;
+
+      background: rgba(255,255,255,0.025);
+      color: #E8F0ED;
+
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition:
+        background 180ms ease,
+        border-color 180ms ease,
+        transform 180ms ease;
+    }
+
+    .register-google:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.14);
+      transform: translateY(-1px);
+    }
+
+    .google-icon {
+      width: 20px;
+      height: 20px;
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+      background: #fff;
+
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+
+      color: #4285F4;
+    }
+
+    /* ---------------------------------------------------------
+       Footer
+       --------------------------------------------------------- */
+
+    .register-footer {
+      margin-top: 20px;
+      text-align: center;
+
+      color: #72877F;
+      font-size: 11px;
+    }
+
+    .register-footer a {
+      color: #20D47B;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .register-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .register-security {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+
+      margin-top: 16px;
+
+      color: #60756C;
+      font-size: 10px;
+    }
+
+    /* ---------------------------------------------------------
+       Feedback
+       --------------------------------------------------------- */
+
+    .register-feedback {
+      display: none;
+      padding: 11px 13px;
+      margin-bottom: 14px;
+
+      border-radius: 12px;
+
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .register-feedback.visible {
+      display: block;
+    }
+
+    .register-feedback.error {
+      color: #FFB6BC;
+      background: rgba(255,92,103,0.08);
+      border: 1px solid rgba(255,92,103,0.18);
+    }
+
+    .register-feedback.info {
+      color: #B7EBD2;
+      background: rgba(32,212,123,0.07);
+      border: 1px solid rgba(32,212,123,0.15);
+    }
+
+    /* ---------------------------------------------------------
+       Responsive
+       --------------------------------------------------------- */
+
+    @media (max-width: 1050px) {
+      .register-shell {
+        grid-template-columns: 1fr;
+        max-width: 560px;
+        gap: 20px;
+      }
+
+      .register-intro {
+        text-align: center;
+        padding-bottom: 0;
+      }
+
+      .register-brand {
+        margin-bottom: 18px;
+      }
+
+      .register-intro h1 {
+        margin-inline: auto;
+        font-size: clamp(32px, 7vw, 48px);
+      }
+
+      .register-intro-text {
+        margin-inline: auto;
+      }
+
+      .register-features {
+        margin-inline: auto;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .register-page {
+        align-items: flex-start;
+        padding: 18px 12px 30px;
+      }
+
+      .register-shell {
+        width: 100%;
+      }
+
+      .register-intro {
+        padding-top: 6px;
+      }
+
+      .register-brand {
+        margin-bottom: 14px;
+      }
+
+      .register-brand-icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+      }
+
+      .register-brand-icon img {
+        width: 27px;
+        height: 27px;
+      }
+
+      .register-brand-name {
+        font-size: 21px;
+      }
+
+      .register-brand-tagline {
+        font-size: 10px;
+      }
+
+      .register-intro h1 {
+        font-size: 30px;
+        letter-spacing: -0.7px;
+      }
+
+      .register-intro-text {
+        font-size: 13px;
+        line-height: 1.9;
+        margin-top: 12px;
+      }
+
+      .register-features {
+        grid-template-columns: 1fr;
+        margin-top: 20px;
+      }
+
+      .register-feature {
+        min-height: auto;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 13px;
+      }
+
+      .register-feature-icon {
+        margin: 0;
+        flex: 0 0 auto;
+      }
+
+      .register-card {
+        padding: 21px 16px;
+        border-radius: 22px;
+      }
+
+      .register-card-header h2 {
+        font-size: 21px;
+      }
+
+      .register-card-header p {
+        font-size: 11px;
+      }
+
+      .register-phone-row {
+        grid-template-columns: 94px 1fr;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .register-page {
+        padding-inline: 8px;
+      }
+
+      .register-card {
+        padding-inline: 13px;
+      }
+
+      .register-phone-row {
+        grid-template-columns: 86px 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .register-submit,
+      .register-google,
+      .register-input,
+      .register-method button {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="register-page">
+
+    <div class="register-glow"></div>
+
+    <div class="register-shell">
+
+      <!-- =====================================================
+           Intro
+           ===================================================== -->
+
+      <section class="register-intro">
+
+        <a
+          class="register-brand"
+          href="../index.html"
+          aria-label="NOVA"
+        >
+
+          <span class="register-brand-icon">
+            <img
+              src="../assets/brand/logo.svg"
+              alt=""
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+            >
+
+            <span
+              class="register-brand-fallback"
+              style="display:none;"
+            >
+              N
+            </span>
+          </span>
+
+          <span>
+            <span class="register-brand-name">NOVA</span>
+            <span class="register-brand-tagline">
+              تواصل ببساطة
+            </span>
+          </span>
+
+        </a>
+
+        <h1>
+          ابدأ مساحتك على
+          <span>NOVA.</span>
+        </h1>
+
+        <p class="register-intro-text">
+          أنشئ حسابك وابدأ في التواصل مع الأشخاص والمجموعات
+          والمجتمعات من مكان واحد، بواجهة بسيطة وتجربة مصممة
+          للمراسلة اليومية.
+        </p>
+
+        <div class="register-features">
+
+          <article class="register-feature">
+            <div class="register-feature-icon">◉</div>
+
+            <div>
+              <strong>محادثات منظمة</strong>
+              <span>
+                محادثات فردية وجماعية في مساحة واحدة.
+              </span>
+            </div>
+          </article>
+
+          <article class="register-feature">
+            <div class="register-feature-icon">⌁</div>
+
+            <div>
+              <strong>مكالمات</strong>
+              <span>
+                بنية جاهزة للمكالمات الصوتية والمرئية.
+              </span>
+            </div>
+          </article>
+
+          <article class="register-feature">
+            <div class="register-feature-icon">◆</div>
+
+            <div>
+              <strong>خصوصية وأمان</strong>
+              <span>
+                إعدادات مخصصة للخصوصية والأجهزة والجلسات.
+              </span>
+            </div>
+          </article>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           Register Card
+           ===================================================== -->
+
+      <section class="register-card">
+
+        <header class="register-card-header">
+
+          <h2>إنشاء حساب</h2>
+
+          <p>
+            أدخل بياناتك الأساسية لإنشاء حساب NOVA.
+          </p>
+
+        </header>
+
+
+        <!-- Progress -->
+
+        <div
+          class="register-progress"
+          aria-label="تقدم التسجيل"
+        >
+          <span class="register-progress-line active"></span>
+          <span class="register-progress-line"></span>
+          <span class="register-progress-line"></span>
+        </div>
+
+
+        <!-- Feedback -->
+
+        <div
+          id="registerFeedback"
+          class="register-feedback"
+          role="alert"
+          aria-live="polite"
+        ></div>
+
+
+        <!-- Registration Method -->
+
+        <div
+          class="register-method"
+          role="tablist"
+          aria-label="طريقة التسجيل"
+        >
+
+          <button
+            type="button"
+            class="active"
+            data-method="phone"
+            role="tab"
+            aria-selected="true"
+          >
+            رقم الهاتف
+          </button>
+
+          <button
+            type="button"
+            data-method="email"
+            role="tab"
+            aria-selected="false"
+          >
+            البريد الإلكتروني
+          </button>
+
+        </div>
+
+
+        <!-- Form -->
+
+        <form
+          id="registerForm"
+          class="register-form"
+          novalidate
+          autocomplete="on"
+        >
+
+          <!-- Full Name -->
+
+          <div class="register-form-group">
+
+            <label
+              class="register-label"
+              for="fullName"
+            >
+              الاسم
+            </label>
+
+            <div class="register-input-wrap">
+
+              <input
+                id="fullName"
+                name="fullName"
+                class="register-input"
+                type="text"
+                autocomplete="name"
+                maxlength="100"
+                placeholder="اكتب اسمك"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <!-- Phone -->
+
+          <div
+            id="phoneGroup"
+            class="register-form-group"
+          >
+
+            <label
+              class="register-label"
+              for="phone"
+            >
+              رقم الهاتف
+            </label>
+
+            <div class="register-phone-row">
+
+              <select
+                id="countryCode"
+                name="countryCode"
+                class="register-country"
+                autocomplete="tel-country-code"
+                aria-label="مفتاح الدولة"
+              >
+                <option value="+20">🇪🇬 +20</option>
+                <option value="+966">🇸🇦 +966</option>
+                <option value="+971">🇦🇪 +971</option>
+                <option value="+965">🇰🇼 +965</option>
+                <option value="+974">🇶🇦 +974</option>
+                <option value="+973">🇧🇭 +973</option>
+                <option value="+968">🇴🇲 +968</option>
+                <option value="+962">🇯🇴 +962</option>
+                <option value="+212">🇲🇦 +212</option>
+                <option value="+213">🇩🇿 +213</option>
+              </select>
+
+              <input
+                id="phone"
+                name="phone"
+                class="register-input register-phone"
+                type="tel"
+                inputmode="tel"
+                autocomplete="tel"
+                maxlength="20"
+                placeholder="10XXXXXXXX"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <!-- Email -->
+
+          <div
+            id="emailGroup"
+            class="register-form-group"
+            hidden
+          >
+
+            <label
+              class="register-label"
+              for="email"
+            >
+              البريد الإلكتروني
+            </label>
+
+            <input
+              id="email"
+              name="email"
+              class="register-input"
+              type="email"
+              autocomplete="email"
+              maxlength="254"
+              placeholder="example@email.com"
+            >
+
+          </div>
+
+
+          <!-- Password -->
+
+          <div class="register-form-group">
+
+            <label
+              class="register-label"
+              for="password"
+            >
+              كلمة المرور
+            </label>
+
+            <div class="register-input-wrap">
+
+              <input
+                id="password"
+                name="password"
+                class="register-input has-icon"
+                type="password"
+                autocomplete="new-password"
+                minlength="8"
+                maxlength="128"
+                placeholder="أنشئ كلمة مرور قوية"
+                required
+              >
+
+              <button
+                type="button"
+                id="togglePassword"
+                class="register-input-action"
+                aria-label="إظهار كلمة المرور"
+                title="إظهار كلمة المرور"
+              >
+                ◉
+              </button>
+
+            </div>
+
+            <div
+              id="passwordStrength"
+              class="register-password-strength"
+              aria-hidden="true"
+            >
+              <span></span>
+            </div>
+
+            <div class="register-password-hint">
+              يجب أن تتكون كلمة المرور من 8 أحرف على الأقل
+              وتحتوي على رقم.
+            </div>
+
+          </div>
+
+
+          <!-- Confirm Password -->
+
+          <div class="register-form-group">
+
+            <label
+              class="register-label"
+              for="confirmPassword"
+            >
+              تأكيد كلمة المرور
+            </label>
+
+            <input
+              id="confirmPassword"
+              name="confirmPassword"
+              class="register-input"
+              type="password"
+              autocomplete="new-password"
+              minlength="8"
+              maxlength="128"
+              placeholder="أعد كتابة كلمة المرور"
+              required
+            >
+
+          </div>
+
+
+          <!-- Terms -->
+
+          <div class="register-terms">
+
+            <input
+              id="terms"
+              name="terms"
+              type="checkbox"
+              required
+            >
+
+            <label for="terms">
+              أوافق على
+              <a href="#" id="termsLink">
+                شروط الاستخدام
+              </a>
+              و
+              <a href="#" id="privacyLink">
+                سياسة الخصوصية
+              </a>
+              الخاصة بـ NOVA.
+            </label>
+
+          </div>
+
+
+          <!-- Submit -->
+
+          <button
+            id="registerSubmit"
+            class="register-submit"
+            type="submit"
+          >
+            إنشاء الحساب
+          </button>
+
+        </form>
+
+
+        <!-- Google -->
+
+        <div class="register-separator">
+          <span>أو</span>
+        </div>
+
+        <button
+          id="googleRegister"
+          type="button"
+          class="register-google"
+        >
+          <span class="google-icon">G</span>
+          التسجيل باستخدام Google
+        </button>
+
+
+        <!-- Footer -->
+
+        <div class="register-footer">
+
+          لديك حساب بالفعل؟
+          <a href="../auth/login.html">
+            تسجيل الدخول
+          </a>
+
+        </div>
+
+        <div class="register-security">
+          <span>🔒</span>
+          <span>بيانات التسجيل تُرسل للخادم فقط عند تفعيل Backend.</span>
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+
+  <!-- =========================================================
+       Configuration
+       ========================================================= -->
+
+  <script src="../js/config.js"></script>
+
+
+  <!-- =========================================================
+       Register Logic
+       ========================================================= -->
+
+  <script>
+    (() => {
+      "use strict";
+
+      const config = window.APP_CONFIG;
+      const app = window.APP;
+
+      if (!config || !app) {
+        console.error("[NOVA] Configuration is unavailable.");
+        return;
+      }
+
+      const form =
+        document.getElementById("registerForm");
+
+      const feedback =
+        document.getElementById("registerFeedback");
+
+      const submitButton =
+        document.getElementById("registerSubmit");
+
+      const googleButton =
+        document.getElementById("googleRegister");
+
+      const fullName =
+        document.getElementById("fullName");
+
+      const phone =
+        document.getElementById("phone");
+
+      const email =
+        document.getElementById("email");
+
+      const countryCode =
+        document.getElementById("countryCode");
+
+      const password =
+        document.getElementById("password");
+
+      const confirmPassword =
+        document.getElementById("confirmPassword");
+
+      const terms =
+        document.getElementById("terms");
+
+      const phoneGroup =
+        document.getElementById("phoneGroup");
+
+      const emailGroup =
+        document.getElementById("emailGroup");
+
+      const togglePassword =
+        document.getElementById("togglePassword");
+
+      const strengthContainer =
+        document.getElementById("passwordStrength");
+
+      const strengthBar =
+        strengthContainer.querySelector("span");
+
+      const methodButtons =
+        document.querySelectorAll(
+          ".register-method button"
+        );
+
+
+      let registrationMethod = "phone";
+
+
+      /* -------------------------------------------------------
+         Feedback
+         ------------------------------------------------------- */
+
+      function showFeedback(
+        message,
+        type = "info"
+      ) {
+        feedback.textContent = message;
+
+        feedback.className =
+          "register-feedback visible " + type;
+      }
+
+
+      function clearFeedback() {
+        feedback.textContent = "";
+        feedback.className =
+          "register-feedback";
+      }
+
+
+      /* -------------------------------------------------------
+         Registration Method
+         ------------------------------------------------------- */
+
+      function changeMethod(method) {
+
+        registrationMethod = method;
+
+        methodButtons.forEach((button) => {
+
+          const active =
+            button.dataset.method === method;
+
+          button.classList.toggle(
+            "active",
+            active
+          );
+
+          button.setAttribute(
+            "aria-selected",
+            String(active)
+          );
+
+        });
+
+
+        if (method === "phone") {
+
+          phoneGroup.hidden = false;
+          emailGroup.hidden = true;
+
+          phone.required = true;
+          email.required = false;
+
+          email.value = "";
+
+        } else {
+
+          phoneGroup.hidden = true;
+          emailGroup.hidden = false;
+
+          phone.required = false;
+          email.required = true;
+
+          phone.value = "";
+
+        }
+
+        clearFeedback();
+      }
+
+
+      methodButtons.forEach((button) => {
+
+        button.addEventListener(
+          "click",
+          () => {
+            changeMethod(
+              button.dataset.method
+            );
+          }
+        );
+
+      });
+
+
+      /* -------------------------------------------------------
+         Password Visibility
+         ------------------------------------------------------- */
+
+      togglePassword.addEventListener(
+        "click",
+        () => {
+
+          const visible =
+            password.type === "text";
+
+          password.type =
+            visible ? "password" : "text";
+
+          togglePassword.setAttribute(
+            "aria-label",
+            visible
+              ? "إظهار كلمة المرور"
+              : "إخفاء كلمة المرور"
+          );
+
+          togglePassword.setAttribute(
+            "title",
+            visible
+              ? "إظهار كلمة المرور"
+              : "إخفاء كلمة المرور"
+          );
+
+        }
+      );
+
+
+      /* -------------------------------------------------------
+         Password Strength
+         ------------------------------------------------------- */
+
+      function calculatePasswordStrength(value) {
+
+        if (!value) {
+          return 0;
+        }
+
+        let score = 0;
+
+        if (value.length >= 8) {
+          score++;
+        }
+
+        if (value.length >= 12) {
+          score++;
+        }
+
+        if (/[0-9]/.test(value)) {
+          score++;
+        }
+
+        if (/[A-Z]/.test(value)) {
+          score++;
+        }
+
+        if (/[^A-Za-z0-9]/.test(value)) {
+          score++;
+        }
+
+        return Math.min(score, 5);
+      }
+
+
+      password.addEventListener(
+        "input",
+        () => {
+
+          const value = password.value;
+
+          if (!value) {
+            strengthContainer.classList.remove(
+              "visible"
+            );
+
+            strengthBar.style.width = "0%";
+
+            return;
+          }
+
+          strengthContainer.classList.add(
+            "visible"
+          );
+
+          const score =
+            calculatePasswordStrength(value);
+
+          strengthBar.style.width =
+            `${score * 20}%`;
+
+          if (score <= 1) {
+            strengthBar.style.background =
+              "#FF5C67";
+          } else if (score <= 3) {
+            strengthBar.style.background =
+              "#F2C94C";
+          } else {
+            strengthBar.style.background =
+              "#20D47B";
+          }
+
+        }
+      );
+
+
+      /* -------------------------------------------------------
+         Validation
+         ------------------------------------------------------- */
+
+      function normalizePhone(value) {
+
+        return String(value || "")
+          .replace(/[^\d]/g, "");
+      }
+
+
+      function validateEmail(value) {
+
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+          .test(value);
+      }
+
+
+      function validateForm() {
+
+        const name =
+          fullName.value.trim();
+
+        if (name.length < 2) {
+
+          showFeedback(
+            "من فضلك اكتب اسمًا صحيحًا.",
+            "error"
+          );
+
+          fullName.focus();
+
+          return false;
+        }
+
+
+        if (registrationMethod === "phone") {
+
+          const phoneValue =
+            normalizePhone(phone.value);
+
+          if (
+            phoneValue.length < 8 ||
+            phoneValue.length > 15
+          ) {
+
+            showFeedback(
+              "من فضلك أدخل رقم هاتف صحيحًا.",
+              "error"
+            );
+
+            phone.focus();
+
+            return false;
+          }
+
+        } else {
+
+          const emailValue =
+            email.value.trim();
+
+          if (!validateEmail(emailValue)) {
+
+            showFeedback(
+              "من فضلك أدخل بريدًا إلكترونيًا صحيحًا.",
+              "error"
+            );
+
+            email.focus();
+
+            return false;
+          }
+
+        }
+
+
+        if (password.value.length < 8) {
+
+          showFeedback(
+            "كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل.",
+            "error"
+          );
+
+          password.focus();
+
+          return false;
+        }
+
+
+        if (!/\d/.test(password.value)) {
+
+          showFeedback(
+            "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل.",
+            "error"
+          );
+
+          password.focus();
+
+          return false;
+        }
+
+
+        if (
+          password.value !==
+          confirmPassword.value
+        ) {
+
+          showFeedback(
+            "كلمتا المرور غير متطابقتين.",
+            "error"
+          );
+
+          confirmPassword.focus();
+
+          return false;
+        }
+
+
+        if (!terms.checked) {
+
+          showFeedback(
+            "يجب الموافقة على شروط الاستخدام وسياسة الخصوصية للمتابعة.",
+            "error"
+          );
+
+          terms.focus();
+
+          return false;
+        }
+
+
+        return true;
+      }
+
+
+      /* -------------------------------------------------------
+         Build API Payload
+         ------------------------------------------------------- */
+
+      function buildPayload() {
+
+        const payload = {
+          name: fullName.value.trim(),
+          password: password.value,
+          registrationMethod
+        };
+
+
+        if (registrationMethod === "phone") {
+
+          const normalized =
+            normalizePhone(phone.value);
+
+          payload.phone =
+            `${countryCode.value}${normalized}`;
+
+        } else {
+
+          payload.email =
+            email.value.trim()
+              .toLowerCase();
+
+        }
+
+
+        return payload;
+      }
+
+
+      /* -------------------------------------------------------
+         Submit
+         ------------------------------------------------------- */
+
+      form.addEventListener(
+        "submit",
+        async (event) => {
+
+          event.preventDefault();
+
+          clearFeedback();
+
+          if (!validateForm()) {
+            return;
+          }
+
+
+          const payload =
+            buildPayload();
+
+
+          /*
+           * Development:
+           * لا يتم إنشاء حساب وهمي.
+           * لا يتم تخزين كلمة المرور.
+           * لا يتم ادعاء نجاح التسجيل.
+           */
+
+          if (
+            config.environment ===
+            "development"
+          ) {
+
+            showFeedback(
+              "نموذج التسجيل جاهز. خدمة إنشاء الحساب غير متصلة حاليًا بالـBackend، لذلك لم يتم إنشاء حساب أو حفظ أي بيانات.",
+              "info"
+            );
+
+            console.info(
+              "[NOVA] Registration payload prepared:",
+              {
+                name: payload.name,
+                registrationMethod:
+                  payload.registrationMethod,
+                phone:
+                  payload.phone
+                    ? "[provided]"
+                    : undefined,
+                email:
+                  payload.email
+                    ? "[provided]"
+                    : undefined
+              }
+            );
+
+            return;
+          }
+
+
+          /* ---------------------------------------------------
+             Production API
+             --------------------------------------------------- */
+
+          submitButton.disabled = true;
+          submitButton.classList.add("loading");
+
+          try {
+
+            const response =
+              await fetch(
+                app.getApiURL("auth/register"),
+                {
+                  method: "POST",
+
+                  headers: {
+                    "Content-Type":
+                      "application/json",
+
+                    "Accept":
+                      "application/json"
+                  },
+
+                  credentials:
+                    config.api.credentials,
+
+                  body:
+                    JSON.stringify(payload)
+                }
+              );
+
+
+            let data = null;
+
+            try {
+              data = await response.json();
+            } catch {
+              data = null;
+            }
+
+
+            if (!response.ok) {
+
+              const message =
+                data &&
+                typeof data.message === "string"
+                  ? data.message
+                  : "تعذر إنشاء الحساب حاليًا.";
+
+              throw new Error(message);
+            }
+
+
+            /*
+             * في حالة نجاح الـBackend:
+             * يتم توجيه المستخدم إلى التحقق.
+             */
+
+            const verifyRoute =
+              app.getRoute("auth.verify");
+
+            window.location.href =
+              verifyRoute;
+
+
+          } catch (error) {
+
+            console.error(
+              "[NOVA] Registration failed:",
+              error
+            );
+
+            showFeedback(
+              error.message ||
+                "حدث خطأ أثناء إنشاء الحساب.",
+              "error"
+            );
+
+          } finally {
+
+            submitButton.disabled = false;
+
+            submitButton.classList.remove(
+              "loading"
+            );
+
+          }
+
+        }
+      );
+
+
+      /* -------------------------------------------------------
+         Google Registration
+         ------------------------------------------------------- */
+
+      googleButton.addEventListener(
+        "click",
+        () => {
+
+          clearFeedback();
+
+          if (
+            config.environment ===
+            "development"
+          ) {
+
+            showFeedback(
+              "تسجيل Google مجهز للربط مع OAuth في مرحلة Backend، ولم يتم إنشاء حساب تجريبي.",
+              "info"
+            );
+
+            return;
+          }
+
+
+          /*
+           * سيتم استبدال هذا المسار بعنوان
+           * OAuth الحقيقي عند تجهيز Backend.
+           */
+
+          const googleEndpoint =
+            app.getApiURL(
+              "auth/google"
+            );
+
+          window.location.href =
+            googleEndpoint;
+
+        }
+      );
+
+
+      /* -------------------------------------------------------
+         Terms / Privacy
+         ------------------------------------------------------- */
+
+      document
+        .getElementById("termsLink")
+        .addEventListener(
+          "click",
+          (event) => {
+            event.preventDefault();
+
+            showFeedback(
+              "صفحة شروط الاستخدام سيتم ربطها ضمن صفحات النظام القانونية.",
+              "info"
+            );
+          }
+        );
+
+
+      document
+        .getElementById("privacyLink")
+        .addEventListener(
+          "click",
+          (event) => {
+            event.preventDefault();
+
+            window.location.href =
+              app.getRoute("pages.privacy");
+          }
+        );
+
+
+      /* -------------------------------------------------------
+         Phone Input Cleanup
+         ------------------------------------------------------- */
+
+      phone.addEventListener(
+        "input",
+        () => {
+
+          phone.value =
+            phone.value.replace(
+              /[^\d\s\-()]/g,
+              ""
+            );
+
+        }
+      );
+
+
+      /* -------------------------------------------------------
+         Initial State
+         ------------------------------------------------------- */
+
+      changeMethod("phone");
+
+
+      if (
+        config.development.debug
+      ) {
+
+        console.info(
+          "[NOVA] Register page initialized."
+        );
+
+      }
+
+    })();
+  </script>
+
+</body>
+</html>
