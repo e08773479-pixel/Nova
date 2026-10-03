@@ -1,0 +1,1651 @@
+/* =========================================================
+   NOVA — Layout System
+   File: css/layout.css
+   Version: 1.0.0
+
+   مسؤول عن:
+   - App Shell
+   - Sidebar
+   - Conversations Panel
+   - Main Content
+   - Chat Layout
+   - Header
+   - Info Panel
+   - Bottom Navigation Foundation
+   - Desktop / Tablet Structure
+
+   ملاحظة:
+   لا يحتوي هذا الملف على ألوان أساسية أو Components عامة.
+   يعتمد على design-system.css و components.css.
+   ========================================================= */
+
+
+/* =========================================================
+   01. APP SHELL
+   ========================================================= */
+
+.nova-app {
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+
+  background:
+    radial-gradient(
+      circle at 85% 10%,
+      rgba(32, 212, 123, 0.055),
+      transparent 32%
+    ),
+    var(--nova-bg);
+
+  color: var(--nova-text);
+
+  overflow: hidden;
+}
+
+
+.nova-app__body {
+  flex: 1;
+
+  min-height: 0;
+
+  display: flex;
+
+  width: 100%;
+}
+
+
+/* =========================================================
+   02. APPLICATION HEADER
+   ========================================================= */
+
+.nova-header {
+  position: relative;
+  z-index: 100;
+
+  width: 100%;
+  min-height: 68px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding:
+    0
+    var(--nova-space-5);
+
+  background:
+    rgba(6, 17, 13, 0.92);
+
+  border-bottom:
+    1px solid var(--nova-border);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  flex-shrink: 0;
+}
+
+
+.nova-header__start,
+.nova-header__center,
+.nova-header__end {
+  display: flex;
+  align-items: center;
+}
+
+
+.nova-header__start {
+  gap: var(--nova-space-3);
+}
+
+
+.nova-header__center {
+  flex: 1;
+
+  justify-content: center;
+
+  min-width: 0;
+
+  padding-inline:
+    var(--nova-space-5);
+}
+
+
+.nova-header__end {
+  gap: var(--nova-space-2);
+}
+
+
+.nova-header__title {
+  margin: 0;
+
+  font-size: var(--nova-font-lg);
+  font-weight: 800;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.nova-header__subtitle {
+  margin-top: 2px;
+
+  color: var(--nova-text-muted);
+
+  font-size: var(--nova-font-sm);
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   03. SIDEBAR
+   ========================================================= */
+
+.nova-sidebar {
+  width: 260px;
+  min-width: 260px;
+
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--nova-surface) 0%,
+      var(--nova-bg-secondary) 100%
+    );
+
+  border-left:
+    1px solid var(--nova-border);
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+}
+
+
+.nova-sidebar__header {
+  min-height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding:
+    var(--nova-space-4)
+    var(--nova-space-5);
+
+  border-bottom:
+    1px solid var(--nova-border);
+
+  flex-shrink: 0;
+}
+
+
+.nova-sidebar__content {
+  flex: 1;
+
+  min-height: 0;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  padding:
+    var(--nova-space-3);
+}
+
+
+.nova-sidebar__footer {
+  padding:
+    var(--nova-space-3);
+
+  border-top:
+    1px solid var(--nova-border);
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   04. SIDEBAR NAVIGATION
+   ========================================================= */
+
+.nova-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+
+.nova-sidebar-nav__item {
+  position: relative;
+
+  min-height: 48px;
+
+  display: flex;
+  align-items: center;
+
+  gap: var(--nova-space-3);
+
+  padding:
+    0
+    var(--nova-space-3);
+
+  border-radius:
+    var(--nova-radius-md);
+
+  color:
+    var(--nova-text-secondary);
+
+  text-decoration: none;
+
+  transition:
+    background var(--nova-duration-fast) ease,
+    color var(--nova-duration-fast) ease,
+    transform var(--nova-duration-fast) ease;
+}
+
+
+.nova-sidebar-nav__item:hover {
+  color: var(--nova-text);
+
+  background:
+    rgba(255, 255, 255, 0.045);
+}
+
+
+.nova-sidebar-nav__item:active {
+  transform: scale(0.985);
+}
+
+
+.nova-sidebar-nav__item.is-active {
+  color: var(--nova-primary);
+
+  background:
+    rgba(32, 212, 123, 0.095);
+}
+
+
+.nova-sidebar-nav__item.is-active::before {
+  content: "";
+
+  position: absolute;
+
+  inset-inline-end: 0;
+
+  top: 8px;
+  bottom: 8px;
+
+  width: 3px;
+
+  border-radius: 999px;
+
+  background:
+    var(--nova-primary);
+}
+
+
+.nova-sidebar-nav__icon {
+  width: 22px;
+  height: 22px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+
+.nova-sidebar-nav__label {
+  flex: 1;
+
+  font-size: var(--nova-font-sm);
+  font-weight: 700;
+}
+
+
+.nova-sidebar-nav__badge {
+  min-width: 20px;
+  height: 20px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding-inline: 5px;
+
+  border-radius: 999px;
+
+  background: var(--nova-primary);
+  color: #04100b;
+
+  font-size: 11px;
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   05. MAIN WORKSPACE
+   ========================================================= */
+
+.nova-workspace {
+  flex: 1;
+
+  min-width: 0;
+  min-height: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(300px, 360px)
+    minmax(0, 1fr)
+    300px;
+
+  direction: rtl;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   06. CONVERSATIONS PANEL
+   ========================================================= */
+
+.nova-conversations {
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  background:
+    var(--nova-bg-secondary);
+
+  border-left:
+    1px solid var(--nova-border);
+
+  border-right:
+    1px solid var(--nova-border);
+
+  overflow: hidden;
+}
+
+
+.nova-conversations__header {
+  min-height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding:
+    var(--nova-space-4);
+
+  border-bottom:
+    1px solid var(--nova-border);
+
+  flex-shrink: 0;
+}
+
+
+.nova-conversations__title {
+  margin: 0;
+
+  font-size: var(--nova-font-xl);
+  font-weight: 900;
+}
+
+
+.nova-conversations__actions {
+  display: flex;
+  align-items: center;
+
+  gap: var(--nova-space-1);
+}
+
+
+.nova-conversations__search {
+  padding:
+    var(--nova-space-3)
+    var(--nova-space-4);
+
+  border-bottom:
+    1px solid var(--nova-border);
+
+  flex-shrink: 0;
+}
+
+
+.nova-conversations__list {
+  flex: 1;
+
+  min-height: 0;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  padding:
+    var(--nova-space-2);
+}
+
+
+/* =========================================================
+   07. CONVERSATION ITEM
+   ========================================================= */
+
+.nova-conversation {
+  position: relative;
+
+  min-height: 76px;
+
+  display: flex;
+  align-items: center;
+
+  gap: var(--nova-space-3);
+
+  padding:
+    var(--nova-space-3);
+
+  border-radius:
+    var(--nova-radius-md);
+
+  text-decoration: none;
+
+  color: inherit;
+
+  cursor: pointer;
+
+  transition:
+    background var(--nova-duration-fast) ease,
+    transform var(--nova-duration-fast) ease;
+}
+
+
+.nova-conversation:hover {
+  background:
+    rgba(255, 255, 255, 0.045);
+}
+
+
+.nova-conversation:active {
+  transform: scale(0.995);
+}
+
+
+.nova-conversation.is-active {
+  background:
+    rgba(32, 212, 123, 0.085);
+}
+
+
+.nova-conversation__avatar {
+  position: relative;
+
+  flex-shrink: 0;
+}
+
+
+.nova-conversation__content {
+  min-width: 0;
+
+  flex: 1;
+}
+
+
+.nova-conversation__top {
+  display: flex;
+  align-items: center;
+
+  gap: var(--nova-space-2);
+
+  margin-bottom: 5px;
+}
+
+
+.nova-conversation__name {
+  flex: 1;
+
+  min-width: 0;
+
+  font-size: var(--nova-font-sm);
+  font-weight: 800;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.nova-conversation__time {
+  flex-shrink: 0;
+
+  color:
+    var(--nova-text-muted);
+
+  font-size: 11px;
+}
+
+
+.nova-conversation__bottom {
+  display: flex;
+  align-items: center;
+
+  gap: var(--nova-space-2);
+}
+
+
+.nova-conversation__preview {
+  flex: 1;
+
+  min-width: 0;
+
+  color:
+    var(--nova-text-muted);
+
+  font-size: var(--nova-font-xs);
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.nova-conversation__counter {
+  flex-shrink: 0;
+
+  min-width: 20px;
+  height: 20px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding-inline: 5px;
+
+  border-radius: 999px;
+
+  background:
+    var(--nova-primary);
+
+  color:
+    #04100b;
+
+  font-size: 10px;
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   08. MAIN CONTENT
+   ========================================================= */
+
+.nova-main {
+  min-width: 0;
+  min-height: 0;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  background:
+    var(--nova-bg);
+
+  overflow: hidden;
+}
+
+
+.nova-main__header {
+  min-height: 72px;
+
+  display: flex;
+  align-items: center;
+
+  padding:
+    var(--nova-space-3)
+    var(--nova-space-4);
+
+  border-bottom:
+    1px solid var(--nova-border);
+
+  background:
+    rgba(6, 17, 13, 0.78);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  flex-shrink: 0;
+}
+
+
+.nova-main__content {
+  flex: 1;
+
+  min-width: 0;
+  min-height: 0;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+
+.nova-main__footer {
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   09. CHAT AREA
+   ========================================================= */
+
+.nova-chat {
+  position: relative;
+
+  flex: 1;
+
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  background:
+    var(--nova-bg);
+}
+
+
+.nova-chat__header {
+  min-height: 68px;
+
+  display: flex;
+  align-items: center;
+
+  gap: var(--nova-space-3);
+
+  padding:
+    var(--nova-space-3)
+    var(--nova-space-4);
+
+  border-bottom:
+    1px solid var(--nova-border);
+
+  background:
+    rgba(8, 25, 20, 0.88);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  flex-shrink: 0;
+}
+
+
+.nova-chat__identity {
+  min-width: 0;
+
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+
+  gap: var(--nova-space-3);
+}
+
+
+.nova-chat__avatar {
+  flex-shrink: 0;
+}
+
+
+.nova-chat__identity-info {
+  min-width: 0;
+}
+
+
+.nova-chat__name {
+  margin: 0;
+
+  font-size: var(--nova-font-md);
+  font-weight: 800;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.nova-chat__presence {
+  margin-top: 2px;
+
+  color:
+    var(--nova-text-muted);
+
+  font-size: var(--nova-font-xs);
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.nova-chat__actions {
+  display: flex;
+  align-items: center;
+
+  gap: var(--nova-space-1);
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   10. MESSAGE AREA
+   ========================================================= */
+
+.nova-chat__messages {
+  flex: 1;
+
+  min-height: 0;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  padding:
+    var(--nova-space-5);
+
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--nova-space-2);
+
+  scroll-behavior: smooth;
+}
+
+
+.nova-chat__messages-inner {
+  width: 100%;
+  max-width: 900px;
+
+  margin-inline: auto;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--nova-space-2);
+}
+
+
+/* =========================================================
+   11. MESSAGE COMPOSER
+   ========================================================= */
+
+.nova-chat__composer {
+  width: 100%;
+
+  padding:
+    var(--nova-space-3)
+    var(--nova-space-4);
+
+  border-top:
+    1px solid var(--nova-border);
+
+  background:
+    rgba(8, 25, 20, 0.94);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  flex-shrink: 0;
+}
+
+
+.nova-composer {
+  width: 100%;
+  max-width: 1000px;
+
+  margin-inline: auto;
+
+  display: flex;
+  align-items: flex-end;
+
+  gap: var(--nova-space-2);
+}
+
+
+.nova-composer__input {
+  flex: 1;
+
+  min-width: 0;
+
+  min-height: 46px;
+  max-height: 140px;
+
+  resize: none;
+
+  overflow-y: auto;
+}
+
+
+.nova-composer__actions {
+  display: flex;
+  align-items: center;
+
+  gap: var(--nova-space-1);
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   12. INFO PANEL
+   ========================================================= */
+
+.nova-info-panel {
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  background:
+    var(--nova-surface);
+
+  border-right:
+    1px solid var(--nova-border);
+
+  overflow: hidden;
+}
+
+
+.nova-info-panel__header {
+  min-height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding:
+    var(--nova-space-4);
+
+  border-bottom:
+    1px solid var(--nova-border);
+
+  flex-shrink: 0;
+}
+
+
+.nova-info-panel__title {
+  margin: 0;
+
+  font-size: var(--nova-font-md);
+  font-weight: 800;
+}
+
+
+.nova-info-panel__content {
+  flex: 1;
+
+  min-height: 0;
+
+  overflow-y: auto;
+
+  padding:
+    var(--nova-space-4);
+}
+
+
+/* =========================================================
+   13. PROFILE / CONTACT SUMMARY
+   ========================================================= */
+
+.nova-profile-summary {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  text-align: center;
+
+  padding:
+    var(--nova-space-5)
+    var(--nova-space-3);
+}
+
+
+.nova-profile-summary__avatar {
+  margin-bottom:
+    var(--nova-space-3);
+}
+
+
+.nova-profile-summary__name {
+  margin: 0;
+
+  font-size: var(--nova-font-lg);
+  font-weight: 900;
+}
+
+
+.nova-profile-summary__meta {
+  margin-top: 4px;
+
+  color:
+    var(--nova-text-muted);
+
+  font-size: var(--nova-font-xs);
+}
+
+
+.nova-profile-summary__about {
+  margin-top:
+    var(--nova-space-3);
+
+  color:
+    var(--nova-text-secondary);
+
+  font-size: var(--nova-font-sm);
+
+  line-height: 1.8;
+}
+
+
+/* =========================================================
+   14. INFO SECTIONS
+   ========================================================= */
+
+.nova-info-section {
+  padding:
+    var(--nova-space-4) 0;
+
+  border-top:
+    1px solid var(--nova-border);
+}
+
+
+.nova-info-section:first-child {
+  border-top: 0;
+}
+
+
+.nova-info-section__title {
+  margin:
+    0 0
+    var(--nova-space-3);
+
+  color:
+    var(--nova-text-muted);
+
+  font-size: var(--nova-font-xs);
+  font-weight: 800;
+}
+
+
+.nova-info-section__list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+
+/* =========================================================
+   15. PAGE LAYOUT
+   ========================================================= */
+
+.nova-page {
+  min-height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+.nova-page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: var(--nova-space-4);
+
+  padding:
+    var(--nova-space-5);
+
+  border-bottom:
+    1px solid var(--nova-border);
+
+  flex-shrink: 0;
+}
+
+
+.nova-page__header-content {
+  min-width: 0;
+}
+
+
+.nova-page__title {
+  margin: 0;
+
+  font-size: var(--nova-font-2xl);
+  font-weight: 900;
+}
+
+
+.nova-page__description {
+  margin:
+    var(--nova-space-1)
+    0 0;
+
+  color:
+    var(--nova-text-muted);
+
+  font-size: var(--nova-font-sm);
+
+  line-height: 1.7;
+}
+
+
+.nova-page__actions {
+  display: flex;
+  align-items: center;
+
+  gap: var(--nova-space-2);
+
+  flex-shrink: 0;
+}
+
+
+.nova-page__body {
+  flex: 1;
+
+  min-height: 0;
+
+  padding:
+    var(--nova-space-5);
+
+  overflow-y: auto;
+}
+
+
+/* =========================================================
+   16. GRID SYSTEM
+   ========================================================= */
+
+.nova-grid {
+  display: grid;
+
+  gap: var(--nova-space-4);
+}
+
+
+.nova-grid--2 {
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+}
+
+
+.nova-grid--3 {
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+}
+
+
+.nova-grid--4 {
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+}
+
+
+.nova-grid--auto {
+  grid-template-columns:
+    repeat(auto-fit, minmax(240px, 1fr));
+}
+
+
+/* =========================================================
+   17. SPLIT LAYOUT
+   ========================================================= */
+
+.nova-split {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(280px, 360px);
+
+  gap: var(--nova-space-5);
+
+  min-height: 0;
+}
+
+
+.nova-split__main {
+  min-width: 0;
+}
+
+
+.nova-split__aside {
+  min-width: 0;
+}
+
+
+/* =========================================================
+   18. EMPTY WORKSPACE
+   ========================================================= */
+
+.nova-empty-workspace {
+  flex: 1;
+
+  min-height: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    var(--nova-space-6);
+
+  text-align: center;
+}
+
+
+.nova-empty-workspace__inner {
+  width: min(440px, 100%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: var(--nova-space-3);
+}
+
+
+.nova-empty-workspace__icon {
+  width: 76px;
+  height: 76px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    rgba(32, 212, 123, 0.08);
+
+  color:
+    var(--nova-primary);
+
+  font-size: 30px;
+}
+
+
+.nova-empty-workspace__title {
+  margin: 0;
+
+  font-size: var(--nova-font-xl);
+  font-weight: 900;
+}
+
+
+.nova-empty-workspace__text {
+  margin: 0;
+
+  color:
+    var(--nova-text-muted);
+
+  font-size: var(--nova-font-sm);
+
+  line-height: 1.8;
+}
+
+
+/* =========================================================
+   19. MOBILE BOTTOM NAV FOUNDATION
+   ========================================================= */
+
+.nova-bottom-nav {
+  display: none;
+
+  position: fixed;
+
+  inset-inline: 0;
+  bottom: 0;
+
+  z-index: 200;
+
+  min-height: 64px;
+
+  padding:
+    6px
+    var(--nova-space-2);
+
+  padding-bottom:
+    calc(
+      6px +
+      var(--nova-safe-bottom)
+    );
+
+  background:
+    rgba(6, 17, 13, 0.96);
+
+  border-top:
+    1px solid var(--nova-border);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+
+.nova-bottom-nav__inner {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  gap: 2px;
+}
+
+
+.nova-bottom-nav__item {
+  min-height: 52px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 3px;
+
+  border-radius:
+    var(--nova-radius-md);
+
+  color:
+    var(--nova-text-muted);
+
+  text-decoration: none;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  transition:
+    background var(--nova-duration-fast) ease,
+    color var(--nova-duration-fast) ease;
+}
+
+
+.nova-bottom-nav__item.is-active {
+  color:
+    var(--nova-primary);
+
+  background:
+    rgba(32, 212, 123, 0.08);
+}
+
+
+.nova-bottom-nav__icon {
+  width: 21px;
+  height: 21px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* =========================================================
+   20. MOBILE BACK BUTTON
+   ========================================================= */
+
+.nova-mobile-back {
+  display: none;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   21. DESKTOP LARGE
+   ========================================================= */
+
+@media (min-width: 1440px) {
+
+  .nova-sidebar {
+    width: 280px;
+    min-width: 280px;
+  }
+
+  .nova-workspace {
+    grid-template-columns:
+      360px
+      minmax(0, 1fr)
+      340px;
+  }
+
+  .nova-chat__messages {
+    padding-inline:
+      clamp(
+        var(--nova-space-5),
+        4vw,
+        var(--nova-space-8)
+      );
+  }
+}
+
+
+/* =========================================================
+   22. TABLET
+   ========================================================= */
+
+@media (max-width: 1199px) {
+
+  .nova-sidebar {
+    width: 78px;
+    min-width: 78px;
+  }
+
+  .nova-sidebar__header {
+    justify-content: center;
+
+    padding-inline:
+      var(--nova-space-2);
+  }
+
+  .nova-sidebar-nav__item {
+    justify-content: center;
+
+    padding-inline: 0;
+  }
+
+  .nova-sidebar-nav__label,
+  .nova-sidebar-nav__badge {
+    display: none;
+  }
+
+  .nova-sidebar-nav__item.is-active::before {
+    inset-inline-end: auto;
+
+    inset-inline-start: 0;
+  }
+
+  .nova-sidebar__footer {
+    padding-inline:
+      var(--nova-space-2);
+  }
+
+  .nova-workspace {
+    grid-template-columns:
+      320px
+      minmax(0, 1fr);
+  }
+
+  .nova-info-panel {
+    display: none;
+  }
+
+  .nova-page__body {
+    padding:
+      var(--nova-space-4);
+  }
+
+  .nova-grid--4 {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* =========================================================
+   23. TABLET COMPACT
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .nova-workspace {
+    grid-template-columns:
+      300px
+      minmax(0, 1fr);
+  }
+
+  .nova-conversations__header {
+    min-height: 64px;
+  }
+
+  .nova-chat__messages {
+    padding:
+      var(--nova-space-4);
+  }
+
+  .nova-grid--3 {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .nova-split {
+    grid-template-columns:
+      minmax(0, 1fr);
+  }
+
+  .nova-split__aside {
+    order: 2;
+  }
+}
+
+
+/* =========================================================
+   24. PHONE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  .nova-app__body {
+    padding-bottom:
+      64px;
+  }
+
+  .nova-header {
+    min-height: 60px;
+
+    padding-inline:
+      var(--nova-space-3);
+  }
+
+  .nova-header__center {
+    justify-content: flex-start;
+
+    padding-inline:
+      var(--nova-space-2);
+  }
+
+  .nova-header__subtitle {
+    display: none;
+  }
+
+  .nova-sidebar {
+    display: none;
+  }
+
+  .nova-workspace {
+    width: 100%;
+
+    grid-template-columns:
+      minmax(0, 1fr);
+  }
+
+  .nova-info-panel {
+    display: none;
+  }
+
+  .nova-conversations {
+    border-inline:
+      0;
+  }
+
+  .nova-main {
+    display: none;
+  }
+
+  .nova-workspace.is-chat-open .nova-conversations {
+    display: none;
+  }
+
+  .nova-workspace.is-chat-open .nova-main {
+    display: flex;
+  }
+
+  .nova-bottom-nav {
+    display: block;
+  }
+
+  .nova-mobile-back {
+    display: inline-flex;
+  }
+
+  .nova-page__header {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    padding:
+      var(--nova-space-4);
+  }
+
+  .nova-page__actions {
+    width: 100%;
+  }
+
+  .nova-page__actions .nova-btn {
+    flex: 1;
+  }
+
+  .nova-page__body {
+    padding:
+      var(--nova-space-3);
+  }
+
+  .nova-grid--2,
+  .nova-grid--3,
+  .nova-grid--4 {
+    grid-template-columns:
+      1fr;
+  }
+
+  .nova-grid--auto {
+    grid-template-columns:
+      1fr;
+  }
+
+  .nova-chat__header {
+    min-height: 60px;
+
+    padding-inline:
+      var(--nova-space-3);
+  }
+
+  .nova-chat__messages {
+    padding:
+      var(--nova-space-3);
+  }
+
+  .nova-chat__composer {
+    padding:
+      var(--nova-space-2)
+      var(--nova-space-3);
+
+    padding-bottom:
+      calc(
+        var(--nova-space-2) +
+        var(--nova-safe-bottom)
+      );
+  }
+
+  .nova-composer {
+    gap: 4px;
+  }
+
+  .nova-composer__input {
+    min-height: 44px;
+  }
+
+  .nova-conversation {
+    min-height: 72px;
+  }
+}
+
+
+/* =========================================================
+   25. SMALL PHONE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .nova-header__end {
+    gap: 0;
+  }
+
+  .nova-header__title {
+    font-size:
+      var(--nova-font-md);
+  }
+
+  .nova-conversations__header {
+    padding:
+      var(--nova-space-3);
+  }
+
+  .nova-conversations__search {
+    padding:
+      var(--nova-space-2)
+      var(--nova-space-3);
+  }
+
+  .nova-conversation {
+    padding:
+      var(--nova-space-2);
+  }
+
+  .nova-chat__actions .nova-btn-icon:nth-child(n + 3) {
+    display: none;
+  }
+
+  .nova-composer__actions .nova-btn-icon:first-child {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   26. REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .nova-conversation,
+  .nova-sidebar-nav__item,
+  .nova-bottom-nav__item {
+    transition: none;
+  }
+
+  .nova-chat__messages {
+    scroll-behavior: auto;
+  }
+}
+
+
+/* =========================================================
+   END OF NOVA LAYOUT
+   ========================================================= */
