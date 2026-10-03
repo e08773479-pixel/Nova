@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  >
+
+  <meta name="theme-color" content="#06110D">
+  <meta
+    name="description"
+    content="NOVA — المجتمعات والقنوات والمساحات المشتركة."
+  >
+  <meta name="color-scheme" content="dark">
+
+  <title>المجتمعات | NOVA</title>
+
+  <!-- Core styles -->
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/animations.css">
+
+  <style>
+    /* =========================================================
+       NOVA — COMMUNITIES PAGE
+       Page-specific fallback styling.
+       ========================================================= */
+
+    .communities-page {
+      min-height: 100%;
+      width: 100%;
+    }
+
+    .communities-page__content {
+      width: 100%;
+      max-width: 1500px;
+      margin-inline: auto;
+      padding-bottom: 110px;
+    }
+
+    /* =========================================================
+       Hero
+       ========================================================= */
+
+    .communities-hero {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: center;
+      margin-bottom: 22px;
+      padding: 30px;
+      border: 1px solid rgba(32, 212, 123, 0.14);
+      border-radius: 28px;
+      background:
+        radial-gradient(
+          circle at 85% 15%,
+          rgba(32, 212, 123, 0.12),
+          transparent 35%
+        ),
+        radial-gradient(
+          circle at 15% 100%,
+          rgba(32, 212, 123, 0.06),
+          transparent 30%
+        ),
+        linear-gradient(
+          145deg,
+          rgba(15, 35, 27, 0.97),
+          rgba(7, 18, 14, 0.97)
+        );
+      box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.035);
+    }
+
+    .communities-hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      margin-bottom: 10px;
+      padding: 7px 12px;
+      border: 1px solid rgba(32, 212, 123, 0.14);
+      border-radius: 999px;
+      background: rgba(32, 212, 123, 0.06);
+      color: #20d47b;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .communities-hero__title {
+      margin: 0;
+      color: #ffffff;
+      font-size: clamp(1.55rem, 3vw, 2.3rem);
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .communities-hero__description {
+      max-width: 760px;
+      margin: 10px 0 0;
+      color: rgba(255, 255, 255, 0.62);
+      font-size: 0.96rem;
+      line-height: 1.9;
+    }
+
+    .communities-hero__actions {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    /* =========================================================
+       Buttons
+       ========================================================= */
+
+    .communities-btn {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.045);
+      color: #ffffff;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition:
+        transform 180ms ease,
+        background 180ms ease,
+        border-color 180ms ease;
+    }
+
+    .communities-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.075);
+      border-color: rgba(255, 255, 255, 0.14);
+    }
+
+    .communities-btn:focus-visible {
+      outline: 2px solid #20d47b;
+      outline-offset: 3px;
+    }
+
+    .communities-btn--primary {
+      border-color: rgba(32, 212, 123, 0.28);
+      background: linear-gradient(
+        135deg,
+        #20d47b,
+        #13ad63
+      );
+      color: #03100a;
+      box-shadow: 0 10px 28px rgba(32, 212, 123, 0.14);
+    }
+
+    .communities-btn--primary:hover {
+      background: linear-gradient(
+        135deg,
+        #2ce488,
+        #18bd6c
+      );
+    }
+
+    .communities-btn--icon {
+      width: 44px;
+      padding: 0;
+    }
+
+    /* =========================================================
+       Layout
+       ========================================================= */
+
+    .communities-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 310px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .communities-main-card,
+    .communities-side-card {
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 24px;
+      background: rgba(9, 20, 16, 0.88);
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.025);
+    }
+
+    .communities-main-card {
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .communities-side-card {
+      padding: 20px;
+    }
+
+    /* =========================================================
+       Search toolbar
+       ========================================================= */
+
+    .communities-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .communities-search {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .communities-search__label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .communities-search__field {
+      width: 100%;
+      min-height: 48px;
+      padding: 0 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 15px;
+      outline: none;
+      background: rgba(255, 255, 255, 0.035);
+      color: #ffffff;
+      font: inherit;
+      transition:
+        border-color 180ms ease,
+        background 180ms ease,
+        box-shadow 180ms ease;
+    }
+
+    .communities-search__field::placeholder {
+      color: rgba(255, 255, 255, 0.38);
+    }
+
+    .communities-search__field:focus {
+      border-color: rgba(32, 212, 123, 0.45);
+      background: rgba(32, 212, 123, 0.035);
+      box-shadow: 0 0 0 4px rgba(32, 212, 123, 0.07);
+    }
+
+    /* =========================================================
+       Filters
+       ========================================================= */
+
+    .communities-filters {
+      display: flex;
+      gap: 8px;
+      padding: 0 18px 18px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+
+    .communities-filter {
+      flex: 0 0 auto;
+      min-height: 38px;
+      padding: 0 14px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 11px;
+      background: rgba(255, 255, 255, 0.03);
+      color: rgba(255, 255, 255, 0.62);
+      font: inherit;
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition:
+        background 180ms ease,
+        border-color 180ms ease,
+        color 180ms ease;
+    }
+
+    .communities-filter:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .communities-filter.is-active,
+    .communities-filter[aria-selected="true"] {
+      border-color: rgba(32, 212, 123, 0.24);
+      background: rgba(32, 212, 123, 0.10);
+      color: #20d47b;
+    }
+
+    /* =========================================================
+       Dynamic communities list
+       ========================================================= */
+
+    .communities-list {
+      min-height: 300px;
+      padding: 0 18px 18px;
+    }
+
+    .communities-items {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .community-card {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.025);
+      transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease;
+    }
+
+    .community-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(32, 212, 123, 0.14);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .community-card__cover {
+      position: relative;
+      height: 120px;
+      overflow: hidden;
+      background:
+        radial-gradient(
+          circle at 70% 20%,
+          rgba(32, 212, 123, 0.20),
+          transparent 35%
+        ),
+        linear-gradient(
+          135deg,
+          rgba(32, 212, 123, 0.10),
+          rgba(255, 255, 255, 0.025)
+        );
+    }
+
+    .community-card__cover img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .community-card__type {
+      position: absolute;
+      inset-block-start: 10px;
+      inset-inline-start: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      min-height: 28px;
+      padding: 0 9px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.40);
+      backdrop-filter: blur(8px);
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.68rem;
+      font-weight: 700;
+    }
+
+    .community-card__body {
+      padding: 15px;
+    }
+
+    .community-card__title {
+      margin: 0;
+      overflow: hidden;
+      color: #ffffff;
+      font-size: 0.98rem;
+      font-weight: 800;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .community-card__description {
+      display: -webkit-box;
+      overflow: hidden;
+      margin: 7px 0 12px;
+      color: rgba(255, 255, 255, 0.48);
+      font-size: 0.78rem;
+      line-height: 1.75;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .community-card__meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 13px;
+      color: rgba(255, 255, 255, 0.40);
+      font-size: 0.72rem;
+    }
+
+    .community-card__actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .community-card__action {
+      flex: 1;
+      min-height: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 11px;
+      background: rgba(255, 255, 255, 0.035);
+      color: rgba(255, 255, 255, 0.76);
+      font: inherit;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .community-card__action:hover {
+      border-color: rgba(32, 212, 123, 0.18);
+      background: rgba(32, 212, 123, 0.07);
+      color: #20d47b;
+    }
+
+    .community-card__action--primary {
+      border-color: rgba(32, 212, 123, 0.18);
+      background: rgba(32, 212, 123, 0.09);
+      color: #20d47b;
+    }
+
+    /* =========================================================
+       Loading
+       ========================================================= */
+
+    .communities-loading {
+      display: grid;
+      place-items: center;
+      min-height: 300px;
+      color: rgba(255, 255, 255, 0.50);
+    }
+
+    .communities-loading__inner {
+      display: grid;
+      justify-items: center;
+      gap: 12px;
+    }
+
+    .communities-spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid rgba(255, 255, 255, 0.08);
+      border-top-color: #20d47b;
+      border-radius: 50%;
+      animation: novaCommunitiesSpin 0.8s linear infinite;
+    }
+
+    /* =========================================================
+       Empty
+       ========================================================= */
+
+    .communities-empty {
+      display: grid;
+      place-items: center;
+      min-height: 320px;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .communities-empty__icon {
+      width: 72px;
+      height: 72px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 15px;
+      border: 1px solid rgba(32, 212, 123, 0.12);
+      border-radius: 22px;
+      background: rgba(32, 212, 123, 0.06);
+      color: #20d47b;
+      font-size: 1.65rem;
+    }
+
+    .communities-empty__title {
+      margin: 0;
+      color: #ffffff;
+      font-size: 1.05rem;
+      font-weight: 800;
+    }
+
+    .communities-empty__description {
+      max-width: 500px;
+      margin: 8px 0 18px;
+      color: rgba(255, 255, 255, 0.46);
+      font-size: 0.84rem;
+      line-height: 1.85;
+    }
+
+    /* =========================================================
+       Sidebar
+       ========================================================= */
+
+    .communities-side-card__title {
+      margin: 0;
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .communities-side-card__description {
+      margin: 8px 0 18px;
+      color: rgba(255, 255, 255, 0.46);
+      font-size: 0.82rem;
+      line-height: 1.8;
+    }
+
+    .communities-side-actions {
+      display: grid;
+      gap: 9px;
+    }
+
+    .communities-side-action {
+      width: 100%;
+      min-height: 49px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 0 14px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      color: rgba(255, 255, 255, 0.80);
+      font: inherit;
+      font-weight: 700;
+      text-align: right;
+      cursor: pointer;
+      transition:
+        transform 180ms ease,
+        background 180ms ease,
+        border-color 180ms ease;
+    }
+
+    .communities-side-action:hover {
+      transform: translateY(-1px);
+      border-color: rgba(32, 212, 123, 0.14);
+      background: rgba(32, 212, 123, 0.055);
+      color: #ffffff;
+    }
+
+    .communities-side-action__icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 34px;
+      border-radius: 10px;
+      background: rgba(32, 212, 123, 0.08);
+      color: #20d47b;
+    }
+
+    .communities-info {
+      margin-top: 18px;
+      padding: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .communities-info__title {
+      margin: 0 0 7px;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .communities-info__text {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.43);
+      font-size: 0.76rem;
+      line-height: 1.85;
+    }
+
+    /* =========================================================
+       Responsive
+       ========================================================= */
+
+    @media (max-width: 1050px) {
+      .communities-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .communities-side-card {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 20px;
+        align-items: start;
+      }
+
+      .communities-info {
+        grid-column: 1 / -1;
+        margin-top: 0;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .communities-hero {
+        grid-template-columns: 1fr;
+        padding: 22px;
+        border-radius: 22px;
+      }
+
+      .communities-hero__actions {
+        justify-content: stretch;
+      }
+
+      .communities-hero__actions .communities-btn {
+        flex: 1;
+      }
+
+      .communities-items {
+        grid-template-columns: 1fr;
+      }
+
+      .communities-side-card {
+        display: block;
+      }
+
+      .communities-toolbar {
+        padding: 14px;
+      }
+
+      .communities-filters {
+        padding-inline: 14px;
+      }
+
+      .communities-list {
+        padding-inline: 14px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .communities-page__content {
+        padding-bottom: 90px;
+      }
+
+      .communities-hero {
+        padding: 18px;
+      }
+
+      .communities-hero__actions {
+        flex-direction: column;
+      }
+
+      .communities-hero__actions .communities-btn {
+        width: 100%;
+      }
+
+      .communities-btn--icon {
+        width: 44px !important;
+      }
+
+      .community-card__cover {
+        height: 105px;
+      }
+
+      .community-card__actions {
+        flex-direction: column;
+      }
+    }
+
+    @keyframes novaCommunitiesSpin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .communities-btn,
+      .community-card,
+      .community-card__action,
+      .communities-side-action {
+        transition: none;
+      }
+
+      .communities-spinner {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+
+<body class="nova-page communities-page">
+
+  <!-- Global header -->
+  <div id="global-header"></div>
+
+  <!-- Global sidebar -->
+  <div id="global-sidebar"></div>
+
+  <main class="app-main communities-page__content">
+
+    <!-- =======================================================
+         Hero
+         ======================================================= -->
+    <section
+      class="communities-hero"
+      aria-labelledby="communities-page-title"
+    >
+
+      <div>
+        <div class="communities-hero__eyebrow">
+          <span aria-hidden="true">🌐</span>
+          <span>المجتمعات</span>
+        </div>
+
+        <h1
+          id="communities-page-title"
+          class="communities-hero__title"
+        >
+          مساحات تجمع الأشخاص حول اهتماماتهم
+        </h1>
+
+        <p class="communities-hero__description">
+          اكتشف المجتمعات والقنوات المتاحة لك، وانضم إلى المساحات المناسبة
+          لك أو أنشئ مجتمعك الخاص عندما تكون جاهزًا.
+        </p>
+      </div>
+
+      <div class="communities-hero__actions">
+
+        <button
+          type="button"
+          class="communities-btn communities-btn--primary"
+          data-action="create-community"
+        >
+          <span aria-hidden="true">＋</span>
+          <span>إنشاء مجتمع</span>
+        </button>
+
+        <button
+          type="button"
+          class="communities-btn communities-btn--icon"
+          data-action="refresh-communities"
+          aria-label="تحديث المجتمعات"
+          title="تحديث"
+        >
+          <span aria-hidden="true">↻</span>
+        </button>
+
+      </div>
+
+    </section>
+
+    <!-- =======================================================
+         Main layout
+         ======================================================= -->
+    <section class="communities-layout">
+
+      <!-- =====================================================
+           Main communities panel
+           ===================================================== -->
+      <div class="communities-main-card">
+
+        <!-- Search -->
+        <div class="communities-toolbar">
+
+          <form
+            id="communities-search-form"
+            class="communities-search"
+            role="search"
+            aria-label="البحث في المجتمعات"
+          >
+
+            <label
+              class="communities-search__label"
+              for="communities-search"
+            >
+              البحث في المجتمعات
+            </label>
+
+            <input
+              type="search"
+              id="communities-search"
+              name="q"
+              class="communities-search__field"
+              placeholder="ابحث عن مجتمع أو قناة..."
+              autocomplete="off"
+              spellcheck="false"
+              aria-label="البحث في المجتمعات"
+              data-communities-search
+            >
+
+          </form>
+
+        </div>
+
+        <!-- Filters -->
+        <div
+          class="communities-filters"
+          role="tablist"
+          aria-label="تصفية المجتمعات"
+        >
+
+          <button
+            type="button"
+            class="communities-filter is-active"
+            role="tab"
+            aria-selected="true"
+            data-community-filter="all"
+          >
+            الكل
+          </button>
+
+          <button
+            type="button"
+            class="communities-filter"
+            role="tab"
+            aria-selected="false"
+            data-community-filter="joined"
+          >
+            المنضم إليها
+          </button>
+
+          <button
+            type="button"
+            class="communities-filter"
+            role="tab"
+            aria-selected="false"
+            data-community-filter="channels"
+          >
+            القنوات
+          </button>
+
+          <button
+            type="button"
+            class="communities-filter"
+            role="tab"
+            aria-selected="false"
+            data-community-filter="discover"
+          >
+            اكتشف
+          </button>
+
+        </div>
+
+        <!-- Loading -->
+        <div
+          id="communities-loading"
+          class="communities-loading"
+          aria-live="polite"
+          hidden
+        >
+          <div class="communities-loading__inner">
+
+            <div
+              class="communities-spinner"
+              aria-hidden="true"
+            ></div>
+
+            <span>
+              جاري تحميل المجتمعات...
+            </span>
+
+          </div>
+        </div>
+
+        <!-- Dynamic community cards -->
+        <div
+          id="communities-list"
+          class="communities-list"
+          aria-live="polite"
+        >
+
+          <div
+            id="communities-items"
+            class="communities-items"
+          >
+            <!-- js/groups.js / API renders real communities here -->
+          </div>
+
+        </div>
+
+        <!-- Empty state -->
+        <div
+          id="communities-empty"
+          class="communities-empty"
+          hidden
+        >
+
+          <div
+            class="communities-empty__icon"
+            aria-hidden="true"
+          >
+            🌐
+          </div>
+
+          <h2 class="communities-empty__title">
+            لا توجد مجتمعات متاحة حاليًا
+          </h2>
+
+          <p class="communities-empty__description">
+            ستظهر المجتمعات والقنوات عندما تصل بيانات حقيقية من الخادم.
+            لا يتم عرض مجتمعات أو أعضاء وهميين داخل NOVA.
+          </p>
+
+          <button
+            type="button"
+            class="communities-btn communities-btn--primary"
+            data-action="create-community"
+          >
+            <span aria-hidden="true">＋</span>
+            <span>إنشاء مجتمع</span>
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- =====================================================
+           Sidebar
+           ===================================================== -->
+      <aside
+        class="communities-side-card"
+        aria-label="أدوات المجتمعات"
+      >
+
+        <div>
+
+          <h2 class="communities-side-card__title">
+            أدوات المجتمع
+          </h2>
+
+          <p class="communities-side-card__description">
+            تحكم سريع في المجتمعات واكتشاف المساحات المتاحة لك.
+          </p>
+
+        </div>
+
+        <div class="communities-side-actions">
+
+          <button
+            type="button"
+            class="communities-side-action"
+            data-action="create-community"
+          >
+            <span
+              class="communities-side-action__icon"
+              aria-hidden="true"
+            >
+              ＋
+            </span>
+
+            <span>
+              إنشاء مجتمع جديد
+            </span>
+          </button>
+
+          <button
+            type="button"
+            class="communities-side-action"
+            data-action="show-my-communities"
+          >
+            <span
+              class="communities-side-action__icon"
+              aria-hidden="true"
+            >
+              ◉
+            </span>
+
+            <span>
+              مجتمعاتي
+            </span>
+          </button>
+
+          <button
+            type="button"
+            class="communities-side-action"
+            data-action="show-channels"
+          >
+            <span
+              class="communities-side-action__icon"
+              aria-hidden="true"
+            >
+              ▤
+            </span>
+
+            <span>
+              القنوات
+            </span>
+          </button>
+
+          <button
+            type="button"
+            class="communities-side-action"
+            data-action="discover-communities"
+          >
+            <span
+              class="communities-side-action__icon"
+              aria-hidden="true"
+            >
+              ⌕
+            </span>
+
+            <span>
+              اكتشاف مجتمعات
+            </span>
+          </button>
+
+          <button
+            type="button"
+            class="communities-side-action"
+            data-action="refresh-communities"
+          >
+            <span
+              class="communities-side-action__icon"
+              aria-hidden="true"
+            >
+              ↻
+            </span>
+
+            <span>
+              تحديث البيانات
+            </span>
+          </button>
+
+        </div>
+
+        <div class="communities-info">
+
+          <h3 class="communities-info__title">
+            نظام المجتمعات
+          </h3>
+
+          <p class="communities-info__text">
+            المجتمع يمكن أن يحتوي على أعضاء وقنوات وإعلانات وصلاحيات
+            وأدوار إدارية. كل هذه البيانات مصممة لتُربط لاحقًا بالـAPI
+            وقاعدة البيانات دون إعادة بناء الواجهة.
+          </p>
+
+        </div>
+
+      </aside>
+
+    </section>
+
+  </main>
+
+  <!-- Global bottom navigation -->
+  <div id="global-bottom-nav"></div>
+
+  <!-- Global modal host -->
+  <div id="global-modal"></div>
+
+  <!-- =========================================================
+       Core JavaScript
+       ========================================================= -->
+  <script src="../js/config.js"></script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/router.js"></script>
+  <script src="../js/realtime.js"></script>
+  <script src="../js/groups.js"></script>
+  <script src="../js/app.js"></script>
+
+</body>
+</html>
+```1
