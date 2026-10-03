@@ -1,0 +1,903 @@
+ /* =========================================================
+    NOVA — Responsive System
+    File: css/responsive.css
+    Version: 1.0.0
+
+    مسؤول عن:
+    - Mobile
+    - Tablet
+    - Desktop
+    - Large Desktop
+    - Touch interaction
+    - Safe areas
+    - Orientation
+    - Responsive typography
+    - Responsive spacing
+    ========================================================= */
+
+
+/* =========================================================
+   01. RESPONSIVE ROOT
+   ========================================================= */
+
+html {
+  width: 100%;
+  min-height: 100%;
+
+  overflow-x: hidden;
+}
+
+
+body {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  overflow-x: hidden;
+}
+
+
+/* =========================================================
+   02. FLUID CONTAINERS
+   ========================================================= */
+
+.nova-container {
+  width: min(
+    100% - 32px,
+    var(--nova-content-max-width, 1440px)
+  );
+
+  margin-inline: auto;
+}
+
+
+.nova-container--wide {
+  width: min(
+    100% - 40px,
+    1600px
+  );
+
+  margin-inline: auto;
+}
+
+
+.nova-container--compact {
+  width: min(
+    100% - 32px,
+    900px
+  );
+
+  margin-inline: auto;
+}
+
+
+/* =========================================================
+   03. RESPONSIVE VISIBILITY
+   ========================================================= */
+
+.nova-only-mobile {
+  display: none !important;
+}
+
+
+.nova-only-tablet {
+  display: none !important;
+}
+
+
+.nova-only-desktop {
+  display: block !important;
+}
+
+
+.nova-hide-mobile {
+  display: block;
+}
+
+
+.nova-hide-tablet {
+  display: block;
+}
+
+
+.nova-hide-desktop {
+  display: none;
+}
+
+
+/* =========================================================
+   04. TOUCH TARGETS
+   ========================================================= */
+
+@media (pointer: coarse) {
+
+  .nova-btn,
+  .nova-btn-icon,
+  .nova-sidebar-nav__item,
+  .nova-bottom-nav__item,
+  .nova-conversation,
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+
+  .nova-btn-icon {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+
+  .nova-sidebar-nav__item {
+    min-height: 48px;
+  }
+
+
+  .nova-conversation {
+    min-height: 72px;
+  }
+}
+
+
+/* =========================================================
+   05. LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1440px) {
+
+  :root {
+    --nova-responsive-page-padding: 32px;
+  }
+
+
+  .nova-container {
+    width: min(
+      calc(100% - 64px),
+      1480px
+    );
+  }
+
+
+  .nova-page__body {
+    padding:
+      var(--nova-space-6)
+      var(--nova-responsive-page-padding);
+  }
+
+
+  .nova-header {
+    padding-inline:
+      var(--nova-responsive-page-padding);
+  }
+
+
+  .nova-card {
+    border-radius:
+      var(--nova-radius-lg);
+  }
+}
+
+
+/* =========================================================
+   06. DESKTOP
+   ========================================================= */
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+
+  :root {
+    --nova-responsive-page-padding: 24px;
+  }
+
+
+  .nova-container {
+    width: min(
+      calc(100% - 48px),
+      1320px
+    );
+  }
+
+
+  .nova-page__body {
+    padding:
+      var(--nova-space-5)
+      var(--nova-responsive-page-padding);
+  }
+
+
+  .nova-header {
+    padding-inline:
+      var(--nova-responsive-page-padding);
+  }
+}
+
+
+/* =========================================================
+   07. TABLET
+   ========================================================= */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+
+  :root {
+    --nova-responsive-page-padding: 20px;
+  }
+
+
+  .nova-only-tablet {
+    display: block !important;
+  }
+
+
+  .nova-hide-tablet {
+    display: none !important;
+  }
+
+
+  .nova-container,
+  .nova-container--wide {
+    width:
+      calc(100% - 40px);
+  }
+
+
+  .nova-container--compact {
+    width:
+      calc(100% - 32px);
+  }
+
+
+  .nova-page__body {
+    padding:
+      var(--nova-space-4)
+      var(--nova-responsive-page-padding);
+  }
+
+
+  .nova-page__header {
+    padding:
+      var(--nova-space-4)
+      var(--nova-responsive-page-padding);
+  }
+
+
+  .nova-card {
+    border-radius:
+      var(--nova-radius-md);
+  }
+
+
+  /*
+   * منع ازدحام عناصر الهيدر
+   */
+
+  .nova-header__center {
+    padding-inline:
+      var(--nova-space-3);
+  }
+
+
+  /*
+   * الشبكات
+   */
+
+  .nova-grid--4 {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+
+  .nova-grid--3 {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+
+  /*
+   * النوافذ
+   */
+
+  .nova-modal__dialog {
+    width:
+      min(92vw, 620px);
+  }
+}
+
+
+/* =========================================================
+   08. TABLET PORTRAIT
+   ========================================================= */
+
+@media (min-width: 768px) and (max-width: 900px) and (orientation: portrait) {
+
+  .nova-workspace {
+    grid-template-columns:
+      290px
+      minmax(0, 1fr);
+  }
+
+
+  .nova-sidebar {
+    width: 72px;
+    min-width: 72px;
+  }
+
+
+  .nova-page__title {
+    font-size:
+      var(--nova-font-xl);
+  }
+
+
+  .nova-split {
+    grid-template-columns:
+      1fr;
+  }
+}
+
+
+/* =========================================================
+   09. TABLET LANDSCAPE
+   ========================================================= */
+
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
+
+  .nova-workspace {
+    grid-template-columns:
+      300px
+      minmax(0, 1fr);
+  }
+
+
+  .nova-sidebar {
+    width: 72px;
+    min-width: 72px;
+  }
+
+
+  .nova-info-panel {
+    display: none;
+  }
+
+
+  .nova-chat__messages {
+    padding-inline:
+      var(--nova-space-5);
+  }
+}
+
+
+/* =========================================================
+   10. MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  :root {
+    --nova-responsive-page-padding: 16px;
+  }
+
+
+  .nova-only-mobile {
+    display: block !important;
+  }
+
+
+  .nova-hide-mobile {
+    display: none !important;
+  }
+
+
+  .nova-container,
+  .nova-container--wide,
+  .nova-container--compact {
+    width:
+      calc(100% - 32px);
+  }
+
+
+  /*
+   * منع horizontal overflow
+   */
+
+  .nova-app,
+  .nova-app__body,
+  .nova-main,
+  .nova-chat,
+  .nova-page {
+    max-width: 100vw;
+  }
+
+
+  /*
+   * الهيدر
+   */
+
+  .nova-header {
+    padding-inline:
+      12px;
+  }
+
+
+  .nova-header__start,
+  .nova-header__end {
+    gap: 2px;
+  }
+
+
+  /*
+   * العناوين
+   */
+
+  .nova-page__title {
+    font-size:
+      var(--nova-font-xl);
+  }
+
+
+  .nova-page__description {
+    font-size:
+      var(--nova-font-xs);
+  }
+
+
+  /*
+   * المسافات
+   */
+
+  .nova-page__body {
+    padding:
+      var(--nova-space-3);
+  }
+
+
+  /*
+   * Grid
+   */
+
+  .nova-grid--2,
+  .nova-grid--3,
+  .nova-grid--4,
+  .nova-grid--auto {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  /*
+   * Split
+   */
+
+  .nova-split {
+    grid-template-columns:
+      1fr;
+
+    gap:
+      var(--nova-space-3);
+  }
+
+
+  /*
+   * Forms
+   */
+
+  .nova-form-row {
+    grid-template-columns:
+      1fr !important;
+  }
+
+
+  /*
+   * أزرار الصفحات
+   */
+
+  .nova-page__actions {
+    width: 100%;
+
+    flex-wrap: wrap;
+  }
+
+
+  .nova-page__actions > * {
+    min-width: 0;
+  }
+
+
+  /*
+   * الكروت
+   */
+
+  .nova-card {
+    border-radius:
+      var(--nova-radius-md);
+  }
+
+
+  /*
+   * Modal
+   */
+
+  .nova-modal__dialog {
+    width:
+      calc(100vw - 24px);
+
+    max-width:
+      calc(100vw - 24px);
+
+    max-height:
+      calc(100dvh - 24px);
+
+    margin: 12px;
+  }
+
+
+  /*
+   * Dropdown
+   */
+
+  .nova-dropdown,
+  .nova-menu {
+    max-width:
+      calc(100vw - 24px);
+  }
+
+
+  /*
+   * الصور والوسائط
+   */
+
+  img,
+  video,
+  iframe {
+    max-width: 100%;
+  }
+
+
+  /*
+   * النصوص الطويلة
+   */
+
+  .nova-text-break {
+    overflow-wrap:
+      anywhere;
+
+    word-break:
+      break-word;
+  }
+}
+
+
+/* =========================================================
+   11. SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 575px) {
+
+  :root {
+    --nova-responsive-page-padding: 12px;
+  }
+
+
+  .nova-container,
+  .nova-container--wide,
+  .nova-container--compact {
+    width:
+      calc(100% - 24px);
+  }
+
+
+  .nova-page__body {
+    padding:
+      12px;
+  }
+
+
+  .nova-page__header {
+    padding:
+      14px
+      12px;
+  }
+
+
+  .nova-page__title {
+    font-size:
+      var(--nova-font-lg);
+  }
+
+
+  .nova-header {
+    min-height:
+      58px;
+  }
+
+
+  .nova-chat__header {
+    min-height:
+      58px;
+  }
+
+
+  .nova-conversation {
+    min-height:
+      68px;
+  }
+
+
+  /*
+   * منع الأزرار من كسر العرض
+   */
+
+  .nova-btn {
+    max-width: 100%;
+  }
+
+
+  /*
+   * حقول البحث
+   */
+
+  .nova-search {
+    width: 100%;
+  }
+
+
+  /*
+   * Toast
+   */
+
+  .nova-toast-container {
+    inset-inline:
+      12px;
+
+    width:
+      auto;
+  }
+
+
+  .nova-toast {
+    width:
+      100%;
+  }
+}
+
+
+/* =========================================================
+   12. VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+  .nova-page__title {
+    font-size:
+      var(--nova-font-md);
+  }
+
+
+  .nova-header__title {
+    font-size:
+      var(--nova-font-sm);
+  }
+
+
+  .nova-chat__name {
+    font-size:
+      var(--nova-font-sm);
+  }
+
+
+  .nova-chat__messages {
+    padding:
+      10px;
+  }
+
+
+  .nova-chat__composer {
+    padding-inline:
+      8px;
+  }
+
+
+  .nova-bottom-nav__item {
+    font-size:
+      9px;
+  }
+
+
+  .nova-bottom-nav__icon {
+    width: 19px;
+    height: 19px;
+  }
+}
+
+
+/* =========================================================
+   13. LANDSCAPE PHONE
+   ========================================================= */
+
+@media (max-width: 767px) and (orientation: landscape) {
+
+  .nova-header {
+    min-height:
+      52px;
+  }
+
+
+  .nova-chat__header {
+    min-height:
+      54px;
+  }
+
+
+  .nova-bottom-nav {
+    min-height:
+      56px;
+  }
+
+
+  .nova-bottom-nav__item {
+    min-height:
+      44px;
+  }
+
+
+  .nova-app__body {
+    padding-bottom:
+      56px;
+  }
+
+
+  .nova-chat__messages {
+    padding-block:
+      10px;
+  }
+}
+
+
+/* =========================================================
+   14. SAFE AREA
+   ========================================================= */
+
+@supports (padding: env(safe-area-inset-bottom)) {
+
+  .nova-bottom-nav {
+    padding-bottom:
+      calc(
+        6px +
+        env(safe-area-inset-bottom)
+      );
+  }
+
+
+  .nova-chat__composer {
+    padding-bottom:
+      calc(
+        var(--nova-space-3) +
+        env(safe-area-inset-bottom)
+      );
+  }
+
+
+  .nova-app__body {
+    padding-bottom:
+      env(safe-area-inset-bottom);
+  }
+}
+
+
+/* =========================================================
+   15. NOTCH / DISPLAY CUTOUT
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  @supports (padding-left: env(safe-area-inset-left)) {
+
+    .nova-header {
+      padding-inline-start:
+        max(
+          12px,
+          env(safe-area-inset-left)
+        );
+
+      padding-inline-end:
+        max(
+          12px,
+          env(safe-area-inset-right)
+        );
+    }
+  }
+}
+
+
+/* =========================================================
+   16. ACCESSIBILITY — LARGE TEXT
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* =========================================================
+   17. HIGH CONTRAST
+   ========================================================= */
+
+@media (prefers-contrast: more) {
+
+  .nova-card,
+  .nova-conversation,
+  .nova-sidebar-nav__item,
+  .nova-btn {
+    border-width:
+      1px;
+  }
+
+
+  .nova-text-muted,
+  .nova-conversation__preview,
+  .nova-conversation__time {
+    opacity:
+      1;
+  }
+}
+
+
+/* =========================================================
+   18. HOVER DEVICES ONLY
+   ========================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+
+  .nova-btn:hover {
+    transform:
+      translateY(-1px);
+  }
+
+
+  .nova-conversation:hover {
+    transform:
+      translateX(-1px);
+  }
+}
+
+
+/* =========================================================
+   19. PRINT
+   ========================================================= */
+
+@media print {
+
+  .nova-sidebar,
+  .nova-header,
+  .nova-bottom-nav,
+  .nova-chat__composer,
+  .nova-chat__actions {
+    display: none !important;
+  }
+
+
+  .nova-app,
+  .nova-main,
+  .nova-chat {
+    min-height:
+      auto;
+
+    overflow:
+      visible;
+  }
+
+
+  .nova-chat__messages {
+    overflow:
+      visible;
+  }
+}
+
+
+/* =========================================================
+   END OF NOVA RESPONSIVE SYSTEM
+   ========================================================= */
